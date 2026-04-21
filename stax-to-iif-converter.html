@@ -1,0 +1,646 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>STAX → IIF Converter</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@300;400;500;600&display=swap');
+
+  :root {
+    --bg: #0c0f18;
+    --surface: #141824;
+    --card: #1a2035;
+    --border: #252d45;
+    --accent: #f0a500;
+    --accent2: #52d98a;
+    --danger: #f87171;
+    --text: #dde3f0;
+    --muted: #7a85a0;
+    --mono: 'IBM Plex Mono', monospace;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'IBM Plex Sans', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    min-height: 100vh;
+  }
+
+  header {
+    background: linear-gradient(135deg, #0f1520 0%, #1a2035 100%);
+    border-bottom: 2px solid var(--accent);
+    padding: 2rem 2.5rem 1.75rem;
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+  }
+
+  .logo {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 3rem;
+    color: var(--accent);
+    line-height: 1;
+    letter-spacing: 2px;
+  }
+
+  .header-right h1 {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1.6rem;
+    letter-spacing: 3px;
+    color: var(--text);
+  }
+
+  .header-right p {
+    font-size: 0.82rem;
+    color: var(--muted);
+    margin-top: 3px;
+  }
+
+  .badge {
+    display: inline-block;
+    background: var(--accent);
+    color: #000;
+    font-family: var(--mono);
+    font-size: 0.65rem;
+    font-weight: 600;
+    padding: 2px 8px;
+    border-radius: 3px;
+    margin-left: 8px;
+    letter-spacing: 1px;
+    vertical-align: middle;
+  }
+
+  .container { max-width: 920px; margin: 0 auto; padding: 2rem 1.5rem; }
+
+  /* ── Cards ── */
+  .card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 1.75rem;
+    margin-bottom: 1.25rem;
+  }
+
+  .card-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1.2rem;
+    letter-spacing: 2px;
+    color: var(--accent);
+    margin-bottom: 0.3rem;
+  }
+
+  .card-sub { font-size: 0.83rem; color: var(--muted); margin-bottom: 1.25rem; }
+
+  /* ── Form ── */
+  label {
+    display: block;
+    font-family: var(--mono);
+    font-size: 0.68rem;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 0.35rem;
+    margin-top: 0.85rem;
+  }
+
+  input[type="text"], select, textarea {
+    width: 100%;
+    background: #0c0f18;
+    border: 1px solid var(--border);
+    border-radius: 5px;
+    padding: 0.55rem 0.85rem;
+    color: var(--text);
+    font-family: var(--mono);
+    font-size: 0.82rem;
+    outline: none;
+    transition: border-color 0.2s;
+  }
+  input:focus, select:focus, textarea:focus { border-color: var(--accent); }
+
+  textarea { resize: vertical; min-height: 180px; line-height: 1.6; }
+
+  .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+  @media (max-width: 560px) { .two-col { grid-template-columns: 1fr; } }
+
+  /* ── Alerts ── */
+  .alert {
+    display: flex;
+    gap: 0.6rem;
+    padding: 0.8rem 1rem;
+    border-radius: 6px;
+    font-size: 0.84rem;
+    margin: 1rem 0;
+    line-height: 1.5;
+  }
+  .alert-warn  { background: #1f1500; border-left: 3px solid var(--accent); color: #f5d78a; }
+  .alert-ok    { background: #051a10; border-left: 3px solid var(--accent2); color: #86efac; }
+  .alert-info  { background: #101828; border-left: 3px solid #60a5fa; color: #93c5fd; }
+
+  /* ── Buttons ── */
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    background: var(--accent);
+    color: #000;
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1rem;
+    letter-spacing: 2px;
+    padding: 0.6rem 1.5rem;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: opacity 0.15s, transform 0.1s;
+  }
+  .btn:hover { opacity: 0.88; transform: translateY(-1px); }
+  .btn:active { transform: translateY(0); }
+
+  .btn-outline {
+    background: transparent;
+    border: 1px solid var(--accent);
+    color: var(--accent);
+  }
+  .btn-green {
+    background: var(--accent2);
+  }
+  .btn-row { display: flex; gap: 0.75rem; flex-wrap: wrap; margin-top: 1.25rem; }
+
+  /* ── Output ── */
+  #iifOutput {
+    background: #060810;
+    border: 1px solid var(--border);
+    border-left: 3px solid var(--accent2);
+    border-radius: 6px;
+    padding: 1rem 1.25rem;
+    font-family: var(--mono);
+    font-size: 0.75rem;
+    color: #a8e6cf;
+    white-space: pre;
+    overflow-x: auto;
+    max-height: 320px;
+    overflow-y: auto;
+    line-height: 1.7;
+    display: none;
+    margin-top: 1rem;
+  }
+
+  /* ── Stats bar ── */
+  .stats-bar {
+    display: flex;
+    gap: 1.5rem;
+    flex-wrap: wrap;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 1rem 1.5rem;
+    margin-bottom: 1.25rem;
+    display: none;
+  }
+  .stat-item { text-align: center; }
+  .stat-val {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1.8rem;
+    line-height: 1;
+    color: var(--accent);
+  }
+  .stat-val.green { color: var(--accent2); }
+  .stat-val.red { color: var(--danger); }
+  .stat-label { font-family: var(--mono); font-size: 0.65rem; letter-spacing: 1px; color: var(--muted); margin-top: 3px; }
+
+  /* ── Preview table ── */
+  .table-wrap {
+    overflow-x: auto;
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    margin-top: 1rem;
+    display: none;
+    max-height: 340px;
+    overflow-y: auto;
+  }
+  table { width: 100%; border-collapse: collapse; font-size: 0.78rem; }
+  th {
+    background: #0c0f18;
+    color: var(--accent);
+    font-family: var(--mono);
+    font-size: 0.68rem;
+    letter-spacing: 1px;
+    padding: 0.55rem 0.9rem;
+    text-align: left;
+    white-space: nowrap;
+    position: sticky;
+    top: 0;
+  }
+  td {
+    padding: 0.45rem 0.9rem;
+    border-bottom: 1px solid var(--border);
+    color: var(--muted);
+    font-family: var(--mono);
+    font-size: 0.75rem;
+    white-space: nowrap;
+  }
+  td.name-col { color: var(--text); }
+  td.pos { color: var(--accent2); font-weight: 600; }
+  td.neg { color: var(--danger); font-weight: 600; }
+  tr:hover td { background: #1a2035; }
+
+  .status-msg {
+    font-family: var(--mono);
+    font-size: 0.82rem;
+    margin-top: 0.75rem;
+    padding: 0.6rem 0.9rem;
+    border-radius: 5px;
+  }
+  .ok  { background: #051a10; color: var(--accent2); }
+  .err { background: #1a0808; color: var(--danger); }
+
+  /* ── Mapping display ── */
+  .map-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 0.75rem;
+    margin: 0.75rem 0;
+  }
+  .map-item {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 0.6rem 0.9rem;
+  }
+  .map-item .from { font-family: var(--mono); font-size: 0.7rem; color: var(--muted); }
+  .map-item .arrow { color: var(--accent); font-size: 0.7rem; }
+  .map-item .to { font-family: var(--mono); font-size: 0.78rem; color: var(--accent2); font-weight: 500; }
+
+  select option { background: #141824; }
+
+  .divider { border: none; border-top: 1px solid var(--border); margin: 1.25rem 0; }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="logo">IIF</div>
+  <div class="header-right">
+    <h1>STAX Export Converter <span class="badge">QB DESKTOP</span></h1>
+    <p>Pre-configured for your STAX CSV format — paste, configure accounts, download.</p>
+  </div>
+</header>
+
+<div class="container">
+
+  <!-- Column mapping reference -->
+  <div class="card">
+    <div class="card-title">✅ Auto-Detected Column Mapping</div>
+    <div class="card-sub">Based on your actual STAX export — no guesswork needed.</div>
+    <div class="map-grid">
+      <div class="map-item">
+        <div class="from">batched_at</div>
+        <div class="arrow">↓</div>
+        <div class="to">DATE</div>
+      </div>
+      <div class="map-item">
+        <div class="from">total</div>
+        <div class="arrow">↓</div>
+        <div class="to">AMOUNT</div>
+      </div>
+      <div class="map-item">
+        <div class="from">transaction_id</div>
+        <div class="arrow">↓</div>
+        <div class="to">DOCNUM</div>
+      </div>
+      <div class="map-item">
+        <div class="from">firstname + lastname</div>
+        <div class="arrow">↓</div>
+        <div class="to">NAME</div>
+      </div>
+      <div class="map-item">
+        <div class="from">memo + type</div>
+        <div class="arrow">↓</div>
+        <div class="to">MEMO</div>
+      </div>
+      <div class="map-item">
+        <div class="from">card_type</div>
+        <div class="arrow">↓</div>
+        <div class="to">MEMO (appended)</div>
+      </div>
+    </div>
+    <div class="alert alert-info">
+      <span>ℹ️</span>
+      <span><strong>Negatives handled automatically.</strong> STAX uses negative <code>total</code> values for refunds/chargebacks. These will import as <strong>CHECK</strong> type transactions in QB (money out), while positive amounts import as <strong>DEPOSIT</strong> (money in).</span>
+    </div>
+  </div>
+
+  <!-- Account config -->
+  <div class="card">
+    <div class="card-title">⚙️ QuickBooks Account Names</div>
+    <div class="card-sub">These must exactly match your QuickBooks Chart of Accounts. Check QB first if unsure.</div>
+
+    <div class="two-col">
+      <div>
+        <label>Bank / Deposit Account (TRNS line)</label>
+        <input type="text" id="acctBank" value="Undeposited Funds" placeholder="e.g. Checking, Undeposited Funds">
+      </div>
+      <div>
+        <label>Income Account (SPL line)</label>
+        <input type="text" id="acctIncome" value="Sales Income" placeholder="e.g. Sales Income, Legal Fees">
+      </div>
+    </div>
+    <div class="alert alert-warn" style="margin-top:0.75rem;">
+      <span>⚠️</span>
+      <span>Using <strong>Undeposited Funds</strong> is recommended — it matches how QB handles payments received before bank deposit, making reconciliation cleaner. Change to <strong>Checking</strong> if you prefer direct deposit recording.</span>
+    </div>
+  </div>
+
+  <!-- CSV Paste -->
+  <div class="card">
+    <div class="card-title">📂 Paste Your STAX CSV</div>
+    <div class="card-sub">Paste the full CSV content including the header row. The converter knows your column names already.</div>
+
+    <textarea id="csvInput" placeholder='Paste your STAX CSV here...
+(the one with columns: batched_at, total, transaction_id, customer_firstname, customer_lastname, memo, type, card_type, etc.)'></textarea>
+
+    <div class="btn-row">
+      <button class="btn" onclick="convert()">⚡ CONVERT TO IIF</button>
+      <button class="btn btn-outline" onclick="loadSample()">Load Sample</button>
+    </div>
+    <div id="statusMsg"></div>
+  </div>
+
+  <!-- Stats -->
+  <div class="stats-bar" id="statsBar">
+    <div class="stat-item">
+      <div class="stat-val" id="statCount">0</div>
+      <div class="stat-label">TRANSACTIONS</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-val green" id="statIn">$0</div>
+      <div class="stat-label">TOTAL IN</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-val red" id="statOut">$0</div>
+      <div class="stat-label">TOTAL REFUNDS</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-val" id="statNet">$0</div>
+      <div class="stat-label">NET AMOUNT</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-val" id="statDates" style="font-size:1rem; padding-top:0.3rem;">—</div>
+      <div class="stat-label">DATE RANGE</div>
+    </div>
+  </div>
+
+  <!-- Preview Table -->
+  <div class="table-wrap" id="tableWrap">
+    <table>
+      <thead>
+        <tr>
+          <th>DATE</th>
+          <th>NAME</th>
+          <th>AMOUNT</th>
+          <th>TYPE</th>
+          <th>MEMO</th>
+          <th>DOCNUM (short)</th>
+        </tr>
+      </thead>
+      <tbody id="previewBody"></tbody>
+    </table>
+  </div>
+
+  <!-- Output + Download -->
+  <div class="card" id="outputCard" style="display:none;">
+    <div class="card-title">📄 IIF Output</div>
+    <div class="card-sub">Review the output below, then download your .IIF file for QuickBooks import.</div>
+    <div id="iifOutput"></div>
+    <div class="btn-row">
+      <button class="btn btn-green" onclick="downloadIIF()">⬇ DOWNLOAD .IIF FILE</button>
+      <button class="btn btn-outline" onclick="copyIIF()">📋 COPY TO CLIPBOARD</button>
+    </div>
+  </div>
+
+  <!-- Import instructions -->
+  <div class="card" id="importCard" style="display:none;">
+    <div class="card-title">📥 Import into QuickBooks Desktop</div>
+    <ol style="padding-left:1.3rem; display:flex; flex-direction:column; gap:0.6rem; margin-top:0.5rem;">
+      <li style="font-size:0.88rem; color:#c0c8de;"><strong style="color:var(--text);">Back up first</strong> — File → Back Up Company → Create Local Backup</li>
+      <li style="font-size:0.88rem; color:#c0c8de;"><strong style="color:var(--text);">Open import</strong> — File → Utilities → Import → IIF Files</li>
+      <li style="font-size:0.88rem; color:#c0c8de;"><strong style="color:var(--text);">Select your file</strong> — browse to the downloaded .IIF file, click Open</li>
+      <li style="font-size:0.88rem; color:#c0c8de;"><strong style="color:var(--text);">Confirm success</strong> — QB will say "Your data has been imported." Check your account register to verify.</li>
+    </ol>
+    <div class="alert alert-warn" style="margin-top:1rem;">
+      <span>⚠️</span>
+      <span>Keep a log of date ranges imported to avoid duplicates. QB does not automatically detect IIF duplicates.</span>
+    </div>
+  </div>
+
+</div>
+
+<script>
+let lastIIF = '';
+let convertedRows = [];
+
+// ── Sample data matching real STAX format ──────────────────
+function loadSample() {
+  document.getElementById('csvInput').value =
+`"batched_at","batch_id","display_batch_id","auth_id","created_at","total","last_four","card_type","method","fees","transaction_id","settlement_id","customer_firstname","customer_lastname","customer_email","customer_company","details","surcharge","subtotal","memo","tax","shippingAmount","dutyAmount","payment_note","type","transaction_initiation_type","transaction_schedule_type","isCnpDigitalWalletPaymentEnabled","isCCPaymentEnabled","tip","discount","reference","donation","funding_account_id","funding_account_name","funding_account_flags","funding_account_last_four","funding_account_routing_number","funding_account_instructed_amount"
+"2026-04-20 00:00:00","12091","12091","05725D","2026-04-20 00:00:00","825","8468","visa","card","","c8da5dde-130a-4d0c-aead-9af41fbaf9e5","","James","Wise","jrwise@juno.com","","","0","825","","0","0","0","","","","","","","","","","","","","","",""
+"2026-04-19 00:00:00","98","98","019541","2026-04-19 00:00:00","1343.82","2771","visa","card","","9b533a48-25d2-4425-98a4-6295e9a96b5d","","Andrew","Zhu","","","","0","1343.82","Invoice # 23297","0","0","0","","","","","","","","","","","","","","",""
+"2026-04-18 00:00:00","1172","1172","38709D","2026-04-18 00:00:00","2600","1976","visa","card","","21e9cad6-d30d-43af-acd6-e4700cfa856d","","Cuong","Koong Vong","","","","0","2600","","0","0","","retainer","quickPayment","","","","","","","","","","","","",""
+"2026-04-16 00:00:00","12849","12849","09697D","2026-04-16 00:00:00","-7200","2072","visa","card","","49f10e36-8062-4782-acb9-5e6dd3085dd7","","Michael","Ronzoni","","","","0","7500","","0","0","","retainer","quickPayment","","","","","","","","","","","","",""`;
+}
+
+// ── CSV Parser ──────────────────────────────────────────────
+function parseCSV(text) {
+  const lines = text.trim().split(/\r?\n/);
+  if (lines.length < 2) return null;
+  const headers = splitLine(lines[0]);
+  const rows = [];
+  for (let i = 1; i < lines.length; i++) {
+    if (!lines[i].trim()) continue;
+    const vals = splitLine(lines[i]);
+    const row = {};
+    headers.forEach((h, idx) => { row[h] = (vals[idx] || '').trim(); });
+    rows.push(row);
+  }
+  return { headers, rows };
+}
+
+function splitLine(line) {
+  const res = [];
+  let cur = '', inQ = false;
+  for (let i = 0; i < line.length; i++) {
+    const c = line[i];
+    if (c === '"') { inQ = !inQ; continue; }
+    if (c === ',' && !inQ) { res.push(cur.trim()); cur = ''; continue; }
+    cur += c;
+  }
+  res.push(cur.trim());
+  return res;
+}
+
+// ── Date: "2026-04-20 00:00:00" → "04/20/2026" ─────────────
+function fmtDate(s) {
+  if (!s) return '';
+  const part = s.split(' ')[0];
+  const [y, m, d] = part.split('-');
+  return `${m}/${d}/${y}`;
+}
+
+// ── Amount cleanup ──────────────────────────────────────────
+function fmtAmt(s) {
+  return parseFloat((s || '0').replace(/[$,\s]/g, '')) || 0;
+}
+
+// ── Build memo line ─────────────────────────────────────────
+function buildMemo(row) {
+  const parts = [];
+  if (row['memo'] && row['memo'].trim()) parts.push(row['memo'].trim());
+  const t = (row['type'] || '').trim();
+  if (t && t !== 'quickPayment' && t !== '') parts.push(t);
+  const card = (row['card_type'] || '').trim();
+  if (card) parts.push(card.toUpperCase());
+  const last = (row['last_four'] || '').trim();
+  if (last) parts.push(`x${last}`);
+  return parts.join(' · ') || 'STAX Payment';
+}
+
+// ── Main convert ────────────────────────────────────────────
+function convert() {
+  const raw = document.getElementById('csvInput').value.trim();
+  if (!raw) { showStatus('Paste your STAX CSV first.', 'err'); return; }
+
+  const parsed = parseCSV(raw);
+  if (!parsed || !parsed.rows.length) {
+    showStatus('Could not parse CSV — make sure you include the header row.', 'err');
+    return;
+  }
+
+  // Verify key columns exist
+  const required = ['batched_at','total','transaction_id'];
+  const missing = required.filter(c => !parsed.headers.includes(c));
+  if (missing.length) {
+    showStatus(`Missing expected columns: ${missing.join(', ')} — are you sure this is a STAX export?`, 'err');
+    return;
+  }
+
+  const bank   = document.getElementById('acctBank').value.trim() || 'Undeposited Funds';
+  const income = document.getElementById('acctIncome').value.trim() || 'Sales Income';
+  const tab    = '\t';
+
+  const lines = [];
+  lines.push(['!TRNS','TRNSTYPE','DATE','ACCNT','NAME','AMOUNT','DOCNUM','MEMO','CLEAR'].join(tab));
+  lines.push(['!SPL', 'TRNSTYPE','DATE','ACCNT','NAME','AMOUNT','DOCNUM','MEMO','CLEAR'].join(tab));
+  lines.push('!ENDTRNS');
+
+  convertedRows = [];
+  let totalIn = 0, totalOut = 0;
+  const dates = [];
+
+  for (const row of parsed.rows) {
+    const date   = fmtDate(row['batched_at']);
+    const amount = fmtAmt(row['total']);
+    const docnum = (row['transaction_id'] || '').substring(0, 20); // QB docnum max ~20 chars
+    const fname  = (row['customer_firstname'] || '').trim();
+    const lname  = (row['customer_lastname'] || '').trim();
+    const name   = [fname, lname].filter(Boolean).join(' ') || 'STAX Customer';
+    const memo   = buildMemo(row);
+    const type   = amount >= 0 ? 'DEPOSIT' : 'CHECK';
+    const splAmt = -amount;
+
+    lines.push([
+      'TRNS', type, date, bank, name,
+      amount.toFixed(2), docnum, memo, 'N'
+    ].join(tab));
+    lines.push([
+      'SPL', type, date, income, '',
+      splAmt.toFixed(2), docnum, memo, 'N'
+    ].join(tab));
+    lines.push('ENDTRNS');
+
+    if (amount >= 0) totalIn += amount;
+    else totalOut += Math.abs(amount);
+
+    convertedRows.push({ date, name, amount, type, memo, docnum });
+    if (date) dates.push(date);
+  }
+
+  lastIIF = lines.join('\r\n'); // QB prefers CRLF
+
+  // Stats
+  const count = convertedRows.length;
+  document.getElementById('statCount').textContent = count;
+  document.getElementById('statIn').textContent    = '$' + totalIn.toFixed(2);
+  document.getElementById('statOut').textContent   = '$' + totalOut.toFixed(2);
+  document.getElementById('statNet').textContent   = '$' + (totalIn - totalOut).toFixed(2);
+
+  if (dates.length) {
+    const sorted = [...dates].sort();
+    document.getElementById('statDates').textContent =
+      sorted[0] === sorted[sorted.length-1]
+        ? sorted[0]
+        : `${sorted[0]} → ${sorted[sorted.length-1]}`;
+  }
+
+  document.getElementById('statsBar').style.display = 'flex';
+
+  // Preview table
+  const tbody = document.getElementById('previewBody');
+  tbody.innerHTML = '';
+  convertedRows.forEach(r => {
+    const tr = document.createElement('tr');
+    const amtClass = r.amount >= 0 ? 'pos' : 'neg';
+    const sign = r.amount >= 0 ? '+' : '';
+    const shortDoc = r.docnum.substring(0,8) + '…';
+    tr.innerHTML = `
+      <td>${r.date}</td>
+      <td class="name-col">${r.name}</td>
+      <td class="${amtClass}">${sign}$${Math.abs(r.amount).toFixed(2)}</td>
+      <td>${r.type}</td>
+      <td>${r.memo.substring(0,40)}${r.memo.length>40?'…':''}</td>
+      <td style="color:var(--muted);">${shortDoc}</td>`;
+    tbody.appendChild(tr);
+  });
+  document.getElementById('tableWrap').style.display = 'block';
+
+  // IIF preview
+  const outEl = document.getElementById('iifOutput');
+  outEl.style.display = 'block';
+  // Show first ~60 lines as preview
+  const previewLines = lines.slice(0, 60);
+  if (lines.length > 60) previewLines.push(`... (${lines.length - 60} more lines)`);
+  outEl.textContent = previewLines.join('\n');
+
+  document.getElementById('outputCard').style.display = 'block';
+  document.getElementById('importCard').style.display = 'block';
+
+  showStatus(`✅ ${count} transactions converted · ${totalIn > 0 ? '$'+totalIn.toFixed(2)+' in' : ''} ${totalOut > 0 ? '· $'+totalOut.toFixed(2)+' refunds' : ''}`, 'ok');
+}
+
+function downloadIIF() {
+  if (!lastIIF) return;
+  const blob = new Blob([lastIIF], { type: 'text/plain;charset=utf-8' });
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(blob);
+  a.download = `stax_${new Date().toISOString().slice(0,10)}.iif`;
+  a.click();
+}
+
+function copyIIF() {
+  if (!lastIIF) return;
+  navigator.clipboard.writeText(lastIIF);
+  const btn = event.target;
+  const orig = btn.textContent;
+  btn.textContent = '✅ COPIED!';
+  setTimeout(() => btn.textContent = orig, 2000);
+}
+
+function showStatus(msg, type) {
+  const el = document.getElementById('statusMsg');
+  el.textContent = msg;
+  el.className = `status-msg ${type}`;
+}
+</script>
+</body>
+</html>

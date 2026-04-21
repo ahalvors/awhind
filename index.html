@@ -1,889 +1,242 @@
 <!DOCTYPE html>
-<html>
-	<head>
-		<meta charset="UTF-8" />
-		<meta name="viewport" content="width=device-width, initial-scale=1">
-		<script src="https://cdn.tailwindcss.com"></script>
-		<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
-		<script src="https://elfsight.com/embed-sdk.js"></script>
-		<script src="https://unpkg.com/vue@3.5.13/dist/vue.global.js"></script>
-		<link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
-		<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-		<script>
-			const sgptComponents = {
-				top: {},
-				page: {},
-				bottom: {}
-			};
-
-			const sgptData = {
-				top: {},
-				page: {},
-				bottom: {}
-			};
-
-			const sgptTemplateFragments = {
-				top: {},
-				page: {},
-				bottom: {}
-			};
-		</script>
-
-		
-    <link rel="icon" href="https://res.cloudinary.com/dq0gbgsdy/image/upload/c_limit,w_48,h_48/uploads/tnU3E63S6.png" />
-
-    <style>
-      
-
-      
-        .text-brand-primary { color: #8ec7e7; }
-        .bg-brand-primary { background-color: #8ec7e7; }
-      
-
-      
-        .text-brand-secondary { color: #fafafa; }
-        .bg-brand-secondary { background-color: #fafafa; }
-      
-
-      
-        .text-brand-accent { color: #07689f; }
-        .bg-brand-accent { background-color: #07689f; }
-      
-    </style>
-
-    
-  
-    <script>
-      sgptComponents["top"]["mdet1tc1cmoma7zwo6"] = {
-    props: { index: { type: Number, default: 0 },
-schema: { type: Object, default: () => ({}) },
-site: { type: Object, default: () => ({}) } },
-    data() {     return {       activeSubmenu: null,       mobileMenuOpen: false,       submenuPositions: {}     }   },
-    computed: { settings() {       const data = {};        this.schema.settings?.forEach((setting) => {         data[setting.id] = setting.value;       });        return data;     },
-styles() {       const data = {};        this.schema.styles?.forEach((setting) => {         data[setting.id] = setting.value;       });        return data;     },
-blocks() {       const blocks = this.schema.blocks?.map((block) => {         const data = {           id: block.id,           type: block.type         };          block.settings.forEach((setting) => {           data[setting.id] = setting.value;         });          return data;       });        return blocks ?? [];     },
-desktopMenu() {       const data = this.settings.menu.slice();       const menu = [];        data.forEach((item) => {         if (item.type === 'Static' && item.title && item.link) {           menu.push(item);         } else if (item.type === 'Dynamic') {           this.site.pages.forEach((page) => {             if (!item.data.includes(`/${page.handle}`)) {               menu.push({                 type: 'Static',                 title: page.title,                 link: `/${page.handle}`               });             }           });         }       });              return menu.slice(0, this.settings.menu_count);     },
-colors() {       return themeColors(this.styles.theme)     } },
-    methods: { getResizeUrl(image, options) {
-  var _a, _b, _c, _d, _e;
-  if (!image.filename || !image.source || !options.width && !options.height) {
-    return image;
-  }
-  if (image.source === "pexels") {
-    let url = image.filename;
-    const params = [];
-    if (options.crop) {
-      params.push(`fit=crop`);
-    }
-    if (options.width) {
-      params.push(`w=${options.width}`);
-    }
-    if (options.height) {
-      params.push(`h=${options.height}`);
-    }
-    if (params.length > 0) {
-      url += `?${params.join("&")}`;
-    }
-    return url;
-  }
-  if (image.source === "legacy") {
-    const inputString = image.filename;
-    const lastIndex = inputString.lastIndexOf("/");
-    let path = inputString.substring(0, lastIndex);
-    let filename = inputString.substring(lastIndex + 1);
-    filename = encodeURIComponent(filename);
-    const width = (_a = options.width) != null ? _a : options.height;
-    const height = (_b = options.height) != null ? _b : options.width;
-    if (!options.crop) {
-      path += "/fit-in";
-    }
-    path += `/${width}x${height}`;
-    return `${path}/${filename}`;
-  }
-  if (image.source === "cloudinary" || image.source === "stock") {
-    const width = (_c = options.width) != null ? _c : options.height;
-    const height = (_d = options.height) != null ? _d : options.width;
-    const crop = (_e = image.crop) != null ? _e : options.crop;
-    if (!width && !height) {
-      return image.filename;
-    }
-    const parts = image.filename.split("/upload/");
-    let path = `${parts[0]}/upload/`;
-    const filename = parts[1];
-    if (crop === "crop" || crop === true) {
-      path += "c_fill";
-      if (image.gravity) {
-        path += `,g_${image.gravity}`;
-      } else {
-        path += ",g_auto";
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AWH Industries</title>
+  <link rel="icon" href="https://res.cloudinary.com/dq0gbgsdy/image/upload/c_limit,w_48,h_48/uploads/tnU3E63S6.png" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            brandPrimary: '#8ec7e7',
+            brandAccent: '#07689f',
+            brandSecondary: '#fafafa'
+          }
+        }
       }
-    } else {
-      path += "c_limit";
-    }
-    if (width) {
-      path += `,w_${width}`;
-    }
-    if (height) {
-      path += `,h_${height}`;
-    }
-    return `${path}/${filename}`;
-  }
-  return image.filename;
-},
-handleLinkClick(event) {
-  if (event.defaultPrevented || event.button !== 0 || // Only left click
-  event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) {
-    return;
-  }
-  const href = event.target.getAttribute("href");
-  if (!href || href.startsWith("javascript:")) {
-    return;
-  }
-  const currentUrl = new URL(window.location.href);
-  const targetUrl = new URL(href, currentUrl);
-  const normalizePath = (path) => path === "/" || path === "/index" ? "/" : path;
-  const normalizedCurrentPath = normalizePath(currentUrl.pathname);
-  const normalizedTargetPath = normalizePath(targetUrl.pathname);
-  const isSamePath = normalizedCurrentPath === normalizedTargetPath;
-  const isHashOnly = isSamePath && targetUrl.hash;
-  if (isHashOnly) {
-    event.preventDefault();
-    const targetEl = document.querySelector(targetUrl.hash);
-    if (targetEl) {
-      targetEl.scrollIntoView({
-        behavior: "smooth",
-        block: "start",
-        inline: "nearest"
-      });
-      history.pushState(null, "", targetUrl.hash);
-    }
-  } else if (currentUrl.href !== targetUrl.href) {
-    event.preventDefault();
-    window.location.href = targetUrl.href;
-  }
-},
-toggleSubmenu(id) {       if (this.activeSubmenu === id) {         this.activeSubmenu = null;         return;       }        this.activeSubmenu = id;     } },
-    watch: { activeSubmenu(id) {       if (!id) {         return;       }        this.submenuPositions[id] = null;              setTimeout(() => {         const submenu = this.$refs[`submenu-${id}`];          if (!submenu) {           return;         }          const position = submenu.getBoundingClientRect();                  if ((position.x + position.width) > window.outerWidth) {           this.submenuPositions[id] = '-right-8';         } else {           this.submenuPositions[id] = '-left-8';         }       }, 1);     } },
-    
-    template: `<header     :style="\{       'margin-top': schema.offset ? \`-\$\{schema.offset\}vw\` : null,       'padding-top': schema.offset ? \`\$\{schema.offset\}vw\` : null,     \}"     class="relative"     :class="[       colors.background,       \{'border-b': styles.theme === 'light'\},       \{'sticky top-0': settings.sticky\}     ]"   >     <a :id="\`basic-header-\$\{index\}\`"></a>     <nav role="navigation" class="mx-auto flex max-w-7xl items-center justify-between p-6 lg:px-8" aria-label="Global">       <div v-if="site.logo?.filename || settings.title" class="flex grow">         <a href="index.html" class="-m-1.5 p-1.5 flex items-center gap-3 w-full">           <img v-if="settings.logo_override?.filename" :src="getResizeUrl(settings.logo_override, \{height: settings.logo_size * 3\})" class="w-auto" :class="\`max-h-[\$\{settings.logo_size\}px]\`" :alt="site.logo?.alt ?? ''">           <img v-else-if="site.logo?.filename" :src="getResizeUrl(site.logo, \{height: settings.logo_size * 3\})" class="w-auto" :class="\`max-h-[\$\{settings.logo_size\}px]\`" :alt="site.logo?.alt ?? ''">           <h1 v-if="settings.title && settings.show_title" :class="colors.text" class="font-primary font-semibold" v-text="settings.title" />         </a>       </div>       <template v-if="settings.menu?.length">         <div           class="flex order-last ml-12"           :class="\{'lg:hidden': desktopMenu.length < settings.menu_count\}"         >           <button @click="mobileMenuOpen = !mobileMenuOpen" type="button" :class="colors.text" class="-m-2.5 inline-flex items-center justify-center rounded-md p-2.5">             <span class="sr-only">Open main menu</span>             <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true">               <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />             </svg>           </button>         </div>         <div class="hidden lg:flex lg:gap-x-12">           <template v-for="(item, index) in desktopMenu" :key="index">             <div v-if="item.children?.length" class="relative">               <button @click="toggleSubmenu(item.id)" type="button" :class="colors.text" class="flex items-center gap-x-1 text-sm font-semibold leading-6" aria-expanded="false">                 <span class="font-secondary">\{\{ item.title \}\}</span>                 <svg :class="colors.text_light" class="h-5 w-5 flex-none" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">                   <path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z" clip-rule="evenodd" />                 </svg>               </button>                <transition enter-active-class="transition ease-out duration-200" enter-from-class="opacity-0 translate-y-1" enter-to-class="opacity-100 translate-y-0" leave-active-class="transition ease-in duration-150" leave-from-class="opacity-100 translate-y-0" leave-to-class="opacity-0 translate-y-1">                 <div                   :ref="\`submenu-\$\{item.id\}\`"                   v-show="activeSubmenu === item.id"                   :class="submenuPositions[item.id]"                   class="absolute top-full z-10 mt-3 w-screen max-w-md overflow-hidden rounded-3xl bg-white shadow-lg ring-1 ring-gray-900/5"                 >                   <div class="p-4">                     <template v-for="(child, childIndex) in item.children" :key="childIndex">                       <template v-if="child.type === 'Static'">                         <div class="group relative flex items-center gap-x-6 rounded-lg p-4 text-sm leading-6 hover:bg-gray-50">                           <div class="flex-auto">                             <a                               @click="handleLinkClick"                               :href="child.link ?? null"                               :target="child.new_tab ? '_blank' : '_self'"                               class="font-secondary block font-semibold text-gray-900"                             >                               \{\{ child.title \}\}                             </a>                             <p v-if="child.subtitle" class="font-secondary mt-1 text-gray-600" v-text="child.subtitle" />                           </div>                         </div>                       </template>                        <template v-else-if="child.type === 'Dynamic'">                         <template v-for="page in site.pages" :key="page.handle">                           <div                             v-if="!child.data.includes(\`/\$\{page.handle\}\`)"                             class="group relative flex items-center gap-x-6 rounded-lg p-4 text-sm leading-6 hover:bg-gray-50"                           >                             <div class="flex-auto">                               <a                                 @click="handleLinkClick"                                 :href="\`/\$\{page.handle\}\` ?? null"                                 class="font-secondary block font-semibold text-gray-900"                               >                                 \{\{ page.title \}\}                               </a>                             </div>                           </div>                         </template>                       </template>                     </template>                   </div>                 </div>               </transition>             </div>              <a               v-else               @click="handleLinkClick"               :href="item.link ?? null"               :target="item.new_tab ? '_blank' : '_self'"               :class="colors.text"               class="font-secondary text-sm font-semibold leading-6"               v-text="item.title"             />           </template>         </div>       </template>     </nav>          <div       v-if="settings.menu?.length && mobileMenuOpen"       :class="\{'lg:hidden': desktopMenu.length < settings.menu_count\}"       role="dialog"       aria-modal="true"     >       <div @click="mobileMenuOpen = false" class="fixed inset-0 z-10 bg-black opacity-30"></div>        <div class="fixed inset-y-0 right-0 z-10 w-full overflow-y-auto bg-white px-6 py-6 sm:max-w-sm sm:ring-1 sm:ring-gray-900/10">         <div class="flex items-center justify-between">           <a href="index.html" class="flex items-center gap-3">             <img v-if="site.logo?.filename" :src="getResizeUrl(site.logo, \{height: settings.logo_size * 3\})" :class="\`h-[\$\{settings.logo_size\}px]\`" alt="">           </a>           <button @click="mobileMenuOpen = false" type="button" class="-m-2.5 rounded-md p-2.5 text-gray-700">             <span class="sr-only">Close menu</span>             <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true">               <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />             </svg>           </button>         </div>         <div class="mt-6 flow-root">           <div class="-my-6 divide-y divide-gray-500/10">             <div class="space-y-2 py-6" role="navigation">               <template v-for="(item, index) in settings.menu" :key="index">                 <template v-if="item.type === 'Static'">                   <div v-if="item.children?.length" class="-mx-3">                     <button                       @click="toggleSubmenu(item.id)"                       type="button"                       class="flex w-full items-center justify-between rounded-lg py-2 pl-3 pr-3.5 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50"                       aria-controls="disclosure-1"                       aria-expanded="false"                     >                       <span class="font-secondary">\{\{ item.title \}\}</span>                       <svg                         :class="\{'rotate-180': activeSubmenu === item.id\}"                         class="h-5 w-5 flex-none transition ease-out duration-200"                         viewBox="0 0 20 20"                         fill="currentColor"                         aria-hidden="true"                       >                         <path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z" clip-rule="evenodd" />                       </svg>                     </button>                                          <div v-show="activeSubmenu === item.id" class="mt-2 space-y-2">                       <template                         v-for="(child, childIndex) in item.children"                         :key="childIndex"                       >                         <a                            v-if="child.type === 'Static'"                           :href="child.link ?? null"                           :target="child.new_tab ? '_blank' : '_self'"                           class="font-secondary block rounded-lg py-2 pl-6 pr-3 text-sm font-semibold leading-7 text-gray-900 hover:bg-gray-50"                           v-text="child.title"                           @click="\$event => \{                             mobileMenuOpen = false;                             handleLinkClick(\$event);                           \}"                         />                          <template v-else-if="child.type === 'Dynamic'">                           <template v-for="page in site.pages" :key="page.handle">                             <a                                v-if="!child.data.includes(\`/\$\{page.handle\}\`)"                               :href="\`/\$\{page.handle\}\` ?? null"                               class="font-secondary block rounded-lg py-2 pl-6 pr-3 text-sm font-semibold leading-7 text-gray-900 hover:bg-gray-50"                               v-text="page.title"                               @click="\$event => \{                                 mobileMenuOpen = false;                                 handleLinkClick(\$event);                               \}"                             />                           </template>                         </template>                       </template>                     </div>                   </div>                                      <a                     v-else                     @click="\$event => \{                       mobileMenuOpen = false;                       handleLinkClick(\$event);                     \}"                     :href="item.link ?? null"                     class="font-secondary -mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50"                     v-text="item.title"                   />                 </template>                  <template v-else-if="item.type === 'Dynamic'">                   <template v-for="page in site.pages" :key="page.handle">                     <a                       v-if="!item.data.includes(\`/\$\{page.handle\}\`)"                       @click="\$event => \{                         mobileMenuOpen = false;                         handleLinkClick(\$event);                       \}"                       :href="\`/\$\{page.handle\}\` ?? null"                       class="font-secondary -mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50"                       v-text="page.title"                     />                   </template>                 </template>               </template>             </div>           </div>         </div>       </div>     </div>   </header>`
-  };
-sgptData["top"] = { schema_mdet1tc1cmoma7zwo6: {"name":"Basic Header","handle":"basic-header","cacheable":false,"settings":[{"type":"image","id":"logo_override","label":"Logo Override","info":"Leave blank to use the default logo."},{"id":"logo_size","type":"range","label":"Logo Size","min":1,"max":100,"step":1,"value":"40","info":"Logo image can be configured in Site Settings."},{"id":"title","type":"text","label":"Logo Title","value":"AWH Industries","info":"Even if it's not shown, this field will provide good SEO value."},{"id":"show_title","type":"checkbox","label":"Show Logo Title","value":true,"info":"If unchecked, the logo text will not be shown."},{"id":"sticky","type":"checkbox","label":"Sticky Header?","value":true},{"type":"header","label":"Menu Settings"},{"id":"menu","type":"menu","label":"Menu","value":[{"id":"lr9ih2u2djpe9s0f0pf","type":"Static","title":"About Us","link":"#basic-content-image-0","new_tab":false,"children":[]},{"id":"lr9ihpyced2nht6m0o9","type":"Static","title":"Our Services","link":"#three-column-images-0","new_tab":false,"children":[]},{"id":"lr9iibmdns4rhdwbtte","type":"Static","title":"Contact Us","link":"#basic-contact-form-0","new_tab":false,"children":[]},{"id":"lqzjk0huquni0ca4jd","type":"Static","title":"925-699-1516","link":"tel:925-699-1516","new_tab":false,"children":[]},{"id":"lr9iig3rd6ms7q57jbp","type":"Dynamic","mode":"exclude","title":"Dynamic Menu Item","data":["/index"],"new_tab":false,"children":[]}]},{"id":"menu_count","type":"range","label":"Visible Menu Items","min":0,"max":10,"step":1,"value":"4"}],"styles":[{"type":"header","label":"Color Settings"},{"id":"theme","type":"radio","label":"Color Theme","options":[{"label":"Light","value":"light"},{"label":"Medium","value":"medium"},{"label":"Dark","value":"dark"},{"label":"Brand","value":"brand-colors"}],"value":"dark"}]},
-site_mdet1tc1cmoma7zwo6: {"gender":50,"logo":{"source":"cloudinary","filename":"https://res.cloudinary.com/dq0gbgsdy/image/upload/uploads/tnU3E63S6.png","type":"image"},"favicon":{"type":"image","filename":"https://res.cloudinary.com/dq0gbgsdy/image/upload/c_limit,w_48,h_48/uploads/tnU3E63S6.png","source":"cloudinary"},"phone":"925-699-1516","colors":{"primary":"#8ec7e7","accent":"#07689f","secondary":"#fafafa"},"industry":{"id":null,"name":"Contract Corporate IT Tech Support"},"company":"AWH Industries","address":"Livermore, CA","id":"0q6jQzrvOb3O1HAmGihr","pages":[{"title":"Homepage","handle":"index"}]} };
-sgptTemplateFragments["top"] = `
-      <mdet1tc1cmoma7zwo6
-        :index="0"
-        :schema="schema_mdet1tc1cmoma7zwo6"
-        :site="site_mdet1tc1cmoma7zwo6"
-        style="z-index: 209"
-      />
-    `;
-    </script>
-  
-    <script>
-      sgptComponents["bottom"]["mdet1tns7z2jeba7mk"] = {
-    props: { index: { type: Number, default: 0 },
-schema: { type: Object, default: () => ({}) },
-site: { type: Object, default: () => ({}) } },
-    data() {     return {       errors: [],       hiddenValue: null,       success: false,       firstname: null,       lastname: null,       formData: {         siteId: this.site.id       }     }   },
-    computed: { settings() {       const data = {};        this.schema.settings?.forEach((setting) => {         data[setting.id] = setting.value;       });        return data;     },
-styles() {       const data = {};        this.schema.styles?.forEach((setting) => {         data[setting.id] = setting.value;       });        return data;     },
-blocks() {       const blocks = this.schema.blocks?.map((block) => {         const data = {           id: block.id,           type: block.type         };          block.settings.forEach((setting) => {           data[setting.id] = setting.value;         });          return data;       });        return blocks ?? [];     },
-colors() {       return themeColors(this.styles.theme);     } },
-    methods: { async handleSubmit() {       if (this.hiddenValue) {         this.errors.push('Failed to submit form. Please try again or contact the site administrator.');         return;       }        this.formData.distribution = this.settings.distribution ?? null;              const response = await fetch("submit.php", {         method: 'POST',         headers: {           'Content-Type': 'application/json',         },         body: JSON.stringify(this.formData)       });        const result = await response.json();        if (result.success) {         this.success = true;         this.errors = [];         return;       }        Object.values(result.errors).forEach((error) => {         this.errors.push(error);       });       this.success = false;     } },
-    watch: {},
-    
-    template: `<div class="relative">     <a :id="\`basic-contact-form-\$\{index\}\`"></a>     <div       :style="\{         'mask-image': styles.divider?.src ? \`url(\$\{styles.divider.src\})\` : null,         'mask-position': styles.divider?.position,         'mask-size': 'cover',         'mask-repeat': 'no-repeat',         'padding-bottom': styles.divider?.offset ? \`\$\{styles.divider.offset\}vw\` : null,         'margin-top': schema.offset ? \`-\$\{schema.offset\}vw\` : null,         'padding-top': schema.offset ? \`\$\{schema.offset\}vw\` : null,       \}"       class="relative isolate px-6 lg:px-8"       :class="colors.background"     >       <div class="py-16 sm:py-24">         <div class="mx-auto max-w-2xl text-center">           <h2             v-if="settings.title"             :class="colors.text"             class="text-3xl font-primary font-bold tracking-tight sm:text-4xl mb-8"             v-text="settings.title"           />           <div             v-if="settings.content"             :class="colors.text_light"             class="font-secondary mt-2 leading-8"             v-html="settings.content"           />         </div>          <form @submit.prevent="handleSubmit" name="contact" method="POST" data-netlify="true" class="mx-auto mt-16 max-w-4xl">           <div class="wrapper flex flex-row flex-wrap">             <template               v-for="block in blocks"               :key="block.id"             >               <div                 :class="\`field w-full sm:w-\$\{block.width ?? 'full'\} px-4 py-3\`"                 :data-sgpt-block="block.id"               >                 <label                   v-if="block.type === 'checkbox'"                   :class="colors.text"                   class="flex font-secondary items-start"                 >                   <input                     type="checkbox"                     v-model="formData[block.label]"                     :aria-label="block.label ?? null"                     :name="block.label ?? null"                     :required="block.required ?? null"                     :aria-required="block.required"                     class="rounded-md border-0 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset mt-1 mx-3"                   />                    <span><span v-html="block.label" /> <span v-if="block.required" class="text-red-600">*</span></span>                 </label>                  <template v-else>                   <label                     :for="block.label"                     :class="colors.text" class="block font-secondary text-sm font-semibold leading-6"                   >                     \{\{ block.label \}\} <span v-if="block.required" class="text-red-600">*</span>                   </label>                    <div class="mt-2 5">                     <textarea                       v-if="block.type === 'textarea'"                       v-model="formData[block.label]"                       rows="8"                       :aria-label="block.label ?? null"                       :name="block.label ?? null"                       :required="block.required ?? null"                       :aria-required="block.required"                       class="grow block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset sm:text-sm sm:leading-6"                     >                     </textarea>                      <input                       v-else                       v-model="formData[block.label]"                       :aria-label="block.label ?? null"                       :name="block.label ?? null"                       :type="block.label"                       :required="block.required ?? null"                       :aria-required="block.required"                       class="block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset sm:text-sm sm:leading-6"                     >                   </div>                 </template>               </div>             </template>           </div>            <div v-if="errors.length" class="px-4 py-3 w-full">             <div class="flex rounded-md bg-red-50 p-4">               <div class="flex-shrink-0">                 <svg class="h-5 w-5 text-red-400" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">                   <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.28 7.22a.75.75 0 00-1.06 1.06L8.94 10l-1.72 1.72a.75.75 0 101.06 1.06L10 11.06l1.72 1.72a.75.75 0 101.06-1.06L11.06 10l1.72-1.72a.75.75 0 00-1.06-1.06L10 8.94 8.28 7.22z" clip-rule="evenodd" />                 </svg>               </div>               <div class="ml-3">                 <h3 v-if="errors.length > 1" class="text-sm font-medium text-red-800">There were 2 errors with your submission</h3>                 <h3 v-else class="text-sm font-medium text-red-800">There was an error with your submission</h3>                 <div class="mt-2 text-sm text-red-700">                   <ul role="list" class="list-disc space-y-1 pl-5">                     <li v-for="(error, index) in errors" :key="index" v-text="error" />                   </ul>                 </div>               </div>               <div class="ml-auto pl-3">                 <div class="-mx-1.5 -my-1.5">                   <button @click="errors = []" type="button" class="inline-flex rounded-md bg-red-50 p-1.5 text-red-400 hover:bg-red-100 focus:outline-none focus:ring-2 focus:ring-offset-2">                     <span class="sr-only">Dismiss</span>                     <svg class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">                       <path d="M6.28 5.22a.75.75 0 00-1.06 1.06L8.94 10l-3.72 3.72a.75.75 0 101.06 1.06L10 11.06l3.72 3.72a.75.75 0 101.06-1.06L11.06 10l3.72-3.72a.75.75 0 00-1.06-1.06L10 8.94 6.28 5.22z" />                     </svg>                   </button>                 </div>               </div>             </div>           </div>            <div v-else-if="success" class="px-4 py-3 w-full">             <div class="flex rounded-md bg-green-50 p-4">               <div class="flex-shrink-0">                 <svg class="h-5 w-5 text-green-400" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">                   <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.857-9.809a.75.75 0 00-1.214-.882l-3.483 4.79-1.88-1.88a.75.75 0 10-1.06 1.061l2.5 2.5a.75.75 0 001.137-.089l4-5.5z" clip-rule="evenodd"></path>                 </svg>               </div>               <div class="ml-3">                 <p class="text-sm font-medium text-green-800">Your form submission has been successfully received. Thank you!</p>               </div>               <div class="ml-auto pl-3">                 <div class="-mx-1.5 -my-1.5">                   <button @click="success = false" type="button" class="inline-flex rounded-md bg-green-50 p-1.5 text-green-500 hover:bg-green-100 focus:outline-none focus:ring-2 focus:ring-green-600 focus:ring-offset-2 focus:ring-offset-green-50">                     <span class="sr-only">Dismiss</span>                     <svg class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">                       <path d="M6.28 5.22a.75.75 0 00-1.06 1.06L8.94 10l-3.72 3.72a.75.75 0 101.06 1.06L10 11.06l3.72 3.72a.75.75 0 101.06-1.06L11.06 10l3.72-3.72a.75.75 0 00-1.06-1.06L10 8.94 6.28 5.22z"></path>                     </svg>                   </button>                 </div>               </div>             </div>           </div>            <div class="px-4 py-3">             <input type="hidden" name="form-name" value="contact">             <input type="hidden" name="hidden" v-model="hiddenValue">             <button               v-if="settings.button_text"               type="submit"               :style="[                 \{'background-color': styles.button_background\},                 \{'color': styles.button_text_color\}               ]"               class="block w-full rounded-md px-3.5 py-2.5 text-center text-sm font-semibold shadow-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2"               v-text="settings.button_text"             />           </div>         </form>       </div>     </div>      <span       v-if="styles.divider?.border?.shape"       v-html="styles.divider.border.shape"     />   </div>`
-  };
-sgptComponents["bottom"]["mdet1v4trj08n43zms"] = {
-    props: { index: { type: Number, default: 0 },
-schema: { type: Object, default: () => ({}) },
-site: { type: Object, default: () => ({}) } },
-    data() {},
-    computed: { settings() {       const data = {};        this.schema.settings?.forEach((setting) => {         data[setting.id] = setting.value;       });        return data;     },
-styles() {       const data = {};        this.schema.styles?.forEach((setting) => {         data[setting.id] = setting.value;       });        return data;     },
-menus() {       const blocks = this.schema.blocks?.filter((block) => block.type === 'link_group');       const menus = blocks?.map((block) => {         const data = {           id: block.id,           type: block.type         };          block.settings.forEach((setting) => {           data[setting.id] = setting.value;         });          return data;       });        return menus ?? [];     },
-menuGroups() {       const groups = [];          for (let i = 0; i < this.menus.length; i += 2) {         groups.push(this.menus.slice(i, i + 2));       }              return groups;     },
-icons() {       const blocks = this.schema.blocks?.filter((block) => block.type === 'icon');       const icons = blocks?.map((block) => {         const data = {           id: block.id,           type: block.type         };          block.settings.forEach((setting) => {           data[setting.id] = setting.value;         });          return data;       });        return icons ?? [];     },
-textHoverColor() {       return `hover:${this.colors.text}`;     },
-colors() {       return themeColors(this.styles.theme);     } },
-    methods: { getResizeUrl(image, options) {
-  var _a, _b, _c, _d, _e;
-  if (!image.filename || !image.source || !options.width && !options.height) {
-    return image;
-  }
-  if (image.source === "pexels") {
-    let url = image.filename;
-    const params = [];
-    if (options.crop) {
-      params.push(`fit=crop`);
-    }
-    if (options.width) {
-      params.push(`w=${options.width}`);
-    }
-    if (options.height) {
-      params.push(`h=${options.height}`);
-    }
-    if (params.length > 0) {
-      url += `?${params.join("&")}`;
-    }
-    return url;
-  }
-  if (image.source === "legacy") {
-    const inputString = image.filename;
-    const lastIndex = inputString.lastIndexOf("/");
-    let path = inputString.substring(0, lastIndex);
-    let filename = inputString.substring(lastIndex + 1);
-    filename = encodeURIComponent(filename);
-    const width = (_a = options.width) != null ? _a : options.height;
-    const height = (_b = options.height) != null ? _b : options.width;
-    if (!options.crop) {
-      path += "/fit-in";
-    }
-    path += `/${width}x${height}`;
-    return `${path}/${filename}`;
-  }
-  if (image.source === "cloudinary" || image.source === "stock") {
-    const width = (_c = options.width) != null ? _c : options.height;
-    const height = (_d = options.height) != null ? _d : options.width;
-    const crop = (_e = image.crop) != null ? _e : options.crop;
-    if (!width && !height) {
-      return image.filename;
-    }
-    const parts = image.filename.split("/upload/");
-    let path = `${parts[0]}/upload/`;
-    const filename = parts[1];
-    if (crop === "crop" || crop === true) {
-      path += "c_fill";
-      if (image.gravity) {
-        path += `,g_${image.gravity}`;
-      } else {
-        path += ",g_auto";
-      }
-    } else {
-      path += "c_limit";
-    }
-    if (width) {
-      path += `,w_${width}`;
-    }
-    if (height) {
-      path += `,h_${height}`;
-    }
-    return `${path}/${filename}`;
-  }
-  return image.filename;
-},
-handleLinkClick(event) {
-  if (event.defaultPrevented || event.button !== 0 || // Only left click
-  event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) {
-    return;
-  }
-  const href = event.target.getAttribute("href");
-  if (!href || href.startsWith("javascript:")) {
-    return;
-  }
-  const currentUrl = new URL(window.location.href);
-  const targetUrl = new URL(href, currentUrl);
-  const normalizePath = (path) => path === "/" || path === "/index" ? "/" : path;
-  const normalizedCurrentPath = normalizePath(currentUrl.pathname);
-  const normalizedTargetPath = normalizePath(targetUrl.pathname);
-  const isSamePath = normalizedCurrentPath === normalizedTargetPath;
-  const isHashOnly = isSamePath && targetUrl.hash;
-  if (isHashOnly) {
-    event.preventDefault();
-    const targetEl = document.querySelector(targetUrl.hash);
-    if (targetEl) {
-      targetEl.scrollIntoView({
-        behavior: "smooth",
-        block: "start",
-        inline: "nearest"
-      });
-      history.pushState(null, "", targetUrl.hash);
-    }
-  } else if (currentUrl.href !== targetUrl.href) {
-    event.preventDefault();
-    window.location.href = targetUrl.href;
-  }
-} },
-    watch: {},
-    
-    template: `<div class="relative">     <a :id="\`basic-footer-\$\{index\}\`"></a>     <footer       :style="\{         'margin-top': schema.offset ? \`-\$\{schema.offset\}vw\` : null,         'padding-top': schema.offset ? \`\$\{schema.offset\}vw\` : null,       \}"       :class="[         colors.background,         \{'border-t border-gray-950': styles.theme === 'dark'\}       ]"     >       <div class="mx-auto max-w-7xl px-6 pb-8 pt-16 sm:pt-24 lg:px-8">         <div class="xl:grid xl:grid-cols-2 xl:gap-8">           <div class="space-y-8 xl:mr-8">             <img               v-if="settings.logo_override?.filename"               :class="\`h-[\$\{settings.logo_size\}px]\`"               :src="getResizeUrl(settings.logo_override, \{height: settings.logo_size * 3\})"               :alt="site.logo.alt ?? null"             >             <img               v-else-if="site.logo?.filename"               :class="\`h-[\$\{settings.logo_size\}px]\`"               :src="getResizeUrl(site.logo, \{height: settings.logo_size * 3\})"               :alt="site.logo.alt ?? null"             >             <div               v-if="settings.content"               :class="colors.text_light"               class="font-secondary leading-6"               v-html="settings.content"             />              <div               v-if="icons?.length"               class="flex flex-wrap gap-3"             >               <a                 v-for="(icon, iconIndex) in icons"                 :key="iconIndex"                 :href="icon.link"                 :data-sgpt-block="icon.id"                 :class="[                   colors.text_light,                   textHoverColor                 ]"                 target="_blank"               >                 <span class="sr-only">\{\{icon.label\}\}</span>                 <i :class="\`bi \$\{icon.icon\} text-3xl\`"></i>               </a>             </div>           </div>           <div             v-if="menus?.length"             class="mt-16 grid grid-cols-2 gap-8 xl:mt-0"             :class="[               \{'md:grid-cols-2': menus.length <= 2\},               \{'md:grid-cols-3': menus.length === 3\},               \{'md:grid-cols-4': menus.length >= 4\},             ]"           >             <template               v-for="(group, index) in menuGroups"               :key="index"             >               <div                 v-for="(block, bindex) in group"                 :key="bindex"                 :data-sgpt-block="block.id"               >                 <h3                   v-if="block.title"                   :class="colors.text"                   class="font-primary text-md font-semibold leading-6"                   v-text="block.title"                 />                 <ul v-if="block.menu?.length" role="list" class="mt-6 space-y-4">                   <template v-for="item in block.menu" :key="item.id">                     <li v-if="item.type === 'Static' && item.title">                       <component                         :is="item.link ? 'a' : 'span'"                         :href="item.link"                         :class="[                           colors.text_light,                           textHoverColor                         ]"                         class="font-secondary text-md leading-6"                         v-text="item.title"                         @click="handleLinkClick"                       />                     </li>                      <template v-else-if="item.type === 'Dynamic'">                       <li                         v-for="page in site.pages"                         :key="page.handle"                       >                         <a                           v-if="!item.data.includes(\`/\$\{page.handle\}\`)"                           :href="page.handle"                           :class="[                             colors.text_light,                             textHoverColor                           ]"                           class="font-secondary text-md leading-6"                           v-text="page.title"                           @click="handleLinkClick"                         />                       </li>                     </template>                   </template>                 </ul>               </div>             </template>           </div>         </div>         <div v-if="settings.copyright" class="mt-16 border-t border-gray-900/10 pt-8 sm:mt-20 lg:mt-24">           <p             :class="colors.text_light"             class="font-secondary text-xs leading-5"           >             \{\{ settings.copyright \}\}             <a               v-if="settings.copyright_link && settings.copyright_link_label"               :href="settings.copyright_link"               target="_blank"               v-text="settings.copyright_link_label"               class="underline"             />                        </p>         </div>       </div>     </footer>   </div>`
-  };
-sgptData["bottom"] = { schema_mdet1tns7z2jeba7mk: {"name":"Basic Contact Form","cacheable":true,"settings":[{"type":"text","id":"title","label":"Title","value":"Contact Us","fallback":"Lorem Ipsum"},{"type":"richtext","id":"content","label":"Content","prompt":"Write 60 characters encouraging users to contact us.","fallback":"Lorem ipsum dolor sit amet, consectetuer adipiscing elit.","value":"Got questions? We're here to help! Contact AWH Industries today!"},{"type":"text","id":"button_text","label":"Button Label","value":"Let's Talk"},{"type":"distribution","id":"distribution","label":"Email List","value":"Default","info":"Successful form submissions will be emailed to the contacts in this list. Manage lists at Settings -> Site Settings -> Distribution Lists"}],"styles":[{"type":"header","value":"Color Settings"},{"id":"theme","type":"radio","label":"Color Theme","options":[{"label":"Light","value":"light"},{"label":"Medium","value":"medium"},{"label":"Dark","value":"dark"},{"label":"Brand","value":"brand-colors"}],"value":"medium"},{"id":"button_background","type":"color","label":"Button Color","value":"#8ec7e7"},{"id":"button_text_color","type":"color","label":"Button Text Color","value":"#FFFFFF"},{"type":"header","label":"Section Dividers"},{"type":"divider","id":"divider","label":"Divider"}],"blockSchema":[{"name":"Form Field","type":"form_field","default_count":1,"settings":[{"id":"label","type":"select","label":"Label","options":[{"label":"Address","value":"Address"},{"label":"Budget / Project Size","value":"Budget / Project Size"},{"label":"City","value":"City"},{"label":"Company Name","value":"Company Name"},{"label":"Country","value":"Country"},{"label":"Deadline","value":"Deadline"},{"label":"Email Address","value":"Email Address"},{"label":"How did you hear about us?","value":"How did you hear about us?"},{"label":"Job Title / Position","value":"Job Title / Position"},{"label":"Message / Comments","value":"Message / Comments"},{"label":"Name","value":"Name"},{"label":"Opt-in (Text Messages)","value":"I consent to receive automated marketing text messages at the phone number provided. Reply STOP to unsubscribe."},{"label":"Phone Number","value":"Phone Number"},{"label":"State / Province / Region","value":"State / Province / Region"},{"label":"Subject","value":"Subject"},{"label":"Zip / Postal Code","value":"Zip / Postal Code"}],"value":"Message / Comments","required":true},{"id":"type","type":"select","label":"Field Type","options":[{"label":"Checkbox","value":"checkbox"},{"label":"Email","value":"email"},{"label":"Phone Number","value":"tel"},{"label":"Text Input","value":"text"},{"label":"Textarea","value":"textarea"}],"value":"textarea","required":true},{"id":"width","type":"select","label":"Field Width","options":[{"label":"1/3","value":"1/3"},{"label":"1/2","value":"1/2"},{"label":"2/3","value":"2/3"},{"label":"Full","value":"full"}],"value":"full"},{"id":"required","type":"checkbox","label":"Required?","info":"Form submission will be disabled unless this field is filled out.","value":true}]}],"blocks":[{"id":"mdet1tnsgjvlb7sz2w","name":"Form Field","type":"form_field","settings":[{"id":"label","type":"select","label":"Label","options":[{"label":"Address","value":"Address"},{"label":"Budget / Project Size","value":"Budget / Project Size"},{"label":"City","value":"City"},{"label":"Company Name","value":"Company Name"},{"label":"Country","value":"Country"},{"label":"Deadline","value":"Deadline"},{"label":"Email Address","value":"Email Address"},{"label":"How did you hear about us?","value":"How did you hear about us?"},{"label":"Job Title / Position","value":"Job Title / Position"},{"label":"Message / Comments","value":"Message / Comments"},{"label":"Name","value":"Name"},{"label":"Opt-in (Text Messages)","value":"I consent to receive automated marketing text messages at the phone number provided. Reply STOP to unsubscribe."},{"label":"Phone Number","value":"Phone Number"},{"label":"State / Province / Region","value":"State / Province / Region"},{"label":"Subject","value":"Subject"},{"label":"Zip / Postal Code","value":"Zip / Postal Code"}],"value":"Name","required":true},{"id":"type","type":"select","label":"Field Type","options":[{"label":"Checkbox","value":"checkbox"},{"label":"Email","value":"email"},{"label":"Phone Number","value":"tel"},{"label":"Text Input","value":"text"},{"label":"Textarea","value":"textarea"}],"value":"text","required":true},{"id":"width","type":"select","label":"Field Width","options":[{"label":"1/3","value":"1/3"},{"label":"1/2","value":"1/2"},{"label":"2/3","value":"2/3"},{"label":"Full","value":"full"}],"value":"full"},{"id":"required","type":"checkbox","label":"Required?","info":"Form submission will be disabled unless this field is filled out.","value":true}]},{"id":"mdet1tnsz7b9orm2k6","name":"Form Field","type":"form_field","settings":[{"id":"label","type":"select","label":"Label","options":[{"label":"Address","value":"Address"},{"label":"Budget / Project Size","value":"Budget / Project Size"},{"label":"City","value":"City"},{"label":"Company Name","value":"Company Name"},{"label":"Country","value":"Country"},{"label":"Deadline","value":"Deadline"},{"label":"Email Address","value":"Email Address"},{"label":"How did you hear about us?","value":"How did you hear about us?"},{"label":"Job Title / Position","value":"Job Title / Position"},{"label":"Message / Comments","value":"Message / Comments"},{"label":"Name","value":"Name"},{"label":"Opt-in (Text Messages)","value":"I consent to receive automated marketing text messages at the phone number provided. Reply STOP to unsubscribe."},{"label":"Phone Number","value":"Phone Number"},{"label":"State / Province / Region","value":"State / Province / Region"},{"label":"Subject","value":"Subject"},{"label":"Zip / Postal Code","value":"Zip / Postal Code"}],"value":"Email Address","required":true},{"id":"type","type":"select","label":"Field Type","options":[{"label":"Checkbox","value":"checkbox"},{"label":"Email","value":"email"},{"label":"Phone Number","value":"tel"},{"label":"Text Input","value":"text"},{"label":"Textarea","value":"textarea"}],"value":"email","required":true},{"id":"width","type":"select","label":"Field Width","options":[{"label":"1/3","value":"1/3"},{"label":"1/2","value":"1/2"},{"label":"2/3","value":"2/3"},{"label":"Full","value":"full"}],"value":"1/2"},{"id":"required","type":"checkbox","label":"Required?","info":"Form submission will be disabled unless this field is filled out.","value":true}]},{"id":"mdet1tns265c00t831a","name":"Form Field","type":"form_field","settings":[{"id":"label","type":"select","label":"Label","options":[{"label":"Address","value":"Address"},{"label":"Budget / Project Size","value":"Budget / Project Size"},{"label":"City","value":"City"},{"label":"Company Name","value":"Company Name"},{"label":"Country","value":"Country"},{"label":"Deadline","value":"Deadline"},{"label":"Email Address","value":"Email Address"},{"label":"How did you hear about us?","value":"How did you hear about us?"},{"label":"Job Title / Position","value":"Job Title / Position"},{"label":"Message / Comments","value":"Message / Comments"},{"label":"Name","value":"Name"},{"label":"Opt-in (Text Messages)","value":"I consent to receive automated marketing text messages at the phone number provided. Reply STOP to unsubscribe."},{"label":"Phone Number","value":"Phone Number"},{"label":"State / Province / Region","value":"State / Province / Region"},{"label":"Subject","value":"Subject"},{"label":"Zip / Postal Code","value":"Zip / Postal Code"}],"value":"Phone Number","required":true},{"id":"type","type":"select","label":"Field Type","options":[{"label":"Checkbox","value":"checkbox"},{"label":"Email","value":"email"},{"label":"Phone Number","value":"tel"},{"label":"Text Input","value":"text"},{"label":"Textarea","value":"textarea"}],"value":"tel","required":true},{"id":"width","type":"select","label":"Field Width","options":[{"label":"1/3","value":"1/3"},{"label":"1/2","value":"1/2"},{"label":"2/3","value":"2/3"},{"label":"Full","value":"full"}],"value":"1/2"},{"id":"required","type":"checkbox","label":"Required?","info":"Form submission will be disabled unless this field is filled out.","value":false}]},{"id":"mdet1tnsxof4xutvypm","name":"Form Field","type":"form_field","settings":[{"id":"label","type":"select","label":"Label","options":[{"label":"Address","value":"Address"},{"label":"Budget / Project Size","value":"Budget / Project Size"},{"label":"City","value":"City"},{"label":"Company Name","value":"Company Name"},{"label":"Country","value":"Country"},{"label":"Deadline","value":"Deadline"},{"label":"Email Address","value":"Email Address"},{"label":"How did you hear about us?","value":"How did you hear about us?"},{"label":"Job Title / Position","value":"Job Title / Position"},{"label":"Message / Comments","value":"Message / Comments"},{"label":"Name","value":"Name"},{"label":"Opt-in (Text Messages)","value":"I consent to receive automated marketing text messages at the phone number provided. Reply STOP to unsubscribe."},{"label":"Phone Number","value":"Phone Number"},{"label":"State / Province / Region","value":"State / Province / Region"},{"label":"Subject","value":"Subject"},{"label":"Zip / Postal Code","value":"Zip / Postal Code"}],"value":"Message / Comments","required":true},{"id":"type","type":"select","label":"Field Type","options":[{"label":"Checkbox","value":"checkbox"},{"label":"Email","value":"email"},{"label":"Phone Number","value":"tel"},{"label":"Text Input","value":"text"},{"label":"Textarea","value":"textarea"}],"value":"textarea","required":true},{"id":"width","type":"select","label":"Field Width","options":[{"label":"1/3","value":"1/3"},{"label":"1/2","value":"1/2"},{"label":"2/3","value":"2/3"},{"label":"Full","value":"full"}],"value":"full"},{"id":"required","type":"checkbox","label":"Required?","info":"Form submission will be disabled unless this field is filled out.","value":true}]}]},
-site_mdet1tns7z2jeba7mk: {"gender":50,"logo":{"source":"cloudinary","filename":"https://res.cloudinary.com/dq0gbgsdy/image/upload/uploads/tnU3E63S6.png","type":"image"},"favicon":{"type":"image","filename":"https://res.cloudinary.com/dq0gbgsdy/image/upload/c_limit,w_48,h_48/uploads/tnU3E63S6.png","source":"cloudinary"},"phone":"925-699-1516","colors":{"primary":"#8ec7e7","accent":"#07689f","secondary":"#fafafa"},"industry":{"id":null,"name":"Contract Corporate IT Tech Support"},"company":"AWH Industries","address":"Livermore, CA","id":"0q6jQzrvOb3O1HAmGihr","pages":[{"title":"Homepage","handle":"index"}]},
-schema_mdet1v4trj08n43zms: {"name":"Basic Footer","handle":"basic-footer","cacheable":true,"settings":[{"type":"image","id":"logo_override","label":"Logo Override","info":"Leave blank to use the default logo."},{"id":"logo_size","type":"range","label":"Logo Size","min":1,"max":300,"step":1,"value":"60","info":"Logo image can be configured in Site Settings."},{"id":"content","type":"richtext","label":"Content","prompt":"Write a 75 character tagline for my company","fallback":"Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo li.","value":"AWH Industries: Your Trusted Partner in Corporate IT Tech Support Solutions"},{"id":"copyright","type":"text","label":"Copyright","value":"© AWH Industries. All rights reserved.","info":"Footer copyright text."},{"type":"url","id":"copyright_link","label":"Copyright Link"},{"type":"text","id":"copyright_link_label","label":"Copyright Link Label"}],"styles":[{"type":"header","label":"Color Settings"},{"id":"theme","type":"radio","label":"Color Theme","options":[{"label":"Light","value":"light"},{"label":"Medium","value":"medium"},{"label":"Dark","value":"dark"},{"label":"Brand","value":"brand-colors"}],"value":"dark"}],"blockSchema":[{"name":"Icon","type":"icon","default_count":1,"settings":[{"id":"title","type":"text","label":"Title","value":"LinkedIn"},{"id":"icon","type":"icon","label":"Icon","value":"bi-linkedin"},{"id":"link","type":"url","label":"Link","value":"#linkedin"}]},{"name":"Link Group","type":"link_group","default_count":1,"settings":[{"id":"title","type":"text","label":"Title","value":"Menu"},{"id":"menu","type":"menu","label":"Menu","value":[{"id":"lr9ih2u2djpe9s0f0pf","type":"Static","title":"About Us","link":"#basic-content-image-0","new_tab":false,"children":[]},{"id":"lr9ihpyced2nht6m0o9","type":"Static","title":"Our Services","link":"#three-column-images-0","new_tab":false,"children":[]},{"id":"lr9iibmdns4rhdwbtte","type":"Static","title":"Contact Us","link":"#basic-contact-form-0","new_tab":false,"children":[]},{"id":"lr9iig3rd6ms7q57jbp","type":"Dynamic","mode":"exclude","title":"Dynamic Menu Item","data":["/index"],"new_tab":false,"children":[]}]}]}],"blocks":[{"id":"mdet1v4t22uonph7y04","name":"Icon","type":"icon","settings":[{"id":"title","type":"text","label":"Title","value":"Facebook"},{"id":"icon","type":"icon","label":"Icon","value":"bi-facebook"},{"id":"link","type":"url","label":"Link","value":"#facebook"}]},{"id":"mdet1v4tfruaaujyj8c","name":"Icon","type":"icon","settings":[{"id":"title","type":"text","label":"Title","value":"Instagram"},{"id":"icon","type":"icon","label":"Icon","value":"bi-instagram"},{"id":"link","type":"url","label":"Link","value":"#instagram"}]},{"id":"mdet1v4ta2odbuzecg","name":"Icon","type":"icon","settings":[{"id":"title","type":"text","label":"Title","value":"Twitter"},{"id":"icon","type":"icon","label":"Icon","value":"bi-twitter"},{"id":"link","type":"url","label":"Link","value":"#twitter"}]},{"id":"mdet1v4tf7i8uoo81nf","name":"Icon","type":"icon","settings":[{"id":"title","type":"text","label":"Title","value":"Youtube"},{"id":"icon","type":"icon","label":"Icon","value":"bi-youtube"},{"id":"link","type":"url","label":"Link","value":"#youtube"}]},{"id":"mdet1v4ttp360a8oh5","name":"Icon","type":"icon","settings":[{"id":"title","type":"text","label":"Title","value":"LinkedIn"},{"id":"icon","type":"icon","label":"Icon","value":"bi-linkedin"},{"id":"link","type":"url","label":"Link","value":"#linkedin"}]},{"id":"mdet1v4t0u5urophh1ln","name":"Link Group","type":"link_group","settings":[{"id":"title","type":"text","label":"Title","value":"Contact Us"},{"id":"menu","type":"menu","label":"Menu","value":[{"id":"lr9ih2u2djpe9s0f0pf","type":"Static","title":"Livermore, CA","link":"https://www.google.com/maps/place/Livermore, CA","new_tab":false,"children":[]},{"id":"lqzjk0huquni0ca4jd","type":"Static","title":"925-699-1516","link":"tel:925-699-1516","new_tab":false,"children":[]}]}]},{"id":"mdet1v4tmzycnt4swji","name":"Link Group","type":"link_group","settings":[{"id":"title","type":"text","label":"Title","value":"Menu"},{"id":"menu","type":"menu","label":"Menu","value":[{"id":"lr9ih2u2djpe9s0f0pf","type":"Static","title":"About Us","link":"#basic-content-image-0","new_tab":false,"children":[]},{"id":"lr9ihpyced2nht6m0o9","type":"Static","title":"Our Services","link":"#three-column-images-0","new_tab":false,"children":[]},{"id":"lr9iibmdns4rhdwbtte","type":"Static","title":"Contact Us","link":"#basic-contact-form-0","new_tab":false,"children":[]},{"id":"lr9iig3rd6ms7q57jbp","type":"Dynamic","mode":"exclude","title":"Dynamic Menu Item","data":["/index"],"new_tab":false,"children":[]}]}]}]},
-site_mdet1v4trj08n43zms: {"gender":50,"logo":{"source":"cloudinary","filename":"https://res.cloudinary.com/dq0gbgsdy/image/upload/uploads/tnU3E63S6.png","type":"image"},"favicon":{"type":"image","filename":"https://res.cloudinary.com/dq0gbgsdy/image/upload/c_limit,w_48,h_48/uploads/tnU3E63S6.png","source":"cloudinary"},"phone":"925-699-1516","colors":{"primary":"#8ec7e7","accent":"#07689f","secondary":"#fafafa"},"industry":{"id":null,"name":"Contract Corporate IT Tech Support"},"company":"AWH Industries","address":"Livermore, CA","id":"0q6jQzrvOb3O1HAmGihr","pages":[{"title":"Homepage","handle":"index"}]} };
-sgptTemplateFragments["bottom"] = `
-      <mdet1tns7z2jeba7mk
-        :index="0"
-        :schema="schema_mdet1tns7z2jeba7mk"
-        :site="site_mdet1tns7z2jeba7mk"
-        style="z-index: 1"
-      />
-    
-      <mdet1v4trj08n43zms
-        :index="0"
-        :schema="schema_mdet1v4trj08n43zms"
-        :site="site_mdet1v4trj08n43zms"
-        style="z-index: 0"
-      />
-    `;
-    </script>
-  <!--No User Plan-->		
-    <title>AWH Industries: Leading Corporate IT Tech Support in Livermore, CA</title>
-    
-    <meta name="description" content="Discover AWH Industries, your trusted partner for contract corporate IT tech support. Experience top-tier service in Livermore, CA. Call us at 925-699-1516." />
-    
-    
+    };
+  </script>
+</head>
+<body class="bg-brandSecondary text-slate-900 antialiased">
+  <header class="sticky top-0 z-50 bg-slate-900 text-white shadow">
+    <nav class="mx-auto flex max-w-7xl items-center justify-between px-6 py-4 lg:px-8">
+      <a href="#top" class="flex items-center gap-3">
+        <img src="https://res.cloudinary.com/dq0gbgsdy/image/upload/uploads/tnU3E63S6.png" alt="AWH Industries logo" class="h-10 w-auto" />
+        <span class="font-semibold">AWH Industries</span>
+      </a>
+      <div class="hidden items-center gap-8 text-sm font-medium md:flex">
+        <a href="#about" class="hover:text-brandPrimary">About Us</a>
+        <a href="#services" class="hover:text-brandPrimary">Our Services</a>
+        <a href="#contact" class="hover:text-brandPrimary">Contact Us</a>
+        <a href="tel:925-699-1516" class="rounded-md bg-brandPrimary px-3 py-1.5 text-slate-900">925-699-1516</a>
+      </div>
+    </nav>
+  </header>
 
-    
+  <main id="top">
+    <section class="relative isolate overflow-hidden">
+      <video class="absolute inset-0 h-full w-full object-cover" autoplay muted loop playsinline>
+        <source src="https://res.cloudinary.com/dq0gbgsdy/video/upload/v1753206077/stock/vecteezy/66106332.mp4" type="video/mp4" />
+      </video>
+      <div class="absolute inset-0 bg-black/30"></div>
+      <div class="relative mx-auto max-w-7xl px-6 py-28 text-white lg:px-8 lg:py-36">
+        <div class="max-w-2xl">
+          <h1 class="text-4xl font-bold tracking-tight sm:text-5xl">Welcome to AWH Industries</h1>
+          <p class="mt-6 text-lg text-slate-100">Discover AWH Industries - your reliable partner for flexible, professional IT support, proudly based in Livermore, CA.</p>
+          <a href="#contact" class="mt-8 inline-flex rounded-md bg-brandPrimary px-5 py-3 font-semibold text-slate-900">Contact Us</a>
+        </div>
+      </div>
+    </section>
 
-    <script>
-      sgptComponents["page"]["mdet1zoetch9tm7o1xc"] = {
-    props: { index: { type: Number, default: 0 },
-schema: { type: Object, default: () => ({}) } },
-    data() {},
-    computed: { settings() {       const data = {};        this.schema.settings?.forEach((setting) => {         data[setting.id] = setting.value;       });        return data;     },
-styles() {       const data = {};        this.schema.styles?.forEach((setting) => {         data[setting.id] = setting.value;       });        return data;     },
-colors() {       return themeColors('dark');     },
-gradientClasses() {       let classes = `bg-[${this.styles.overlay_color}] `;        if (this.settings.alignment !== 'center') {         classes += `lg:w-3/4 lg:bg-transparent from-[${this.styles.overlay_color}] from-50% to-transparent `;       }        if (this.settings.alignment === 'left') {         classes += 'lg:bg-gradient-to-r ';       }        if (this.settings.alignment === 'right') {         classes += 'lg:bg-gradient-to-l lg:left-auto lg:right-0';       }        return classes;     } },
-    methods: { getResizeUrl(image, options) {
-  var _a, _b, _c, _d, _e;
-  if (!image.filename || !image.source || !options.width && !options.height) {
-    return image;
-  }
-  if (image.source === "pexels") {
-    let url = image.filename;
-    const params = [];
-    if (options.crop) {
-      params.push(`fit=crop`);
-    }
-    if (options.width) {
-      params.push(`w=${options.width}`);
-    }
-    if (options.height) {
-      params.push(`h=${options.height}`);
-    }
-    if (params.length > 0) {
-      url += `?${params.join("&")}`;
-    }
-    return url;
-  }
-  if (image.source === "legacy") {
-    const inputString = image.filename;
-    const lastIndex = inputString.lastIndexOf("/");
-    let path = inputString.substring(0, lastIndex);
-    let filename = inputString.substring(lastIndex + 1);
-    filename = encodeURIComponent(filename);
-    const width = (_a = options.width) != null ? _a : options.height;
-    const height = (_b = options.height) != null ? _b : options.width;
-    if (!options.crop) {
-      path += "/fit-in";
-    }
-    path += `/${width}x${height}`;
-    return `${path}/${filename}`;
-  }
-  if (image.source === "cloudinary" || image.source === "stock") {
-    const width = (_c = options.width) != null ? _c : options.height;
-    const height = (_d = options.height) != null ? _d : options.width;
-    const crop = (_e = image.crop) != null ? _e : options.crop;
-    if (!width && !height) {
-      return image.filename;
-    }
-    const parts = image.filename.split("/upload/");
-    let path = `${parts[0]}/upload/`;
-    const filename = parts[1];
-    if (crop === "crop" || crop === true) {
-      path += "c_fill";
-      if (image.gravity) {
-        path += `,g_${image.gravity}`;
-      } else {
-        path += ",g_auto";
-      }
-    } else {
-      path += "c_limit";
-    }
-    if (width) {
-      path += `,w_${width}`;
-    }
-    if (height) {
-      path += `,h_${height}`;
-    }
-    return `${path}/${filename}`;
-  }
-  return image.filename;
-},
-handleLinkClick(event) {
-  if (event.defaultPrevented || event.button !== 0 || // Only left click
-  event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) {
-    return;
-  }
-  const href = event.target.getAttribute("href");
-  if (!href || href.startsWith("javascript:")) {
-    return;
-  }
-  const currentUrl = new URL(window.location.href);
-  const targetUrl = new URL(href, currentUrl);
-  const normalizePath = (path) => path === "/" || path === "/index" ? "/" : path;
-  const normalizedCurrentPath = normalizePath(currentUrl.pathname);
-  const normalizedTargetPath = normalizePath(targetUrl.pathname);
-  const isSamePath = normalizedCurrentPath === normalizedTargetPath;
-  const isHashOnly = isSamePath && targetUrl.hash;
-  if (isHashOnly) {
-    event.preventDefault();
-    const targetEl = document.querySelector(targetUrl.hash);
-    if (targetEl) {
-      targetEl.scrollIntoView({
-        behavior: "smooth",
-        block: "start",
-        inline: "nearest"
-      });
-      history.pushState(null, "", targetUrl.hash);
-    }
-  } else if (currentUrl.href !== targetUrl.href) {
-    event.preventDefault();
-    window.location.href = targetUrl.href;
-  }
-} },
-    watch: {},
-    
-    template: `<div     class="relative"     :class="\{'bg-gray-900': !styles.overlay_color\}"     :style="\{       'background-color': styles.overlay_color,       'mask-image': styles.divider?.src ? \`url(\$\{styles.divider.src\})\` : null,       'mask-position': styles.divider?.position,       'mask-size': 'cover',       'mask-repeat': 'no-repeat',       'margin-top': schema.offset ? \`-\$\{schema.offset\}vw\` : null,     \}"   >     <a :id="\`basic-hero-banner-\$\{index\}\`"></a>     <div class="relative isolate overflow-hidden pt-14">        <video         v-if="settings.media?.type === 'video'"         class="absolute inset-0 -z-10 h-full w-full object-cover"         autoplay         muted         defaultMuted         playsInline         loop         preload="auto"         oncontextmenu="return false;"         :title="settings.media.alt ?? null"       >         <source :src="getResizeUrl(settings.media, \{width: 576, height: 1024, crop: true\})" media="(max-width: 576px)">>         <source :src="getResizeUrl(settings.media, \{width: 768, height: 576, crop: true\})" media="(max-width: 768px)">>         <source :src="getResizeUrl(settings.media, \{width: 992, height: 558, crop: true\})" media="(max-width: 992px)">>         <source :src="getResizeUrl(settings.media, \{width: 1200, height: 750, crop: true\})" media="(max-width: 1200px)">>         <source :src="getResizeUrl(settings.media, \{width: 1920, height: 1080, crop: true\})">       </video>        <img         v-else-if="settings.media?.type === 'image'"         :srcset="\`           \$\{getResizeUrl(settings.media, \{width: 576\})\} 576w,           \$\{getResizeUrl(settings.media, \{width: 768\})\} 768w,           \$\{getResizeUrl(settings.media, \{width: 992\})\} 992w,           \$\{getResizeUrl(settings.media, \{width: 1200\})\} 1200w,           \$\{getResizeUrl(settings.media, \{width: 1920, height: 1080\})\}         \`"         sizes="           (max-width: 576px) 576px,           (max-width: 768px) 768px,           (max-width: 992px) 992px,           (max-width: 1200px) 1200px,           1400px         "         :src="getResizeUrl(settings.media, \{width: 1920, height: 1080\})"         :alt="settings.media?.alt ?? null"         class="absolute inset-0 -z-10 h-full w-full object-cover"       >        <div         v-if="styles.overlay_color"         class="absolute z-0 top-0 left-0 h-full w-full"         :class="[           gradientClasses         ]"         :style="\{'opacity': \`\$\{styles.overlay_opacity\}%\`\}"       />        <div :style="\{         'padding-top': schema.offset ? \`\$\{schema.offset\}vw\` : null,         'padding-bottom': styles.divider?.offset ? \`\$\{styles.divider.offset\}vw\` : null       \}">         <div           :class="[             \{'sm:py-48': settings.size === 'medium'\},             \{'sm:py-48 lg:py-56': settings.size === 'large'\},             \{'lg:max-w-7xl': settings.alignment !== 'center'\}           ]"           class="relative mx-auto max-w-2xl z-10 py-32 px-8 lg:px-16"         >           <div :class="[             \{'lg:w-2/3 xl:w-1/2': settings.alignment !== 'center'\},             \{'lg:mr-auto': settings.alignment === 'left'\},             \{'lg:ml-auto': settings.alignment === 'right'\}           ]">             <div               v-if="settings.pretitle"               :class="[                 \{'sm:justify-center': settings.alignment === 'center'\},                 \{'sm:justify-start': settings.alignment === 'left'\},                 \{'sm:justify-end': settings.alignment === 'right'\}               ]"               class="hidden sm:mb-8 sm:flex"             >               <div                 :class="colors.text"                 class="relative rounded-full px-3 py-1 text-sm leading-6 ring-1 ring-white/50"                 v-text="settings.pretitle"               />             </div>              <div :class="\`text-\$\{settings.alignment\}\`">               <h2                 v-if="settings.title"                 class="text-4xl font-primary font-bold tracking-tight text-white sm:text-6xl"                 v-text="settings.title"               />                <div                 v-if="settings.content"                 :class="colors.text"                 class="font-secondary mt-6 leading-8 lg:text-lg"                 v-html="settings.content"               />                <div                 :class="[                   \{'justify-center': settings.alignment === 'center'\},                   \{'justify-start': settings.alignment === 'left'\},                   \{'justify-end': settings.alignment === 'right'\}                 ]"                  class="mt-10 flex items-center gap-x-6"               >                 <a                   v-if="settings.primary_button_text"                   :href="settings.primary_button_link ?? '#'"                   :style="[                     \{'background-color': styles.primary_button_background\},                     \{'color': styles.primary_button_color\}                   ]"                   class="rounded-md px-3.5 py-2.5 text-sm font-secondary font-semibold shadow-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2"                   v-text="settings.primary_button_text"                   @click="handleLinkClick"                 />               </div>              </div>           </div>         </div>       </div>      </div>      <span       v-if="styles.divider?.border?.shape"       v-html="styles.divider.border.shape"     />   </div>`
-  };
-sgptComponents["page"]["mdet21pz8xya95bl8gg"] = {
-    props: { index: { type: Number, default: 0 },
-schema: { type: Object, default: () => ({}) } },
-    data() {},
-    computed: { settings() {       const data = {};        this.schema.settings?.forEach((setting) => {         data[setting.id] = setting.value;       });        return data;     },
-styles() {       const data = {};        this.schema.styles?.forEach((setting) => {         data[setting.id] = setting.value;       });        return data;     },
-colors() {       return themeColors(this.styles.theme);     } },
-    methods: { getResizeUrl(image, options) {
-  var _a, _b, _c, _d, _e;
-  if (!image.filename || !image.source || !options.width && !options.height) {
-    return image;
-  }
-  if (image.source === "pexels") {
-    let url = image.filename;
-    const params = [];
-    if (options.crop) {
-      params.push(`fit=crop`);
-    }
-    if (options.width) {
-      params.push(`w=${options.width}`);
-    }
-    if (options.height) {
-      params.push(`h=${options.height}`);
-    }
-    if (params.length > 0) {
-      url += `?${params.join("&")}`;
-    }
-    return url;
-  }
-  if (image.source === "legacy") {
-    const inputString = image.filename;
-    const lastIndex = inputString.lastIndexOf("/");
-    let path = inputString.substring(0, lastIndex);
-    let filename = inputString.substring(lastIndex + 1);
-    filename = encodeURIComponent(filename);
-    const width = (_a = options.width) != null ? _a : options.height;
-    const height = (_b = options.height) != null ? _b : options.width;
-    if (!options.crop) {
-      path += "/fit-in";
-    }
-    path += `/${width}x${height}`;
-    return `${path}/${filename}`;
-  }
-  if (image.source === "cloudinary" || image.source === "stock") {
-    const width = (_c = options.width) != null ? _c : options.height;
-    const height = (_d = options.height) != null ? _d : options.width;
-    const crop = (_e = image.crop) != null ? _e : options.crop;
-    if (!width && !height) {
-      return image.filename;
-    }
-    const parts = image.filename.split("/upload/");
-    let path = `${parts[0]}/upload/`;
-    const filename = parts[1];
-    if (crop === "crop" || crop === true) {
-      path += "c_fill";
-      if (image.gravity) {
-        path += `,g_${image.gravity}`;
-      } else {
-        path += ",g_auto";
-      }
-    } else {
-      path += "c_limit";
-    }
-    if (width) {
-      path += `,w_${width}`;
-    }
-    if (height) {
-      path += `,h_${height}`;
-    }
-    return `${path}/${filename}`;
-  }
-  return image.filename;
-} },
-    watch: {},
-    
-    template: `<div     class="relative"     :style="\{       'mask-image': styles.divider?.src ? \`url(\$\{styles.divider.src\})\` : null,       'mask-position': styles.divider?.position,       'mask-size': 'cover',       'mask-repeat': 'no-repeat',       'margin-top': schema.offset ? \`-\$\{schema.offset\}vw\` : null     \}"   >     <a :id="\`basic-content-image-\$\{index\}\`"></a>     <div       :class="colors.background"       :style="\{         'padding-top': schema.offset ? \`\$\{schema.offset\}vw\` : null,         'padding-bottom': styles.divider?.offset ? \`\$\{styles.divider.offset\}vw\` : null       \}"     >       <div class="flex flex-col gap-16 mx-auto px-6 py-16 sm:py-24 lg:flex-row lg:gap-28 lg:px-8 lg:w-full lg:max-w-7xl">         <div class="lg:w-4/6 max-w-xl mx-auto lg:max-w-none flex flex-col justify-center">           <h2             v-if="settings.title"             :class="colors.text"             class="text-3xl font-primary font-bold tracking-tight sm:text-4xl mb-8"             v-text="settings.title"           />            <div             v-if="settings.content"             :class="colors.text_light"             class="font-secondary text-base leading-7"             v-html="settings.content"           />         </div>          <div           v-if="settings.media"           :class="\{'lg:order-last': settings.alignment === 'right'\}"           class="relative lg:w-2/6 order-first lg:pb-8"         >           <video             v-if="settings.media?.type === 'video'"             class="lg:sticky lg:top-0 mx-auto lg:w-full rounded-xl shadow-xl"             preload="auto"             :autoplay="settings.autoplay"             :muted="settings.muted"             :defaultMuted="settings.muted"             :controls="settings.controls"             playsInline             :loop="settings.loop"             :oncontextmenu="settings.autoplay ? \`return false;\` : null"             :title="settings.media.alt ?? null"           >             <source :src="getResizeUrl(settings.media, \{width: 368, height: 368, crop: true\})" media="(min-width: 1024px)">             <source :src="getResizeUrl(settings.media, \{width: 720, height: 464, crop: true\})">           </video>                      <picture v-else-if="settings.media?.type === 'image'">             <source               :srcset="\`\$\{getResizeUrl(settings.media, \{width: 368, height: 368, crop: true\})\}\`"               media="(min-width: 1024px)"             />             <img               class="lg:sticky lg:top-0 mx-auto lg:w-full rounded-xl shadow-xl"               :src="\`\$\{getResizeUrl(settings.media, \{width: 720, height: 464, crop: true\})\}\`"               :alt="settings.media.alt ?? null"             />           </picture>         </div>       </div>     </div>      <span       v-if="styles.divider?.border?.shape"       v-html="styles.divider.border.shape"     />   </div>`
-  };
-sgptComponents["page"]["mdet26cmwolqqqqnqec"] = {
-    props: { index: { type: Number, default: 0 },
-schema: { type: Object, default: () => ({}) } },
-    data() {},
-    computed: { settings() {       const data = {};        this.schema.settings?.forEach((setting) => {         data[setting.id] = setting.value;       });        return data;     },
-styles() {       const data = {};        this.schema.styles?.forEach((setting) => {         data[setting.id] = setting.value;       });        return data;     },
-blocks() {       const blocks = this.schema.blocks?.map((block) => {         const data = {           id: block.id,           type: block.type         };          block.settings.forEach((setting) => {           data[setting.id] = setting.value;         });          return data;       });        return blocks ?? [];     },
-colors() {       return themeColors(this.styles.theme);     } },
-    methods: { getResizeUrl(image, options) {
-  var _a, _b, _c, _d, _e;
-  if (!image.filename || !image.source || !options.width && !options.height) {
-    return image;
-  }
-  if (image.source === "pexels") {
-    let url = image.filename;
-    const params = [];
-    if (options.crop) {
-      params.push(`fit=crop`);
-    }
-    if (options.width) {
-      params.push(`w=${options.width}`);
-    }
-    if (options.height) {
-      params.push(`h=${options.height}`);
-    }
-    if (params.length > 0) {
-      url += `?${params.join("&")}`;
-    }
-    return url;
-  }
-  if (image.source === "legacy") {
-    const inputString = image.filename;
-    const lastIndex = inputString.lastIndexOf("/");
-    let path = inputString.substring(0, lastIndex);
-    let filename = inputString.substring(lastIndex + 1);
-    filename = encodeURIComponent(filename);
-    const width = (_a = options.width) != null ? _a : options.height;
-    const height = (_b = options.height) != null ? _b : options.width;
-    if (!options.crop) {
-      path += "/fit-in";
-    }
-    path += `/${width}x${height}`;
-    return `${path}/${filename}`;
-  }
-  if (image.source === "cloudinary" || image.source === "stock") {
-    const width = (_c = options.width) != null ? _c : options.height;
-    const height = (_d = options.height) != null ? _d : options.width;
-    const crop = (_e = image.crop) != null ? _e : options.crop;
-    if (!width && !height) {
-      return image.filename;
-    }
-    const parts = image.filename.split("/upload/");
-    let path = `${parts[0]}/upload/`;
-    const filename = parts[1];
-    if (crop === "crop" || crop === true) {
-      path += "c_fill";
-      if (image.gravity) {
-        path += `,g_${image.gravity}`;
-      } else {
-        path += ",g_auto";
-      }
-    } else {
-      path += "c_limit";
-    }
-    if (width) {
-      path += `,w_${width}`;
-    }
-    if (height) {
-      path += `,h_${height}`;
-    }
-    return `${path}/${filename}`;
-  }
-  return image.filename;
-},
-getHoverClass(link) {       if (!link) {         return null;       }        return `group-hover:${this.colors.text_light}`;     } },
-    watch: {},
-    
-    template: `<div     class="relative"     :style="\{       'mask-image': styles.divider?.src ? \`url(\$\{styles.divider.src\})\` : null,       'mask-position': styles.divider?.position,       'mask-size': 'cover',       'mask-repeat': 'no-repeat',       'margin-top': schema.offset ? \`-\$\{schema.offset\}vw\` : null     \}"   >     <a :id="\`three-column-images-\$\{index\}\`"></a>     <div       :class="colors.background"       :style="\{         'padding-top': schema.offset ? \`\$\{schema.offset\}vw\` : null,         'padding-bottom': styles.divider?.offset ? \`\$\{styles.divider.offset\}vw\` : null       \}"     >       <div class="mx-auto max-w-7xl px-6 lg:px-8 py-16 sm:py-24">         <div class="mx-auto max-w-2xl text-center">           <h2             v-if="settings.title"             :class="colors.text"             class="font-primary text-3xl font-bold tracking-tight sm:text-4xl"             v-text="settings.title"           />           <div             v-if="settings.content"             :class="colors.text_light"             class="font-secondary mt-2 leading-8"             v-html="settings.content"           />         </div>          <div v-if="blocks.length" class="mx-auto mt-10 grid max-w-2xl grid-cols-1 gap-x-8 gap-y-8 lg:mx-0 lg:max-w-none lg:grid-cols-3">           <article             v-for="(block, index) in blocks"             :key="index"             class="flex flex-col items-start p-6 rounded-2xl border-2"             :style="[               \{'border-color': block.border_color\}             ]"             :data-sgpt-block="block.id"           >             <component :is="(block.link && !block.show_link_as_button) ? 'a' : 'div'" :href="block.link ?? null">               <div v-if="block.image?.filename" class="relative w-full">                 <img :src="getResizeUrl(block.image, \{width: 672, crop: true\})" :alt="block.image.alt ?? null" class="aspect-[16/9] w-full rounded-2xl object-cover sm:aspect-[2/1] lg:aspect-[3/2]">                 <div class="absolute inset-0 rounded-2xl ring-1 ring-inset ring-gray-900/10"></div>               </div>               <div class="max-w-xl">                 <div class="group mt-8 relative">                   <h3                     v-if="block.title"                     :class="[                       colors.text,                       getHoverClass(block.link)                     ]"                     class="font-primary mt-3 text-lg font-semibold leading-6"                   >                     <div>                       \{\{ block.title \}\}                     </div>                   </h3>                   <div                     v-if="block.content"                     :class="colors.text_light"                     class="font-secondary mt-5 leading-6"                     v-html="block.content"                   />                 </div>               </div>                <div v-if="block.link_label && block.show_link_as_button" class="mt-4">                 <a                   :href="block.link ?? '#'"                   :style="[                     \{'background-color': styles.primary_button_background\},                     \{'color': styles.primary_button_color\}                   ]"                   class="inline-block rounded-md px-3.5 py-2.5 text-sm font-secondary font-semibold shadow-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2"                   v-text="block.link_label"                 />               </div>             </component>           </article>         </div>       </div>     </div>      <span       v-if="styles.divider?.border?.shape"       v-html="styles.divider.border.shape"     />   </div>`
-  };
-sgptComponents["page"]["mdet2c0b4djpwv9hslf"] = {
-    props: { index: { type: Number, default: 0 },
-schema: { type: Object, default: () => ({}) } },
-    data() {},
-    computed: { settings() {       const data = {};        this.schema.settings?.forEach((setting) => {         data[setting.id] = setting.value;       });        return data;     },
-styles() {       const data = {};        this.schema.styles?.forEach((setting) => {         data[setting.id] = setting.value;       });        return data;     },
-colors() {       return themeColors(this.styles.theme);     } },
-    methods: {},
-    watch: {},
-    
-    template: `<div     class="relative"     :style="\{       'margin-top': schema.offset ? \`-\$\{schema.offset\}vw\` : null     \}"   >     <a :id="\`basic-content-well-\$\{index\}\`"></a>     <div       :style="\{         'mask-image': styles.divider?.src ? \`url(\$\{styles.divider.src\})\` : null,         'mask-position': styles.divider?.position,         'mask-size': 'cover',         'mask-repeat': 'no-repeat',         'padding-top': schema.offset ? \`\$\{schema.offset\}vw\` : null,         'padding-bottom': styles.divider?.offset ? \`\$\{styles.divider.offset\}vw\` : null       \}"       class="relative isolate overflow-hidden"       :class="colors.background"     >       <div class="px-6 sm:px-6 py-16 sm:py-24 lg:px-8">         <div           :class="[             \{'text-center': settings.alignment === 'center'\},             \{'text-left': settings.alignment === 'left'\},             \{'text-right': settings.alignment === 'right'\},           ]"           class="mx-auto max-w-2xl"         >           <h2             v-if="settings.title"             :class="colors.text"             class="text-3xl font-primary font-bold tracking-tight sm:text-4xl"             v-text="settings.title"           />            <div             v-if="settings.content"             :class="[               colors.text_light,               \{'mx-auto': settings.alignment === 'center'\},               \{'mr-auto': settings.alignment === 'left'\},               \{'ml-auto': settings.alignment === 'right'\}             ]"              class="font-secondary mt-6 max-w-xl leading-8"             v-html="settings.content"           />            <div             v-if="settings.primary_button_text || settings.secondary_button_text"             :class="[               \{'justify-center': settings.alignment === 'center'\},               \{'justify-start': settings.alignment === 'left'\},               \{'justify-end': settings.alignment === 'right'\},             ]"             class="mt-10 flex items-center gap-x-6"           >             <component               v-if="settings.primary_button_text"               :is="settings.primary_button_link ? 'a' : 'span'"               :href="settings.primary_button_link ?? null"               :style="[                 \{'background-color': styles.primary_button_background\},                 \{'color': styles.primary_button_color\}               ]"               class="font-secondary rounded-md bg-white px-3.5 py-2.5 text-sm font-semibold shadow-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2"               v-text="settings.primary_button_text"             />             <component               v-if="settings.secondary_button_text"               :is="settings.secondary_button_link ? 'a' : 'span'"               :href="settings.secondary_button_link ?? null"               :style="\{'color': styles.secondary_button_color\}"               class="font-secondary text-sm font-semibold leading-6"             >               \{\{ settings.secondary_button_text \}\} <span aria-hidden="true">→</span>             </component>           </div>         </div>       </div>     </div>      <span       v-if="styles.divider?.border?.shape"       v-html="styles.divider.border.shape"     />   </div>`
-  };
-sgptComponents["page"]["mdet2ejluvhasa5b27s"] = {
-    props: { index: { type: Number, default: 0 },
-schema: { type: Object, default: () => ({}) } },
-    data() {},
-    computed: { settings() {       const data = {};        this.schema.settings?.forEach((setting) => {         data[setting.id] = setting.value;       });        return data;     },
-styles() {       const data = {};        this.schema.styles?.forEach((setting) => {         data[setting.id] = setting.value;       });        return data;     },
-blocks() {       const blocks = this.schema.blocks?.map((block) => {         const data = {           id: block.id,           type: block.type         };          block.settings.forEach((setting) => {           data[setting.id] = setting.value;         });          return data;       });        return blocks ?? [];     },
-colors() {       return themeColors(this.styles.theme);     },
-blockBgColor() {       if (this.styles.theme === 'light' || this.styles.theme === 'dark') {         return null;       }        return `background-color: rgba(0,0,0,0.1)`;     } },
-    methods: { getResizeUrl(image, options) {
-  var _a, _b, _c, _d, _e;
-  if (!image.filename || !image.source || !options.width && !options.height) {
-    return image;
-  }
-  if (image.source === "pexels") {
-    let url = image.filename;
-    const params = [];
-    if (options.crop) {
-      params.push(`fit=crop`);
-    }
-    if (options.width) {
-      params.push(`w=${options.width}`);
-    }
-    if (options.height) {
-      params.push(`h=${options.height}`);
-    }
-    if (params.length > 0) {
-      url += `?${params.join("&")}`;
-    }
-    return url;
-  }
-  if (image.source === "legacy") {
-    const inputString = image.filename;
-    const lastIndex = inputString.lastIndexOf("/");
-    let path = inputString.substring(0, lastIndex);
-    let filename = inputString.substring(lastIndex + 1);
-    filename = encodeURIComponent(filename);
-    const width = (_a = options.width) != null ? _a : options.height;
-    const height = (_b = options.height) != null ? _b : options.width;
-    if (!options.crop) {
-      path += "/fit-in";
-    }
-    path += `/${width}x${height}`;
-    return `${path}/${filename}`;
-  }
-  if (image.source === "cloudinary" || image.source === "stock") {
-    const width = (_c = options.width) != null ? _c : options.height;
-    const height = (_d = options.height) != null ? _d : options.width;
-    const crop = (_e = image.crop) != null ? _e : options.crop;
-    if (!width && !height) {
-      return image.filename;
-    }
-    const parts = image.filename.split("/upload/");
-    let path = `${parts[0]}/upload/`;
-    const filename = parts[1];
-    if (crop === "crop" || crop === true) {
-      path += "c_fill";
-      if (image.gravity) {
-        path += `,g_${image.gravity}`;
-      } else {
-        path += ",g_auto";
-      }
-    } else {
-      path += "c_limit";
-    }
-    if (width) {
-      path += `,w_${width}`;
-    }
-    if (height) {
-      path += `,h_${height}`;
-    }
-    return `${path}/${filename}`;
-  }
-  return image.filename;
-} },
-    watch: {},
-    
-    template: `<div     class="relative"     :style="\{       'mask-image': styles.divider?.src ? \`url(\$\{styles.divider.src\})\` : null,       'mask-position': styles.divider?.position,       'mask-size': 'cover',       'mask-repeat': 'no-repeat',       'margin-top': schema.offset ? \`-\$\{schema.offset\}vw\` : null     \}"   >     <a :id="\`basic-testimonials-\$\{index\}\`"></a>     <div       :style="\{         'padding-top': schema.offset ? \`\$\{schema.offset\}vw\` : null,         'padding-bottom': styles.divider?.offset ? \`\$\{styles.divider.offset\}vw\` : null       \}"       :class="colors.background"     >       <div class="mx-auto max-w-7xl px-6 lg:px-8 py-16 sm:py-24">         <div v-if="settings.pretitle || settings.title" class="mx-auto max-w-xl text-center">           <h2             v-if="settings.pretitle"             :style="\{'color': styles.pretitle_color\}"             class="font-secondary text-lg font-semibold leading-8 tracking-tight"              v-text="settings.pretitle"           />           <p             v-if="settings.title"             :class="colors.text"             class="font-primary mt-2 text-3xl font-bold tracking-tight sm:text-4xl"             v-text="settings.title"             role="heading"           />         </div>         <div v-if="blocks.length" class="mx-auto mt-8 max-w-2xl sm:mt-10 lg:mx-0 lg:max-w-none">           <div class="mx-auto grid max-w-2xl grid-cols-1 gap-x-8 lg:mx-0 lg:max-w-none lg:grid-cols-3">              <div               v-for="(block, index) in blocks"               :key="index"               class="pt-8 sm:inline-block sm:w-full"               :data-sgpt-block="block.id"             >               <figure                 :class="[                   \{'bg-gray-50': styles.theme === 'light'\},                   \{'bg-gray-800': styles.theme === 'dark'\}                 ]"                 :style="blockBgColor"                 class="rounded-2xl p-8 text-sm leading-6"               >                 <blockquote                   v-if="block.content"                   :class="colors.text"                   class="font-secondary"                 >                   <div v-html="block.content" />                 </blockquote>                 <figcaption v-if="block.title || block.image?.filename" class="mt-6 flex items-center gap-x-4">                   <img v-if="block.image"                     class="h-10 w-10 rounded-full"                     :src="getResizeUrl(block.image, \{width: 160, height: 160, crop: true\})"                     :alt="block.image.alt ?? null"                   >                   <div v-if="block.title || block.image.meta">                     <div                       :class="colors.text"                       class="font-secondary font-semibold"                       v-text="block.title ?? block.image.meta"                     />                   </div>                 </figcaption>               </figure>             </div>                        </div>         </div>       </div>     </div>      <span       v-if="styles.divider?.border?.shape"       v-html="styles.divider.border.shape"     />   </div>`
-  };
-sgptComponents["page"]["mdet2h6vyo00emyjnm"] = {
-    props: { index: { type: Number, default: 0 },
-schema: { type: Object, default: () => ({}) } },
-    data() {},
-    computed: { settings() {       const data = {};        this.schema.settings?.forEach((setting) => {         data[setting.id] = setting.value;       });        return data;     },
-styles() {       const data = {};        this.schema.styles?.forEach((setting) => {         data[setting.id] = setting.value;       });        return data;     },
-blocks() {       const blocks = this.schema.blocks?.map((block) => {         const data = {           id: block.id,           type: block.type         };          block.settings.forEach((setting) => {           data[setting.id] = setting.value;         });          return data;       });        return blocks ?? [];     },
-colors() {       return themeColors(this.styles.theme);     } },
-    methods: { getResizeUrl(image, options) {
-  var _a, _b, _c, _d, _e;
-  if (!image.filename || !image.source || !options.width && !options.height) {
-    return image;
-  }
-  if (image.source === "pexels") {
-    let url = image.filename;
-    const params = [];
-    if (options.crop) {
-      params.push(`fit=crop`);
-    }
-    if (options.width) {
-      params.push(`w=${options.width}`);
-    }
-    if (options.height) {
-      params.push(`h=${options.height}`);
-    }
-    if (params.length > 0) {
-      url += `?${params.join("&")}`;
-    }
-    return url;
-  }
-  if (image.source === "legacy") {
-    const inputString = image.filename;
-    const lastIndex = inputString.lastIndexOf("/");
-    let path = inputString.substring(0, lastIndex);
-    let filename = inputString.substring(lastIndex + 1);
-    filename = encodeURIComponent(filename);
-    const width = (_a = options.width) != null ? _a : options.height;
-    const height = (_b = options.height) != null ? _b : options.width;
-    if (!options.crop) {
-      path += "/fit-in";
-    }
-    path += `/${width}x${height}`;
-    return `${path}/${filename}`;
-  }
-  if (image.source === "cloudinary" || image.source === "stock") {
-    const width = (_c = options.width) != null ? _c : options.height;
-    const height = (_d = options.height) != null ? _d : options.width;
-    const crop = (_e = image.crop) != null ? _e : options.crop;
-    if (!width && !height) {
-      return image.filename;
-    }
-    const parts = image.filename.split("/upload/");
-    let path = `${parts[0]}/upload/`;
-    const filename = parts[1];
-    if (crop === "crop" || crop === true) {
-      path += "c_fill";
-      if (image.gravity) {
-        path += `,g_${image.gravity}`;
-      } else {
-        path += ",g_auto";
-      }
-    } else {
-      path += "c_limit";
-    }
-    if (width) {
-      path += `,w_${width}`;
-    }
-    if (height) {
-      path += `,h_${height}`;
-    }
-    return `${path}/${filename}`;
-  }
-  return image.filename;
-} },
-    watch: {},
-    
-    template: `<div     class="relative"     :style="\{       'mask-image': styles.divider?.src ? \`url(\$\{styles.divider.src\})\` : null,       'mask-position': styles.divider?.position,       'mask-size': 'cover',       'mask-repeat': 'no-repeat',       'margin-top': schema.offset ? \`-\$\{schema.offset\}vw\` : null     \}"   >     <a :id="\`quote-floating-image-\$\{index\}\`"></a>     <div       class="bg-white"       :style="\{         'padding-top': schema.offset ? \`\$\{schema.offset\}vw\` : null,         'padding-bottom': styles.divider?.offset ? \`\$\{styles.divider.offset\}vw\` : null       \}"     >       <div class="py-16 sm:py-24">         <div           class="relative lg:z-10"           :class="colors.background"         >           <div             :class="[               \{'from-gray-200': styles.theme === 'light'\},               \{'from-gray-800': styles.theme === 'dark'\},               \{'from-gray-900': styles.theme !== 'dark' && styles.theme !== 'light'\}             ]"             class="absolute top-0 right-0 w-full h-full z-0 bg-gradient-to-r to-transparent"           />           <div class="relative z-10 lg:mx-auto lg:grid lg:max-w-7xl lg:grid-cols-3 lg:gap-8 lg:px-8 py-24 sm:py-32 lg:py-0">             <div v-if="settings.media" class="relative lg:-my-8">               <div class="mx-auto max-w-md px-6 sm:max-w-3xl lg:h-full lg:p-0">                 <div class="aspect-h-6 aspect-w-10 overflow-hidden rounded-xl shadow-xl sm:aspect-h-7 sm:aspect-w-16 lg:aspect-none lg:h-full">                   <video                     v-if="settings.media.type === 'video'"                     preload="auto"                     :autoplay="settings.autoplay"                     :muted="settings.muted"                     :defaultMuted="settings.muted"                     :controls="settings.controls"                     playsInline                     :loop="settings.loop"                     :oncontextmenu="settings.autoplay ? \`return false;\` : null"                     :title="settings.media.alt ?? null"                     class="object-cover lg:h-full lg:w-full"                   >                     <source :src="getResizeUrl(settings.media, \{width: 384, height: 464, crop: true\})" media="(min-width: 1024px)">                     <source :src="getResizeUrl(settings.media, \{width: 720, height: 464, crop: true\})">                   </video>                    <picture v-else-if="settings.media.type === 'image'">                     <source                       :srcset="\`\$\{getResizeUrl(settings.media, \{width: 384, height: 464, crop: true\})\}\`"                       media="(min-width: 1024px)"                     />                     <img                       class="object-cover lg:h-full lg:w-full"                       :src="\`\$\{getResizeUrl(settings.media, \{width: 720, height: 464, crop: true\})\}\`"                       :alt="settings.media.alt ?? null"                     />                   </picture>                 </div>               </div>             </div>             <div class="mt-12 lg:col-span-2 lg:m-0 lg:pl-8">               <div class="mx-auto max-w-md px-6 sm:max-w-2xl lg:max-w-none lg:px-0 lg:py-20">                 <blockquote>                   <div>                     <div class="flex gap-5 items-center">                       <h2                         v-if="settings.title"                         :class="colors.text"                         class="font-primary text-2xl font-bold tracking-tight sm:text-3xl"                         v-text="settings.title"                       />                        <svg                         v-if="settings.show_icon === 'show'"                         :class="colors.text"                         class="h-12 w-12 opacity-25 order-first"                         fill="currentColor"                         viewBox="0 0 32 32"                         aria-hidden="true"                       >                         <path d="M9.352 4C4.456 7.456 1 13.12 1 19.36c0 5.088 3.072 8.064 6.624 8.064 3.36 0 5.856-2.688 5.856-5.856 0-3.168-2.208-5.472-5.088-5.472-.576 0-1.344.096-1.536.192.48-3.264 3.552-7.104 6.624-9.024L9.352 4zm16.512 0c-4.8 3.456-8.256 9.12-8.256 15.36 0 5.088 3.072 8.064 6.624 8.064 3.264 0 5.856-2.688 5.856-5.856 0-3.168-2.304-5.472-5.184-5.472-.576 0-1.248.096-1.44.192.48-3.264 3.456-7.104 6.528-9.024L25.864 4z"></path>                       </svg>                     </div>                     <div                       v-if="settings.content"                       :class="colors.text"                       class="font-secondary mt-6 leading-8 font-lg"                       v-html="settings.content"                       role="heading"                     />                   </div>                   <footer class="mt-6">                     <p                       v-if="settings.name"                       :class="colors.text"                       class="font-secondary text-base font-medium"                       v-text="settings.name"                     />                     <p                       v-if="settings.subtitle"                       :style="\{'color': styles.subtitle_color\}"                       :class="colors.text_light"                       class="font-secondary text-base font-medium"                       v-text="settings.subtitle"                     />                   </footer>                 </blockquote>               </div>             </div>           </div>         </div>       </div>     </div>      <span       v-if="styles.divider?.border?.shape"       v-html="styles.divider.border.shape"     />   </div>`
-  };
-sgptComponents["page"]["mdet2kvf2f9wfmvmyfe"] = {
-    props: { index: { type: Number, default: 0 },
-schema: { type: Object, default: () => ({}) } },
-    data() {},
-    computed: { settings() {       const data = {};        this.schema.settings?.forEach((setting) => {         data[setting.id] = setting.value;       });        return data;     },
-styles() {       const data = {};        this.schema.styles?.forEach((setting) => {         data[setting.id] = setting.value;       });        return data;     },
-colors() {       return themeColors(this.styles.theme);     } },
-    methods: { handleButtonClick(event) {       const href = event.target.getAttribute('href');        if (!href || !href.startsWith('#')) {         return;       }        event.preventDefault();       const target = document.querySelector(href);        if (!target) {         return;       }        target.scrollIntoView({         behavior: 'smooth',         block: 'start',         inline: 'nearest'       });     } },
-    watch: {},
-    
-    template: `<div     class="relative"     :style="\{       'mask-image': styles.divider?.src ? \`url(\$\{styles.divider.src\})\` : null,       'mask-position': styles.divider?.position,       'mask-size': 'cover',       'mask-repeat': 'no-repeat',       'margin-top': schema.offset ? \`-\$\{schema.offset\}vw\` : null     \}"   >     <a :id="\`map-content-\$\{index\}\`"></a>     <div       :class="colors.background"       :style="\{         'padding-top': schema.offset ? \`\$\{schema.offset\}vw\` : null,         'padding-bottom': styles.divider?.offset ? \`\$\{styles.divider.offset\}vw\` : null       \}"     >       <div class="mx-auto max-w-7xl px-6 lg:px-8 py-16 sm:py-24">         <div           class="mx-auto grid max-w-2xl grid-cols-1 items-start gap-x-8 gap-y-16 sm:gap-y-24 lg:mx-0 lg:max-w-none lg:grid-cols-2"         >           <div             v-if="settings.address"             :class="[               \{'lg:pr-4': settings.alignment === 'left'\},               \{'lg:pl-4 order-last': settings.alignment === 'right'\}             ]"           >             <div class="relative overflow-hidden rounded-3xl bg-gray-100 shadow-2xl lg:max-w-lg">               <iframe                 width="100%"                 height="448"                 style="border:0"                 loading="lazy"                 allowfullscreen                 referrerpolicy="no-referrer-when-downgrade"                 :aria-label="\`Map of \$\{settings.address\}\`"                 :src="\`https://www.google.com/maps/embed/v1/place?key=AIzaSyBsh6yJba2R7lA-Varqc1qL9--6Xgmdi_w&q=\$\{settings.address\}\`">               </iframe>             </div>           </div>           <div>             <div :class="colors.text_light" class="text-base leading-7 lg:max-w-lg">               <p                 v-if="settings.pretitle"                 :style="\{'color': styles.pretitle_color\}"                 class="font-secondary text-base font-semibold leading-7"                 v-text="settings.pretitle"               />                <h2                 v-if="settings.title"                 :class="colors.text"                 class="font-primary mt-2 text-3xl font-bold tracking-tight sm:text-4xl"                 v-text="settings.title"               />                <div                 v-if="settings.content"                 class="font-secondary max-w-xl mt-8"                 v-html="settings.content"               />                <div                 v-if="settings.button_text"                 class="mt-10 flex items-center gap-x-6"               >                 <component                   v-if="settings.button_text"                   :is="settings.button_link ? 'a' : 'span'"                   :href="settings.button_link ?? null"                   :style="[                     \{'background-color': styles.button_background\},                     \{'color': styles.button_color\}                   ]"                   class="font-secondary rounded-md bg-white px-3.5 py-2.5 text-sm font-semibold shadow-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2"                   v-text="settings.button_text"                   @click="handleButtonClick"                 />               </div>             </div>           </div>         </div>       </div>     </div>      <span       v-if="styles.divider?.border?.shape"       v-html="styles.divider.border.shape"     />   </div>`
-  };
-sgptData["page"] = { schema_mdet1zoetch9tm7o1xc: {"name":"Basic Hero Banner","cacheable":true,"settings":[{"type":"media","id":"media","label":"Image / Video","media":{"type":"video","role":2},"value":{"filename":"https://res.cloudinary.com/dq0gbgsdy/video/upload/v1753206077/stock/vecteezy/66106332.mp4","type":"video","source":"stock"}},{"type":"text","id":"pretitle","label":"Pretitle"},{"type":"text","id":"title","label":"Title","prompt":"Write a very short title that relates to the page title","fallback":"Lorem Ipsum Dolor","value":"Welcome to AWH Industries"},{"type":"richtext","id":"content","label":"Content","prompt":"Write 140 characters that relates to the page purpose","fallback":"Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et ma.","value":"<p class=\"mb-8 text-sm sm:text-base last:mb-0\">Discover AWH Industries – your reliable partner for flexible, professional IT support, proudly based in Livermore, CA.</p>"},{"type":"text","id":"primary_button_text","label":"Button Label","value":"Contact Us"},{"type":"url","id":"primary_button_link","label":"Button Link","value":"#basic-contact-form-0"},{"type":"select","id":"alignment","label":"Content Alignment","options":[{"label":"Left","value":"left"},{"label":"Right","value":"right"},{"label":"Center","value":"center"}],"value":"left"},{"type":"select","id":"size","label":"Banner Size","options":[{"label":"small","value":"Small"},{"label":"Medium","value":"medium"},{"label":"Large","value":"large"}],"value":"medium"}],"styles":[{"type":"header","label":"Banner Styles"},{"id":"overlay_color","type":"color","label":"Overlay Color","value":"#000000"},{"id":"overlay_opacity","type":"range","label":"Overlay Opacity","min":0,"max":100,"step":1,"value":"30"},{"type":"header","label":"Button Styles"},{"id":"primary_button_background","type":"color","label":"Button Background","value":"#8ec7e7"},{"id":"primary_button_color","type":"color","label":"Button Text Color","value":"#ffffff"},{"type":"header","label":"Section Dividers"},{"type":"divider","id":"divider","label":"Divider"}],"blockSchema":[],"blocks":[]},
-site_mdet1zoetch9tm7o1xc: {"gender":50,"logo":{"source":"cloudinary","filename":"https://res.cloudinary.com/dq0gbgsdy/image/upload/uploads/tnU3E63S6.png","type":"image"},"favicon":{"type":"image","filename":"https://res.cloudinary.com/dq0gbgsdy/image/upload/c_limit,w_48,h_48/uploads/tnU3E63S6.png","source":"cloudinary"},"phone":"925-699-1516","colors":{"primary":"#8ec7e7","accent":"#07689f","secondary":"#fafafa"},"industry":{"id":null,"name":"Contract Corporate IT Tech Support"},"company":"AWH Industries","address":"Livermore, CA","id":"0q6jQzrvOb3O1HAmGihr","pages":[{"title":"Homepage","handle":"index"}]},
-schema_mdet21pz8xya95bl8gg: {"name":"Basic Content w/ Image","cacheable":true,"settings":[{"type":"header","label":"Media Settings"},{"type":"media","id":"media","label":"Image / Video","media":{"role":2,"status":2},"value":{"filename":"https://res.cloudinary.com/dq0gbgsdy/image/upload/v1753206241/stock/pexels/3184660.jpg","type":"image","source":"stock"}},{"type":"checkbox","id":"autoplay","label":"Autoplay Video","value":false},{"type":"checkbox","id":"muted","label":"Mute Video","value":false},{"type":"checkbox","id":"loop","label":"Loop Video","value":false},{"type":"checkbox","id":"controls","label":"Enable Video Controls","value":true},{"type":"header","label":"Content Settings"},{"type":"text","id":"title","label":"Title","prompt":"Write a 1-3 word title that relates to the page title and purpose.","fallback":"Lorem Ipsum","value":"Tech Support Overview"},{"type":"richtext","id":"content","label":"Content","prompt":"Write a 440 character paragraph that relates to the page purpose.","fallback":"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est.","value":"<p class=\"mb-8 text-sm sm:text-base last:mb-0\">Based in Livermore, CA, AWH Industries is your trusted partner for reliable, end-to-end tech support tailored to your business. We specialize in everything from secure network buildouts and Office 365 setup to day-to-day user support and physical security systems.</p><p class=\"mb-8 text-sm sm:text-base last:mb-0\"><span style=\"font-size: 1em;\">Our experienced team is dedicated to keeping your IT running smoothly, so you can stay focused on what you do best—growing your business. With a strong commitment to customer satisfaction and practical, high-quality solutions, we’re here to support you every step of the way.</span></p><p class=\"mb-8 text-sm sm:text-base last:mb-0\">Call us at 925-699-1516 to find out how we can help simplify and strengthen your IT.</p>"},{"type":"select","id":"alignment","label":"Image Alignment","options":[{"label":"Left","value":"left"},{"label":"Right","value":"right"}],"value":"left"}],"styles":[{"type":"header","label":"Color Settings"},{"id":"theme","type":"radio","label":"Color Theme","options":[{"label":"Light","value":"light"},{"label":"Medium","value":"medium"},{"label":"Dark","value":"dark"},{"label":"Brand","value":"brand-colors"}],"value":"medium"},{"type":"header","label":"Section Dividers"},{"type":"divider","id":"divider","label":"Divider"}],"blockSchema":[],"blocks":[]},
-site_mdet21pz8xya95bl8gg: {"gender":50,"logo":{"source":"cloudinary","filename":"https://res.cloudinary.com/dq0gbgsdy/image/upload/uploads/tnU3E63S6.png","type":"image"},"favicon":{"type":"image","filename":"https://res.cloudinary.com/dq0gbgsdy/image/upload/c_limit,w_48,h_48/uploads/tnU3E63S6.png","source":"cloudinary"},"phone":"925-699-1516","colors":{"primary":"#8ec7e7","accent":"#07689f","secondary":"#fafafa"},"industry":{"id":null,"name":"Contract Corporate IT Tech Support"},"company":"AWH Industries","address":"Livermore, CA","id":"0q6jQzrvOb3O1HAmGihr","pages":[{"title":"Homepage","handle":"index"}]},
-schema_mdet26cmwolqqqqnqec: {"name":"3 Column w/ Images","cacheable":true,"settings":[{"id":"title","type":"text","label":"Title","value":"Our Services","fallback":"Lorem Ipsum"},{"id":"content","type":"richtext","label":"Content","prompt":"Write 1-2 sentences about Our Services in the {industry} industry","fallback":"Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa cum sociis natoque penatibus et magnis dis parturient montes.","value":"<p class=\"mb-8 text-sm sm:text-base last:mb-0\">At AWH Industries, we deliver Flexible IT Services for Modern Workplaces, ensuring your business stays connected, secure, and productive with reliable support tailored to your unique needs.</p>"}],"styles":[{"type":"header","label":"Color Settings"},{"id":"theme","type":"radio","label":"Color Theme","options":[{"label":"Light","value":"light"},{"label":"Medium","value":"medium"},{"label":"Dark","value":"dark"},{"label":"Brand","value":"brand-colors"}],"value":"light"},{"type":"header","label":"Button Styles"},{"id":"primary_button_background","type":"color","label":"Button Background","value":"#8ec7e7"},{"id":"primary_button_color","type":"color","label":"Button Text Color","value":"#ffffff"},{"type":"header","label":"Section Dividers"},{"type":"divider","id":"divider","label":"Divider"}],"blockSchema":[{"name":"Additional Content","type":"additional_content","default_count":3,"settings":[{"type":"image","id":"image","label":"Image","image":{"service":true}},{"type":"text","id":"title","label":"Title","prompt":"{service}","fallback":"Lorem Ipsum"},{"type":"richtext","id":"content","label":"Content","required":true,"prompt":"Write ~160 characters about {service}","fallback":"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud."},{"type":"url","id":"link","label":"Link"},{"type":"text","id":"link_label","label":"Link Label"},{"id":"show_link_as_button","type":"checkbox","label":"Show link as button","value":false},{"type":"header","label":"Color Settings"},{"id":"border_color","type":"color","label":"Border Color","value":"#ffffff"}]}],"blocks":[{"id":"mdet26cmf6pn5fok9qw","name":"Additional Content","type":"additional_content","settings":[{"type":"image","id":"image","label":"Image","image":{"service":true},"value":{"filename":"https://res.cloudinary.com/dq0gbgsdy/image/upload/v1753205359/stock/pexels/2881232.jpg","type":"image","source":"stock"}},{"type":"text","id":"title","label":"Title","prompt":"{service}","fallback":"Lorem Ipsum","value":"Network Buildout"},{"type":"richtext","id":"content","label":"Content","required":true,"prompt":"Write ~160 characters about {service}","fallback":"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud.","value":"<p class=\"mb-8 text-sm sm:text-base last:mb-0\">Network Buildouts from scratch are all about creating a fast, secure, and reliable infrastructure tailored to your office needs. Using trusted solutions like UniFi, we design and deploy everything—from cabling and Wi-Fi to firewalls and VLANs—ensuring top-tier performance and enterprise-grade security from day one. Perfect for small businesses that want peace of mind and room to grow.</p>"},{"type":"url","id":"link","label":"Link"},{"type":"text","id":"link_label","label":"Link Label"},{"id":"show_link_as_button","type":"checkbox","label":"Show link as button","value":false},{"type":"header","label":"Color Settings"},{"id":"border_color","type":"color","label":"Border Color","value":"#ffffff"}]},{"id":"mdet26cmilv7v80cam","name":"Additional Content","type":"additional_content","settings":[{"type":"image","id":"image","label":"Image","image":{"service":true},"value":{"filename":"https://res.cloudinary.com/dq0gbgsdy/image/upload/v1753205395/stock/pexels/15554492.jpg","type":"image","source":"stock"}},{"type":"text","id":"title","label":"Title","prompt":"{service}","fallback":"Lorem Ipsum","value":"IT Support"},{"type":"richtext","id":"content","label":"Content","required":true,"prompt":"Write ~160 characters about {service}","fallback":"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud.","value":"<p class=\"mb-8 text-sm sm:text-base last:mb-0\">We set up Office 365 and Google Workspace to get your team up and running with email, calendars, cloud storage, and collaboration tools—fast and hassle-free. From initial setup to ongoing end-user support, we handle it all so your team stays productive, secure, and supported every step of the way.</p><p class=\"mb-8 text-sm sm:text-base last:mb-0\"><br></p>"},{"type":"url","id":"link","label":"Link"},{"type":"text","id":"link_label","label":"Link Label"},{"id":"show_link_as_button","type":"checkbox","label":"Show link as button","value":false},{"type":"header","label":"Color Settings"},{"id":"border_color","type":"color","label":"Border Color","value":"#ffffff"}]},{"id":"mdet26cmwoip6ilxh9l","name":"Additional Content","type":"additional_content","settings":[{"type":"image","id":"image","label":"Image","image":{"service":true},"value":{"filename":"https://res.cloudinary.com/dq0gbgsdy/image/upload/v1753205537/stock/pexels/13657523.jpg","type":"image","source":"stock"}},{"type":"text","id":"title","label":"Title","prompt":"{service}","fallback":"Lorem Ipsum","value":"Physical Security"},{"type":"richtext","id":"content","label":"Content","required":true,"prompt":"Write ~160 characters about {service}","fallback":"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud.","value":"<p class=\"mb-8 text-sm sm:text-base last:mb-0\">Physical Security Systems like card readers and door entry solutions provide smart, secure access control for your office. Integrated with your company directory, they streamline employee access while allowing controlled guest entry—keeping your space safe, efficient, and fully auditable.</p>"},{"type":"url","id":"link","label":"Link"},{"type":"text","id":"link_label","label":"Link Label"},{"id":"show_link_as_button","type":"checkbox","label":"Show link as button","value":false},{"type":"header","label":"Color Settings"},{"id":"border_color","type":"color","label":"Border Color","value":"#ffffff"}]}]},
-site_mdet26cmwolqqqqnqec: {"gender":50,"logo":{"source":"cloudinary","filename":"https://res.cloudinary.com/dq0gbgsdy/image/upload/uploads/tnU3E63S6.png","type":"image"},"favicon":{"type":"image","filename":"https://res.cloudinary.com/dq0gbgsdy/image/upload/c_limit,w_48,h_48/uploads/tnU3E63S6.png","source":"cloudinary"},"phone":"925-699-1516","colors":{"primary":"#8ec7e7","accent":"#07689f","secondary":"#fafafa"},"industry":{"id":null,"name":"Contract Corporate IT Tech Support"},"company":"AWH Industries","address":"Livermore, CA","id":"0q6jQzrvOb3O1HAmGihr","pages":[{"title":"Homepage","handle":"index"}]},
-schema_mdet2c0b4djpwv9hslf: {"name":"Basic Content Well","cacheable":true,"settings":[{"type":"text","id":"title","label":"Title","prompt":"Write a 50 character title encouraging users to contact us","fallback":"Lorem ipsum dolor sit amet","value":"Reach Out to Us Today for Expert IT Support"},{"type":"richtext","id":"content","label":"Content","prompt":"Write 120 characters about the title","fallback":"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.","value":"Need help with your IT needs? Don't hesitate to contact us at AWH Industries. Our expert team in Livermore, CA is ready to assist you."},{"type":"text","id":"primary_button_text","label":"Button Label","value":"925-699-1516"},{"type":"url","id":"primary_button_link","label":"Button Link","value":"tel:925-699-1516"},{"type":"text","id":"secondary_button_text","label":"Text Link Label"},{"type":"url","id":"secondary_button_link","label":"Text Link URL"},{"type":"select","id":"alignment","label":"Content Alignment","options":[{"label":"Left","value":"left"},{"label":"Right","value":"right"},{"label":"Center","value":"center"}],"value":"center"}],"styles":[{"type":"header","label":"Color Settings"},{"id":"theme","type":"radio","label":"Color Theme","options":[{"label":"Light","value":"light"},{"label":"Medium","value":"medium"},{"label":"Dark","value":"dark"},{"label":"Brand","value":"brand-colors"}],"value":"dark"},{"id":"primary_button_background","type":"color","label":"Button Background","value":"#8ec7e7"},{"id":"primary_button_color","type":"color","label":"Button Text Color","value":"#ffffff"},{"id":"secondary_button_color","type":"color","label":"Text Link Color","value":"#ffffff"},{"type":"header","label":"Section Dividers"},{"type":"divider","id":"divider","label":"Divider"}],"blockSchema":[],"blocks":[]},
-site_mdet2c0b4djpwv9hslf: {"gender":50,"logo":{"source":"cloudinary","filename":"https://res.cloudinary.com/dq0gbgsdy/image/upload/uploads/tnU3E63S6.png","type":"image"},"favicon":{"type":"image","filename":"https://res.cloudinary.com/dq0gbgsdy/image/upload/c_limit,w_48,h_48/uploads/tnU3E63S6.png","source":"cloudinary"},"phone":"925-699-1516","colors":{"primary":"#8ec7e7","accent":"#07689f","secondary":"#fafafa"},"industry":{"id":null,"name":"Contract Corporate IT Tech Support"},"company":"AWH Industries","address":"Livermore, CA","id":"0q6jQzrvOb3O1HAmGihr","pages":[{"title":"Homepage","handle":"index"}]},
-schema_mdet2ejluvhasa5b27s: {"name":"Basic Testimonials","cacheable":true,"max_blocks":18,"settings":[{"id":"pretitle","type":"text","label":"Pretitle","value":"Testimonials","fallback":"Lorem Ipsum"},{"id":"title","type":"text","label":"Title","prompt":"Write a 30-50 character title for my websites testimonial section","fallback":"Lorem ipsum dolor sit amet, consectetuer adipiscing.","value":"Voices of Satisfied Clients"}],"styles":[{"type":"header","label":"Color Settings"},{"id":"pretitle_color","type":"color","label":"Pretitle Color","value":"#8ec7e7"},{"id":"theme","type":"radio","label":"Color Theme","options":[{"label":"Light","value":"light"},{"label":"Medium","value":"medium"},{"label":"Dark","value":"dark"},{"label":"Brand","value":"brand-colors"}],"value":"light"},{"type":"header","label":"Section Dividers"},{"type":"divider","id":"divider","label":"Divider"}],"blockSchema":[{"name":"Testimonial","type":"testimonial","default_count":3,"settings":[{"id":"content","type":"richtext","label":"Content","prompt":"Write a 100 character review for my {industry} company","fallback":"Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor aenean me."},{"id":"title","type":"text","label":"Name"},{"type":"image","id":"image","label":"Image","image":{"role":3}}]}],"blocks":[{"id":"mdet2ejl13l0khhwo85n","name":"Testimonial","type":"testimonial","settings":[{"id":"content","type":"richtext","label":"Content","prompt":"Write a 100 character review for my {industry} company","fallback":"Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor aenean me.","value":"AWH Industries exceeded our IT expectations!"},{"id":"title","type":"text","label":"Name"},{"type":"image","id":"image","label":"Image","image":{"role":3},"value":{"filename":"https://res.cloudinary.com/dq0gbgsdy/image/upload/assets/rl20Ok2RNTa.jpg","type":"image","schemaType":"image","source":"cloudinary","meta":"Louis P."}}]},{"id":"mdet2ejl5s7nfw72k3l","name":"Testimonial","type":"testimonial","settings":[{"id":"content","type":"richtext","label":"Content","prompt":"Write a 100 character review for my {industry} company","fallback":"Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor aenean me.","value":"AWH Industries provided top-notch IT support."},{"id":"title","type":"text","label":"Name"},{"type":"image","id":"image","label":"Image","image":{"role":3},"value":{"filename":"https://res.cloudinary.com/dq0gbgsdy/image/upload/assets/bpwv3S-PXIq.jpg","type":"image","schemaType":"image","source":"cloudinary","meta":"Albert O."}}]},{"id":"mdet2ejlsyc90xg0ls","name":"Testimonial","type":"testimonial","settings":[{"id":"content","type":"richtext","label":"Content","prompt":"Write a 100 character review for my {industry} company","fallback":"Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor aenean me.","value":"AWH Industries - reliable and efficient IT service."},{"id":"title","type":"text","label":"Name"},{"type":"image","id":"image","label":"Image","image":{"role":3},"value":{"filename":"https://res.cloudinary.com/dq0gbgsdy/image/upload/assets/opsqwoXMyPk.jpg","type":"image","schemaType":"image","source":"cloudinary","meta":"Wanda G."}}]}]},
-site_mdet2ejluvhasa5b27s: {"gender":50,"logo":{"source":"cloudinary","filename":"https://res.cloudinary.com/dq0gbgsdy/image/upload/uploads/tnU3E63S6.png","type":"image"},"favicon":{"type":"image","filename":"https://res.cloudinary.com/dq0gbgsdy/image/upload/c_limit,w_48,h_48/uploads/tnU3E63S6.png","source":"cloudinary"},"phone":"925-699-1516","colors":{"primary":"#8ec7e7","accent":"#07689f","secondary":"#fafafa"},"industry":{"id":null,"name":"Contract Corporate IT Tech Support"},"company":"AWH Industries","address":"Livermore, CA","id":"0q6jQzrvOb3O1HAmGihr","pages":[{"title":"Homepage","handle":"index"}]},
-schema_mdet2h6vyo00emyjnm: {"name":"Quote w/ Floating Image","cacheable":true,"settings":[{"type":"header","label":"Media Settings"},{"type":"media","id":"media","label":"Image / Video","media":{"role":2},"value":{"filename":"https://img.b2bpic.net/premium-photo/professional-corporate-stationery-mockup-with-orange-accent_1061150-144742.jpg","type":"image","schemaType":"media","source":"freepik","attribution":"Photo by yanii765999 on Freepik"}},{"type":"checkbox","id":"autoplay","label":"Autoplay Video","value":false},{"type":"checkbox","id":"muted","label":"Mute Video","value":false},{"type":"checkbox","id":"loop","label":"Loop Video","value":false},{"type":"checkbox","id":"controls","label":"Enable Video Controls","value":true},{"type":"header","label":"Content Settings"},{"id":"title","type":"text","label":"Title","value":"Our Mission","fallback":"Lorem Ipsum"},{"id":"content","type":"richtext","label":"Content","prompt":"Write a mission statement thats ~380 characters long.","fallback":"Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus donec quam felis.","value":"Our mission at AWH Industries is to provide exceptional corporate IT tech support services. We are committed to leveraging our expertise to deliver innovative, reliable, and efficient solutions that meet our clients' unique needs. Based in Livermore, CA, we strive to build long-lasting relationships with our clients, ensuring their IT systems are always running smoothly and securely."},{"id":"name","type":"text","label":"Name","fallback":"Lorem Ipsum"},{"id":"subtitle","type":"text","label":"Subtitle","fallback":"Dolor Sit Amet"},{"id":"show_icon","type":"radio","label":"Quote Icon Visibility","options":[{"label":"Show","value":"show"},{"label":"Hide","value":"hide"}],"value":"show"}],"styles":[{"type":"header","label":"Color Settings"},{"id":"theme","type":"radio","label":"Color Theme","options":[{"label":"Light","value":"light"},{"label":"Medium","value":"medium"},{"label":"Dark","value":"dark"},{"label":"Brand","value":"brand-colors"}],"value":"dark"},{"id":"subtitle_color","type":"color","label":"Subtitle Color","value":"#8ec7e7"},{"type":"header","label":"Section Dividers"},{"type":"divider","id":"divider","label":"Divider"}],"blockSchema":[],"blocks":[]},
-site_mdet2h6vyo00emyjnm: {"gender":50,"logo":{"source":"cloudinary","filename":"https://res.cloudinary.com/dq0gbgsdy/image/upload/uploads/tnU3E63S6.png","type":"image"},"favicon":{"type":"image","filename":"https://res.cloudinary.com/dq0gbgsdy/image/upload/c_limit,w_48,h_48/uploads/tnU3E63S6.png","source":"cloudinary"},"phone":"925-699-1516","colors":{"primary":"#8ec7e7","accent":"#07689f","secondary":"#fafafa"},"industry":{"id":null,"name":"Contract Corporate IT Tech Support"},"company":"AWH Industries","address":"Livermore, CA","id":"0q6jQzrvOb3O1HAmGihr","pages":[{"title":"Homepage","handle":"index"}]},
-schema_mdet2kvf2f9wfmvmyfe: {"name":"Map w/ Content","cacheable":true,"max_blocks":3,"condition":"address","settings":[{"type":"text","id":"address","label":"Address","value":"Livermore, CA","required":true},{"type":"text","id":"pretitle","label":"Pretitle"},{"type":"text","id":"title","label":"Title","value":"Find Us Here!"},{"type":"richtext","id":"content","label":"Content","prompt":"Write ~660 characters for the map section of a website for a {industry} company which encourages users to come visit us.","fallback":"Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu. In enim justo, rhoncus ut, imperdiet.","value":"<p class=\"mb-8 text-sm sm:text-base last:mb-0\">Welcome to AWH Industries – Your Trusted IT Partner in Livermore, CA</p><p class=\"mb-8 text-sm sm:text-base last:mb-0\">Located in the heart of Livermore, AWH Industries offers flexible IT solutions designed to keep your business secure, efficient, and future-ready. Use the interactive map below to find us—we’d love to connect.</p><p class=\"mb-8 text-sm sm:text-base last:mb-0\"><span style=\"font-size: 1em;\">Stop by and discover how we can transform your IT operations with tailored solutions that fit your unique needs. Our team of experts is ready to meet, listen, and build a strategy that works for you.</span></p><p class=\"mb-8 text-sm sm:text-base last:mb-0\"><span style=\"font-size: 1em;\">Need help finding us? Call us at 925-699-1516—we’re happy to assist. We look forward to meeting you and becoming your go-to partner in tech success.</span></p>"},{"type":"text","id":"button_text","label":"Button Label","value":"Let's Connect"},{"type":"url","id":"button_link","label":"Button Link","value":"#basic-contact-form-0"},{"type":"select","id":"alignment","label":"Map Alignment","options":[{"label":"Left","value":"left"},{"label":"Right","value":"right"}],"value":"left"}],"styles":[{"type":"header","label":"Color Settings"},{"id":"theme","type":"radio","label":"Color Theme","options":[{"label":"Light","value":"light"},{"label":"Medium","value":"medium"},{"label":"Dark","value":"dark"},{"label":"Brand","value":"brand-colors"}],"value":"light"},{"id":"pretitle_color","type":"color","label":"Pretitle Color","value":"#8ec7e7"},{"id":"button_background","type":"color","label":"Button Background","value":"#8ec7e7"},{"id":"button_color","type":"color","label":"Button Text Color","value":"#ffffff"},{"type":"header","label":"Section Dividers"},{"type":"divider","id":"divider","label":"Divider"}],"blockSchema":[],"blocks":[]},
-site_mdet2kvf2f9wfmvmyfe: {"gender":50,"logo":{"source":"cloudinary","filename":"https://res.cloudinary.com/dq0gbgsdy/image/upload/uploads/tnU3E63S6.png","type":"image"},"favicon":{"type":"image","filename":"https://res.cloudinary.com/dq0gbgsdy/image/upload/c_limit,w_48,h_48/uploads/tnU3E63S6.png","source":"cloudinary"},"phone":"925-699-1516","colors":{"primary":"#8ec7e7","accent":"#07689f","secondary":"#fafafa"},"industry":{"id":null,"name":"Contract Corporate IT Tech Support"},"company":"AWH Industries","address":"Livermore, CA","id":"0q6jQzrvOb3O1HAmGihr","pages":[{"title":"Homepage","handle":"index"}]} };
-sgptTemplateFragments["page"] = `
-      <mdet1zoetch9tm7o1xc
-        :index="0"
-        :schema="schema_mdet1zoetch9tm7o1xc"
-        :site="site_mdet1zoetch9tm7o1xc"
-        style="z-index: 108"
-      />
-    
-      <mdet21pz8xya95bl8gg
-        :index="0"
-        :schema="schema_mdet21pz8xya95bl8gg"
-        :site="site_mdet21pz8xya95bl8gg"
-        style="z-index: 107"
-      />
-    
-      <mdet26cmwolqqqqnqec
-        :index="0"
-        :schema="schema_mdet26cmwolqqqqnqec"
-        :site="site_mdet26cmwolqqqqnqec"
-        style="z-index: 106"
-      />
-    
-      <mdet2c0b4djpwv9hslf
-        :index="0"
-        :schema="schema_mdet2c0b4djpwv9hslf"
-        :site="site_mdet2c0b4djpwv9hslf"
-        style="z-index: 105"
-      />
-    
-      <mdet2ejluvhasa5b27s
-        :index="0"
-        :schema="schema_mdet2ejluvhasa5b27s"
-        :site="site_mdet2ejluvhasa5b27s"
-        style="z-index: 104"
-      />
-    
-      <mdet2h6vyo00emyjnm
-        :index="0"
-        :schema="schema_mdet2h6vyo00emyjnm"
-        :site="site_mdet2h6vyo00emyjnm"
-        style="z-index: 103"
-      />
-    
-      <mdet2kvf2f9wfmvmyfe
-        :index="0"
-        :schema="schema_mdet2kvf2f9wfmvmyfe"
-        :site="site_mdet2kvf2f9wfmvmyfe"
-        style="z-index: 102"
-      />
-    `;
-    </script>
-  
-		<script>
-			const { createApp } = Vue;
+    <section id="about" class="bg-white py-20">
+      <div class="mx-auto grid max-w-7xl gap-12 px-6 lg:grid-cols-2 lg:px-8">
+        <img src="https://res.cloudinary.com/dq0gbgsdy/image/upload/v1753206241/stock/pexels/3184660.jpg" alt="IT support team" class="h-full w-full rounded-2xl object-cover shadow" />
+        <div>
+          <h2 class="text-3xl font-bold text-slate-900">Tech Support Overview</h2>
+          <div class="mt-6 space-y-4 text-slate-700">
+            <p>Based in Livermore, CA, AWH Industries is your trusted partner for reliable, end-to-end tech support tailored to your business. We specialize in everything from secure network buildouts and Office 365 setup to day-to-day user support and physical security systems.</p>
+            <p>Our experienced team is dedicated to keeping your IT running smoothly, so you can stay focused on what you do best-growing your business. With a strong commitment to customer satisfaction and practical, high-quality solutions, we are here to support you every step of the way.</p>
+            <p>Call us at 925-699-1516 to find out how we can help simplify and strengthen your IT.</p>
+          </div>
+        </div>
+      </div>
+    </section>
 
-			const app = createApp({
-				components: {
-					...sgptComponents.top,
-					...sgptComponents.page,
-					...sgptComponents.bottom
-				},
-				data() {
-					return {
-						...sgptData.top,
-						...sgptData.page,
-						...sgptData.bottom
-					};
-				},
-				template: `<div>
-					${typeof sgptTemplateFragments.top === 'string' ? sgptTemplateFragments.top : ''}
-					${typeof sgptTemplateFragments.page === 'string' ? sgptTemplateFragments.page : ''}
-					${typeof sgptTemplateFragments.bottom === 'string' ? sgptTemplateFragments.bottom : ''}
-				</div>`
-			});
-		</script>
-	</head>
-	<body>
-		<div id="app" class="relative z-0"></div>
-		<script>
-			app.mount('#app');
-		</script>
-		<script>
-			AOS.init({
-				once: true
-			});
-		</script>
-	</body>
+    <section id="services" class="bg-brandSecondary py-20">
+      <div class="mx-auto max-w-7xl px-6 lg:px-8">
+        <h2 class="text-3xl font-bold">Our Services</h2>
+        <p class="mt-4 max-w-3xl text-slate-700">At AWH Industries, we deliver Flexible IT Services for Modern Workplaces, ensuring your business stays connected, secure, and productive with reliable support tailored to your unique needs.</p>
+        <div class="mt-12 grid gap-8 md:grid-cols-3">
+          <article class="overflow-hidden rounded-2xl bg-white shadow">
+            <img src="https://res.cloudinary.com/dq0gbgsdy/image/upload/v1753205359/stock/pexels/2881232.jpg" alt="Network Buildout" class="h-48 w-full object-cover" />
+            <div class="p-6">
+              <h3 class="text-xl font-semibold">Network Buildout</h3>
+              <p class="mt-3 text-sm text-slate-700">Network Buildouts from scratch are all about creating a fast, secure, and reliable infrastructure tailored to your office needs. Using trusted solutions like UniFi, we design and deploy everything-from cabling and Wi-Fi to firewalls and VLANs-ensuring top-tier performance and enterprise-grade security from day one. Perfect for small businesses that want peace of mind and room to grow.</p>
+            </div>
+          </article>
+          <article class="overflow-hidden rounded-2xl bg-white shadow">
+            <img src="https://res.cloudinary.com/dq0gbgsdy/image/upload/v1753205395/stock/pexels/15554492.jpg" alt="IT Support" class="h-48 w-full object-cover" />
+            <div class="p-6">
+              <h3 class="text-xl font-semibold">IT Support</h3>
+              <p class="mt-3 text-sm text-slate-700">We set up Office 365 and Google Workspace to get your team up and running with email, calendars, cloud storage, and collaboration tools-fast and hassle-free. From initial setup to ongoing end-user support, we handle it all so your team stays productive, secure, and supported every step of the way.</p>
+            </div>
+          </article>
+          <article class="overflow-hidden rounded-2xl bg-white shadow">
+            <img src="https://res.cloudinary.com/dq0gbgsdy/image/upload/v1753205537/stock/pexels/13657523.jpg" alt="Physical Security" class="h-48 w-full object-cover" />
+            <div class="p-6">
+              <h3 class="text-xl font-semibold">Physical Security</h3>
+              <p class="mt-3 text-sm text-slate-700">Physical Security Systems like card readers and door entry solutions provide smart, secure access control for your office. Integrated with your company directory, they streamline employee access while allowing controlled guest entry-keeping your space safe, efficient, and fully auditable.</p>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="bg-slate-900 py-16 text-white">
+      <div class="mx-auto max-w-4xl px-6 text-center lg:px-8">
+        <h2 class="text-3xl font-bold">Reach Out to Us Today for Expert IT Support</h2>
+        <p class="mx-auto mt-4 max-w-2xl text-slate-200">Need help with your IT needs? Don't hesitate to contact us at AWH Industries. Our expert team in Livermore, CA is ready to assist you.</p>
+        <a href="tel:925-699-1516" class="mt-8 inline-flex rounded-md bg-brandPrimary px-5 py-3 font-semibold text-slate-900">925-699-1516</a>
+      </div>
+    </section>
+
+    <section class="bg-white py-20">
+      <div class="mx-auto max-w-7xl px-6 lg:px-8">
+        <p class="text-sm font-semibold uppercase tracking-wide text-brandPrimary">Testimonials</p>
+        <h2 class="mt-2 text-3xl font-bold">Voices of Satisfied Clients</h2>
+        <div class="mt-12 grid gap-8 md:grid-cols-3">
+          <article class="rounded-2xl border border-slate-200 p-6">
+            <p class="text-slate-700">AWH Industries exceeded our IT expectations!</p>
+            <div class="mt-6 flex items-center gap-3">
+              <img src="https://res.cloudinary.com/dq0gbgsdy/image/upload/assets/rl20Ok2RNTa.jpg" alt="Louis P." class="h-12 w-12 rounded-full object-cover" />
+              <span class="font-semibold">Louis P.</span>
+            </div>
+          </article>
+          <article class="rounded-2xl border border-slate-200 p-6">
+            <p class="text-slate-700">AWH Industries provided top-notch IT support.</p>
+            <div class="mt-6 flex items-center gap-3">
+              <img src="https://res.cloudinary.com/dq0gbgsdy/image/upload/assets/bpwv3S-PXIq.jpg" alt="Albert O." class="h-12 w-12 rounded-full object-cover" />
+              <span class="font-semibold">Albert O.</span>
+            </div>
+          </article>
+          <article class="rounded-2xl border border-slate-200 p-6">
+            <p class="text-slate-700">AWH Industries - reliable and efficient IT service.</p>
+            <div class="mt-6 flex items-center gap-3">
+              <img src="https://res.cloudinary.com/dq0gbgsdy/image/upload/assets/opsqwoXMyPk.jpg" alt="Wanda G." class="h-12 w-12 rounded-full object-cover" />
+              <span class="font-semibold">Wanda G.</span>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="bg-slate-900 py-20 text-white">
+      <div class="mx-auto grid max-w-7xl items-center gap-10 px-6 lg:grid-cols-2 lg:px-8">
+        <div>
+          <h2 class="text-3xl font-bold">Our Mission</h2>
+          <p class="mt-6 text-slate-200">Our mission at AWH Industries is to provide exceptional corporate IT tech support services. We are committed to leveraging our expertise to deliver innovative, reliable, and efficient solutions that meet our clients' unique needs. Based in Livermore, CA, we strive to build long-lasting relationships with our clients, ensuring their IT systems are always running smoothly and securely.</p>
+        </div>
+        <img src="https://img.b2bpic.net/premium-photo/professional-corporate-stationery-mockup-with-orange-accent_1061150-144742.jpg" alt="Mission visual" class="rounded-2xl object-cover shadow-xl" />
+      </div>
+    </section>
+
+    <section class="bg-white py-20">
+      <div class="mx-auto grid max-w-7xl gap-10 px-6 lg:grid-cols-2 lg:px-8">
+        <div class="overflow-hidden rounded-2xl border border-slate-200">
+          <iframe
+            class="h-[420px] w-full"
+            loading="lazy"
+            referrerpolicy="no-referrer-when-downgrade"
+            src="https://www.google.com/maps?q=Livermore%2C%20CA&output=embed"
+            title="Map of Livermore, CA"
+          ></iframe>
+        </div>
+        <div>
+          <h2 class="text-3xl font-bold">Find Us Here!</h2>
+          <div class="mt-6 space-y-4 text-slate-700">
+            <p>Welcome to AWH Industries - Your Trusted IT Partner in Livermore, CA</p>
+            <p>Located in the heart of Livermore, AWH Industries offers flexible IT solutions designed to keep your business secure, efficient, and future-ready. Use the interactive map below to find us-we would love to connect.</p>
+            <p>Stop by and discover how we can transform your IT operations with tailored solutions that fit your unique needs. Our team of experts is ready to meet, listen, and build a strategy that works for you.</p>
+            <p>Need help finding us? Call us at 925-699-1516-we are happy to assist. We look forward to meeting you and becoming your go-to partner in tech success.</p>
+          </div>
+          <a href="#contact" class="mt-8 inline-flex rounded-md bg-brandPrimary px-5 py-3 font-semibold text-slate-900">Let's Connect</a>
+        </div>
+      </div>
+    </section>
+
+    <section id="contact" class="bg-brandSecondary py-20">
+      <div class="mx-auto max-w-4xl px-6 lg:px-8">
+        <div class="text-center">
+          <h2 class="text-3xl font-bold">Contact Us</h2>
+          <p class="mt-4 text-slate-700">Got questions? We're here to help! Contact AWH Industries today!</p>
+        </div>
+
+        <form name="contact" method="POST" data-netlify="true" class="mt-12 grid grid-cols-1 gap-6 sm:grid-cols-2">
+          <input type="hidden" name="form-name" value="contact" />
+
+          <div class="sm:col-span-2">
+            <label for="name" class="mb-2 block text-sm font-semibold">Name</label>
+            <input id="name" name="Name" type="text" required class="w-full rounded-md border border-slate-300 px-4 py-2" />
+          </div>
+
+          <div>
+            <label for="email" class="mb-2 block text-sm font-semibold">Email Address</label>
+            <input id="email" name="Email Address" type="email" required class="w-full rounded-md border border-slate-300 px-4 py-2" />
+          </div>
+
+          <div>
+            <label for="phone" class="mb-2 block text-sm font-semibold">Phone Number</label>
+            <input id="phone" name="Phone Number" type="tel" class="w-full rounded-md border border-slate-300 px-4 py-2" />
+          </div>
+
+          <div class="sm:col-span-2">
+            <label for="message" class="mb-2 block text-sm font-semibold">Message / Comments</label>
+            <textarea id="message" name="Message / Comments" rows="6" required class="w-full rounded-md border border-slate-300 px-4 py-2"></textarea>
+          </div>
+
+          <div class="sm:col-span-2">
+            <button type="submit" class="w-full rounded-md bg-brandPrimary px-4 py-3 font-semibold text-slate-900">Let's Talk</button>
+          </div>
+        </form>
+      </div>
+    </section>
+  </main>
+
+  <footer class="bg-slate-900 text-slate-200">
+    <div class="mx-auto grid max-w-7xl gap-10 px-6 py-14 lg:grid-cols-3 lg:px-8">
+      <div>
+        <img src="https://res.cloudinary.com/dq0gbgsdy/image/upload/uploads/tnU3E63S6.png" alt="AWH Industries logo" class="h-12 w-auto" />
+        <p class="mt-4 text-sm">AWH Industries: Your Trusted Partner in Corporate IT Tech Support Solutions</p>
+      </div>
+
+      <div>
+        <h3 class="font-semibold text-white">Contact Us</h3>
+        <ul class="mt-4 space-y-2 text-sm">
+          <li><a href="https://www.google.com/maps/place/Livermore, CA" class="hover:text-brandPrimary">Livermore, CA</a></li>
+          <li><a href="tel:925-699-1516" class="hover:text-brandPrimary">925-699-1516</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <h3 class="font-semibold text-white">Menu</h3>
+        <ul class="mt-4 space-y-2 text-sm">
+          <li><a href="#about" class="hover:text-brandPrimary">About Us</a></li>
+          <li><a href="#services" class="hover:text-brandPrimary">Our Services</a></li>
+          <li><a href="#contact" class="hover:text-brandPrimary">Contact Us</a></li>
+        </ul>
+        <div class="mt-6 flex gap-4 text-sm">
+          <a href="#facebook" class="rounded border border-slate-600 px-2 py-1 hover:border-brandPrimary hover:text-brandPrimary">Facebook</a>
+          <a href="#instagram" class="rounded border border-slate-600 px-2 py-1 hover:border-brandPrimary hover:text-brandPrimary">Instagram</a>
+          <a href="#twitter" class="rounded border border-slate-600 px-2 py-1 hover:border-brandPrimary hover:text-brandPrimary">Twitter</a>
+          <a href="#youtube" class="rounded border border-slate-600 px-2 py-1 hover:border-brandPrimary hover:text-brandPrimary">YouTube</a>
+          <a href="#linkedin" class="rounded border border-slate-600 px-2 py-1 hover:border-brandPrimary hover:text-brandPrimary">LinkedIn</a>
+        </div>
+      </div>
+    </div>
+    <div class="border-t border-slate-800 py-6 text-center text-xs text-slate-400">© AWH Industries. All rights reserved.</div>
+  </footer>
+</body>
 </html>

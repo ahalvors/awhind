@@ -1,242 +1,654 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>AWH Industries</title>
-  <link rel="icon" href="https://res.cloudinary.com/dq0gbgsdy/image/upload/c_limit,w_48,h_48/uploads/tnU3E63S6.png" />
-  <script src="https://cdn.tailwindcss.com"></script>
-  <script>
-    tailwind.config = {
-      theme: {
-        extend: {
-          colors: {
-            brandPrimary: '#8ec7e7',
-            brandAccent: '#07689f',
-            brandSecondary: '#fafafa'
-          }
-        }
-      }
-    };
-  </script>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="AWHIND — Global IT services and AI operations consulting. Daily CIO/CTO briefings on AI and enterprise IT operations, service desk, endpoint modernization, and AI governance.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='16' fill='%230B0F17'/%3E%3Ccircle cx='50' cy='50' r='16' fill='%23DD4E1E'/%3E%3C/svg%3E">
+<title>AWHIND</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,500&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap');
+
+  :root{
+    --bg:#F1F2ED;
+    --bg-elevated:#FFFFFF;
+    --bg-sunken:#E7E8E1;
+    --text:#0B0F17;
+    --text-secondary:#566072;
+    --text-tertiary:#848d9b;
+    --line:#D9DAD2;
+    --line-strong:#c2c4ba;
+    --accent:#DD4E1E;
+    --accent-contrast:#FFFFFF;
+    --status-good:#177562;
+    --status-warn:#9c6b0a;
+    --status-critical:#a63a2b;
+    --shadow: 0 1px 2px rgba(11,15,23,.04), 0 8px 24px rgba(11,15,23,.06);
+    --serif: 'Newsreader', Georgia, 'Times New Roman', serif;
+    --sans: 'IBM Plex Sans', -apple-system, 'Segoe UI', Roboto, sans-serif;
+    --mono: 'IBM Plex Mono', 'SF Mono', Consolas, monospace;
+  }
+  @media (prefers-color-scheme: dark){
+    :root:not([data-theme="light"]){
+      --bg:#0A0D14;
+      --bg-elevated:#12161F;
+      --bg-sunken:#080A10;
+      --text:#EEF0F4;
+      --text-secondary:#9AA3B4;
+      --text-tertiary:#6d7688;
+      --line:#232838;
+      --line-strong:#323951;
+      --accent:#FF7A47;
+      --accent-contrast:#0A0D14;
+      --status-good:#3FC3A8;
+      --status-warn:#E3B341;
+      --status-critical:#E5695A;
+      --shadow: 0 1px 2px rgba(0,0,0,.3), 0 8px 28px rgba(0,0,0,.4);
+    }
+  }
+  :root[data-theme="dark"]{
+    --bg:#0A0D14;
+    --bg-elevated:#12161F;
+    --bg-sunken:#080A10;
+    --text:#EEF0F4;
+    --text-secondary:#9AA3B4;
+    --text-tertiary:#6d7688;
+    --line:#232838;
+    --line-strong:#323951;
+    --accent:#FF7A47;
+    --accent-contrast:#0A0D14;
+    --status-good:#3FC3A8;
+    --status-warn:#E3B341;
+    --status-critical:#E5695A;
+    --shadow: 0 1px 2px rgba(0,0,0,.3), 0 8px 28px rgba(0,0,0,.4);
+  }
+
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0; background:var(--bg); color:var(--text);
+    font-family:var(--sans); font-size:16px; line-height:1.55;
+    -webkit-font-smoothing:antialiased;
+  }
+  img{max-width:100%;}
+  a{color:inherit;}
+  h1,h2,h3,h4{font-family:var(--serif); font-weight:500; margin:0; text-wrap:balance; letter-spacing:-0.01em;}
+  .mono{font-family:var(--mono);}
+  .eyebrow{
+    font-family:var(--mono); font-size:11px; letter-spacing:.12em; text-transform:uppercase;
+    color:var(--text-secondary);
+  }
+  .wrap{max-width:1120px; margin:0 auto; padding:0 28px;}
+  .col{max-width:680px;}
+  .hr{border:none; border-top:1px solid var(--line); margin:0;}
+  .btn{
+    display:inline-flex; align-items:center; gap:8px; font-family:var(--mono); font-size:13px;
+    letter-spacing:.04em; text-transform:uppercase; padding:12px 20px; border-radius:2px;
+    text-decoration:none; cursor:pointer; border:1px solid transparent; transition:transform .12s ease, background .15s ease, color .15s ease;
+  }
+  .btn:active{transform:translateY(1px);}
+  .btn-primary{background:var(--accent); color:var(--accent-contrast);}
+  .btn-primary:hover{filter:brightness(1.06);}
+  .btn-ghost{border-color:var(--line-strong); color:var(--text);}
+  .btn-ghost:hover{border-color:var(--accent); color:var(--accent);}
+  .btn-sm{padding:8px 14px; font-size:11px;}
+
+  /* ---- status ticker ---- */
+  .ticker-bar{background:var(--bg-sunken); border-bottom:1px solid var(--line); overflow:hidden; white-space:nowrap;}
+  .ticker-track{display:inline-flex; gap:56px; padding:9px 0; animation:scroll 42s linear infinite;}
+  @media (prefers-reduced-motion: reduce){ .ticker-track{animation:none;} .ticker-bar{overflow-x:auto;} }
+  @keyframes scroll{ from{transform:translateX(0);} to{transform:translateX(-50%);} }
+  .ticker-item{font-family:var(--mono); font-size:11.5px; letter-spacing:.03em; color:var(--text-secondary); display:inline-flex; align-items:center; gap:10px;}
+  .dot{width:6px; height:6px; border-radius:50%; background:var(--accent); flex:none; box-shadow:0 0 0 3px color-mix(in srgb, var(--accent) 18%, transparent);}
+
+  /* ---- nav ---- */
+  nav.wrap{display:flex; align-items:center; justify-content:space-between; padding-top:18px; padding-bottom:18px;}
+  .brand{font-family:var(--serif); font-weight:600; font-size:21px; letter-spacing:-.01em; text-decoration:none; color:var(--text); display:flex; align-items:center; gap:9px;}
+  .brand .mark{width:9px;height:9px;background:var(--accent);display:inline-block;}
+  .navlinks{display:flex; gap:30px; align-items:center;}
+  .navlinks a{font-family:var(--mono); font-size:12.5px; letter-spacing:.03em; text-decoration:none; color:var(--text-secondary);}
+  .navlinks a:hover{color:var(--accent);}
+  @media (max-width:760px){ .navlinks a.hide-mobile{display:none;} }
+
+  /* ---- hero ---- */
+  header.hero{padding:64px 0 56px; border-bottom:1px solid var(--line);}
+  .hero h1{font-size:clamp(34px,5vw,54px); line-height:1.08;}
+  .hero h1 em{font-style:italic; color:var(--accent);}
+  .hero p.lede{font-size:18px; color:var(--text-secondary); margin-top:20px; max-width:560px;}
+  .hero .ctas{display:flex; gap:14px; margin-top:32px; flex-wrap:wrap;}
+
+  /* ---- sections ---- */
+  section{padding:64px 0;}
+  section.tight{padding:48px 0;}
+  .section-head{display:flex; justify-content:space-between; align-items:flex-end; gap:24px; margin-bottom:36px; flex-wrap:wrap;}
+  .section-head h2{font-size:28px;}
+  .section-head p{color:var(--text-secondary); max-width:440px; margin-top:8px; font-size:14.5px;}
+
+  /* ---- services grid ---- */
+  .grid-services{display:grid; grid-template-columns:repeat(3,1fr); gap:1px; background:var(--line); border:1px solid var(--line);}
+  @media (max-width:900px){ .grid-services{grid-template-columns:repeat(2,1fr);} }
+  @media (max-width:600px){ .grid-services{grid-template-columns:1fr;} }
+  .svc{background:var(--bg-elevated); padding:26px 24px; min-height:190px; display:flex; flex-direction:column; justify-content:space-between; transition:background .15s ease;}
+  .svc:hover{background:color-mix(in srgb, var(--accent) 5%, var(--bg-elevated));}
+  .svc .id{font-family:var(--mono); font-size:11px; color:var(--text-tertiary); letter-spacing:.06em;}
+  .svc h3{font-size:18.5px; margin-top:14px;}
+  .svc p{font-size:13.5px; color:var(--text-secondary); margin-top:10px; line-height:1.5;}
+
+  /* ---- stats row ---- */
+  .stats-row{display:grid; grid-template-columns:repeat(4,1fr); border-top:1px solid var(--line); border-bottom:1px solid var(--line);}
+  @media (max-width:760px){ .stats-row{grid-template-columns:repeat(2,1fr);} }
+  .stat{padding:28px 24px; border-left:1px solid var(--line);}
+  .stat:first-child{border-left:none;}
+  .stat .n{font-family:var(--serif); font-size:38px; color:var(--accent);}
+  .stat .l{font-family:var(--mono); font-size:11px; color:var(--text-secondary); margin-top:6px; letter-spacing:.02em; line-height:1.5;}
+
+  /* ---- blog list ---- */
+  .briefing{border-top:1px solid var(--line);}
+  .post-row{display:grid; grid-template-columns:120px 1fr auto; gap:24px; padding:26px 0; border-bottom:1px solid var(--line); align-items:start; cursor:pointer;}
+  @media (max-width:680px){ .post-row{grid-template-columns:1fr; gap:8px;} .post-row .date{order:-1;} }
+  .post-row .date{font-family:var(--mono); font-size:12px; color:var(--text-tertiary); padding-top:4px;}
+  .post-row h3{font-size:21px; transition:color .15s ease;}
+  .post-row:hover h3{color:var(--accent);}
+  .post-row .dek{color:var(--text-secondary); font-size:14.5px; margin-top:8px; max-width:560px;}
+  .post-row .tag{font-family:var(--mono); font-size:10.5px; letter-spacing:.05em; text-transform:uppercase; color:var(--text-tertiary); margin-top:10px; display:block;}
+  .post-row .arrow{font-family:var(--mono); font-size:20px; color:var(--text-tertiary); padding-top:4px;}
+
+  /* ---- article overlay ---- */
+  .article-overlay{position:fixed; inset:0; background:rgba(10,13,20,.5); backdrop-filter:blur(2px); display:none; align-items:flex-start; justify-content:center; padding:5vh 20px; z-index:60; overflow-y:auto;}
+  .article-overlay.open{display:flex;}
+  .article-panel{background:var(--bg-elevated); max-width:720px; width:100%; padding:44px 48px 56px; box-shadow:var(--shadow); position:relative; margin-bottom:5vh;}
+  @media (max-width:640px){ .article-panel{padding:32px 22px 44px;} }
+  .article-panel .close{position:absolute; top:20px; right:20px; font-family:var(--mono); background:none; border:1px solid var(--line-strong); color:var(--text-secondary); width:32px; height:32px; cursor:pointer; font-size:14px;}
+  .article-panel .close:hover{border-color:var(--accent); color:var(--accent);}
+  .article-panel .meta{font-family:var(--mono); font-size:11.5px; color:var(--text-tertiary); letter-spacing:.03em; margin-bottom:16px;}
+  .article-panel h2{font-size:32px; line-height:1.15;}
+  .article-panel .dek{font-size:16px; color:var(--text-secondary); margin-top:14px; font-family:var(--serif); font-style:italic;}
+  .article-body{margin-top:28px; font-size:15.5px; color:var(--text); max-width:60ch;}
+  .article-body p{margin:0 0 18px;}
+  .article-body strong{font-weight:600;}
+  .article-body .stat-inline{font-family:var(--mono); color:var(--accent); font-weight:600;}
+  .article-sources{margin-top:32px; padding-top:20px; border-top:1px solid var(--line); font-size:12px; color:var(--text-tertiary);}
+  .article-sources a{color:var(--text-secondary); text-decoration:underline; text-decoration-color:var(--line-strong);}
+  .share-row{display:flex; gap:10px; margin-top:28px; flex-wrap:wrap;}
+
+  /* ---- why us ---- */
+  .why-grid{display:grid; grid-template-columns:1fr 1fr; gap:40px;}
+  @media (max-width:760px){ .why-grid{grid-template-columns:1fr;} }
+  .why-item{padding:22px 0; border-top:1px solid var(--line);}
+  .why-item .num{font-family:var(--mono); font-size:11px; color:var(--accent);}
+  .why-item h3{font-size:19px; margin-top:8px;}
+  .why-item p{font-size:14px; color:var(--text-secondary); margin-top:8px;}
+
+  /* ---- footer ---- */
+  footer{border-top:1px solid var(--line); padding:48px 0 40px; background:var(--bg-sunken);}
+  .foot-grid{display:grid; grid-template-columns:2fr 1fr 1fr 1fr; gap:32px;}
+  @media (max-width:760px){ .foot-grid{grid-template-columns:1fr 1fr;} }
+  footer h4{font-family:var(--mono); font-size:11px; letter-spacing:.06em; text-transform:uppercase; color:var(--text-tertiary); margin-bottom:14px;}
+  footer a{display:block; font-size:13.5px; color:var(--text-secondary); text-decoration:none; margin-bottom:9px;}
+  footer a:hover{color:var(--accent);}
+  .foot-bottom{margin-top:40px; padding-top:20px; border-top:1px solid var(--line); display:flex; justify-content:space-between; flex-wrap:wrap; gap:10px; font-family:var(--mono); font-size:11px; color:var(--text-tertiary);}
+
+  /* ---- concierge widget ---- */
+  #concierge-launch{
+    position:fixed; bottom:26px; right:26px; z-index:70; background:var(--text); color:var(--bg);
+    border:none; border-radius:999px; padding:14px 20px 14px 16px; display:flex; align-items:center; gap:10px;
+    font-family:var(--mono); font-size:12.5px; letter-spacing:.03em; cursor:pointer; box-shadow:var(--shadow);
+  }
+  :root[data-theme="dark"] #concierge-launch, @media (prefers-color-scheme:dark){ }
+  #concierge-launch .pulse{width:8px; height:8px; border-radius:50%; background:#39D98A; box-shadow:0 0 0 0 rgba(57,217,138,.6); animation:pulse 2s infinite;}
+  @media (prefers-reduced-motion: reduce){ #concierge-launch .pulse{animation:none;} }
+  @keyframes pulse{ 0%{box-shadow:0 0 0 0 rgba(57,217,138,.55);} 70%{box-shadow:0 0 0 9px rgba(57,217,138,0);} 100%{box-shadow:0 0 0 0 rgba(57,217,138,0);} }
+
+  #concierge-panel{
+    position:fixed; bottom:26px; right:26px; z-index:71; width:360px; max-width:92vw; max-height:76vh;
+    background:var(--bg-elevated); border:1px solid var(--line); box-shadow:var(--shadow); display:none; flex-direction:column; overflow:hidden;
+  }
+  #concierge-panel.open{display:flex;}
+  .cq-head{padding:16px 18px; border-bottom:1px solid var(--line); display:flex; justify-content:space-between; align-items:center;}
+  .cq-head .who{display:flex; align-items:center; gap:9px;}
+  .cq-head .who .dot{width:7px;height:7px;border-radius:50%;background:#39D98A;}
+  .cq-head .title{font-family:var(--mono); font-size:12px; letter-spacing:.03em;}
+  .cq-head .sub{font-size:10.5px; color:var(--text-tertiary); font-family:var(--mono);}
+  .cq-head button{background:none; border:none; color:var(--text-secondary); cursor:pointer; font-size:16px; font-family:var(--mono);}
+  .cq-body{padding:18px; overflow-y:auto; flex:1;}
+  .cq-msg{font-size:13.5px; line-height:1.55; margin-bottom:14px; max-width:92%;}
+  .cq-msg.bot{color:var(--text);}
+  .cq-msg.user{margin-left:auto; background:var(--bg-sunken); padding:8px 12px; border-radius:2px; color:var(--text);}
+  .cq-msg .stat-inline{color:var(--accent); font-family:var(--mono); font-weight:600;}
+  .cq-options{display:flex; flex-direction:column; gap:8px; margin-top:4px;}
+  .cq-opt{text-align:left; background:none; border:1px solid var(--line-strong); color:var(--text); padding:10px 12px; font-size:13px; font-family:var(--sans); cursor:pointer; border-radius:2px;}
+  .cq-opt:hover{border-color:var(--accent); color:var(--accent);}
+  .cq-form{display:flex; flex-direction:column; gap:8px; margin-top:6px;}
+  .cq-form input{padding:10px 11px; border:1px solid var(--line-strong); background:var(--bg); color:var(--text); font-family:var(--sans); font-size:13px; border-radius:2px;}
+  .cq-form input:focus{outline:2px solid var(--accent); outline-offset:1px;}
+  .cq-foot{padding:12px 18px; border-top:1px solid var(--line); font-family:var(--mono); font-size:9.5px; color:var(--text-tertiary); text-align:center;}
+</style>
 </head>
-<body class="bg-brandSecondary text-slate-900 antialiased">
-  <header class="sticky top-0 z-50 bg-slate-900 text-white shadow">
-    <nav class="mx-auto flex max-w-7xl items-center justify-between px-6 py-4 lg:px-8">
-      <a href="#top" class="flex items-center gap-3">
-        <img src="https://res.cloudinary.com/dq0gbgsdy/image/upload/uploads/tnU3E63S6.png" alt="AWH Industries logo" class="h-10 w-auto" />
-        <span class="font-semibold">AWH Industries</span>
-      </a>
-      <div class="hidden items-center gap-8 text-sm font-medium md:flex">
-        <a href="#about" class="hover:text-brandPrimary">About Us</a>
-        <a href="#services" class="hover:text-brandPrimary">Our Services</a>
-        <a href="#contact" class="hover:text-brandPrimary">Contact Us</a>
-        <a href="tel:925-699-1516" class="rounded-md bg-brandPrimary px-3 py-1.5 text-slate-900">925-699-1516</a>
-      </div>
-    </nav>
-  </header>
+<body>
 
-  <main id="top">
-    <section class="relative isolate overflow-hidden">
-      <video class="absolute inset-0 h-full w-full object-cover" autoplay muted loop playsinline>
-        <source src="https://res.cloudinary.com/dq0gbgsdy/video/upload/v1753206077/stock/vecteezy/66106332.mp4" type="video/mp4" />
-      </video>
-      <div class="absolute inset-0 bg-black/30"></div>
-      <div class="relative mx-auto max-w-7xl px-6 py-28 text-white lg:px-8 lg:py-36">
-        <div class="max-w-2xl">
-          <h1 class="text-4xl font-bold tracking-tight sm:text-5xl">Welcome to AWH Industries</h1>
-          <p class="mt-6 text-lg text-slate-100">Discover AWH Industries - your reliable partner for flexible, professional IT support, proudly based in Livermore, CA.</p>
-          <a href="#contact" class="mt-8 inline-flex rounded-md bg-brandPrimary px-5 py-3 font-semibold text-slate-900">Contact Us</a>
-        </div>
-      </div>
-    </section>
 
-    <section id="about" class="bg-white py-20">
-      <div class="mx-auto grid max-w-7xl gap-12 px-6 lg:grid-cols-2 lg:px-8">
-        <img src="https://res.cloudinary.com/dq0gbgsdy/image/upload/v1753206241/stock/pexels/3184660.jpg" alt="IT support team" class="h-full w-full rounded-2xl object-cover shadow" />
-        <div>
-          <h2 class="text-3xl font-bold text-slate-900">Tech Support Overview</h2>
-          <div class="mt-6 space-y-4 text-slate-700">
-            <p>Based in Livermore, CA, AWH Industries is your trusted partner for reliable, end-to-end tech support tailored to your business. We specialize in everything from secure network buildouts and Office 365 setup to day-to-day user support and physical security systems.</p>
-            <p>Our experienced team is dedicated to keeping your IT running smoothly, so you can stay focused on what you do best-growing your business. With a strong commitment to customer satisfaction and practical, high-quality solutions, we are here to support you every step of the way.</p>
-            <p>Call us at 925-699-1516 to find out how we can help simplify and strengthen your IT.</p>
-          </div>
-        </div>
-      </div>
-    </section>
+<div class="ticker-bar">
+  <div class="wrap" style="padding:0;">
+    <div class="ticker-track" id="ticker"></div>
+  </div>
+</div>
 
-    <section id="services" class="bg-brandSecondary py-20">
-      <div class="mx-auto max-w-7xl px-6 lg:px-8">
-        <h2 class="text-3xl font-bold">Our Services</h2>
-        <p class="mt-4 max-w-3xl text-slate-700">At AWH Industries, we deliver Flexible IT Services for Modern Workplaces, ensuring your business stays connected, secure, and productive with reliable support tailored to your unique needs.</p>
-        <div class="mt-12 grid gap-8 md:grid-cols-3">
-          <article class="overflow-hidden rounded-2xl bg-white shadow">
-            <img src="https://res.cloudinary.com/dq0gbgsdy/image/upload/v1753205359/stock/pexels/2881232.jpg" alt="Network Buildout" class="h-48 w-full object-cover" />
-            <div class="p-6">
-              <h3 class="text-xl font-semibold">Network Buildout</h3>
-              <p class="mt-3 text-sm text-slate-700">Network Buildouts from scratch are all about creating a fast, secure, and reliable infrastructure tailored to your office needs. Using trusted solutions like UniFi, we design and deploy everything-from cabling and Wi-Fi to firewalls and VLANs-ensuring top-tier performance and enterprise-grade security from day one. Perfect for small businesses that want peace of mind and room to grow.</p>
-            </div>
-          </article>
-          <article class="overflow-hidden rounded-2xl bg-white shadow">
-            <img src="https://res.cloudinary.com/dq0gbgsdy/image/upload/v1753205395/stock/pexels/15554492.jpg" alt="IT Support" class="h-48 w-full object-cover" />
-            <div class="p-6">
-              <h3 class="text-xl font-semibold">IT Support</h3>
-              <p class="mt-3 text-sm text-slate-700">We set up Office 365 and Google Workspace to get your team up and running with email, calendars, cloud storage, and collaboration tools-fast and hassle-free. From initial setup to ongoing end-user support, we handle it all so your team stays productive, secure, and supported every step of the way.</p>
-            </div>
-          </article>
-          <article class="overflow-hidden rounded-2xl bg-white shadow">
-            <img src="https://res.cloudinary.com/dq0gbgsdy/image/upload/v1753205537/stock/pexels/13657523.jpg" alt="Physical Security" class="h-48 w-full object-cover" />
-            <div class="p-6">
-              <h3 class="text-xl font-semibold">Physical Security</h3>
-              <p class="mt-3 text-sm text-slate-700">Physical Security Systems like card readers and door entry solutions provide smart, secure access control for your office. Integrated with your company directory, they streamline employee access while allowing controlled guest entry-keeping your space safe, efficient, and fully auditable.</p>
-            </div>
-          </article>
-        </div>
-      </div>
-    </section>
+<nav class="wrap">
+  <a href="#top" class="brand"><span class="mark"></span>AWHIND</a>
+  <div class="navlinks">
+    <a href="#services" class="hide-mobile">Capabilities</a>
+    <a href="#briefing" class="hide-mobile">The Daily Briefing</a>
+    <a href="#why" class="hide-mobile">Why AWHIND</a>
+    <a href="#contact" class="btn btn-ghost btn-sm">Talk to Us</a>
+  </div>
+</nav>
 
-    <section class="bg-slate-900 py-16 text-white">
-      <div class="mx-auto max-w-4xl px-6 text-center lg:px-8">
-        <h2 class="text-3xl font-bold">Reach Out to Us Today for Expert IT Support</h2>
-        <p class="mx-auto mt-4 max-w-2xl text-slate-200">Need help with your IT needs? Don't hesitate to contact us at AWH Industries. Our expert team in Livermore, CA is ready to assist you.</p>
-        <a href="tel:925-699-1516" class="mt-8 inline-flex rounded-md bg-brandPrimary px-5 py-3 font-semibold text-slate-900">925-699-1516</a>
-      </div>
-    </section>
+<header class="hero" id="top">
+  <div class="wrap">
+    <p class="eyebrow">Global IT Services &amp; AI Operations Consulting</p>
+    <h1 style="margin-top:14px;">Your service desk is where <em>shadow AI</em><br>quietly becomes the board's problem.</h1>
+    <p class="lede">AWHIND runs the desk, governs the agents, and modernizes the fleet — so the tools your people already use stop being the incident nobody saw coming.</p>
+    <div class="ctas">
+      <a href="#contact" class="btn btn-primary">Book a Readiness Assessment</a>
+      <a href="#briefing" class="btn btn-ghost">Read Today's Briefing →</a>
+    </div>
+  </div>
+</header>
 
-    <section class="bg-white py-20">
-      <div class="mx-auto max-w-7xl px-6 lg:px-8">
-        <p class="text-sm font-semibold uppercase tracking-wide text-brandPrimary">Testimonials</p>
-        <h2 class="mt-2 text-3xl font-bold">Voices of Satisfied Clients</h2>
-        <div class="mt-12 grid gap-8 md:grid-cols-3">
-          <article class="rounded-2xl border border-slate-200 p-6">
-            <p class="text-slate-700">AWH Industries exceeded our IT expectations!</p>
-            <div class="mt-6 flex items-center gap-3">
-              <img src="https://res.cloudinary.com/dq0gbgsdy/image/upload/assets/rl20Ok2RNTa.jpg" alt="Louis P." class="h-12 w-12 rounded-full object-cover" />
-              <span class="font-semibold">Louis P.</span>
-            </div>
-          </article>
-          <article class="rounded-2xl border border-slate-200 p-6">
-            <p class="text-slate-700">AWH Industries provided top-notch IT support.</p>
-            <div class="mt-6 flex items-center gap-3">
-              <img src="https://res.cloudinary.com/dq0gbgsdy/image/upload/assets/bpwv3S-PXIq.jpg" alt="Albert O." class="h-12 w-12 rounded-full object-cover" />
-              <span class="font-semibold">Albert O.</span>
-            </div>
-          </article>
-          <article class="rounded-2xl border border-slate-200 p-6">
-            <p class="text-slate-700">AWH Industries - reliable and efficient IT service.</p>
-            <div class="mt-6 flex items-center gap-3">
-              <img src="https://res.cloudinary.com/dq0gbgsdy/image/upload/assets/opsqwoXMyPk.jpg" alt="Wanda G." class="h-12 w-12 rounded-full object-cover" />
-              <span class="font-semibold">Wanda G.</span>
-            </div>
-          </article>
-        </div>
-      </div>
-    </section>
+<div class="stats-row" id="stats"></div>
 
-    <section class="bg-slate-900 py-20 text-white">
-      <div class="mx-auto grid max-w-7xl items-center gap-10 px-6 lg:grid-cols-2 lg:px-8">
-        <div>
-          <h2 class="text-3xl font-bold">Our Mission</h2>
-          <p class="mt-6 text-slate-200">Our mission at AWH Industries is to provide exceptional corporate IT tech support services. We are committed to leveraging our expertise to deliver innovative, reliable, and efficient solutions that meet our clients' unique needs. Based in Livermore, CA, we strive to build long-lasting relationships with our clients, ensuring their IT systems are always running smoothly and securely.</p>
-        </div>
-        <img src="https://img.b2bpic.net/premium-photo/professional-corporate-stationery-mockup-with-orange-accent_1061150-144742.jpg" alt="Mission visual" class="rounded-2xl object-cover shadow-xl" />
-      </div>
-    </section>
-
-    <section class="bg-white py-20">
-      <div class="mx-auto grid max-w-7xl gap-10 px-6 lg:grid-cols-2 lg:px-8">
-        <div class="overflow-hidden rounded-2xl border border-slate-200">
-          <iframe
-            class="h-[420px] w-full"
-            loading="lazy"
-            referrerpolicy="no-referrer-when-downgrade"
-            src="https://www.google.com/maps?q=Livermore%2C%20CA&output=embed"
-            title="Map of Livermore, CA"
-          ></iframe>
-        </div>
-        <div>
-          <h2 class="text-3xl font-bold">Find Us Here!</h2>
-          <div class="mt-6 space-y-4 text-slate-700">
-            <p>Welcome to AWH Industries - Your Trusted IT Partner in Livermore, CA</p>
-            <p>Located in the heart of Livermore, AWH Industries offers flexible IT solutions designed to keep your business secure, efficient, and future-ready. Use the interactive map below to find us-we would love to connect.</p>
-            <p>Stop by and discover how we can transform your IT operations with tailored solutions that fit your unique needs. Our team of experts is ready to meet, listen, and build a strategy that works for you.</p>
-            <p>Need help finding us? Call us at 925-699-1516-we are happy to assist. We look forward to meeting you and becoming your go-to partner in tech success.</p>
-          </div>
-          <a href="#contact" class="mt-8 inline-flex rounded-md bg-brandPrimary px-5 py-3 font-semibold text-slate-900">Let's Connect</a>
-        </div>
-      </div>
-    </section>
-
-    <section id="contact" class="bg-brandSecondary py-20">
-      <div class="mx-auto max-w-4xl px-6 lg:px-8">
-        <div class="text-center">
-          <h2 class="text-3xl font-bold">Contact Us</h2>
-          <p class="mt-4 text-slate-700">Got questions? We're here to help! Contact AWH Industries today!</p>
-        </div>
-
-        <form name="contact" method="POST" data-netlify="true" class="mt-12 grid grid-cols-1 gap-6 sm:grid-cols-2">
-          <input type="hidden" name="form-name" value="contact" action="/" />
-
-          <div class="sm:col-span-2">
-            <label for="name" class="mb-2 block text-sm font-semibold">Name</label>
-            <input id="name" name="Name" type="text" required class="w-full rounded-md border border-slate-300 px-4 py-2" />
-          </div>
-
-          <div>
-            <label for="email" class="mb-2 block text-sm font-semibold">Email Address</label>
-            <input id="email" name="Email Address" type="email" required class="w-full rounded-md border border-slate-300 px-4 py-2" />
-          </div>
-
-          <div>
-            <label for="phone" class="mb-2 block text-sm font-semibold">Phone Number</label>
-            <input id="phone" name="Phone Number" type="tel" class="w-full rounded-md border border-slate-300 px-4 py-2" />
-          </div>
-
-          <div class="sm:col-span-2">
-            <label for="message" class="mb-2 block text-sm font-semibold">Message / Comments</label>
-            <textarea id="message" name="Message / Comments" rows="6" required class="w-full rounded-md border border-slate-300 px-4 py-2"></textarea>
-          </div>
-
-          <div class="sm:col-span-2">
-            <button type="submit" class="w-full rounded-md bg-brandPrimary px-4 py-3 font-semibold text-slate-900">Let's Talk</button>
-          </div>
-        </form>
-      </div>
-    </section>
-  </main>
-
-  <footer class="bg-slate-900 text-slate-200">
-    <div class="mx-auto grid max-w-7xl gap-10 px-6 py-14 lg:grid-cols-3 lg:px-8">
+<section id="services">
+  <div class="wrap">
+    <div class="section-head">
       <div>
-        <img src="https://res.cloudinary.com/dq0gbgsdy/image/upload/uploads/tnU3E63S6.png" alt="AWH Industries logo" class="h-12 w-auto" />
-        <p class="mt-4 text-sm">AWH Industries: Your Trusted Partner in Corporate IT Tech Support Solutions</p>
+        <p class="eyebrow">Capabilities</p>
+        <h2>Six problems we're built to own</h2>
       </div>
+      <p>Not a staffing bench. An operating team that sits between your endpoints, your agents, and your audit committee.</p>
+    </div>
+  </div>
+  <div class="grid-services wrap" style="padding-left:28px; padding-right:28px;" id="services-grid"></div>
+</section>
 
+<section class="tight" id="why">
+  <div class="wrap">
+    <div class="section-head">
       <div>
-        <h3 class="font-semibold text-white">Contact Us</h3>
-        <ul class="mt-4 space-y-2 text-sm">
-          <li><a href="https://www.google.com/maps/place/Livermore, CA" class="hover:text-brandPrimary">Livermore, CA</a></li>
-          <li><a href="tel:925-699-1516" class="hover:text-brandPrimary">925-699-1516</a></li>
-        </ul>
-      </div>
-
-      <div>
-        <h3 class="font-semibold text-white">Menu</h3>
-        <ul class="mt-4 space-y-2 text-sm">
-          <li><a href="#about" class="hover:text-brandPrimary">About Us</a></li>
-          <li><a href="#services" class="hover:text-brandPrimary">Our Services</a></li>
-          <li><a href="#contact" class="hover:text-brandPrimary">Contact Us</a></li>
-        </ul>
-        <div class="mt-6 flex gap-4 text-sm">
-          <a href="#facebook" class="rounded border border-slate-600 px-2 py-1 hover:border-brandPrimary hover:text-brandPrimary">Facebook</a>
-          <a href="#instagram" class="rounded border border-slate-600 px-2 py-1 hover:border-brandPrimary hover:text-brandPrimary">Instagram</a>
-          <a href="#twitter" class="rounded border border-slate-600 px-2 py-1 hover:border-brandPrimary hover:text-brandPrimary">Twitter</a>
-          <a href="#youtube" class="rounded border border-slate-600 px-2 py-1 hover:border-brandPrimary hover:text-brandPrimary">YouTube</a>
-          <a href="#linkedin" class="rounded border border-slate-600 px-2 py-1 hover:border-brandPrimary hover:text-brandPrimary">LinkedIn</a>
-        </div>
+        <p class="eyebrow">Why AWHIND</p>
+        <h2>We were built for the agentic-AI decade, not retrofitted for it</h2>
       </div>
     </div>
-    <div class="border-t border-slate-800 py-6 text-center text-xs text-slate-400">© AWH Industries. All rights reserved.</div>
-  </footer>
+    <div class="why-grid" id="why-grid"></div>
+  </div>
+</section>
+
+<section id="briefing">
+  <div class="wrap">
+    <div class="section-head">
+      <div>
+        <p class="eyebrow">The Daily Briefing</p>
+        <h2>Written for the person who has to explain this to the board</h2>
+      </div>
+      <p>One new briefing a day on the AI and enterprise-IT issue actually hitting desktop and ops teams — short enough to forward, sourced enough to trust.</p>
+    </div>
+    <div class="briefing" id="post-list"></div>
+  </div>
+</section>
+
+<section class="tight" id="contact">
+  <div class="wrap" style="max-width:680px;">
+    <p class="eyebrow">Get In Touch</p>
+    <h2 style="margin-top:10px; font-size:28px;">Tell us what's actually on fire.</h2>
+    <p style="color:var(--text-secondary); margin-top:12px; font-size:14.5px;">One conversation, no deck required. We'll tell you within a week whether this is a scoping problem, a governance problem, or a staffing problem.</p>
+    <div class="ctas" style="margin-top:24px;">
+      <a href="mailto:hello@awhind.com?subject=Readiness%20Assessment%20Request" class="btn btn-primary">Email hello@awhind.com</a>
+      <a href="#" class="btn btn-ghost" id="open-concierge-link">Talk to the Concierge instead</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="foot-grid">
+      <div>
+        <a href="#top" class="brand" style="margin-bottom:12px;"><span class="mark"></span>AWHIND</a>
+        <p style="font-size:13px; color:var(--text-secondary); max-width:280px; margin-top:10px;">Global IT services and AI operations consulting for enterprises that can't afford to find out about shadow AI from an auditor.</p>
+      </div>
+      <div>
+        <h4>Capabilities</h4>
+        <a href="#services">Service Desk</a>
+        <a href="#services">AI Governance</a>
+        <a href="#services">Endpoint Ops</a>
+        <a href="#services">Global NOC</a>
+      </div>
+      <div>
+        <h4>Company</h4>
+        <a href="#briefing">Insights</a>
+        <a href="#why">Why AWHIND</a>
+        <a href="#contact">Contact</a>
+      </div>
+      <div>
+        <h4>Follow</h4>
+        <a href="https://www.linkedin.com" target="_blank" rel="noopener">LinkedIn</a>
+        <a href="https://www.facebook.com" target="_blank" rel="noopener">Facebook</a>
+        <a href="mailto:hello@awhind.com">hello@awhind.com</a>
+      </div>
+    </div>
+    <div class="foot-bottom">
+      <span>© <span id="year"></span> AWHIND. All rights reserved.</span>
+      <span>Briefings updated daily · Last update <span id="lastUpdate"></span></span>
+    </div>
+  </div>
+</footer>
+
+<div class="article-overlay" id="overlay">
+  <div class="article-panel" id="article-panel"></div>
+</div>
+
+<button id="concierge-launch"><span class="pulse"></span>AI Concierge — Get a Fit Check</button>
+<div id="concierge-panel">
+  <div class="cq-head">
+    <div class="who"><span class="dot"></span><div><div class="title">AWHIND Concierge</div><div class="sub">presales · avg. reply instant</div></div></div>
+    <button id="cq-close" aria-label="Close">✕</button>
+  </div>
+  <div class="cq-body" id="cq-body"></div>
+  <div class="cq-foot">Guided intake — a specialist reviews every submission before follow-up.</div>
+</div>
+
+<script>
+(function(){
+  document.getElementById('year').textContent = new Date().getFullYear();
+
+  /* ---------------- DATA ---------------- */
+  var STATS = [
+    {n:'47%', l:'of enterprises name IT itself as the top source of shadow AI — WitnessAI, 2026'},
+    {n:'80%', l:'of enterprises lack mature agentic-AI governance — Deloitte, State of AI in the Enterprise'},
+    {n:'53%', l:'of organizations are still stuck in AI pilot-and-experiment mode — Portal26, 2026'},
+    {n:'14 vs 5', l:'AI tools the average employee uses, versus how many IT actually knows about'}
+  ];
+
+  var SERVICES = [
+    {id:'SVC — 01', name:'AI-Augmented Service Desk', d:'Human-verified AI triage for L1/L2 tickets, with real deflection measured under strict Gartner-comparable criteria — not vendor marketing math.'},
+    {id:'SVC — 02', name:'Shadow AI Discovery & Governance', d:"Inventory the AI tools already running inside your org, close the gap between what's used and what's approved, and put policy where the tools already are."},
+    {id:'SVC — 03', name:'Agentic AI Guardrails', d:'Decision boundaries, human-in-the-loop approval gates, and audit trails for autonomous agents — built before an incident forces the conversation.'},
+    {id:'SVC — 04', name:'Endpoint & Desktop Modernization', d:'Fleet management, patching, and provisioning at global scale, with AI-assisted remediation that a human still signs off on.'},
+    {id:'SVC — 05', name:'24/7 Global NOC & Incident Response', d:'Follow-the-sun monitoring, escalation, and postmortems — so 3am in one time zone is 10am somewhere on your team.'},
+    {id:'SVC — 06', name:'AI ROI & Board Reporting', d:'Translate pilots into board-credible metrics on the 90-day clock most boards are now enforcing.'}
+  ];
+
+  var WHY = [
+    {n:'01', h:'We report deflection the way Gartner does, not the way vendors do', p:'20–30% is the honest industry average under strict, no-reopen criteria. We tell you that number before you sign anything.'},
+    {n:'02', h:'Governance is a deliverable, not a slide', p:'Decision boundaries, approval gates, and audit trails ship alongside the agents — not eighteen months after the first incident.'},
+    {n:'03', h:'IT is usually the leak, so we start there', p:'Nearly half of shadow-AI activity traces back to IT and infrastructure teams. We audit our own footprint on day one, not last.'},
+    {n:'04', h:'One team, the whole stack', p:'Desk, endpoints, NOC, and governance sit under one roof, so nobody spends Tuesday arguing about whose ticket it is.'}
+  ];
+
+  var POSTS = [
+    {
+      date:'2026-08-31', tag:'Governance', read:'4 min',
+      title:'Your IT Department Is the Biggest Shadow-AI Risk in the Building',
+      dek:'The team responsible for governing AI use is also, statistically, the most likely to be breaking its own rules.',
+      body:[
+        "Ask most CIOs where shadow AI lives in their organization and they'll point at sales, or marketing, or some overeager product team pasting customer data into a consumer chatbot. The data says otherwise.",
+        "A 2026 WitnessAI survey of 300 enterprise decision-makers found that <strong>47% named IT and infrastructure as the single largest source of shadow AI activity</strong> — ahead of every other function in the company. The same survey found <strong>91% of respondents worried AI agents are increasing their financial risk exposure</strong>, and <strong>86% had investigated at least one AI-related security or operational incident</strong> in the past twelve months.",
+        "The uncomfortable part isn't the number. It's the role reversal. IT is usually the function writing the AI acceptable-use policy, running the approval workflow, and fielding the audit questions. When it's also the function most likely to be operating outside that same policy, the org chart stops matching reality.",
+        "This tracks with what we see on-site: engineers standing up their own coding assistants, ops teams wiring agentic workflows into ticketing systems over a weekend, sysadmins testing tools nobody in security has ever heard of — all in the name of moving faster. None of it is malicious. Almost none of it is documented.",
+        "<strong>Over 40% of enterprises</strong> in the same survey reported an AI-related incident costing <span class='stat-inline'>$2 million or more</span> in the past year. That's not a hypothetical line item for next year's budget. It's this year's.",
+        "The fix isn't a stricter policy memo — IT already writes those. It's an actual inventory: what's running, who approved it, what data it touches, and who's accountable if it breaks. Most enterprises we work with don't have one. Building it is usually the first thing we do together."
+      ],
+      sources:[
+        ['CIO Dive — AI incidents cost enterprises $2M or more, IT is the biggest shadow AI culprit','https://www.ciodive.com/news/enterprise-ai-security-risk-costs-millions/826886/']
+      ]
+    },
+    {
+      date:'2026-08-30', tag:'Governance', read:'3 min',
+      title:'80% of Enterprises Are Running Agents Faster Than They Can Govern Them',
+      dek:"Deloitte surveyed 3,235 leaders across 24 countries. The gap between deployment speed and governance maturity is the headline.",
+      body:[
+        "Deloitte's latest State of AI in the Enterprise research, drawn from 3,235 IT and business leaders across 24 countries, puts a hard number on something most operators already feel: <strong>only 21% of enterprises report having a mature governance model for agentic AI</strong>. Roughly four in five don't.",
+        "Meanwhile adoption isn't slowing down to wait for governance to catch up. <strong>74% of organizations expect to use AI agents at least &ldquo;moderately&rdquo;</strong> by 2027, and <strong>23% expect &ldquo;extensive&rdquo;</strong> usage. Agents are being handed real decisions well before most companies have defined which decisions they're allowed to make alone.",
+        "Deloitte's researchers point to three specific gaps in the organizations without mature governance: no clear boundary between what an agent can decide autonomously versus what needs human sign-off, no real-time monitoring for anomalous agent behavior, and no audit trail documenting the chain of actions an agent actually took.",
+        "That last one matters more than it sounds. When something goes wrong — a bad provisioning action, a data exposure, an agent that escalated a decision it shouldn't have made — &ldquo;we're not sure what it did or why&rdquo; is not an answer that survives a board meeting, let alone a regulator.",
+        "None of this is an argument against agentic AI. It's an argument for sequencing: guardrails and audit trails shipped alongside the agent, not bolted on after the incident that finally gets budget approved for them."
+      ],
+      sources:[
+        ['Deloitte — Business and IT leaders report AI agents are scaling faster than their guardrails','https://www.deloitte.com/us/en/insights/topics/emerging-technologies/ai-agents-scaling-faster.html']
+      ]
+    },
+    {
+      date:'2026-08-29', tag:'Shadow AI', read:'3 min',
+      title:"14 AI Tools Are Running in Your Org. IT Knows About Five of Them.",
+      dek:'Shadow AI is quietly turning into shadow operations — entire workflows running outside anyone’s visibility.',
+      body:[
+        "The average enterprise now has roughly <strong>14 AI tools in active use</strong> among employees — and IT teams are typically aware of only <strong>4 to 5 of them</strong>, according to 2026 research on enterprise AI adoption. That's not a rounding error. It's most of the picture, missing.",
+        "<strong>67% of employees report using AI tools at work</strong>, but only <strong>18% of companies have a formal AI security policy</strong> in place to govern that usage. The gap between adoption and policy isn't closing — it's what analysts are starting to call &ldquo;shadow operations&rdquo;: entire workflows, not just individual tools, running end-to-end outside IT's field of view.",
+        "It shows up in mundane ways before it shows up in dramatic ones. Someone pastes a customer record into a consumer-grade chatbot to draft a faster response. Someone else feeds proprietary source code into an AI coding assistant with no enterprise data controls. A finance analyst uploads a quarterly forecast to get a summary written faster. Each instance feels small. In aggregate, it's an ungoverned data pipeline running through your most sensitive systems.",
+        "Confirmed or suspected AI agent security incidents were reported by <span class='stat-inline'>88%</span> of organizations surveyed in the past year — a number high enough that the honest question isn't whether shadow AI exists in your environment. It's how much of it you can currently see.",
+        "Visibility is the tractable first step. You can't govern a tool you don't know is running, and you can't have the sensible, business-enabling AI conversation with your workforce until you know what they've already built without you."
+      ],
+      sources:[
+        ['Portal26 — The 7 Most Urgent CIO AI Issues for 2026','https://portal26.ai/cio-ai-issues-2026/']
+      ]
+    },
+    {
+      date:'2026-08-28', tag:'Service Desk', read:'4 min',
+      title:"Your Vendor's Deflection Number and Gartner's Deflection Number Are Not the Same Number",
+      dek:'When a vendor claims 65% deflection and the strict industry average is 20–30%, they are describing two different things.',
+      body:[
+        "If you've sat through an AI service-desk vendor pitch recently, you've heard a deflection number somewhere in the 50–75% range. Aisera has cited 65% at Cisco. Moveworks has claimed a 75% average across customers. Those numbers are real — under the definition each vendor is using.",
+        "Under the stricter, Gartner-comparable definition — full AI resolution, zero human escalation, and no re-open within 72 hours — the honest 2026 industry average is <strong>20–30% deflection</strong>. Best-in-class, mature deployments reach <strong>40–60%</strong>, and the realistic ceiling after 18–24 months of sustained optimization sits around <strong>55–65%</strong>. First-year deployments typically land at <strong>20–35%</strong>.",
+        "Reconciling vendor-published numbers against the strict standard generally means applying something like a <span class='stat-inline'>10-point compression</span> — a claimed 65% converts to roughly 55% once you control for looser definitions of what counts as &ldquo;resolved.&rdquo;",
+        "The gap between year-one performance and mature-deployment performance comes down to five things, in rough order of impact: how clean your knowledge base actually is (the single biggest lever), how broad your intent library is, whether the platform can take real actions like password resets and provisioning or only answer questions, how well the rollout was change-managed with end users, and simply how much runway the deployment has had — most of the real gains show up between month six and month eighteen, not week one.",
+        "None of this is a reason to skip AI at the service desk. It's a reason to build your board deck on the strict number, not the vendor's, so the second-year results land as a win instead of a disappointment nobody saw coming."
+      ],
+      sources:[
+        ['ServiceDeskAgents.com — AI Service Desk Deflection Rate Benchmarks 2026','https://servicedeskagents.com/deflection-rates/']
+      ]
+    },
+    {
+      date:'2026-08-27', tag:'ROI', read:'3 min',
+      title:"Boards Now Want AI ROI in 90 Days. Most Programs Are Still in Pilot.",
+      dek:'The window for "we’re still experimenting" as an acceptable answer is closing fast.',
+      body:[
+        "Eighteen months used to be a reasonable runway to prove out an enterprise AI initiative. In 2026, boards are compressing that expectation to roughly <strong>three months</strong> — and most programs aren't ready for the new clock.",
+        "<strong>53% of organizations are still stuck in the &ldquo;pilot and experiment&rdquo; phase</strong> of their AI initiatives, with only around <strong>10% reporting genuine, measurable growth results</strong> from the AI they've deployed. That's the gap a lot of CIOs are being asked to close in a single quarter.",
+        "Compounding the problem: only <strong>38% of large companies</strong> have appointed anyone with clear accountability for AI outcomes — a Chief AI Officer or equivalent — which means the ROI question often lands on a desk with no formal mandate to answer it, and no consensus on which reporting line even owns the number.",
+        "The programs that clear the 90-day bar tend to share one habit: they picked a narrow, measurable workflow — ticket deflection, provisioning time, mean-time-to-resolution — before they picked the AI tool, not after. The board doesn't want a platform demo. It wants a before-and-after number it can repeat in its own next meeting.",
+        "If your AI program can't currently produce that number, that's the gap to close before the next board cycle — not the vendor selection, and not the model."
+      ],
+      sources:[
+        ['Portal26 — The 7 Most Urgent CIO AI Issues for 2026','https://portal26.ai/cio-ai-issues-2026/']
+      ]
+    }
+  ];
+
+  /* ---------------- RENDER ---------------- */
+  var ticker = document.getElementById('ticker');
+  var tItems = STATS.concat(STATS).map(function(s){
+    return '<span class="ticker-item"><span class="dot"></span>'+s.n+' — '+s.l+'</span>';
+  }).join('');
+  ticker.innerHTML = tItems + tItems;
+
+  var statsRow = document.getElementById('stats');
+  statsRow.innerHTML = '<div class="wrap" style="display:contents;">'+
+    STATS.map(function(s){
+      return '<div class="stat"><div class="n">'+s.n+'</div><div class="l">'+s.l+'</div></div>';
+    }).join('') + '</div>';
+  // rebuild without nested wrap issue
+  statsRow.className = 'stats-row wrap';
+  statsRow.innerHTML = STATS.map(function(s){
+    return '<div class="stat"><div class="n">'+s.n+'</div><div class="l">'+s.l+'</div></div>';
+  }).join('');
+
+  document.getElementById('services-grid').innerHTML = SERVICES.map(function(s){
+    return '<div class="svc"><div><div class="id">'+s.id+'</div><h3>'+s.name+'</h3></div><p>'+s.d+'</p></div>';
+  }).join('');
+
+  document.getElementById('why-grid').innerHTML = WHY.map(function(w){
+    return '<div class="why-item"><div class="num">'+w.n+'</div><h3>'+w.h+'</h3><p>'+w.p+'</p></div>';
+  }).join('');
+
+  function fmtDate(d){
+    var dt = new Date(d+'T00:00:00');
+    return dt.toLocaleDateString('en-US',{month:'short', day:'numeric', year:'numeric'});
+  }
+  document.getElementById('lastUpdate').textContent = fmtDate(POSTS[0].date);
+
+  var listEl = document.getElementById('post-list');
+  listEl.innerHTML = POSTS.map(function(p,i){
+    return '<div class="post-row" data-i="'+i+'">'+
+      '<div class="date mono">'+fmtDate(p.date)+'<br>'+p.read+' read</div>'+
+      '<div><h3>'+p.title+'</h3><div class="dek">'+p.dek+'</div><span class="tag">'+p.tag+'</span></div>'+
+      '<div class="arrow">→</div>'+
+    '</div>';
+  }).join('');
+
+  var overlay = document.getElementById('overlay');
+  var panel = document.getElementById('article-panel');
+  function openPost(i){
+    var p = POSTS[i];
+    var url = encodeURIComponent('https://awhind.com/briefing/'+p.date);
+    var title = encodeURIComponent(p.title);
+    panel.innerHTML =
+      '<button class="close" aria-label="Close">✕</button>'+
+      '<div class="meta">'+fmtDate(p.date)+' &middot; '+p.tag+' &middot; '+p.read+' read</div>'+
+      '<h2>'+p.title+'</h2>'+
+      '<div class="dek">'+p.dek+'</div>'+
+      '<div class="article-body">'+p.body.map(function(par){return '<p>'+par+'</p>';}).join('')+'</div>'+
+      '<div class="share-row">'+
+        '<a class="btn btn-ghost btn-sm" target="_blank" rel="noopener" href="https://www.linkedin.com/sharing/share-offsite/?url='+url+'">Share to LinkedIn</a>'+
+        '<a class="btn btn-ghost btn-sm" target="_blank" rel="noopener" href="https://www.facebook.com/sharer/sharer.php?u='+url+'">Share to Facebook</a>'+
+        '<a class="btn btn-ghost btn-sm" href="mailto:?subject='+title+'&body='+encodeURIComponent(p.dek+'\n\nRead the full briefing: ')+url+'">Forward by Email</a>'+
+      '</div>'+
+      '<div class="article-sources">Sources: '+p.sources.map(function(s){return '<a href="'+s[1]+'" target="_blank" rel="noopener">'+s[0]+'</a>';}).join(' &middot; ')+'</div>';
+    overlay.classList.add('open');
+    panel.querySelector('.close').addEventListener('click', closePost);
+    window.scrollTo({top:0});
+  }
+  function closePost(){ overlay.classList.remove('open'); }
+  listEl.addEventListener('click', function(e){
+    var row = e.target.closest('.post-row');
+    if(row) openPost(parseInt(row.getAttribute('data-i'),10));
+  });
+  overlay.addEventListener('click', function(e){ if(e.target === overlay) closePost(); });
+  document.addEventListener('keydown', function(e){ if(e.key === 'Escape') closePost(); });
+
+  /* ---------------- CONCIERGE ---------------- */
+  var cqBody = document.getElementById('cq-body');
+  var launch = document.getElementById('concierge-launch');
+  var cqPanel = document.getElementById('concierge-panel');
+  var openLink = document.getElementById('open-concierge-link');
+  var state = {answers:{}};
+
+  var FLOW = {
+    start: {
+      bot: "Quick one: what's the fastest-growing fire in your environment right now?",
+      options: [
+        ['Service desk ticket volume', 'desk'],
+        ['Shadow AI / ungoverned tools', 'shadow'],
+        ['Endpoint & desktop modernization', 'endpoint'],
+        ['Agentic AI governance', 'gov']
+      ]
+    },
+    desk: {
+      bot: "Makes sense — that's usually the loudest one. Worth knowing: the honest industry-average AI deflection rate is <span class='stat-inline'>20–30%</span> under strict criteria, not the 65–75% most vendors pitch. Want a scoped read on where your desk actually sits?",
+      next: 'capture', tag: 'AI-Augmented Service Desk'
+    },
+    shadow: {
+      bot: "Common, and usually bigger than people expect. <span class='stat-inline'>47%</span> of enterprises say IT itself is the top source of shadow AI. Want us to run a fast inventory pass?",
+      next: 'capture', tag: 'Shadow AI Discovery & Governance'
+    },
+    endpoint: {
+      bot: "Endpoint sprawl compounds fast once AI tooling gets involved. We handle fleet modernization with AI-assisted remediation a human still signs off on. Want a capacity read?",
+      next: 'capture', tag: 'Endpoint & Desktop Modernization'
+    },
+    gov: {
+      bot: "Good instinct — <span class='stat-inline'>80%</span> of enterprises don't yet have mature agentic-AI governance. Want us to map your current guardrail gaps?",
+      next: 'capture', tag: 'Agentic AI Guardrails'
+    }
+  };
+
+  function addMsg(html, cls){
+    var d = document.createElement('div');
+    d.className = 'cq-msg ' + (cls||'bot');
+    d.innerHTML = html;
+    cqBody.appendChild(d);
+    cqBody.scrollTop = cqBody.scrollHeight;
+    return d;
+  }
+  function addOptions(opts, onPick){
+    var wrap = document.createElement('div');
+    wrap.className = 'cq-options';
+    opts.forEach(function(o){
+      var b = document.createElement('button');
+      b.className = 'cq-opt';
+      b.textContent = o[0];
+      b.addEventListener('click', function(){
+        addMsg(o[0], 'user');
+        wrap.remove();
+        onPick(o[1]);
+      });
+      wrap.appendChild(b);
+    });
+    cqBody.appendChild(wrap);
+    cqBody.scrollTop = cqBody.scrollHeight;
+  }
+  function showCapture(tag){
+    state.answers.tag = tag;
+    addMsg("Last step — where should the assessment go?");
+    var form = document.createElement('div');
+    form.className = 'cq-form';
+    form.innerHTML =
+      '<input type="text" id="cq-name" placeholder="Name" autocomplete="name">'+
+      '<input type="text" id="cq-company" placeholder="Company" autocomplete="organization">'+
+      '<input type="email" id="cq-email" placeholder="Work email" autocomplete="email">'+
+      '<button class="btn btn-primary btn-sm" id="cq-submit" style="margin-top:4px;">Request Readiness Assessment</button>';
+    cqBody.appendChild(form);
+    cqBody.scrollTop = cqBody.scrollHeight;
+    document.getElementById('cq-submit').addEventListener('click', function(){
+      var name = document.getElementById('cq-name').value.trim();
+      var company = document.getElementById('cq-company').value.trim();
+      var email = document.getElementById('cq-email').value.trim();
+      if(!email){ document.getElementById('cq-email').focus(); return; }
+      form.remove();
+      addMsg((name||'Thanks')+' — routing this to the team now.');
+      var subject = encodeURIComponent('Readiness Assessment — '+(state.answers.tag||'General'));
+      var body = encodeURIComponent(
+        'Name: '+name+'\nCompany: '+company+'\nEmail: '+email+'\nArea of interest: '+(state.answers.tag||'General')+'\n\n(Sent via the AWHIND site concierge)'
+      );
+      var mailto = 'mailto:hello@awhind.com?subject='+subject+'&body='+body;
+      setTimeout(function(){
+        addMsg('Opening a pre-filled email to <strong>hello@awhind.com</strong> — send it and a specialist will follow up within one business day. <a href="'+mailto+'" style="color:var(--accent);">Click here if it didn\'t open automatically.</a>');
+        window.location.href = mailto;
+      }, 500);
+    });
+  }
+  function startFlow(){
+    cqBody.innerHTML = '';
+    addMsg(FLOW.start.bot);
+    addOptions(FLOW.start.options, function(key){
+      var step = FLOW[key];
+      setTimeout(function(){
+        addMsg(step.bot);
+        setTimeout(function(){ showCapture(step.tag); }, 700);
+      }, 500);
+    });
+  }
+  function openConcierge(){
+    cqPanel.classList.add('open');
+    launch.style.display = 'none';
+    if(!cqBody.hasChildNodes()) startFlow();
+  }
+  function closeConcierge(){
+    cqPanel.classList.remove('open');
+    launch.style.display = 'flex';
+  }
+  launch.addEventListener('click', openConcierge);
+  document.getElementById('cq-close').addEventListener('click', closeConcierge);
+  openLink.addEventListener('click', function(e){ e.preventDefault(); openConcierge(); });
+
+})();
+</script>
+
 </body>
 </html>

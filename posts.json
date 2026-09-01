@@ -1,0 +1,88 @@
+[
+  {
+    "date": "2026-08-31",
+    "tag": "Governance",
+    "read": "4 min",
+    "title": "Your IT Department Is the Biggest Shadow-AI Risk in the Building",
+    "dek": "The team responsible for governing AI use is also, statistically, the most likely to be breaking its own rules.",
+    "body": [
+      "Ask most CIOs where shadow AI lives in their organization and they'll point at sales, or marketing, or some overeager product team pasting customer data into a consumer chatbot. The data says otherwise.",
+      "A 2026 WitnessAI survey of 300 enterprise decision-makers found that <strong>47% named IT and infrastructure as the single largest source of shadow AI activity</strong> — ahead of every other function in the company. The same survey found <strong>91% of respondents worried AI agents are increasing their financial risk exposure</strong>, and <strong>86% had investigated at least one AI-related security or operational incident</strong> in the past twelve months.",
+      "The uncomfortable part isn't the number. It's the role reversal. IT is usually the function writing the AI acceptable-use policy, running the approval workflow, and fielding the audit questions. When it's also the function most likely to be operating outside that same policy, the org chart stops matching reality.",
+      "This tracks with what we see on-site: engineers standing up their own coding assistants, ops teams wiring agentic workflows into ticketing systems over a weekend, sysadmins testing tools nobody in security has ever heard of — all in the name of moving faster. None of it is malicious. Almost none of it is documented.",
+      "<strong>Over 40% of enterprises</strong> in the same survey reported an AI-related incident costing <span class='stat-inline'>$2 million or more</span> in the past year. That's not a hypothetical line item for next year's budget. It's this year's.",
+      "The fix isn't a stricter policy memo — IT already writes those. It's an actual inventory: what's running, who approved it, what data it touches, and who's accountable if it breaks. Most enterprises we work with don't have one. Building it is usually the first thing we do together."
+    ],
+    "sources": [
+      ["CIO Dive — AI incidents cost enterprises $2M or more, IT is the biggest shadow AI culprit", "https://www.ciodive.com/news/enterprise-ai-security-risk-costs-millions/826886/"]
+    ]
+  },
+  {
+    "date": "2026-08-30",
+    "tag": "Governance",
+    "read": "3 min",
+    "title": "80% of Enterprises Are Running Agents Faster Than They Can Govern Them",
+    "dek": "Deloitte surveyed 3,235 leaders across 24 countries. The gap between deployment speed and governance maturity is the headline.",
+    "body": [
+      "Deloitte's latest State of AI in the Enterprise research, drawn from 3,235 IT and business leaders across 24 countries, puts a hard number on something most operators already feel: <strong>only 21% of enterprises report having a mature governance model for agentic AI</strong>. Roughly four in five don't.",
+      "Meanwhile adoption isn't slowing down to wait for governance to catch up. <strong>74% of organizations expect to use AI agents at least &ldquo;moderately&rdquo;</strong> by 2027, and <strong>23% expect &ldquo;extensive&rdquo;</strong> usage. Agents are being handed real decisions well before most companies have defined which decisions they're allowed to make alone.",
+      "Deloitte's researchers point to three specific gaps in the organizations without mature governance: no clear boundary between what an agent can decide autonomously versus what needs human sign-off, no real-time monitoring for anomalous agent behavior, and no audit trail documenting the chain of actions an agent actually took.",
+      "That last one matters more than it sounds. When something goes wrong — a bad provisioning action, a data exposure, an agent that escalated a decision it shouldn't have made — &ldquo;we're not sure what it did or why&rdquo; is not an answer that survives a board meeting, let alone a regulator.",
+      "None of this is an argument against agentic AI. It's an argument for sequencing: guardrails and audit trails shipped alongside the agent, not bolted on after the incident that finally gets budget approved for them."
+    ],
+    "sources": [
+      ["Deloitte — Business and IT leaders report AI agents are scaling faster than their guardrails", "https://www.deloitte.com/us/en/insights/topics/emerging-technologies/ai-agents-scaling-faster.html"]
+    ]
+  },
+  {
+    "date": "2026-08-29",
+    "tag": "Shadow AI",
+    "read": "3 min",
+    "title": "14 AI Tools Are Running in Your Org. IT Knows About Five of Them.",
+    "dek": "Shadow AI is quietly turning into shadow operations — entire workflows running outside anyone's visibility.",
+    "body": [
+      "The average enterprise now has roughly <strong>14 AI tools in active use</strong> among employees — and IT teams are typically aware of only <strong>4 to 5 of them</strong>, according to 2026 research on enterprise AI adoption. That's not a rounding error. It's most of the picture, missing.",
+      "<strong>67% of employees report using AI tools at work</strong>, but only <strong>18% of companies have a formal AI security policy</strong> in place to govern that usage. The gap between adoption and policy isn't closing — it's what analysts are starting to call &ldquo;shadow operations&rdquo;: entire workflows, not just individual tools, running end-to-end outside IT's field of view.",
+      "It shows up in mundane ways before it shows up in dramatic ones. Someone pastes a customer record into a consumer-grade chatbot to draft a faster response. Someone else feeds proprietary source code into an AI coding assistant with no enterprise data controls. A finance analyst uploads a quarterly forecast to get a summary written faster. Each instance feels small. In aggregate, it's an ungoverned data pipeline running through your most sensitive systems.",
+      "Confirmed or suspected AI agent security incidents were reported by <span class='stat-inline'>88%</span> of organizations surveyed in the past year — a number high enough that the honest question isn't whether shadow AI exists in your environment. It's how much of it you can currently see.",
+      "Visibility is the tractable first step. You can't govern a tool you don't know is running, and you can't have the sensible, business-enabling AI conversation with your workforce until you know what they've already built without you."
+    ],
+    "sources": [
+      ["Portal26 — The 7 Most Urgent CIO AI Issues for 2026", "https://portal26.ai/cio-ai-issues-2026/"]
+    ]
+  },
+  {
+    "date": "2026-08-28",
+    "tag": "Service Desk",
+    "read": "4 min",
+    "title": "Your Vendor's Deflection Number and Gartner's Deflection Number Are Not the Same Number",
+    "dek": "When a vendor claims 65% deflection and the strict industry average is 20–30%, they are describing two different things.",
+    "body": [
+      "If you've sat through an AI service-desk vendor pitch recently, you've heard a deflection number somewhere in the 50–75% range. Aisera has cited 65% at Cisco. Moveworks has claimed a 75% average across customers. Those numbers are real — under the definition each vendor is using.",
+      "Under the stricter, Gartner-comparable definition — full AI resolution, zero human escalation, and no re-open within 72 hours — the honest 2026 industry average is <strong>20–30% deflection</strong>. Best-in-class, mature deployments reach <strong>40–60%</strong>, and the realistic ceiling after 18–24 months of sustained optimization sits around <strong>55–65%</strong>. First-year deployments typically land at <strong>20–35%</strong>.",
+      "Reconciling vendor-published numbers against the strict standard generally means applying something like a <span class='stat-inline'>10-point compression</span> — a claimed 65% converts to roughly 55% once you control for looser definitions of what counts as &ldquo;resolved.&rdquo;",
+      "The gap between year-one performance and mature-deployment performance comes down to five things, in rough order of impact: how clean your knowledge base actually is (the single biggest lever), how broad your intent library is, whether the platform can take real actions like password resets and provisioning or only answer questions, how well the rollout was change-managed with end users, and simply how much runway the deployment has had — most of the real gains show up between month six and month eighteen, not week one.",
+      "None of this is a reason to skip AI at the service desk. It's a reason to build your board deck on the strict number, not the vendor's, so the second-year results land as a win instead of a disappointment nobody saw coming."
+    ],
+    "sources": [
+      ["ServiceDeskAgents.com — AI Service Desk Deflection Rate Benchmarks 2026", "https://servicedeskagents.com/deflection-rates/"]
+    ]
+  },
+  {
+    "date": "2026-08-27",
+    "tag": "ROI",
+    "read": "3 min",
+    "title": "Boards Now Want AI ROI in 90 Days. Most Programs Are Still in Pilot.",
+    "dek": "The window for \"we're still experimenting\" as an acceptable answer is closing fast.",
+    "body": [
+      "Eighteen months used to be a reasonable runway to prove out an enterprise AI initiative. In 2026, boards are compressing that expectation to roughly <strong>three months</strong> — and most programs aren't ready for the new clock.",
+      "<strong>53% of organizations are still stuck in the &ldquo;pilot and experiment&rdquo; phase</strong> of their AI initiatives, with only around <strong>10% reporting genuine, measurable growth results</strong> from the AI they've deployed. That's the gap a lot of CIOs are being asked to close in a single quarter.",
+      "Compounding the problem: only <strong>38% of large companies</strong> have appointed anyone with clear accountability for AI outcomes — a Chief AI Officer or equivalent — which means the ROI question often lands on a desk with no formal mandate to answer it, and no consensus on which reporting line even owns the number.",
+      "The programs that clear the 90-day bar tend to share one habit: they picked a narrow, measurable workflow — ticket deflection, provisioning time, mean-time-to-resolution — before they picked the AI tool, not after. The board doesn't want a platform demo. It wants a before-and-after number it can repeat in its own next meeting.",
+      "If your AI program can't currently produce that number, that's the gap to close before the next board cycle — not the vendor selection, and not the model."
+    ],
+    "sources": [
+      ["Portal26 — The 7 Most Urgent CIO AI Issues for 2026", "https://portal26.ai/cio-ai-issues-2026/"]
+    ]
+  }
+]

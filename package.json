@@ -1,0 +1,10 @@
+{
+  "name": "awhind-site",
+  "version": "1.0.0",
+  "description": "AWHIND static site with generated briefing pages",
+  "scripts": {
+    "build": "node build-briefings.js"
+  },
+  "devDependencies": {},
+  "private": true
+}

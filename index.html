@@ -3,9 +3,33 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="description" content="AWHIND — Global IT services and AI operations consulting. Daily CIO/CTO briefings on AI and enterprise IT operations, service desk, endpoint modernization, and AI governance.">
+<meta name="description" content="AWHIND runs service desk, endpoint, and NOC operations with shadow AI governance built in — so your audit committee doesn’t find out the hard way.">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='16' fill='%230B0F17'/%3E%3Ccircle cx='50' cy='50' r='16' fill='%23DD4E1E'/%3E%3C/svg%3E">
-<title>AWHIND</title>
+<title>AWHIND — Shadow AI Governance &amp; Service Desk Operations</title>
+<link rel="canonical" href="https://awhind.com/">
+
+<!-- Open Graph -->
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://awhind.com/">
+<meta property="og:site_name" content="AWHIND">
+<meta property="og:title" content="AWHIND — Shadow AI Governance &amp; Service Desk Operations">
+<meta property="og:description" content="AWHIND runs service desk, endpoint, and NOC operations with shadow AI governance built in — so your audit committee doesn’t find out the hard way.">
+
+<!-- Twitter Card -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="AWHIND — Shadow AI Governance &amp; Service Desk Operations">
+<meta name="twitter:description" content="AWHIND runs service desk, endpoint, and NOC operations with shadow AI governance built in — so your audit committee doesn’t find out the hard way.">
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  "name": "AWHIND",
+  "url": "https://awhind.com",
+  "description": "AWHIND is a global IT services and AI operations consulting firm providing service desk, AI governance, endpoint operations, and global NOC services for enterprises managing shadow AI risk.",
+  "email": "hello@awhind.com"
+}
+</script>
 <style>
   @import url('https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,500&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap');
 
@@ -262,7 +286,7 @@
     <div class="section-head">
       <div>
         <p class="eyebrow">Capabilities</p>
-        <h2>Six problems we're built to own</h2>
+        <h2>The problems we're built to own</h2>
       </div>
       <p>Not a staffing bench. An operating team that sits between your endpoints, your agents, and your audit committee.</p>
     </div>
@@ -316,14 +340,15 @@
       </div>
       <div>
         <h4>Capabilities</h4>
-        <a href="#services">Service Desk</a>
-        <a href="#services">AI Governance</a>
-        <a href="#services">Endpoint Ops</a>
-        <a href="#services">Global NOC</a>
+        <a href="/capabilities/service-desk">Service Desk</a>
+        <a href="/capabilities/ai-governance">AI Governance</a>
+        <a href="/capabilities/endpoint-ops">Endpoint Ops</a>
+        <a href="/capabilities/global-noc">Global NOC</a>
       </div>
       <div>
         <h4>Company</h4>
         <a href="#briefing">Insights</a>
+        <a href="/shadow-ai">What Is Shadow AI?</a>
         <a href="#why">Why AWHIND</a>
         <a href="#contact">Contact</a>
       </div>
@@ -367,6 +392,26 @@
     {n:'14 vs 5', l:'AI tools the average employee uses, versus how many IT actually knows about'}
   ];
 
+  var SERVICES = [
+    {id:'01', name:'Service Desk', d:"Tier 1/2 support with shadow AI signal built into every ticket — not a bolt-on audit layer running alongside a normal help desk."},
+    {id:'02', name:'AI Governance', d:"Inventory, policy, and board reporting built from what's actually running — not a framework that sits in a binder nobody opens."},
+    {id:'03', name:'Endpoint Ops', d:"Fleet management and modernization with visibility into what's actually installed — including the extensions nobody formally requested."},
+    {id:'04', name:'Global NOC', d:"24/7 monitoring across time zones, watching for the traffic patterns that mean AI tools are moving your data somewhere new."}
+  ];
+  var SERVICE_LINKS = {
+    '01': '/capabilities/service-desk',
+    '02': '/capabilities/ai-governance',
+    '03': '/capabilities/endpoint-ops',
+    '04': '/capabilities/global-noc'
+  };
+
+  var WHY = [
+    {n:'01', h:'One Operating Team, Not Four Vendors', p:"Service desk, endpoint ops, NOC, and AI governance run by the same team — so a signal caught in one place doesn't die in a handoff to another."},
+    {n:'02', h:'Governance That Ships With the Work', p:"Not a framework in a binder. Oversight is instrumented into the ticket, the endpoint, and the network traffic — so the audit trail builds itself."},
+    {n:'03', h:'Built for Agents, Not Just Chat Windows', p:"As AI moves from chat tools to systems that take real actions, oversight has to extend to what an agent is authorized to do — not just what got typed into a prompt."},
+    {n:'04', h:'Speed Beats Enforcement', p:"The fastest way to end shadow AI usage is a faster approved alternative — not a stricter policy memo nobody reads twice."}
+  ];
+
   var POSTS = [];
 
   /* ---------------- RENDER ---------------- */
@@ -398,7 +443,8 @@
   }).join('');
 
   document.getElementById('services-grid').innerHTML = SERVICES.map(function(s){
-    return '<div class="svc"><div><div class="id">'+s.id+'</div><h3>'+s.name+'</h3></div><p>'+s.d+'</p></div>';
+    var href = SERVICE_LINKS[s.id] || '#services';
+    return '<a class="svc" href="'+href+'"><div><div class="id">'+s.id+'</div><h3>'+s.name+'</h3></div><p>'+s.d+'</p></a>';
   }).join('');
 
   document.getElementById('why-grid').innerHTML = WHY.map(function(w){

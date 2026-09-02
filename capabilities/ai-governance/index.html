@@ -1,0 +1,178 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="AWHIND builds and runs AI governance operationally — inventory, policy, and ongoing oversight — so your board hears about AI risk from you first.">
+<title>AI Governance Framework for Enterprise IT | AWHIND</title>
+<link rel="canonical" href="https://awhind.com/capabilities/ai-governance">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='16' fill='%230B0F17'/%3E%3Ccircle cx='50' cy='50' r='16' fill='%23DD4E1E'/%3E%3C/svg%3E">
+
+<!-- Open Graph -->
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://awhind.com/capabilities/ai-governance">
+<meta property="og:site_name" content="AWHIND">
+<meta property="og:title" content="AI Governance Framework for Enterprise IT | AWHIND">
+<meta property="og:description" content="AWHIND builds and runs AI governance operationally — inventory, policy, and ongoing oversight — so your board hears about AI risk from you first.">
+
+<!-- Twitter Card -->
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="AI Governance Framework for Enterprise IT | AWHIND">
+<meta name="twitter:description" content="AWHIND builds and runs AI governance operationally — inventory, policy, and ongoing oversight — so your board hears about AI risk from you first.">
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "AI Governance That Runs Day to Day, Not a Framework That Sits in a Binder",
+  "description": "AWHIND builds and runs AI governance operationally — inventory, policy, and ongoing oversight — so your board hears about AI risk from you first.",
+  "url": "https://awhind.com/capabilities/ai-governance",
+  "publisher": {
+    "@type": "Organization",
+    "name": "AWHIND",
+    "url": "https://awhind.com"
+  }
+}
+</script>
+
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,500&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap');
+
+  :root{
+    --bg:#F1F2ED; --bg-elevated:#FFFFFF; --bg-sunken:#E7E8E1;
+    --text:#0B0F17; --text-secondary:#566072; --text-tertiary:#848d9b;
+    --line:#D9DAD2; --line-strong:#c2c4ba; --accent:#DD4E1E; --accent-contrast:#FFFFFF;
+    --shadow: 0 1px 2px rgba(11,15,23,.04), 0 8px 24px rgba(11,15,23,.06);
+    --serif: 'Newsreader', Georgia, 'Times New Roman', serif;
+    --sans: 'IBM Plex Sans', -apple-system, 'Segoe UI', Roboto, sans-serif;
+    --mono: 'IBM Plex Mono', 'SF Mono', Consolas, monospace;
+  }
+  @media (prefers-color-scheme: dark){
+    :root:not([data-theme="light"]){
+      --bg:#0A0D14; --bg-elevated:#12161F; --bg-sunken:#080A10;
+      --text:#EEF0F4; --text-secondary:#9AA3B4; --text-tertiary:#6d7688;
+      --line:#232838; --line-strong:#323951; --accent:#FF7A47; --accent-contrast:#0A0D14;
+      --shadow: 0 1px 2px rgba(0,0,0,.3), 0 8px 28px rgba(0,0,0,.4);
+    }
+  }
+  :root[data-theme="dark"]{
+    --bg:#0A0D14; --bg-elevated:#12161F; --bg-sunken:#080A10;
+    --text:#EEF0F4; --text-secondary:#9AA3B4; --text-tertiary:#6d7688;
+    --line:#232838; --line-strong:#323951; --accent:#FF7A47; --accent-contrast:#0A0D14;
+    --shadow: 0 1px 2px rgba(0,0,0,.3), 0 8px 28px rgba(0,0,0,.4);
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{margin:0; background:var(--bg); color:var(--text); font-family:var(--sans); font-size:16px; line-height:1.55; -webkit-font-smoothing:antialiased;}
+  a{color:inherit;}
+  h1,h2,h3{font-family:var(--serif); font-weight:500; margin:0; text-wrap:balance; letter-spacing:-0.01em;}
+  .mono{font-family:var(--mono);}
+  .eyebrow{font-family:var(--mono); font-size:11px; letter-spacing:.12em; text-transform:uppercase; color:var(--text-secondary);}
+  .wrap{max-width:1120px; margin:0 auto; padding:0 28px;}
+  .btn{display:inline-flex; align-items:center; gap:8px; font-family:var(--mono); font-size:13px; letter-spacing:.04em; text-transform:uppercase; padding:12px 20px; border-radius:2px; text-decoration:none; cursor:pointer; border:1px solid transparent;}
+  .btn-primary{background:var(--accent); color:var(--accent-contrast);}
+  .btn-primary:hover{filter:brightness(1.06);}
+  .btn-ghost{border-color:var(--line-strong); color:var(--text);}
+  .btn-ghost:hover{border-color:var(--accent); color:var(--accent);}
+  .btn-sm{padding:8px 14px; font-size:11px;}
+  nav.wrap{display:flex; align-items:center; justify-content:space-between; padding-top:18px; padding-bottom:18px;}
+  .brand{font-family:var(--serif); font-weight:600; font-size:21px; letter-spacing:-.01em; text-decoration:none; color:var(--text); display:flex; align-items:center; gap:9px;}
+  .brand .mark{width:9px;height:9px;background:var(--accent);display:inline-block;}
+  header.page-hero{padding:52px 0 44px; border-bottom:1px solid var(--line);}
+  header.page-hero h1{font-size:38px; line-height:1.14; margin-top:14px; max-width:820px;}
+  header.page-hero .lede{font-size:17px; color:var(--text-secondary); max-width:640px; margin-top:16px;}
+  article{max-width:720px; margin:0 auto; padding:44px 28px 20px;}
+  article section{margin-bottom:36px;}
+  article h2{font-size:24px; margin-bottom:14px;}
+  article p{margin:0 0 16px; font-size:15.5px; color:var(--text);}
+  article p.dek{font-size:16px; color:var(--text-secondary); font-family:var(--serif); font-style:italic; margin-bottom:8px;}
+  article strong{font-weight:600;}
+  article .stat-inline{font-family:var(--mono); color:var(--accent); font-weight:600;}
+  article ul, article ol{padding-left:22px; margin:0 0 16px;}
+  article li{margin-bottom:8px; font-size:15.5px;}
+  .related-row{display:flex; flex-wrap:wrap; gap:10px; margin-top:8px;}
+  .cta-band{background:var(--bg-elevated); border-top:1px solid var(--line); border-bottom:1px solid var(--line); padding:40px 0; margin:44px 0;}
+  .cta-band .wrap{max-width:720px;}
+  footer{padding:40px 0; }
+  footer .wrap{display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:12px;}
+  footer .copy{font-size:12px; color:var(--text-tertiary); font-family:var(--mono);}
+  footer a{font-size:12px; color:var(--text-secondary); text-decoration:none; margin-right:16px;}
+  footer a:hover{color:var(--accent);}
+</style>
+</head>
+<body>
+
+<nav class="wrap">
+  <a href="/" class="brand"><span class="mark"></span>AWHIND</a>
+  <div>
+    <a href="/#services" class="btn btn-ghost btn-sm" style="margin-right:8px;">Capabilities</a>
+    <a href="/#contact" class="btn btn-ghost btn-sm">Talk to Us</a>
+  </div>
+</nav>
+
+<header class="page-hero">
+  <div class="wrap">
+    <p class="eyebrow">Capability 02 — AI Governance</p>
+    <h1>AI Governance That Runs Day to Day, Not a Framework That Sits in a Binder</h1>
+    <p class="lede">Most AI governance work produces a document. AWHIND builds that foundation, but the actual product is operational — governance wired into service desk, endpoint, and network signal as it happens.</p>
+  </div>
+</header>
+
+<article>
+    <section>
+      <h2>What we actually run</h2>
+      <ul>
+        <li>AI tool inventory, continuously maintained — not a one-time audit that goes stale next quarter</li>
+        <li>Policy specific enough to act on — concrete boundaries on what data categories can and can't go into third-party AI tools</li>
+        <li>Approval pathways fast enough to actually use — the biggest driver of shadow AI is a slow or missing approval process</li>
+        <li>Audit committee and board reporting, built from operational reality and delivered on a cadence that means no surprises</li>
+        <li>Agentic AI oversight — as agents move from chat tools to systems that take actions, governance has to extend to what they're authorized to touch</li>
+      </ul>
+    </section>
+    <section>
+      <h2>Why this sits with operations, not just policy</h2>
+      <p><strong>80% of enterprises lack a mature governance model for agentic AI</strong> (Deloitte, State of AI in the Enterprise, 2026) — and the gap between &ldquo;we have a policy&rdquo; and &ldquo;we know what's actually happening&rdquo; is exactly where shadow AI lives.</p>
+      <p>It's usually IT operations, not the policy team, that has the visibility to close that gap — which is why AWHIND runs governance as part of the same operating team handling your service desk, endpoint management, and NOC.</p>
+    </section>
+    <section>
+      <h2>What you get</h2>
+      <ul>
+        <li>A defensible, current answer when a client, auditor, or board member asks what AI is actually running</li>
+        <li>Policy your employees follow because it's specific, not a policy they route around because it's vague</li>
+        <li>Ongoing monitoring instead of an annual point-in-time review</li>
+        <li>A direct line from operational signal to governance action — no handoff gap</li>
+      </ul>
+    </section>
+
+</article>
+
+<div class="cta-band">
+  <div class="wrap">
+    <p class="eyebrow" style="margin-bottom:10px;">Related</p>
+    <div class="related-row">
+      <a class="btn btn-ghost btn-sm" href="/capabilities/service-desk">Service Desk</a>
+      <a class="btn btn-ghost btn-sm" href="/shadow-ai">What Is Shadow AI?</a>
+      <a class="btn btn-ghost btn-sm" href="/capabilities/global-noc">Global NOC</a>
+    </div>
+  </div>
+</div>
+
+<div class="cta-band" style="border-top:none; margin-top:0; padding-top:0;">
+  <div class="wrap">
+    <h2 style="font-size:22px; margin-bottom:10px;">Tell us what's actually on fire.</h2>
+    <p style="color:var(--text-secondary); font-size:14.5px; margin-bottom:18px;">One conversation, no deck required.</p>
+    <a href="mailto:hello@awhind.com?subject=Readiness%20Assessment%20Request" class="btn btn-primary">Email hello@awhind.com</a>
+  </div>
+</div>
+
+<footer>
+  <div class="wrap">
+    <div>
+      <a href="/">Home</a><a href="/#briefing">Daily Briefing</a><a href="/shadow-ai">What Is Shadow AI?</a><a href="/#contact">Contact</a>
+    </div>
+    <div class="copy">&copy; 2026 AWHIND. All rights reserved.</div>
+  </div>
+</footer>
+
+</body>
+</html>

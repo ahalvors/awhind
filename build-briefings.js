@@ -37,6 +37,16 @@ posts.forEach(post => {
   const canonicalUrl = `https://awhind.com/briefing/${post.date}`;
   const ogTitle = escapeHtml(post.title);
   const ogDescription = escapeHtml(stripHtml(post.dek));
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "headline": post.title,
+    "description": stripHtml(post.dek),
+    "datePublished": post.date,
+    "url": canonicalUrl,
+    "author": { "@type": "Organization", "name": "AWHIND", "url": "https://awhind.com" },
+    "publisher": { "@type": "Organization", "name": "AWHIND", "url": "https://awhind.com" }
+  };
   
   const html = `<!doctype html>
 <html lang="en">
@@ -59,6 +69,10 @@ posts.forEach(post => {
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="${ogTitle}">
 <meta name="twitter:description" content="${ogDescription}">
+
+<script type="application/ld+json">
+${JSON.stringify(jsonLd, null, 2)}
+</script>
 
 <style>
   @import url('https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,500&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap');

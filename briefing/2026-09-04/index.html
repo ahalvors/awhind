@@ -1,0 +1,157 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Local configs, DNS, OAuth grants, and MDM scripts will surface most of what is already running. Sanctioned MCP gateways beat blanket blocks.">
+<title>How to Find Unauthorized Agents and MCP Servers Without Waiting for a Breach — AWHIND Daily Briefing</title>
+<link rel="canonical" href="https://awhind.com/briefing/2026-09-04">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='16' fill='%230B0F17'/%3E%3Ccircle cx='50' cy='50' r='16' fill='%23DD4E1E'/%3E%3C/svg%3E">
+
+<!-- Open Graph -->
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://awhind.com/briefing/2026-09-04">
+<meta property="og:title" content="How to Find Unauthorized Agents and MCP Servers Without Waiting for a Breach">
+<meta property="og:description" content="Local configs, DNS, OAuth grants, and MDM scripts will surface most of what is already running. Sanctioned MCP gateways beat blanket blocks.">
+<meta property="og:site_name" content="AWHIND">
+
+<!-- Twitter Card -->
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="How to Find Unauthorized Agents and MCP Servers Without Waiting for a Breach">
+<meta name="twitter:description" content="Local configs, DNS, OAuth grants, and MDM scripts will surface most of what is already running. Sanctioned MCP gateways beat blanket blocks.">
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "How to Find Unauthorized Agents and MCP Servers Without Waiting for a Breach",
+  "description": "Local configs, DNS, OAuth grants, and MDM scripts will surface most of what is already running. Sanctioned MCP gateways beat blanket blocks.",
+  "datePublished": "2026-09-04",
+  "url": "https://awhind.com/briefing/2026-09-04",
+  "author": {
+    "@type": "Organization",
+    "name": "AWHIND",
+    "url": "https://awhind.com"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "AWHIND",
+    "url": "https://awhind.com"
+  }
+}
+</script>
+
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,500&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap');
+
+  :root{
+    --bg:#F1F2ED;
+    --bg-elevated:#FFFFFF;
+    --bg-sunken:#E7E8E1;
+    --text:#0B0F17;
+    --text-secondary:#566072;
+    --text-tertiary:#848d9b;
+    --line:#D9DAD2;
+    --line-strong:#c2c4ba;
+    --accent:#DD4E1E;
+    --accent-contrast:#FFFFFF;
+    --shadow: 0 1px 2px rgba(11,15,23,.04), 0 8px 24px rgba(11,15,23,.06);
+    --serif: 'Newsreader', Georgia, 'Times New Roman', serif;
+    --sans: 'IBM Plex Sans', -apple-system, 'Segoe UI', Roboto, sans-serif;
+    --mono: 'IBM Plex Mono', 'SF Mono', Consolas, monospace;
+  }
+  @media (prefers-color-scheme: dark){
+    :root:not([data-theme="light"]){
+      --bg:#0A0D14;
+      --bg-elevated:#12161F;
+      --bg-sunken:#080A10;
+      --text:#EEF0F4;
+      --text-secondary:#9AA3B4;
+      --text-tertiary:#6d7688;
+      --line:#232838;
+      --line-strong:#323951;
+      --accent:#FF7A47;
+      --accent-contrast:#0A0D14;
+      --shadow: 0 1px 2px rgba(0,0,0,.3), 0 8px 28px rgba(0,0,0,.4);
+    }
+  }
+  :root[data-theme="dark"]{
+    --bg:#0A0D14;
+    --bg-elevated:#12161F;
+    --bg-sunken:#080A10;
+    --text:#EEF0F4;
+    --text-secondary:#9AA3B4;
+    --text-tertiary:#6d7688;
+    --line:#232838;
+    --line-strong:#323951;
+    --accent:#FF7A47;
+    --accent-contrast:#0A0D14;
+    --shadow: 0 1px 2px rgba(0,0,0,.3), 0 8px 28px rgba(0,0,0,.4);
+  }
+
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0; background:var(--bg); color:var(--text);
+    font-family:var(--sans); font-size:16px; line-height:1.55;
+    -webkit-font-smoothing:antialiased;
+  }
+  a{color:inherit;}
+  h1,h2{font-family:var(--serif); font-weight:500; margin:0; text-wrap:balance; letter-spacing:-0.01em;}
+  .mono{font-family:var(--mono);}
+  .wrap{max-width:1120px; margin:0 auto; padding:0 28px;}
+  .btn{
+    display:inline-flex; align-items:center; gap:8px; font-family:var(--mono); font-size:13px;
+    letter-spacing:.04em; text-transform:uppercase; padding:12px 20px; border-radius:2px;
+    text-decoration:none; cursor:pointer; border:1px solid transparent;
+  }
+  .btn-ghost{border-color:var(--line-strong); color:var(--text);}
+  .btn-ghost:hover{border-color:var(--accent); color:var(--accent);}
+  .btn-sm{padding:8px 14px; font-size:11px;}
+
+  nav.wrap{display:flex; align-items:center; justify-content:space-between; padding-top:18px; padding-bottom:18px;}
+  .brand{font-family:var(--serif); font-weight:600; font-size:21px; letter-spacing:-.01em; text-decoration:none; color:var(--text); display:flex; align-items:center; gap:9px;}
+  .brand .mark{width:9px;height:9px;background:var(--accent);display:inline-block;}
+
+  article{max-width:720px; margin:44px auto; padding:0 28px;}
+  .meta{font-family:var(--mono); font-size:11.5px; color:var(--text-tertiary); letter-spacing:.03em; margin-bottom:16px;}
+  article h1{font-size:32px; line-height:1.15;}
+  .dek{font-size:16px; color:var(--text-secondary); margin-top:14px; font-family:var(--serif); font-style:italic;}
+  .article-body{margin-top:28px; font-size:15.5px; color:var(--text); max-width:60ch;}
+  .article-body p{margin:0 0 18px;}
+  .article-body strong{font-weight:600;}
+  .article-body .stat-inline{font-family:var(--mono); color:var(--accent); font-weight:600;}
+  .article-sources{margin-top:32px; padding-top:20px; border-top:1px solid var(--line); font-size:12px; color:var(--text-tertiary);}
+  .article-sources a{color:var(--text-secondary); text-decoration:underline; text-decoration-color:var(--line-strong);}
+  .back-link{margin-top:32px; display:inline-block;}
+</style>
+</head>
+<body>
+
+<nav class="wrap">
+  <a href="/" class="brand"><span class="mark"></span>AWHIND</a>
+  <div>
+    <a href="/#briefing" class="btn btn-ghost btn-sm">← All Briefings</a>
+  </div>
+</nav>
+
+<article>
+  <div class="meta">Sep 4, 2026 &middot; Shadow AI &middot; 4 min read</div>
+  <h1>How to Find Unauthorized Agents and MCP Servers Without Waiting for a Breach</h1>
+  <div class="dek">Local configs, DNS, OAuth grants, and MDM scripts will surface most of what is already running. Sanctioned MCP gateways beat blanket blocks.</div>
+  <div class="article-body">
+    <p>Shadow AI inside engineering orgs often is not a mystery SaaS logo on an expense report. It is an MCP server someone stood up in Cursor, Claude Desktop, or VS Code over a lunch break—wired to GitHub, Slack, or Notion with whatever token was handy.</p>
+    <p>Obot's practical guide starts where discovery is cheapest: <strong>local and project config files</strong> (mcp.json, Claude desktop configs, editor settings). Those files name the servers, commands, and URLs already in use. MDM tools such as Intune or Jamf can collect the same paths across the fleet instead of relying on voluntary self-reporting alone.</p>
+    <p>Next, pull <strong>DNS and proxy logs</strong> for known model and routing endpoints, group by source machine, and watch local ports MCP servers commonly bind. Then audit <strong>OAuth apps and personal access tokens</strong> in GitHub, Slack, Notion, and similar—tokens named like &ldquo;mcp&rdquo; or &ldquo;cursor,&rdquo; or apps nobody remembers approving, are usually enough to prove a live connection.</p>
+    <p>Asking teams directly still works if you frame it as inventory, not discipline. People adopt these tools to finish work; if the only answer is a hard block, they will route around you into less visible paths and you will lose the audit trail you were trying to create.</p>
+    <p>The governance move Obot argues for—and the one that holds up in a board conversation—is a <strong>sanctioned MCP gateway with RBAC, enterprise auth, and call logging</strong>, plus a curated catalog of vetted servers. Bring the popular ones under a shared control plane rather than pretending a monthly scavenger hunt is a control.</p>
+    <p>For service-desk and platform owners, that is the same pattern as any other shadow channel: discover, classify by privilege and data reach, then offer a safer default path that is easier than the underground one.</p>
+  </div>
+  <div class="article-sources">
+    Sources: <a href="https://obot.ai/blog/shadow-ai-finding-the-agents-and-mcp-servers-already-running-in-your-company/" target="_blank" rel="noopener">Obot — Shadow AI: Finding the agents and MCP servers already running in your company</a>
+  </div>
+  <a href="/#briefing" class="btn btn-ghost btn-sm back-link">← All Briefings</a>
+</article>
+
+</body>
+</html>

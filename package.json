@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "AWHIND static site with generated briefing pages",
   "scripts": {
-    "build": "node build-briefings.js"
+    "build": "node build-briefings.js && node build-sitemap.js"
   },
   "devDependencies": {},
   "private": true

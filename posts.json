@@ -1,5 +1,37 @@
 [
   {
+    "date": "2026-09-09",
+    "tag": "Governance",
+    "read": "3 min",
+    "title": "70% of EMEA Orgs Say AI Workflows Touch Sensitive Data Without Full Oversight",
+    "dek": "Veeam/Censuswide: shadow agents are a boardroom liability problem, not just an IT inventory problem.",
+    "body": [
+      "A Veeam-commissioned Censuswide survey of <strong>1,000</strong> IT, data, and security decision-makers at organizations with 500+ employees across the UK, Germany, France, and MEA finds <strong>70%</strong> say automated AI workflows interact with sensitive corporate data without full oversight — and <strong>67%</strong> say employees are creating autonomous AI workflows IT cannot fully track.",
+      "Germany is hotter still (<strong>81%</strong> / <strong>79%</strong>). In the UK, <strong>75%</strong> lack adequate oversight of AI agents on sensitive data. <strong>41%</strong> of EMEA organizations are building local or sovereign models specifically to combat shadow AI. <strong>32%</strong> say accountability pressure is causing C-suite conflict, and <strong>40%</strong> of executives worry about personal liability. Fieldwork ran April 21–27, 2026.",
+      "This sits next to yesterday's GTIG story, not opposite it: adversaries are already using agentic tooling at cloud speed, while boards are discovering employees stood up the same class of automation without a named owner.",
+      "The first move is still inventory — what agents exist, what data they can reach, who approved them — then a sanctioned path that is faster than the shadow one. Ban-only policies just push the work onto personal accounts you can't see."
+    ],
+    "sources": [
+      ["CIO Influence / Veeam — EMEA organizations facing a shadow agent crisis (Censuswide)", "https://cioinfluence.com/security/emea-organizations-facing-a-shadow-agent-crisis-as-boardroom-anxiety-over-personal-liability-grows-veeam-research-finds/"]
+    ]
+  },
+  {
+    "date": "2026-09-08",
+    "tag": "Threat",
+    "read": "3 min",
+    "title": "Attackers Used an AI Coding Chatbot to Steal Thousands of Credentials in Under Six Hours",
+    "dek": "Google Threat Intelligence's Q3 tracker: from a compromised cloud tenant to a mass harvest — agents ran the pipeline, fixed failures, and rotated IPs.",
+    "body": [
+      "Google Threat Intelligence Group's Q3 2026 AI Threat Tracker describes a financially motivated actor who compromised a victim's cloud environment, then used an AI coding chatbot plus markdown agent playbooks to <strong>plan, build, and run a mass credential-harvesting campaign in under six hours</strong> — compromising <strong>thousands of third-party credentials</strong>.",
+      "The agents didn't just draft code. They ran the scan pipeline, troubleshot failures, and rotated IPs, with outbound traffic leaving from the victim's own cloud addresses. The same report notes an exposed \"Recon\" C2 dashboard managing <strong>more than 23,800 harvested secrets</strong>, including cloud and AI API keys.",
+      "GTIG has <strong>not</strong> yet seen fully autonomous zero-day pipelines in the wild — the human still started the compromise. Separately, UNC6780/TeamPCP backdoored MCP servers and hid payloads in <code>.claude</code> / <code>.cursor</code> project directories to evade EDR.",
+      "For a Bay Area shop the takeaway is blunt: treat AI coding assistants and MCP/project dirs as part of your attack surface. Inventory what's installed, what OAuth/API keys they hold, and whether a compromised workstation can stand up agentic tooling that looks like normal developer traffic leaving your cloud."
+    ],
+    "sources": [
+      ["Google Cloud / GTIG — From prompting to autonomy: the evolution of adversarial AI", "https://cloud.google.com/blog/topics/threat-intelligence/from-prompting-to-autonomy-the-evolution-of-adversarial-ai"]
+    ]
+  },
+  {
     "date": "2026-09-07",
     "tag": "Shadow AI",
     "read": "3 min",

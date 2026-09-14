@@ -1,5 +1,111 @@
 [
   {
+    "date": "2026-09-14",
+    "tag": "Ops",
+    "read": "3 min",
+    "title": "September Patch Tuesday Is Breaking Remote Desktop — Stage Before You Spray",
+    "dek": "Microsoft's September updates: RDS hangs, USB audio glitches, and silent Excel paste failures. Smoke-test before mass deploy.",
+    "body": [
+      "After September Patch Tuesday, some environments are seeing Remote Desktop Services fail after a few minutes, hang at \"Please wait for the Remote Desktop Configuration,\" with MMC/Explorer unresponsive and the Windows Update page stuck. Reports span Server 2012 and newer plus Windows 10/11. Microsoft published GPO mitigations; restarting VMs is a temporary bandage; rolling back removes the security fixes you just applied.",
+      "The same update wave is also tied to USB Audio Class 1.0 issues on recent Windows 11 builds and silent Excel paste failures after Office security updates — uninstalling the Office fix also uninstalls the security patches.",
+      "Ops rule for this week: don't mass-push to every RDS host on Monday morning. Stage a jump box and a terminal server, keep console/OOB access ready, tell helpdesk the known Excel/audio symptoms before tickets invent a ghost, and only then widen the ring."
+    ],
+    "sources": [
+      [
+        "BleepingComputer — Microsoft September updates cause RDS failures",
+        "https://www.bleepingcomputer.com/news/microsoft/microsoft-september-updates-cause-rds-failures-on-windows-server/"
+      ],
+      [
+        "The Register — Microsoft patches break audio, remote access, and paste",
+        "https://www.theregister.com/os-platforms/2026/09/14/microsoft-patches-windows-and-excel-breaks-audio-remote-access-and-paste/5296085"
+      ]
+    ]
+  },
+  {
+    "date": "2026-09-13",
+    "tag": "Backup",
+    "read": "3 min",
+    "title": "Ransomware Recovery Is Getting Worse While Everyone Agrees Immutability Matters",
+    "dek": "Omdia/Object First: more orgs hit, fewer recover most of their data — and only 16% say backup storage is actually immutable.",
+    "body": [
+      "An Omdia study with Object First (reported 2026-09-08; thin news day so we're filing it on the weekend catch-up) finds <strong>83%</strong> of organizations hit by successful ransomware in the past two years (up from <strong>66%</strong> in 2024), while only <strong>39%</strong> recovered at least three-quarters of their data (down from <strong>57%</strong>). <strong>93%</strong> say Absolute Immutability is critical; only <strong>16%</strong> say their backup storage meets it.",
+      "Same week, ITAD commentary urged providers to niche into AI/high-density data-center decommissioning — colo ownership splits, liquid cooling, accelerators, boot media, caches, and model weights — with NIST SP 800-88 Rev. 2 as the documented sanitization bar before assets leave custody. That's an Anchor Point problem as much as a backup problem: when media retires, the recovery story and the destruction certificate have to both be true.",
+      "If your \"immutable\" backup still has a delete path an admin can click after a helpdesk call, it isn't immutable. Test a restore this month, name who can break the lock, and decide what happens to retired disks before the next refresh cycle."
+    ],
+    "sources": [
+      [
+        "PCR — Research highlights immutability gap (Omdia/Object First)",
+        "https://pcr-online.biz/2026/09/08/research-highlights-immutability-gap/"
+      ],
+      [
+        "Resource Recycling — ITAD providers should choose their data center niche",
+        "https://resource-recycling.com/e-scrap/2026/09/08/itad-providers-should-choose-their-data-center-niche/"
+      ]
+    ]
+  },
+  {
+    "date": "2026-09-12",
+    "tag": "Governance",
+    "read": "3 min",
+    "title": "The Agent Governance Stack Just Showed Up — And Most Orgs Still Treat Agents Like Interns",
+    "dek": "Okta, IBM, Broadcom, and Dataiku shipped or teed up agent SSO/ops tools the same fortnight Okta found only 34% apply human-grade security to agents.",
+    "body": [
+      "In one fortnight the market sketched an \"agent governance stack\": Okta Agent SSO (GA), IBM watsonx Orchestrate AgentOps, Broadcom AgentMinder, and Dataiku Agent Management (GA planned October). Okta's 2026 <em>AI Agents at Work</em> data says only <strong>34%</strong> of organizations apply the same security controls to agents that they apply to humans.",
+      "Separately, Cybersecurity Insiders' 2026 research (vendor-adjacent — label it) claims <strong>91%</strong> of orgs discover agent actions only after execution and only <strong>23%</strong> report inline real-time AI security. Whether you buy their gateway or not, the direction is clear: inventory and allow/block at the point of action, not in next quarter's postmortem.",
+      "For a small Bay Area shop the checklist is still human-scale: what agents exist (Cursor, Claude, MCP, Copilot, RMM scripts), what they can reach (Drive, email, tickets), who approved them, and whether a compromised laptop can stand one up overnight. Procurement will start asking; better to have the list before the RFP does."
+    ],
+    "sources": [
+      [
+        "Forkast — The agent governance stack is forming",
+        "https://forkast.news/the-agent-governance-stack-is-forming-four-products-two-weeks-one-pattern/"
+      ],
+      [
+        "Cybersecurity Insiders — AI agent governance is moving to the point of action",
+        "https://www.cybersecurity-insiders.com/ai-agent-governance-is-moving-to-the-point-of-action/"
+      ]
+    ]
+  },
+  {
+    "date": "2026-09-11",
+    "tag": "Threat",
+    "read": "3 min",
+    "title": "Passkey Helpdesk Calls Are the New Front Door to Microsoft 365 Theft",
+    "dek": "Microsoft: fake passkey/SSO/MFA support calls lead to attacker MFA methods, Graph recon, and paced SharePoint/OneDrive theft.",
+    "body": [
+      "Microsoft is tracking adversary-in-the-middle and device-code attacks since May 2026 where victims get a convincing \"helpdesk\" call about passkeys, SSO, or MFA. Once the caller tricks the user into registering <strong>attacker-controlled MFA methods</strong>, operators run Microsoft Graph recon and then steal files from SharePoint/OneDrive (sometimes Exchange) at a paced rate — often under <strong>1,000 files/hour</strong> to stay quiet. Clusters sit in the Storm-3121 / Storm-3032 / ShinyHunters ecosystem. BleepingComputer amplified the write-up on 2026-09-11.",
+      "This is core Livermore SMB risk: everyone has a helpdesk culture, and \"IT called about my MFA\" still works. The defense stack is boring and effective — phishing-resistant MFA where you can, block unused device-code flows, alert on new MFA method registrations, watch Graph consent spikes, and flag unusual download bursts.",
+      "Train the sentence out loud: <em>We will never call you to add a passkey or MFA method. Hang up and call the number on your invoice.</em>"
+    ],
+    "sources": [
+      [
+        "Microsoft Security Blog — Passkey-themed social engineering leads to identity and cloud compromise",
+        "https://www.microsoft.com/en-us/security/blog/2026/09/09/passkey-themed-social-engineering-leads-identity-cloud-compromise/"
+      ],
+      [
+        "BleepingComputer — Passkey-themed phishing leads to Microsoft 365 data theft",
+        "https://www.bleepingcomputer.com/news/security/passkey-themed-phishing-attacks-lead-to-microsoft-365-data-theft/"
+      ]
+    ]
+  },
+  {
+    "date": "2026-09-10",
+    "tag": "Threat",
+    "read": "3 min",
+    "title": "Anthropic's Sept Report: AI Agents Helped Steal Azure AD Tokens Across 40+ Tenants in a Day",
+    "dek": "Claude misuse cases from Midnight Blizzard–style campaigns to ShinyHunters affiliates dumping ~2,100 token sets — treat AI keys like production credentials.",
+    "body": [
+      "Anthropic's September 2026 threat-intelligence report covers malicious Claude use it disrupted from December 2025 through August 2026. That includes a Russia-aligned campaign consistent with Midnight Blizzard hitting <strong>20+</strong> government and defense orgs, and ShinyHunters-linked affiliates dumping roughly <strong>2,100 Azure AD token sets across 40+ tenants in about 34 hours</strong>. Chinese-linked appliance research allegedly produced <strong>12+</strong> possible zero-days in a month. Reuters coverage the same week also cited Anthropic accusing Chinese labs (including Alibaba-linked activity) of illicit model distillation peaking near <strong>3 million exchanges/day</strong> from <strong>3,500+</strong> fraudulent accounts (May–July 2026).",
+      "You do not need to be a Fortune 50 target for the pattern to matter. Device-code phishing plus Entra token theft is already a high-probability path against Livermore Microsoft 365 tenants — and AI APIs just accelerate the recon and exfil loop once an identity is owned.",
+      "Practical move this week: inventory which staff and which bots hold AI API keys; revoke unused keys; require phishing-resistant MFA on admin and high-value accounts; and treat \"the AI agent can read SharePoint\" the same way you'd treat a service account with Files.Read.All."
+    ],
+    "sources": [
+      [
+        "Anthropic — Threat Intelligence Report September 2026",
+        "https://www.anthropic.com/threat-intelligence-report-september-2026"
+      ]
+    ]
+  },
+  {
     "date": "2026-09-09",
     "tag": "Governance",
     "read": "3 min",
@@ -12,7 +118,10 @@
       "The first move is still inventory — what agents exist, what data they can reach, who approved them — then a sanctioned path that is faster than the shadow one. Ban-only policies just push the work onto personal accounts you can't see."
     ],
     "sources": [
-      ["CIO Influence / Veeam — EMEA organizations facing a shadow agent crisis (Censuswide)", "https://cioinfluence.com/security/emea-organizations-facing-a-shadow-agent-crisis-as-boardroom-anxiety-over-personal-liability-grows-veeam-research-finds/"]
+      [
+        "CIO Influence / Veeam — EMEA organizations facing a shadow agent crisis (Censuswide)",
+        "https://cioinfluence.com/security/emea-organizations-facing-a-shadow-agent-crisis-as-boardroom-anxiety-over-personal-liability-grows-veeam-research-finds/"
+      ]
     ]
   },
   {
@@ -28,7 +137,10 @@
       "For a Bay Area shop the takeaway is blunt: treat AI coding assistants and MCP/project dirs as part of your attack surface. Inventory what's installed, what OAuth/API keys they hold, and whether a compromised workstation can stand up agentic tooling that looks like normal developer traffic leaving your cloud."
     ],
     "sources": [
-      ["Google Cloud / GTIG — From prompting to autonomy: the evolution of adversarial AI", "https://cloud.google.com/blog/topics/threat-intelligence/from-prompting-to-autonomy-the-evolution-of-adversarial-ai"]
+      [
+        "Google Cloud / GTIG — From prompting to autonomy: the evolution of adversarial AI",
+        "https://cloud.google.com/blog/topics/threat-intelligence/from-prompting-to-autonomy-the-evolution-of-adversarial-ai"
+      ]
     ]
   },
   {
@@ -46,8 +158,14 @@
       "For desk and ops leaders, that means inventory of unsanctioned tools, a sanctioned path that is easy enough to prefer, and explicit guardrails before agentic workflows get write access to ticketing, identity, or production systems."
     ],
     "sources": [
-      ["NCSC — The hidden risks of shadow AI", "https://www.ncsc.gov.uk/blogs/the-hidden-risks-of-shadow-ai"],
-      ["NCSC — The hidden risks of shadow AI (PDF)", "https://www.ncsc.gov.uk/sites/default/files/2026-09/The-hidden-risks-of-shadow-AI.pdf"]
+      [
+        "NCSC — The hidden risks of shadow AI",
+        "https://www.ncsc.gov.uk/blogs/the-hidden-risks-of-shadow-ai"
+      ],
+      [
+        "NCSC — The hidden risks of shadow AI (PDF)",
+        "https://www.ncsc.gov.uk/sites/default/files/2026-09/The-hidden-risks-of-shadow-AI.pdf"
+      ]
     ]
   },
   {
@@ -64,7 +182,12 @@
       "None of this replaces a service-desk roadmap. It does reset sequencing. Before the next model drop lands in your tenant with broader tool use and write paths, inventory the agents already running, enforce which systems they can touch, and treat path control and audit logs as first-class controls—not a Phase 2 polish item.",
       "If labs themselves are arguing for paced scaling and external auditors, enterprises should not wait for a statute to demand the same discipline on the agents already answering tickets and resetting passwords."
     ],
-    "sources": [["OpenAI — An Alien Mind (Jakub Pachocki)", "https://openai.com/index/an-alien-mind/"]]
+    "sources": [
+      [
+        "OpenAI — An Alien Mind (Jakub Pachocki)",
+        "https://openai.com/index/an-alien-mind/"
+      ]
+    ]
   },
   {
     "date": "2026-09-05",
@@ -80,8 +203,14 @@
       "Treat disclosure and containment as paired controls: require vendors to say how they report unintended agent behavior, and require your own agent deployments to log actions, constrain outbound paths, and escalate when an agent leaves the approved workflow. Waiting for a finished industry standard is not a governance plan."
     ],
     "sources": [
-      ["Reuters — OpenAI acknowledges wiki incident and need for more transparency around unintended AI behavior", "https://www.reuters.com/business/media-telecom/openai-acknowledges-wiki-incident-need-more-transparency-around-unintended-ai-2026-09-05/"],
-      ["TechCrunch — OpenAI confirms wiki incident, says it's working on a framework for more disclosure", "https://techcrunch.com/2026/09/05/openai-confirms-wiki-incident-says-its-working-on-a-framework-for-more-disclosure/"]
+      [
+        "Reuters — OpenAI acknowledges wiki incident and need for more transparency around unintended AI behavior",
+        "https://www.reuters.com/business/media-telecom/openai-acknowledges-wiki-incident-need-more-transparency-around-unintended-ai-2026-09-05/"
+      ],
+      [
+        "TechCrunch — OpenAI confirms wiki incident, says it's working on a framework for more disclosure",
+        "https://techcrunch.com/2026/09/05/openai-confirms-wiki-incident-says-its-working-on-a-framework-for-more-disclosure/"
+      ]
     ]
   },
   {
@@ -98,7 +227,12 @@
       "The governance move Obot argues for—and the one that holds up in a board conversation—is a <strong>sanctioned MCP gateway with RBAC, enterprise auth, and call logging</strong>, plus a curated catalog of vetted servers. Bring the popular ones under a shared control plane rather than pretending a monthly scavenger hunt is a control.",
       "For service-desk and platform owners, that is the same pattern as any other shadow channel: discover, classify by privilege and data reach, then offer a safer default path that is easier than the underground one."
     ],
-    "sources": [["Obot — Shadow AI: Finding the agents and MCP servers already running in your company", "https://obot.ai/blog/shadow-ai-finding-the-agents-and-mcp-servers-already-running-in-your-company/"]]
+    "sources": [
+      [
+        "Obot — Shadow AI: Finding the agents and MCP servers already running in your company",
+        "https://obot.ai/blog/shadow-ai-finding-the-agents-and-mcp-servers-already-running-in-your-company/"
+      ]
+    ]
   },
   {
     "date": "2026-09-03",
@@ -114,8 +248,14 @@
       "Whether or not this bill becomes law this session, the operational ask is already the right one. If you can't inventory the agents in your tenant — who owns them, what they can write, what data they touch — you can't govern them. That inventory is usually the first thing we build with a desk team that has already shipped agents faster than the policy deck."
     ],
     "sources": [
-      ["Axios — House bill aims to secure AI agents", "https://www.axios.com/2026/09/03/house-bill-ai-agents-security"],
-      ["Rep. Mike Lawler — Exclusive: New bill cracks down on AI agents after Hugging Face breach", "https://lawler.house.gov/news/documentsingle.aspx?DocumentID=6424"]
+      [
+        "Axios — House bill aims to secure AI agents",
+        "https://www.axios.com/2026/09/03/house-bill-ai-agents-security"
+      ],
+      [
+        "Rep. Mike Lawler — Exclusive: New bill cracks down on AI agents after Hugging Face breach",
+        "https://lawler.house.gov/news/documentsingle.aspx?DocumentID=6424"
+      ]
     ]
   },
   {
@@ -132,7 +272,12 @@
       "Useful shadow deployments should not automatically mean a ban. Move them into monitored, least-privilege workflows: task-scoped access, contextual guardrails, human approval for high-risk actions, and automatic revocation when the task ends. Retire what cannot be governed; replace what has a safer sanctioned path.",
       "If your current &ldquo;AI discovery&rdquo; program cannot answer who the agent is acting as and what it could break if compromised, you are still doing tool inventory. Start the identity and blast-radius map before the next board asks how much shadow AI you actually have."
     ],
-    "sources": [["Apono — How to Detect Shadow AI: 8 Key Steps", "https://www.apono.io/blog/how-to-detect-shadow-ai-8-key-steps/"]]
+    "sources": [
+      [
+        "Apono — How to Detect Shadow AI: 8 Key Steps",
+        "https://www.apono.io/blog/how-to-detect-shadow-ai-8-key-steps/"
+      ]
+    ]
   },
   {
     "date": "2026-09-01",
@@ -147,7 +292,12 @@
       "Control stays with IT. Admins decide what runs automatically, what needs approval, and what escalates. Every request, resolution, and escalation stays in a <strong>full activity log</strong>. That is the non-negotiable for any agentic desk move: automation without an audit trail is just a faster way to lose the chain of custody.",
       "For operators evaluating vendors, the useful checklist is not the demo script. It is whether the agent can act inside your identity and device graph, whether approval boundaries are first-class, and whether every write is logged well enough to survive an audit or an incident review. Rippling's pitch is that those three come packaged with the HR/IT stack rather than bolted on afterward."
     ],
-    "sources": [["Rippling — Introducing Rippling Helpdesk: Agentic IT Support", "https://www.rippling.com/blog/introducing-rippling-helpdesk"]]
+    "sources": [
+      [
+        "Rippling — Introducing Rippling Helpdesk: Agentic IT Support",
+        "https://www.rippling.com/blog/introducing-rippling-helpdesk"
+      ]
+    ]
   },
   {
     "date": "2026-08-31",
@@ -164,7 +314,10 @@
       "The fix isn't a stricter policy memo — IT already writes those. It's an actual inventory: what's running, who approved it, what data it touches, and who's accountable if it breaks. Most enterprises we work with don't have one. Building it is usually the first thing we do together."
     ],
     "sources": [
-      ["CIO Dive — AI incidents cost enterprises $2M or more, IT is the biggest shadow AI culprit", "https://www.ciodive.com/news/enterprise-ai-security-risk-costs-millions/826886/"]
+      [
+        "CIO Dive — AI incidents cost enterprises $2M or more, IT is the biggest shadow AI culprit",
+        "https://www.ciodive.com/news/enterprise-ai-security-risk-costs-millions/826886/"
+      ]
     ]
   },
   {
@@ -181,7 +334,10 @@
       "None of this is an argument against agentic AI. It's an argument for sequencing: guardrails and audit trails shipped alongside the agent, not bolted on after the incident that finally gets budget approved for them."
     ],
     "sources": [
-      ["Deloitte — Business and IT leaders report AI agents are scaling faster than their guardrails", "https://www.deloitte.com/us/en/insights/topics/emerging-technologies/ai-agents-scaling-faster.html"]
+      [
+        "Deloitte — Business and IT leaders report AI agents are scaling faster than their guardrails",
+        "https://www.deloitte.com/us/en/insights/topics/emerging-technologies/ai-agents-scaling-faster.html"
+      ]
     ]
   },
   {
@@ -198,7 +354,10 @@
       "Visibility is the tractable first step. You can't govern a tool you don't know is running, and you can't have the sensible, business-enabling AI conversation with your workforce until you know what they've already built without you."
     ],
     "sources": [
-      ["Portal26 — The 7 Most Urgent CIO AI Issues for 2026", "https://portal26.ai/cio-ai-issues-2026/"]
+      [
+        "Portal26 — The 7 Most Urgent CIO AI Issues for 2026",
+        "https://portal26.ai/cio-ai-issues-2026/"
+      ]
     ]
   },
   {
@@ -215,7 +374,10 @@
       "None of this is a reason to skip AI at the service desk. It's a reason to build your board deck on the strict number, not the vendor's, so the second-year results land as a win instead of a disappointment nobody saw coming."
     ],
     "sources": [
-      ["ServiceDeskAgents.com — AI Service Desk Deflection Rate Benchmarks 2026", "https://servicedeskagents.com/deflection-rates/"]
+      [
+        "ServiceDeskAgents.com — AI Service Desk Deflection Rate Benchmarks 2026",
+        "https://servicedeskagents.com/deflection-rates/"
+      ]
     ]
   },
   {
@@ -232,7 +394,10 @@
       "If your AI program can't currently produce that number, that's the gap to close before the next board cycle — not the vendor selection, and not the model."
     ],
     "sources": [
-      ["Portal26 — The 7 Most Urgent CIO AI Issues for 2026", "https://portal26.ai/cio-ai-issues-2026/"]
+      [
+        "Portal26 — The 7 Most Urgent CIO AI Issues for 2026",
+        "https://portal26.ai/cio-ai-issues-2026/"
+      ]
     ]
   }
 ]

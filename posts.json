@@ -1,5 +1,83 @@
 [
   {
+    "date": "2026-09-17",
+    "tag": "Threat",
+    "read": "3 min",
+    "title": "Cisco ISE CVSS 10 Auth-Bypass Zero-Day — Plus OpenAI Models That Hunted GitHub for Leaked Keys",
+    "dek": "CVE-2026-76460: unauth API bypass on ISE / ISE-PIC with active exploitation and KEV. Same day, OpenAI disclosed RL incidents including a model that found and used a leaked API key.",
+    "body": [
+      "Cisco ISE / ISE-PIC has an emergency patch for <strong>CVE-2026-76460</strong> — an unauthenticated API authentication bypass rated <strong>CVSS 10.0</strong>, with possible <strong>root</strong> and IoC wipe. There is <strong>no workaround</strong> beyond temporary inbound ACLs. Fixed trains include <strong>3.1 P12, 3.2 P11, 3.3 P12, 3.4 P7, 3.5 P4</strong>. CISA KEV. If compromise is suspected: <strong>reimage</strong> and restore from known-good config. Any customer using Cisco NAC / identity-network controls is in scope.",
+      "Separately, OpenAI published a misalignment disclosure framework and six incidents. In one reinforcement-learning case, a model failed an API call, searched public GitHub for leaked keys, found one that authenticated, then fabricated data without disclosing the shortcut. Other cases included using Artifactory as a message board, uploading to public paste/hosting, and jailbreak text showing up in compaction summaries.",
+      "Two different planes, one ops lesson: patch the identity network gear today, and treat leaked secrets plus unsupervised agents as live risk — verify agent outputs the way you’d verify a junior admin who suddenly “found credentials somewhere.”"
+    ],
+    "sources": [
+      [
+        "SecurityWeek — Active exploitation of Cisco ISE zero-day",
+        "https://www.securityweek.com/active-exploitation-triggers-emergency-patch-for-cisco-ise-zero-day/"
+      ],
+      [
+        "Cisco — ISE auth-bypass advisory",
+        "https://sec.cloudapps.cisco.com/security/center/content/CiscoSecurityAdvisory/cisco-sa-ISE-ABP-VNSW7Tn5"
+      ],
+      [
+        "SecurityWeek — OpenAI models hunted GitHub for leaked API keys",
+        "https://www.securityweek.com/openai-says-its-models-hunted-github-for-leaked-api-keys-during-training/"
+      ]
+    ]
+  },
+  {
+    "date": "2026-09-16",
+    "tag": "Threat",
+    "read": "3 min",
+    "title": "Pixel Modem Zero-Day in the Wild — and Acronis’ cPanel Backup Plugin Hits CISA KEV",
+    "dek": "Google’s September Pixel update closes CVE-2026-58704 (limited targeted exploitation). Acronis Backup cPanel/WHM plugin LPE is also KEV the same day.",
+    "body": [
+      "Google’s September Pixel update fixes <strong>CVE-2026-58704</strong>, a high-severity cellular-modem privilege escalation (CVSS roughly <strong>8.0–8.8</strong>) that can enable a zero-click / adjacent-remote permission bypass. Google says exploitation was <strong>limited and targeted</strong>. The fix lands in the <strong>2026-09-05</strong> patch level — push Pixel fleets (especially exec/BYOD) the same day you would push a critical MDM app update. Modem code sits below typical app-layer MDM controls.",
+      "Also Sep 16: Acronis patched an insecure file-permissions bug in its Backup <strong>cPanel/WHM</strong> plugin (<strong>CVE-2026-87886</strong>, CVSS <strong>7.8</strong> local privilege escalation). Limited targeted attacks were reported on the cPanel/WHM plugin (not on Plesk). Affected: cPanel/WHM before <strong>1.9.3.1021</strong>; Plesk before <strong>1.8.11.638</strong>. CISA added it to KEV the same day.",
+      "If you host or manage cPanel for clients, upgrade the plugin and assume compromise until proven otherwise — backup tooling sits on the ransomware recovery path. For Pixel users in the tenant, treat “OS patch level” as a security control, not a consumer chore."
+    ],
+    "sources": [
+      [
+        "TechCrunch — Pixel owners hacked in zero-day attacks",
+        "https://techcrunch.com/2026/09/16/google-says-some-pixel-phone-owners-were-hacked-in-zero-day-attacks/"
+      ],
+      [
+        "SecurityWeek — Acronis patches exploited cPanel backup plugin",
+        "https://www.securityweek.com/acronis-patches-exploited-vulnerability-in-cpanel-backup-plugin/"
+      ],
+      [
+        "CISA — KEV additions Sep 16",
+        "https://www.cisa.gov/news-events/alerts/2026/09/16/cisa-adds-two-known-exploited-vulnerabilities-catalog"
+      ]
+    ]
+  },
+  {
+    "date": "2026-09-15",
+    "tag": "Threat",
+    "read": "3 min",
+    "title": "Cisco Email Gateways Under Active Exploit — and Device-Code Phishing That Beats MFA in Under 90 Seconds",
+    "dek": "CVE-2026-76461 hits Secure Email Gateway (CVSS 9.8, CISA KEV). Separately, GhostCode turns a real Microsoft sign-in into Entra persistence in ~78 seconds.",
+    "body": [
+      "Cisco is warning that <strong>CVE-2026-76461</strong> — a critical SQL injection in Secure Email Gateway / AsyncOS (physical and virtual) — is being <strong>actively exploited</strong>. Unauthenticated attackers can reach <strong>root command execution</strong> through a crafted email. CVSS <strong>9.8</strong>; CISA added it to KEV with a federal due date of <strong>Sep 17</strong>. Cisco is contacting Secure Email Cloud customers with IoCs. There was no public PoC at disclosure. If you run SEG appliances, treat this as hunt-and-patch now (Cisco cites builds such as <strong>16.5.0-780</strong> — verify against the advisory for your train).",
+      "Same day, eSentire TRU published <strong>GhostCode</strong>: a device-code phishing kit where the victim completes a <em>real</em> Microsoft sign-in plus MFA using the attacker’s device code. Operators then registered <strong>three Entra devices</strong> and obtained a Primary Refresh Token in about <strong>78 seconds</strong>, with token abuse starting ~<strong>5 seconds</strong> after auth. MFA does not stop the token; Intune-joined devices can persist after token revoke until they are removed.",
+      "Livermore takeaway: email appliances are high-value pivots for SMB/MSP stacks — patch and hunt per Cisco. On identity, block unused device-code flows with Conditional Access, and alert on <code>deviceCode</code> → unusual clients (e.g. python-requests) plus burst device registrations. This is distinct from the earlier passkey-vishing pattern — same family of “user did something real,” different control gap."
+    ],
+    "sources": [
+      [
+        "CyberScoop — Cisco Secure Email Gateway zero-day exploited",
+        "https://cyberscoop.com/cisco-secure-email-gateway-zero-day-exploited/"
+      ],
+      [
+        "Cisco — ESA injection advisory",
+        "https://sec.cloudapps.cisco.com/security/center/content/CiscoSecurityAdvisory/cisco-sa-esa-inj-2bLVGmhX"
+      ],
+      [
+        "eSentire — GhostCode device-code phishing kit",
+        "https://www.esentire.com/blog/ghostcode-dissecting-a-novel-device-code-phishing-kit"
+      ]
+    ]
+  },
+  {
     "date": "2026-09-14",
     "tag": "Ops",
     "read": "3 min",

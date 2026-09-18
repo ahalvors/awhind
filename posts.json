@@ -1,5 +1,31 @@
 [
   {
+    "date": "2026-09-18",
+    "tag": "Threat",
+    "read": "3 min",
+    "title": "Brevo Forms Injected ClickFix Malware — and Microsoft Patched 18 Azure/Copilot Bugs the Same Day",
+    "dek": "A compromised Cloudflare API key let Brevo serve malicious embeds to 100k+ sites for hours. Separately, Microsoft fixed 18 Azure + Copilot issues; one Windows EoP still needs your update.",
+    "body": [
+      "Brevo’s post-mortem (covered 2026-09-18) describes a supply-chain hit: a compromised <strong>long-lived Cloudflare API key</strong> let an attacker publish a Worker that injected malicious scripts into <strong>brevo.com</strong>, <strong>sibforms.com</strong>, and three JavaScript files customers embed. The window was about <strong>5.5 hours on 2026-09-14</strong>. Victims saw a fake “Cloudflare verify you are human” <strong>ClickFix</strong> prompt (paste and run a command). On WordPress with a logged-in admin, the payload tried to install a plugin. Sansec estimates <strong>100,000+</strong> sites loaded affected components during a roughly four-hour serve window. Brevo says <strong>app.brevo.com</strong>, APIs, email, and account data were not modified at source — the damage was in the customer-facing embeds.",
+      "Same day, SecurityWeek reports Microsoft disclosed <strong>18</strong> fixes across Azure and Copilot AI — mostly elevation of privilege in Azure Arc, AI Foundry, Logic Apps, Cosmos DB, Container Registry, Fabric, Dataverse, and M365 Copilot, plus info-disclosure in Copilot/AML and one Azure Portal spoofing issue. Those cloud/AI fixes are <strong>server-side</strong> (no customer patch action). Separately, Windows elevation-of-privilege <strong>CVE-2026-85921</strong> still needs a Windows update; Microsoft rates exploitation “less likely.” The same write-up notes the latest Patch Tuesday covered a record <strong>970</strong> product vulnerabilities.",
+      "Livermore takeaway: if you use Brevo/Sendinblue forms or widgets, audit WordPress plugins and admin activity from <strong>Sep 14</strong>, and treat any ClickFix “paste this command” moment as a full endpoint incident. For M365/Copilot shops, treat AI and SaaS privilege paths as first-class — and confirm endpoints are current for CVE-2026-85921."
+    ],
+    "sources": [
+      [
+        "SecurityWeek — Brevo supply-chain injects malware into 100,000 websites",
+        "https://www.securityweek.com/brevo-supply-chain-attack-injects-malware-into-100000-websites/"
+      ],
+      [
+        "Brevo — Incident write-up",
+        "https://status.brevo.com/incidents/01M2QBC4EZ24ZACW6SWQYVW8N3/write-up"
+      ],
+      [
+        "SecurityWeek — Microsoft patches 18 vulnerabilities in AI/cloud products",
+        "https://www.securityweek.com/microsoft-patches-18-vulnerabilities-in-ai-cloud-products/"
+      ]
+    ]
+  },
+  {
     "date": "2026-09-17",
     "tag": "Threat",
     "read": "3 min",

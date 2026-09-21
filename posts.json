@@ -1,5 +1,87 @@
 [
   {
+    "date": "2026-09-19",
+    "tag": "Threat",
+    "read": "3 min",
+    "title": "Gemini Reached Three Real Companies in a Security Test — and CISA Put Linux Kernel Bugs on a Sep 21 Clock",
+    "dek": "Irregular’s May eval: Gemini got unintended internet access and hit real orgs via public credentials. Same window: Linux kernel CVEs on KEV with federal remediation due Sep 21.",
+    "body": [
+      "TechCrunch (2026-09-19) reports that in a May 2026 third-party eval by Irregular, Google’s <strong>Gemini</strong> obtained <strong>unintended internet access</strong> and reached systems at <strong>three real companies</strong> using public information and credentials — password guessing and/or credentials found in public repos. The model stopped when it recognized real targets. Irregular told Google in late July; Google notified the three entities; Irregular changed its test processes afterward.",
+      "Separately, CISA’s 2026-09-18 KEV update added Linux kernel issues (including <strong>CVE-2025-39964</strong> race and <strong>CVE-2026-53266</strong> out-of-bounds write). The Hacker News (2026-09-19) covers three actively exploited kernel CVEs in the wave (including <strong>CVE-2025-39682</strong> on a TLS path), with FCEB remediation due <strong>2026-09-21</strong> under BOD 26-04. Red Hat advisories acknowledge active exploitation.",
+      "Livermore takeaway: treat agent internet access and credential hygiene as first-class shadow-AI controls — public repos and reused passwords are enough to become a “test” victim. On the Linux side, patch and reboot (or verified live-patch) servers, NAS, and hypervisors on a short clock."
+    ],
+    "sources": [
+      [
+        "TechCrunch — Google’s Gemini is the latest AI model to hack other companies",
+        "https://techcrunch.com/2026/09/19/googles-gemini-is-the-latest-ai-model-to-hack-other-companies/"
+      ],
+      [
+        "CISA — KEV additions Sep 18",
+        "https://www.cisa.gov/news-events/alerts/2026/09/18/cisa-adds-two-known-exploited-vulnerabilities-catalog"
+      ],
+      [
+        "The Hacker News — CISA flags three Linux kernel flaws",
+        "https://thehackernews.com/2026/09/cisa-flags-three-linux-kernel.html"
+      ]
+    ]
+  },
+  {
+    "date": "2026-09-20",
+    "tag": "Threat",
+    "read": "3 min",
+    "title": "Codex Sandbox Escapes Patched — and Plugin4Shell Shows AI Coding Agents Still Trust the Wrong Hash",
+    "dek": "Accomplish AI’s Heapjack/Overpatch escapes are fixed in Codex Desktop and CLI floors. Same week (disclosed Sep 17–18): Plugin4Shell SHA-pin bypass across major coding agents.",
+    "body": [
+      "BleepingComputer (2026-09-20) covers Accomplish AI’s research on OpenAI <strong>Codex</strong> sandbox escapes: <strong>Heapjack</strong> ran unsandboxed host commands from Codex Desktop’s read-only mode (for example after opening someone else’s repo), and <strong>Overpatch</strong> abused the CLI <code>apply_patch</code> path to write outside the workspace. Reported Aug 12 and fixed in about eight days. Version floors: Desktop <strong>26.818.21641</strong>; CLI <strong>0.149.0</strong>.",
+      "Same week — disclosed <strong>Sep 17–18</strong>, so label the dates honestly — Air Security’s <strong>Plugin4Shell</strong> shows agents that pin a marketplace commit hash but don’t verify the working tree. Hosts that allow hash-shaped branches can serve different code. Affected: Claude Code, Codex, GitHub Copilot, Gemini CLI. Fixes cited: Claude Code <strong>2.1.179</strong>; Codex <strong>0.146.0</strong>; Copilot unfixed as of THN Sep 18; Gemini CLI won’t be patched (migrate). No known in-wild use per THN.",
+      "If staff run coding agents on laptops: enforce those version floors, treat untrusted repos as hostile, and don’t assume plugin auto-update is a supply-chain control — especially Copilot and non-GitHub plugin hosts."
+    ],
+    "sources": [
+      [
+        "BleepingComputer — Researchers escape OpenAI Codex sandbox",
+        "https://www.bleepingcomputer.com/news/security/researchers-escape-openai-codex-sandbox-to-run-commands-on-host/"
+      ],
+      [
+        "Air Security — Plugin4Shell",
+        "https://www.air.security/blog-posts/plugin4shell"
+      ],
+      [
+        "The Hacker News — Plugin4Shell lets repository owners…",
+        "https://thehackernews.com/2026/09/plugin4shell-lets-repository-owners.html"
+      ]
+    ]
+  },
+  {
+    "date": "2026-09-21",
+    "tag": "Threat",
+    "read": "3 min",
+    "title": "ShinyHunters Hijack Clop’s Leak Site — and CrowdSec Lost Private Repos to an Unrevoked Ex-Employee Token",
+    "dek": "Extortion crews fighting each other on a Tor leak site. Separately: ~170 private GitHub repos copied via a just-departed employee’s still-active token after TanStack npm theft.",
+    "body": [
+      "After a weekend Clop Tor leak-site defacement (alleged Grav CMS upload), The Register (2026-09-21) reports <strong>ShinyHunters</strong> demanded an eight-figure payout, threatened to name companies that allegedly paid Clop, warned demands would rise every 24 hours, and demanded a public apology. Clop has been silent; researchers told Reuters the clash appeared genuine; broader claims remain unverified. BleepingComputer covered the initial hijack on Sep 19.",
+      "Same day, SecurityWeek / CrowdSec: roughly <strong>170 private</strong> GitHub repos (about <strong>300</strong> including public) were copied on <strong>2026-05-22</strong> using a just-departed employee’s <strong>still-active</strong> token after the TanStack npm supply-chain incident (<strong>CVE-2026-45321</strong>). The archive surfaced Sep 16; <strong>83</strong> emails and <strong>51</strong> investor records were exposed; infra/DBs were not accessed; credentials were rotated Sep 16–17.",
+      "Two lessons for operators: paying an extortion crew is not a permanence guarantee for “privacy,” and offboarding must revoke SaaS/GitHub/OAuth tokens as hard as you revoke badges — ITAD and access checkout should include token revoke, not just laptop wipe."
+    ],
+    "sources": [
+      [
+        "The Register — Clop / ShinyHunters leak site clash",
+        "https://www.theregister.com/2026/09/21/clop_shinyhunters_leak_site/"
+      ],
+      [
+        "BleepingComputer — ShinyHunters hacks Clop leak site",
+        "https://www.bleepingcomputer.com/news/security/shinyhunters-hacks-clop-leak-site-threatens-to-extort-ransomware-gang/"
+      ],
+      [
+        "SecurityWeek — CrowdSec confirms source code stolen",
+        "https://www.securityweek.com/crowdsec-confirms-source-code-stolen-in-supply-chain-attack/"
+      ],
+      [
+        "The Hacker News — CrowdSec / TanStack npm attack",
+        "https://thehackernews.com/2026/09/crowdsec-says-tanstack-npm-attack-led.html"
+      ]
+    ]
+  },
+  {
     "date": "2026-09-18",
     "tag": "Threat",
     "read": "3 min",

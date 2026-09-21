@@ -1,0 +1,154 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Accomplish AI’s Heapjack/Overpatch escapes are fixed in Codex Desktop and CLI floors. Same week (disclosed Sep 17–18): Plugin4Shell SHA-pin bypass across major coding agents.">
+<title>Codex Sandbox Escapes Patched — and Plugin4Shell Shows AI Coding Agents Still Trust the Wrong Hash — AWHIND Daily Briefing</title>
+<link rel="canonical" href="https://awhind.com/briefing/2026-09-20">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='16' fill='%230B0F17'/%3E%3Ccircle cx='50' cy='50' r='16' fill='%23DD4E1E'/%3E%3C/svg%3E">
+
+<!-- Open Graph -->
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://awhind.com/briefing/2026-09-20">
+<meta property="og:title" content="Codex Sandbox Escapes Patched — and Plugin4Shell Shows AI Coding Agents Still Trust the Wrong Hash">
+<meta property="og:description" content="Accomplish AI’s Heapjack/Overpatch escapes are fixed in Codex Desktop and CLI floors. Same week (disclosed Sep 17–18): Plugin4Shell SHA-pin bypass across major coding agents.">
+<meta property="og:site_name" content="AWHIND">
+
+<!-- Twitter Card -->
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Codex Sandbox Escapes Patched — and Plugin4Shell Shows AI Coding Agents Still Trust the Wrong Hash">
+<meta name="twitter:description" content="Accomplish AI’s Heapjack/Overpatch escapes are fixed in Codex Desktop and CLI floors. Same week (disclosed Sep 17–18): Plugin4Shell SHA-pin bypass across major coding agents.">
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "Codex Sandbox Escapes Patched — and Plugin4Shell Shows AI Coding Agents Still Trust the Wrong Hash",
+  "description": "Accomplish AI’s Heapjack/Overpatch escapes are fixed in Codex Desktop and CLI floors. Same week (disclosed Sep 17–18): Plugin4Shell SHA-pin bypass across major coding agents.",
+  "datePublished": "2026-09-20",
+  "url": "https://awhind.com/briefing/2026-09-20",
+  "author": {
+    "@type": "Organization",
+    "name": "AWHIND",
+    "url": "https://awhind.com"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "AWHIND",
+    "url": "https://awhind.com"
+  }
+}
+</script>
+
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,500&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap');
+
+  :root{
+    --bg:#F1F2ED;
+    --bg-elevated:#FFFFFF;
+    --bg-sunken:#E7E8E1;
+    --text:#0B0F17;
+    --text-secondary:#566072;
+    --text-tertiary:#848d9b;
+    --line:#D9DAD2;
+    --line-strong:#c2c4ba;
+    --accent:#DD4E1E;
+    --accent-contrast:#FFFFFF;
+    --shadow: 0 1px 2px rgba(11,15,23,.04), 0 8px 24px rgba(11,15,23,.06);
+    --serif: 'Newsreader', Georgia, 'Times New Roman', serif;
+    --sans: 'IBM Plex Sans', -apple-system, 'Segoe UI', Roboto, sans-serif;
+    --mono: 'IBM Plex Mono', 'SF Mono', Consolas, monospace;
+  }
+  @media (prefers-color-scheme: dark){
+    :root:not([data-theme="light"]){
+      --bg:#0A0D14;
+      --bg-elevated:#12161F;
+      --bg-sunken:#080A10;
+      --text:#EEF0F4;
+      --text-secondary:#9AA3B4;
+      --text-tertiary:#6d7688;
+      --line:#232838;
+      --line-strong:#323951;
+      --accent:#FF7A47;
+      --accent-contrast:#0A0D14;
+      --shadow: 0 1px 2px rgba(0,0,0,.3), 0 8px 28px rgba(0,0,0,.4);
+    }
+  }
+  :root[data-theme="dark"]{
+    --bg:#0A0D14;
+    --bg-elevated:#12161F;
+    --bg-sunken:#080A10;
+    --text:#EEF0F4;
+    --text-secondary:#9AA3B4;
+    --text-tertiary:#6d7688;
+    --line:#232838;
+    --line-strong:#323951;
+    --accent:#FF7A47;
+    --accent-contrast:#0A0D14;
+    --shadow: 0 1px 2px rgba(0,0,0,.3), 0 8px 28px rgba(0,0,0,.4);
+  }
+
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0; background:var(--bg); color:var(--text);
+    font-family:var(--sans); font-size:16px; line-height:1.55;
+    -webkit-font-smoothing:antialiased;
+  }
+  a{color:inherit;}
+  h1,h2{font-family:var(--serif); font-weight:500; margin:0; text-wrap:balance; letter-spacing:-0.01em;}
+  .mono{font-family:var(--mono);}
+  .wrap{max-width:1120px; margin:0 auto; padding:0 28px;}
+  .btn{
+    display:inline-flex; align-items:center; gap:8px; font-family:var(--mono); font-size:13px;
+    letter-spacing:.04em; text-transform:uppercase; padding:12px 20px; border-radius:2px;
+    text-decoration:none; cursor:pointer; border:1px solid transparent;
+  }
+  .btn-ghost{border-color:var(--line-strong); color:var(--text);}
+  .btn-ghost:hover{border-color:var(--accent); color:var(--accent);}
+  .btn-sm{padding:8px 14px; font-size:11px;}
+
+  nav.wrap{display:flex; align-items:center; justify-content:space-between; padding-top:18px; padding-bottom:18px;}
+  .brand{font-family:var(--serif); font-weight:600; font-size:21px; letter-spacing:-.01em; text-decoration:none; color:var(--text); display:flex; align-items:center; gap:9px;}
+  .brand .mark{width:9px;height:9px;background:var(--accent);display:inline-block;}
+
+  article{max-width:720px; margin:44px auto; padding:0 28px;}
+  .meta{font-family:var(--mono); font-size:11.5px; color:var(--text-tertiary); letter-spacing:.03em; margin-bottom:16px;}
+  article h1{font-size:32px; line-height:1.15;}
+  .dek{font-size:16px; color:var(--text-secondary); margin-top:14px; font-family:var(--serif); font-style:italic;}
+  .article-body{margin-top:28px; font-size:15.5px; color:var(--text); max-width:60ch;}
+  .article-body p{margin:0 0 18px;}
+  .article-body strong{font-weight:600;}
+  .article-body .stat-inline{font-family:var(--mono); color:var(--accent); font-weight:600;}
+  .article-sources{margin-top:32px; padding-top:20px; border-top:1px solid var(--line); font-size:12px; color:var(--text-tertiary);}
+  .article-sources a{color:var(--text-secondary); text-decoration:underline; text-decoration-color:var(--line-strong);}
+  .back-link{margin-top:32px; display:inline-block;}
+</style>
+</head>
+<body>
+
+<nav class="wrap">
+  <a href="/" class="brand"><span class="mark"></span>AWHIND</a>
+  <div>
+    <a href="/#briefing" class="btn btn-ghost btn-sm">← All Briefings</a>
+  </div>
+</nav>
+
+<article>
+  <div class="meta">Sep 20, 2026 &middot; Threat &middot; 3 min read</div>
+  <h1>Codex Sandbox Escapes Patched — and Plugin4Shell Shows AI Coding Agents Still Trust the Wrong Hash</h1>
+  <div class="dek">Accomplish AI’s Heapjack/Overpatch escapes are fixed in Codex Desktop and CLI floors. Same week (disclosed Sep 17–18): Plugin4Shell SHA-pin bypass across major coding agents.</div>
+  <div class="article-body">
+    <p>BleepingComputer (2026-09-20) covers Accomplish AI’s research on OpenAI <strong>Codex</strong> sandbox escapes: <strong>Heapjack</strong> ran unsandboxed host commands from Codex Desktop’s read-only mode (for example after opening someone else’s repo), and <strong>Overpatch</strong> abused the CLI <code>apply_patch</code> path to write outside the workspace. Reported Aug 12 and fixed in about eight days. Version floors: Desktop <strong>26.818.21641</strong>; CLI <strong>0.149.0</strong>.</p>
+    <p>Same week — disclosed <strong>Sep 17–18</strong>, so label the dates honestly — Air Security’s <strong>Plugin4Shell</strong> shows agents that pin a marketplace commit hash but don’t verify the working tree. Hosts that allow hash-shaped branches can serve different code. Affected: Claude Code, Codex, GitHub Copilot, Gemini CLI. Fixes cited: Claude Code <strong>2.1.179</strong>; Codex <strong>0.146.0</strong>; Copilot unfixed as of THN Sep 18; Gemini CLI won’t be patched (migrate). No known in-wild use per THN.</p>
+    <p>If staff run coding agents on laptops: enforce those version floors, treat untrusted repos as hostile, and don’t assume plugin auto-update is a supply-chain control — especially Copilot and non-GitHub plugin hosts.</p>
+  </div>
+  <div class="article-sources">
+    Sources: <a href="https://www.bleepingcomputer.com/news/security/researchers-escape-openai-codex-sandbox-to-run-commands-on-host/" target="_blank" rel="noopener">BleepingComputer — Researchers escape OpenAI Codex sandbox</a> &middot; <a href="https://www.air.security/blog-posts/plugin4shell" target="_blank" rel="noopener">Air Security — Plugin4Shell</a> &middot; <a href="https://thehackernews.com/2026/09/plugin4shell-lets-repository-owners.html" target="_blank" rel="noopener">The Hacker News — Plugin4Shell lets repository owners…</a>
+  </div>
+  <a href="/#briefing" class="btn btn-ghost btn-sm back-link">← All Briefings</a>
+</article>
+
+</body>
+</html>

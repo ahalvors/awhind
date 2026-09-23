@@ -1,5 +1,57 @@
 [
   {
+    "date": "2026-09-23",
+    "tag": "Threat",
+    "read": "3 min",
+    "title": "Fake Sites Delivered a Chrome–Windows Zero-Day Chain (CLEANGULP) — and PAYLOAD Lived Entirely Inside Group Policy",
+    "dek": "UTA0565 used BlueMoon (Chrome CVE-2026-85046/87491 + Windows CVE-2026-85880) via lookalike sites. Separately: encryption-less PAYLOAD used a root-linked GPO — no Windows encryptor required.",
+    "body": [
+      "The Hacker News (2026-09-23) covers Volexity’s follow-up on Chinese actor <strong>UTA0565</strong>: on <strong>Sep 3–4</strong>, while the bugs were still zero-days, the group used fake websites (spoofing media/NGO brands, including lookalikes of China Digital Times and Center for American Progress) to deliver the <strong>BlueMoon</strong> kit — Chrome <strong>CVE-2026-85046</strong> and <strong>CVE-2026-87491</strong> chained with Windows ALPC <strong>CVE-2026-85880</strong> for sandbox escape and RCE. Payload: <strong>CLEANGULP</strong> (<code>chrome_cleanup.exe</code>) with shell/ps/upload/download/BOF over HTTP C2 mimicking a legitimate media domain. Volexity says the same kit appears across multiple Chinese actors — likely shared/customized, so observed cases understate scale.",
+      "Separately (Cyberinsider / Kaspersky GERT, 2026-09-22): a <strong>PAYLOAD</strong> incident at a Middle East manufacturer weaponized Active Directory <strong>Group Policy</strong> without encrypting Windows files. Initial access <strong>Apr 11</strong> via compromised domain account on FortiGate SSL VPN; by Apr 13, domain-admin equivalent and a malicious GPO named “PAYLOAD” linked at the domain root — ransom note, wallpaper/lock-screen, login banner, disable built-in local admin — plus a second GPO (“win Firewall Off”) that disabled Windows Firewall. Policies reached endpoints Apr 13 and largely fired after reboots Apr 14. Data was exfiltrated and leaked; an ESXi PAYLOAD variant existed, but no Windows encryptor. Forensics found no persistent Windows malware — the attack lived inside AD.",
+      "Patch Chrome (and Chromium Edge) to current Stable and confirm Windows updates covering CVE-2026-85880. On the AD side: treat unexpected new GPOs, wallpaper changes, and mass local-admin/firewall disables as ransomware-class even when nothing is encrypted — remove bad GPOs from DCs before cleaning endpoints, restrict who can create/link domain-root GPOs, and put phishing-resistant MFA on VPN."
+    ],
+    "sources": [
+      [
+        "The Hacker News — CLEANGULP / Chrome–Windows zero-day chain",
+        "https://thehackernews.com/2026/09/chinese-hackers-exploit-chrome-windows.html"
+      ],
+      [
+        "Volexity — Mind the (Patch) Gap, Part 2",
+        "https://www.volexity.com/blog/2026/09/21/mind-the-patch-gap-part-2-fake-websites-used-to-deploy-chrome-windows-0-day-exploits/"
+      ],
+      [
+        "Cyberinsider — PAYLOAD ransomware hijacks Group Policy",
+        "https://cyberinsider.com/payload-ransomware-hijacks-windows-group-policy-in-encryption-less-attacks/"
+      ]
+    ]
+  },
+  {
+    "date": "2026-09-22",
+    "tag": "Threat",
+    "read": "3 min",
+    "title": "Check Point Management Zero-Day Hit KEV — and Microsoft Disrupted EvilTokens After 12,000 M365 Compromises",
+    "dek": "CVE-2026-93616 (CVSS 9.8) is pre-auth path traversal on Check Point management; CISA due date Sep 25. Same day: EvilTokens PhaaS device-code phishing disrupted after 12k+ Microsoft accounts.",
+    "body": [
+      "Check Point Research (2026-09-22) warns of active exploitation of two critical issues. <strong>CVE-2026-93616</strong> is a newly disclosed <strong>pre-authentication path traversal</strong> in the Security Management web service (also Multi-Domain management, Log Server, SmartEvent) — CVSS <strong>9.8</strong> — that lets an unauthenticated attacker upload/execute arbitrary scripts and load Java classes. Fix is in the advisory Jumbo/hotfixes (<strong>sk1000171</strong>); LivePatch Take 28/29 does <em>not</em> cover it. Smart-1 Cloud is already patched; gateways/Spark firewalls are not in scope for this CVE. CISA added it to KEV on Sep 22 with FCEB remediation due <strong>2026-09-25</strong>. Separately, <strong>CVE-2026-85102</strong> (VPN certificate RCE on Security Gateway/Spark, fix since Sep 9) is seeing exploitation attempts against Spark customers since about Sep 12.",
+      "Same day, BleepingComputer / Microsoft DCU: <strong>EvilTokens</strong> (Storm-2992) — a phishing-as-a-service platform that specialized in <strong>OAuth device-code</strong> phishing that bypasses MFA — was disrupted after compromising more than <strong>12,000</strong> Microsoft accounts across <strong>10,000+</strong> organizations (SpyCloud: ~8,700 recaptured accounts / 6,585 domains). The service used AI to customize lures and mine inboxes for BEC targets; list price cited at <strong>$500/month</strong> or <strong>$1,500</strong> one-time. Microsoft seized infrastructure with Health-ISAC, SpyCloud, and UK law enforcement (two arrests). Microsoft says this was a disruption, not a full kill — clones such as APToken already exist.",
+      "Livermore takeaway: if you run Check Point management on-prem, patch <strong>today</strong> and hunt per sk1000171 — do not assume LivePatch covered you. For M365 shops, disable device-code auth where it is not required, prefer FIDO2/passkeys, and treat unexpected “enter this code at microsoft.com” prompts as credential theft."
+    ],
+    "sources": [
+      [
+        "Check Point Blog — Security Advisory CVE-2026-85102 / CVE-2026-93616",
+        "https://blog.checkpoint.com/security/security-advisory-action-required-active-exploitation-of-cve-2026-85102-and-a-management-pre-authentication-vulnerability-cve-2026-93616/"
+      ],
+      [
+        "Check Point SK — CVE-2026-93616",
+        "https://support.checkpoint.com/results/sk/sk1000171/"
+      ],
+      [
+        "BleepingComputer — EvilTokens PhaaS disrupted",
+        "https://www.bleepingcomputer.com/news/security/eviltokens-phaas-disrupted-after-compromising-12-000-microsoft-accounts/"
+      ]
+    ]
+  },
+  {
     "date": "2026-09-19",
     "tag": "Threat",
     "read": "3 min",

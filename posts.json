@@ -1,5 +1,35 @@
 [
   {
+    "date": "2026-09-24",
+    "tag": "Threat",
+    "read": "3 min",
+    "title": "CISA Flags TeamCity CVE-2026-63077 for Ransomware Abuse — and Malicious Terraform Providers Hit HashiCorp’s Registry",
+    "dek": "JetBrains auth-bypass (patched July) now ransomware-tagged in KEV; ~160 exposed hosts remain. Separately: Graphalgo-linked Go malware via two Terraform providers + Go modules — first known HashiCorp Registry malware drop.",
+    "body": [
+      "BleepingComputer (2026-09-24): CISA updated KEV on <strong>Wednesday Sep 23</strong> to flag critical JetBrains TeamCity On-Premises <strong>CVE-2026-63077</strong> as abused by <strong>ransomware gangs</strong> (no public group names or campaign IoCs yet). JetBrains patched on <strong>July 25</strong> in <strong>2025.11.7</strong> and <strong>2026.1.3</strong> — an authentication bypass via the agent polling protocol that lets an unauthenticated attacker with HTTP(S) access run OS commands as the TeamCity server process, with risk to data, configs, stored credentials, build artifacts, and downstream CI/CD. CISA first added the CVE to KEV on <strong>Aug 5</strong> (FCEB due Aug 8); JetBrains confirmed in-the-wild exploitation <strong>Aug 7</strong>. Shadowserver now tracks just over <strong>~160</strong> internet-exposed TeamCity hosts still unpatched (down from ~700 right after the patch). Since Oct 2023, CISA has tagged four TeamCity issues as exploited in the wild — all later also tied to ransomware abuse.",
+      "Separately (The Hacker News / Aikido, 2026-09-22–23): Go-based malware shipped through two Terraform providers on HashiCorp’s public registry — <code>gocommunity-io/dockerd</code> (<strong>222</strong> downloads) and typosquat <code>kreuzwenker/docker</code> vs legitimate <code>kreuzwerker/docker</code> (<strong>1,449</strong> downloads) — plus Go modules <code>gocommunity.io/orderedbtree</code> and <code>gogets.dev/btreex</code>. Aikido calls this the first observed malware distribution via HashiCorp’s centralized Terraform registry. The implant is a Go port overlapping the <strong>Graphalgo</strong> campaign (ReversingLabs, Feb 2026; recent npm samples covered by Checkmarx, JFrog, SafeDep): gated activation, dual C2 via Slack bot API and blockchain dead drops (Arbitrum Sepolia), fingerprinting, and remote Go/JS execution. Socket’s Karlo Zanki told THN it is <strong>too early</strong> to conclude DPRK-linked actors are adopting Terraform registries at scale, though overlap with recent TraderTraitor/SentinelOne Terraform findings makes coincidence less likely; Contagious Interview–style fake-job social engineering remains the reported primary access playbook.",
+      "Livermore takeaway: inventory every TeamCity On-Premises instance (especially internet-exposed), confirm ≥2025.11.7 or ≥2026.1.3, and restrict agent-polling exposure if you cannot patch today — then hunt unauthorized “scan” agents on any host that was exposed before patch. On the IaC side: pin/verify Terraform provider source addresses (watch typosquats of <code>kreuzwerker/*</code>), block unknown providers in CI, and if any listed package ran on a laptop or runner — isolate, rotate cloud/IaC/Git tokens, and reimage."
+    ],
+    "sources": [
+      [
+        "BleepingComputer — CISA TeamCity CVE-2026-63077 ransomware KEV",
+        "https://www.bleepingcomputer.com/news/security/cisa-ransomware-gangs-now-exploiting-critical-teamcity-flaw/"
+      ],
+      [
+        "The Hacker News — malicious Terraform providers / Graphalgo",
+        "https://thehackernews.com/2026/09/attackers-use-malicious-terraform.html"
+      ],
+      [
+        "Aikido — Graphalgo Terraform + Go modules",
+        "https://www.aikido.dev/blog/graphalgo-terraform-go-modules"
+      ],
+      [
+        "NVD — CVE-2026-63077",
+        "https://nvd.nist.gov/vuln/detail/cve-2026-63077"
+      ]
+    ]
+  },
+  {
     "date": "2026-09-23",
     "tag": "Threat",
     "read": "3 min",

@@ -1,5 +1,47 @@
 [
   {
+    "date": "2026-09-25",
+    "tag": "Threat",
+    "read": "3 min",
+    "title": "CISA Adds SharePoint CVE-2026-65660 to KEV — and WordPress CVE-2026-87902 Goes From Patch to Attack in Hours",
+    "dek": "An on-prem SharePoint bug Microsoft first published as “spoofing” is now listed as exploited code execution. Separately, a WordPress core path-traversal flaw fixed Sep 22 drew attack attempts the same day. Both are due for federal agencies Sep 28.",
+    "body": [
+      "CISA added Microsoft SharePoint <strong>CVE-2026-65660</strong> (code injection, CWE-94) to its Known Exploited Vulnerabilities catalog on <strong>Sep 25</strong>, with a federal due date of <strong>Monday Sep 28</strong>. The flaw lets an authenticated attacker with low-level access run code on on-prem <strong>SharePoint Server 2016, 2019, and Subscription Edition</strong> with no user interaction. Microsoft patched it in the <strong>Aug 11</strong> updates (fixed builds <code>16.0.5565.1001</code>, <code>16.0.10417.20198</code>, and <code>16.0.19725.20522</code>) but originally published it as a spoofing issue (CVSS 6.5, “Exploitation Less Likely”) and later reclassified it as remote code execution (CVSS 8.8). A researcher published full exploit details on <strong>Sep 22</strong>, including a chain with a separate anonymous-access bug (fixed June 9) that allows pre-authentication code execution on farms with anonymous viewing enabled. The Canadian Cyber Centre (alert AL26-023) reported active exploitation on <strong>Sep 24</strong>, and Previdian logged exploitation requests against a SharePoint honeypot the same day that drop a webshell at <code>/_layouts/15/sphealth.aspx</code>. Microsoft’s own advisory still does not list the bug as exploited, no attacker has been named, and CISA lists ransomware use as unknown. SharePoint Online is not listed as affected.",
+      "WordPress shipped <strong>7.1.2</strong> on <strong>Sep 22</strong> to fix core <strong>CVE-2026-87902</strong>, an unauthenticated path traversal in page-template resolution that affects versions 4.7.0 through 7.1.1, with fixes backported to every branch down to 4.7.37. WordPress rates it Critical (CVSS 4.0 score 9.2; NVD lists 8.1 under CVSS 3.1). It can lead to code execution only under certain conditions: the active theme needs a top-level folder starting with <code>page-</code> (the advisory names Twenty Twelve, Twenty Fourteen, Neve, Hestia, and Sydney), and PHP needs a readable target such as PEAR’s <code>pearcmd.php</code> with <code>register_argc_argv</code> on, which the advisory says includes the official PHP Docker image and default cPanel setups on PHP before 8.5. Patchstack saw the first attack attempt the same day the patch shipped and the first file-write attempts hours later, with traffic up more than tenfold by Sep 23. CISA added the CVE to KEV on <strong>Sep 25</strong> (due Sep 28). Previdian expects mass attempts but relatively few actual compromises because of the preconditions and default auto-updates.",
+      "Livermore takeaway: if you still run on-prem SharePoint, confirm every farm is at or above the August 2026 fixed build and the June update, turn off anonymous access you don’t need, take SharePoint off direct internet exposure, enable AMSI full request-body scanning, and hunt for <code>sphealth.aspx</code> under <code>/_layouts/15/</code> and unexpected new web parts. SharePoint 2016 and 2019 reached end of life in July, so put migration on the plan. If you triaged this in August as a medium spoofing bug, re-rank it now. For WordPress, confirm every site, including agency- and marketing-managed ones, is on 7.1.2 or its branch backport rather than assuming auto-update ran. Check themes for <code>page-*</code> folders, and search logs for encoded <code>../</code> in <code>pagename</code> or requests mentioning <code>pearcmd</code>. Any unexpected <code>.php</code> file in <code>/tmp</code> or <code>/var/tmp</code> means you should treat the host as compromised, not just scanned."
+    ],
+    "sources": [
+      [
+        "CISA — two KEV additions, Sep 25 (SharePoint CVE-2026-65660)",
+        "https://www.cisa.gov/news-events/alerts/2026/09/25/cisa-adds-two-known-exploited-vulnerabilities-catalog"
+      ],
+      [
+        "Canadian Cyber Centre — AL26-023 SharePoint CVE-2026-65660",
+        "https://www.cyber.gc.ca/en/alerts-advisories/al26-023-vulnerability-impacting-microsoft-sharepoint-server-cve-2026-65660"
+      ],
+      [
+        "Previdian — SharePoint CVE-2026-65660 exploitation attempts",
+        "https://blog.previdian.com/cve-2026-65660-previdian-observes-two-stage-sharepoint-exploitation-attempts/"
+      ],
+      [
+        "Microsoft MSRC — CVE-2026-65660",
+        "https://msrc.microsoft.com/update-guide/vulnerability/CVE-2026-65660"
+      ],
+      [
+        "CISA — one KEV addition, Sep 25 (WordPress CVE-2026-87902)",
+        "https://www.cisa.gov/news-events/alerts/2026/09/25/cisa-adds-one-known-exploited-vulnerability-catalog"
+      ],
+      [
+        "WordPress — 7.1.2 security release",
+        "https://wordpress.org/news/2026/09/wordpress-7-1-2-release/"
+      ],
+      [
+        "Patchstack — CVE-2026-87902 probing hours after patch",
+        "https://patchstack.com/articles/cve-2026-87902-attackers-started-probing-wordpress-sites-hours-after-the-patch/"
+      ]
+    ]
+  },
+  {
     "date": "2026-09-24",
     "tag": "Threat",
     "read": "3 min",

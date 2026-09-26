@@ -413,16 +413,20 @@
   ];
 
   var POSTS = [];
+  var ARTICLES = [];
 
   /* ---------------- RENDER ---------------- */
-  fetch('posts.json')
-    .then(function(response) { return response.json(); })
-    .then(function(data) {
-      POSTS = data;
+  Promise.all([
+    fetch('posts.json').then(function(r) { return r.json(); }),
+    fetch('articles.json').then(function(r) { return r.json(); }).catch(function() { return []; })
+  ])
+    .then(function(results) {
+      POSTS = results[0];
+      ARTICLES = results[1];
       renderPage();
     })
     .catch(function(err) {
-      console.error('Failed to load posts:', err);
+      console.error('Failed to load data:', err);
     });
 
   function renderPage() {var ticker = document.getElementById('ticker');
@@ -456,16 +460,22 @@
     return dt.toLocaleDateString('en-US',{month:'short', day:'numeric', year:'numeric'});
   }
   
+  // Merge articles and posts, sort by date descending
+  var allItems = POSTS.concat(ARTICLES.map(function(a){
+    return {type:'article', date:a.date, slug:a.slug, read:a.read, title:a.title, excerpt:a.excerpt, part:a.part};
+  }));
+  allItems.sort(function(a,b){ return b.date.localeCompare(a.date); });
+
   // Find first briefing for lastUpdate
-  var firstBriefing = POSTS.find(function(p){ return p.type !== 'article'; });
-  document.getElementById('lastUpdate').textContent = fmtDate(firstBriefing ? firstBriefing.date : POSTS[0].date);
+  var firstBriefing = POSTS[0];
+  document.getElementById('lastUpdate').textContent = fmtDate(firstBriefing ? firstBriefing.date : new Date().toISOString().split('T')[0]);
 
   var listEl = document.getElementById('post-list');
-  listEl.innerHTML = POSTS.map(function(p,i){
+  listEl.innerHTML = allItems.map(function(p,i){
     if (p.type === 'article') {
       // Render article row
-      var seriesLabel = p.series ? ' &middot; Part ' + p.series.part : '';
-      return '<div class="post-row" data-i="'+i+'" data-type="article" data-slug="'+p.slug+'">'+
+      var seriesLabel = p.part ? ' &middot; Part ' + p.part : '';
+      return '<div class="post-row" data-type="article" data-slug="'+p.slug+'">'+
         '<div class="date mono">'+fmtDate(p.date)+'<br>'+p.read+' read</div>'+
         '<div><h3>'+p.title+'</h3><div class="dek">'+p.excerpt+'</div><span class="tag">Case Study'+seriesLabel+'</span></div>'+
         '<div class="arrow">→</div>'+
@@ -516,8 +526,15 @@
         var slug = row.getAttribute('data-slug');
         window.location.href = '/articles/' + slug + '/';
       } else {
-        // Open briefing overlay
-        openPost(parseInt(row.getAttribute('data-i'),10));
+        // Open briefing overlay - find the briefing in POSTS by index
+        var briefingIndex = parseInt(row.getAttribute('data-i'),10);
+        // Since allItems can include articles, we need to find the actual post
+        var post = allItems[briefingIndex];
+        if (post && post.type !== 'article') {
+          // Find this post in POSTS array
+          var postIndex = POSTS.findIndex(function(p) { return p.date === post.date && p.title === post.title; });
+          if (postIndex >= 0) openPost(postIndex);
+        }
       }
     }
   });

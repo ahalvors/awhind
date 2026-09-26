@@ -3,6 +3,9 @@
 const fs = require('fs');
 
 const posts = JSON.parse(fs.readFileSync('posts.json', 'utf8'));
+const articles = fs.existsSync('articles.json') 
+  ? JSON.parse(fs.readFileSync('articles.json', 'utf8'))
+  : [];
 
 const staticUrls = [
   { loc: 'https://awhind.com/', lastmod: '2026-09-02', priority: '1.0' },
@@ -13,21 +16,17 @@ const staticUrls = [
   { loc: 'https://awhind.com/capabilities/global-noc', lastmod: '2026-09-02', priority: '0.8' }
 ];
 
-const briefingUrls = posts
-  .filter(post => post.type !== 'article')
-  .map(post => ({
-    loc: `https://awhind.com/briefing/${post.date}`,
-    lastmod: post.date,
-    priority: '0.6'
-  }));
+const briefingUrls = posts.map(post => ({
+  loc: `https://awhind.com/briefing/${post.date}`,
+  lastmod: post.date,
+  priority: '0.6'
+}));
 
-const articleUrls = posts
-  .filter(post => post.type === 'article')
-  .map(post => ({
-    loc: `https://awhind.com/articles/${post.slug}`,
-    lastmod: post.date,
-    priority: '0.7'
-  }));
+const articleUrls = articles.map(article => ({
+  loc: `https://awhind.com/articles/${article.slug}`,
+  lastmod: article.date,
+  priority: '0.7'
+}));
 
 const allUrls = [...staticUrls, ...articleUrls, ...briefingUrls];
 

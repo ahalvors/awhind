@@ -1,0 +1,9 @@
+[build]
+  command = "npm run build"
+  publish = "."
+
+[[redirects]]
+  from = "/content/*"
+  to = "/404"
+  status = 404
+  force = true

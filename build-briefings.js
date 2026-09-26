@@ -3,7 +3,11 @@
 const fs = require('fs');
 const path = require('path');
 
+// Read posts.json (briefings only) and content/articles.json
 const posts = JSON.parse(fs.readFileSync('posts.json', 'utf8'));
+const allArticles = fs.existsSync('content/articles.json') 
+  ? JSON.parse(fs.readFileSync('content/articles.json', 'utf8'))
+  : [];
 
 const briefingDir = path.join(__dirname, 'briefing');
 if (!fs.existsSync(briefingDir)) {
@@ -33,14 +37,47 @@ function stripHtml(html) {
   return html.replace(/<[^>]*>/g, '');
 }
 
+// Determine current date in America/Los_Angeles timezone
+function getTodayInPacific() {
+  // Allow override for testing
+  if (process.env.PUBLISH_DATE_OVERRIDE) {
+    return new Date(process.env.PUBLISH_DATE_OVERRIDE + 'T00:00:00');
+  }
+  
+  const now = new Date();
+  const formatter = new Intl.DateTimeFormat('en-US', {
+    timeZone: 'America/Los_Angeles',
+    year: 'numeric',
+    month: '2-digit',
+    day: '2-digit'
+  });
+  const parts = formatter.formatToParts(now);
+  const year = parts.find(p => p.type === 'year').value;
+  const month = parts.find(p => p.type === 'month').value;
+  const day = parts.find(p => p.type === 'day').value;
+  return new Date(`${year}-${month}-${day}T00:00:00`);
+}
+
+// Check if article is due
+function isArticleDue(article) {
+  const articleDate = new Date(article.date + 'T00:00:00');
+  const today = getTodayInPacific();
+  return articleDate <= today;
+}
+
+// Determine if we're in preview mode
+const isPreview = process.env.CONTEXT === 'deploy-preview' || process.env.CONTEXT === 'branch-deploy';
+
+// Filter articles based on context
+const dueArticles = isPreview 
+  ? allArticles // Preview shows all
+  : allArticles.filter(isArticleDue); // Production only shows due articles
+
 let briefingCount = 0;
 let articleCount = 0;
 
+// ========== GENERATE BRIEFING PAGES ==========
 posts.forEach(post => {
-  // Skip articles - they're handled separately below
-  if (post.type === 'article') {
-    return;
-  }
   briefingCount++;
   const dateDir = path.join(briefingDir, post.date);
   if (!fs.existsSync(dateDir)) {
@@ -203,11 +240,23 @@ ${JSON.stringify(jsonLd, null, 2)}
   console.log(`Generated ${outputPath}`);
 });
 
-// Now generate article pages
-posts.forEach(post => {
-  if (post.type !== 'article') {
-    return;
+// ========== CLEAN UP NON-DUE ARTICLE DIRECTORIES ==========
+// Delete article directories that shouldn't exist
+const allSlugs = allArticles.map(a => a.slug);
+const dueSlugs = new Set(dueArticles.map(a => a.slug));
+
+allSlugs.forEach(slug => {
+  if (!dueSlugs.has(slug)) {
+    const slugDir = path.join(articlesDir, slug);
+    if (fs.existsSync(slugDir)) {
+      fs.rmSync(slugDir, { recursive: true, force: true });
+      console.log(`Deleted non-due article directory: ${slugDir}`);
+    }
   }
+});
+
+// ========== GENERATE ARTICLE PAGES ==========
+dueArticles.forEach(post => {
   articleCount++;
 
   const slugDir = path.join(articlesDir, post.slug);
@@ -242,18 +291,36 @@ posts.forEach(post => {
     const nextPart = post.series.part < post.series.total ? post.series.part + 1 : null;
     
     // Find prev/next articles
-    const prevArticle = prevPart ? posts.find(p => p.type === 'article' && p.series && p.series.part === prevPart) : null;
-    const nextArticle = nextPart ? posts.find(p => p.type === 'article' && p.series && p.series.part === nextPart) : null;
+    const prevArticle = prevPart ? allArticles.find(p => p.series && p.series.part === prevPart) : null;
+    const nextArticle = nextPart ? allArticles.find(p => p.series && p.series.part === nextPart) : null;
+    
+    // In production, only show links to due articles
+    const prevLink = prevArticle && (isPreview || isArticleDue(prevArticle));
+    const nextLink = nextArticle && (isPreview || isArticleDue(nextArticle));
+    
+    // In preview, label scheduled articles
+    const prevLabel = prevArticle && isPreview && !isArticleDue(prevArticle) ? ` (scheduled ${fmtDate(prevArticle.date)})` : '';
+    const nextLabel = nextArticle && isPreview && !isArticleDue(nextArticle) ? ` (scheduled ${fmtDate(nextArticle.date)})` : '';
     
     seriesNav = `
   <div class="series-nav">
     <div class="series-label">${post.series.title} &middot; Part ${post.series.part}</div>
     <div class="series-links">
-      ${prevArticle ? `<a href="/articles/${prevArticle.slug}" class="series-link">← Part ${prevPart}</a>` : ''}
-      ${nextArticle ? `<a href="/articles/${nextArticle.slug}" class="series-link">Part ${nextPart} →</a>` : ''}
+      ${prevLink ? `<a href="/articles/${prevArticle.slug}" class="series-link">← Part ${prevPart}${prevLabel}</a>` : ''}
+      ${nextLink ? `<a href="/articles/${nextArticle.slug}" class="series-link">Part ${nextPart} →${nextLabel}</a>` : ''}
     </div>
   </div>`;
   }
+
+  // Scheduled banner for future articles in preview
+  const isDue = isArticleDue(post);
+  const scheduledBanner = (isPreview && !isDue) ? `
+  <div class="scheduled-banner">
+    <strong>Scheduled:</strong> Publishes ${fmtDate(post.date)}
+  </div>` : '';
+
+  // Add noindex meta for scheduled articles in preview
+  const noindexMeta = (isPreview && !isDue) ? '\n<meta name="robots" content="noindex">' : '';
 
   const html = `<!doctype html>
 <html lang="en">
@@ -263,7 +330,7 @@ posts.forEach(post => {
 <meta name="description" content="${ogDescription}">
 <title>${ogTitle}</title>
 <link rel="canonical" href="${canonicalUrl}">
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='16' fill='%230B0F17'/%3E%3Ccircle cx='50' cy='50' r='16' fill='%23DD4E1E'/%3E%3C/svg%3E">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='16' fill='%230B0F17'/%3E%3Ccircle cx='50' cy='50' r='16' fill='%23DD4E1E'/%3E%3C/svg%3E">${noindexMeta}
 
 <!-- Open Graph -->
 <meta property="og:type" content="article">
@@ -376,7 +443,11 @@ ${JSON.stringify(jsonLd, null, 2)}
   .series-links{display:flex; gap:16px;}
   .series-link{color:var(--text-secondary); text-decoration:underline; text-decoration-color:var(--line-strong);}
   .series-link:hover{color:var(--accent); text-decoration-color:var(--accent);}
-  .series-link-disabled{color:var(--text-tertiary);}
+  .scheduled-banner{
+    background:var(--bg-sunken); border:1px solid var(--line-strong); border-radius:4px;
+    padding:16px 20px; margin-top:24px; font-size:14px; color:var(--text-secondary);
+  }
+  .scheduled-banner strong{color:var(--text);}
 </style>
 </head>
 <body>
@@ -390,7 +461,7 @@ ${JSON.stringify(jsonLd, null, 2)}
 
 <article>
   <div class="meta">${fmtDate(post.date)} &middot; ${post.read} read</div>
-  <h1>${post.title}</h1>${post.featured_image ? `
+  <h1>${post.title}</h1>${scheduledBanner}${post.featured_image ? `
   <img src="${post.featured_image}" alt="${post.title}" class="featured-image" width="1200" height="630">` : ''}
   <div class="article-body">
     ${post.body}
@@ -407,4 +478,20 @@ ${JSON.stringify(jsonLd, null, 2)}
   console.log(`Generated ${outputPath}`);
 });
 
+// ========== GENERATE PUBLIC ARTICLES.JSON ==========
+// Only include metadata, no body
+const publicArticles = dueArticles.map(a => ({
+  title: a.title,
+  slug: a.slug,
+  date: a.date,
+  excerpt: a.excerpt,
+  read: a.read,
+  featured_image: a.featured_image,
+  part: a.series ? a.series.part : null
+}));
+
+fs.writeFileSync('articles.json', JSON.stringify(publicArticles, null, 2), 'utf8');
+console.log(`\nGenerated articles.json with ${publicArticles.length} due articles`);
+
 console.log(`\nGenerated ${briefingCount} briefing pages and ${articleCount} article pages.`);
+console.log(`Context: ${process.env.CONTEXT || 'local'}, Preview mode: ${isPreview}, Today: ${getTodayInPacific().toISOString().split('T')[0]}`);

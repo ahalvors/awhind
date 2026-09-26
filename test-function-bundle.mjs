@@ -70,7 +70,7 @@ async function testBundle() {
       console.log('\nTesting shouldPublishToday logic...');
       const testDate = '2026-10-05';
       const mockArticles = [
-        { date: '2026-09-28', slug: 'part-1' },
+        { date: '2026-09-26', slug: 'part-1' },
         { date: '2026-10-05', slug: 'part-2' },
         { date: '2026-10-12', slug: 'part-3' }
       ];

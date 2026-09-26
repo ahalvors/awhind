@@ -3,12 +3,12 @@
 echo "========== Testing Article Publication Schedule =========="
 echo
 
-echo "Test 1: Sep 27, 2026 (day before Part 1) - No articles expected"
-CONTEXT=production PUBLISH_DATE_OVERRIDE=2026-09-27 npm run build | grep -E "(Generated articles.json|Generated .* article pages|Context:)"
+echo "Test 1: Sep 25, 2026 (day before Part 1) - No articles expected"
+CONTEXT=production PUBLISH_DATE_OVERRIDE=2026-09-25 npm run build | grep -E "(Generated articles.json|Generated .* article pages|Context:)"
 echo
 
-echo "Test 2: Sep 28, 2026 (Part 1 publishes) - Only Part 1 expected"
-CONTEXT=production PUBLISH_DATE_OVERRIDE=2026-09-28 npm run build | grep -E "(Generated articles.json|Generated .* article pages|Context:)"
+echo "Test 2: Sep 26, 2026 (Part 1 publishes) - Only Part 1 expected"
+CONTEXT=production PUBLISH_DATE_OVERRIDE=2026-09-26 npm run build | grep -E "(Generated articles.json|Generated .* article pages|Context:)"
 ls -la articles/ 2>/dev/null | grep -v "^total" | awk '{print "  " $NF}' || echo "  (no articles directory)"
 cat articles.json 2>/dev/null | jq '.[] | {part, slug, date}' || echo "{}"
 echo

@@ -4,7 +4,7 @@ import { getTodayPacific, shouldPublishToday } from './netlify/functions/schedul
 
 // Mock articles matching the real schedule
 const mockArticles = [
-  { date: '2026-09-28', slug: 'part-1' },
+  { date: '2026-09-26', slug: 'part-1' },
   { date: '2026-10-05', slug: 'part-2' },
   { date: '2026-10-12', slug: 'part-3' }
 ];
@@ -13,9 +13,9 @@ console.log('========== Testing Scheduled Function Date Logic ==========\n');
 
 // Test cases
 const testCases = [
-  { date: '2026-09-27', expected: false, desc: 'Day before Part 1' },
-  { date: '2026-09-28', expected: true, desc: 'Part 1 publish day' },
-  { date: '2026-09-29', expected: false, desc: 'Day after Part 1' },
+  { date: '2026-09-25', expected: false, desc: 'Day before Part 1' },
+  { date: '2026-09-26', expected: true, desc: 'Part 1 publish day' },
+  { date: '2026-09-27', expected: false, desc: 'Day after Part 1' },
   { date: '2026-10-04', expected: false, desc: 'Day before Part 2' },
   { date: '2026-10-05', expected: true, desc: 'Part 2 publish day' },
   { date: '2026-10-06', expected: false, desc: 'Day after Part 2' },

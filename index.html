@@ -464,7 +464,7 @@
   listEl.innerHTML = POSTS.map(function(p,i){
     if (p.type === 'article') {
       // Render article row
-      var seriesLabel = p.series ? ' &middot; Part ' + p.series.part + ' of ' + p.series.total : '';
+      var seriesLabel = p.series ? ' &middot; Part ' + p.series.part : '';
       return '<div class="post-row" data-i="'+i+'" data-type="article" data-slug="'+p.slug+'">'+
         '<div class="date mono">'+fmtDate(p.date)+'<br>'+p.read+' read</div>'+
         '<div><h3>'+p.title+'</h3><div class="dek">'+p.excerpt+'</div><span class="tag">Case Study'+seriesLabel+'</span></div>'+

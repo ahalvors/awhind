@@ -247,10 +247,10 @@ posts.forEach(post => {
     
     seriesNav = `
   <div class="series-nav">
-    <div class="series-label">${post.series.title} &middot; Part ${post.series.part} of ${post.series.total}</div>
+    <div class="series-label">${post.series.title} &middot; Part ${post.series.part}</div>
     <div class="series-links">
-      ${prevArticle ? `<a href="/articles/${prevArticle.slug}" class="series-link">← Part ${prevPart}</a>` : '<span class="series-link-disabled">← Part ${prevPart}</span>'}
-      ${nextArticle ? `<a href="/articles/${nextArticle.slug}" class="series-link">Part ${nextPart} →</a>` : '<span class="series-link-disabled">Part ${nextPart} →</span>'}
+      ${prevArticle ? `<a href="/articles/${prevArticle.slug}" class="series-link">← Part ${prevPart}</a>` : ''}
+      ${nextArticle ? `<a href="/articles/${nextArticle.slug}" class="series-link">Part ${nextPart} →</a>` : ''}
     </div>
   </div>`;
   }
@@ -361,8 +361,7 @@ ${JSON.stringify(jsonLd, null, 2)}
   article{max-width:720px; margin:44px auto; padding:0 28px;}
   .meta{font-family:var(--mono); font-size:11.5px; color:var(--text-tertiary); letter-spacing:.03em; margin-bottom:16px;}
   article h1{font-size:32px; line-height:1.15;}
-  .excerpt{font-size:16px; color:var(--text-secondary); margin-top:14px; font-family:var(--serif); font-style:italic;}
-  .featured-image{margin-top:28px; width:100%; height:auto; display:block;}
+  .featured-image{margin-top:24px; width:100%; height:auto; display:block;}
   .article-body{margin-top:28px; font-size:15.5px; color:var(--text); max-width:60ch;}
   .article-body p{margin:0 0 18px;}
   .article-body h2{font-size:24px; margin:32px 0 16px; line-height:1.25;}
@@ -391,8 +390,7 @@ ${JSON.stringify(jsonLd, null, 2)}
 
 <article>
   <div class="meta">${fmtDate(post.date)} &middot; ${post.read} read</div>
-  <h1>${post.title}</h1>
-  <div class="excerpt">${post.excerpt}</div>${post.featured_image ? `
+  <h1>${post.title}</h1>${post.featured_image ? `
   <img src="${post.featured_image}" alt="${post.title}" class="featured-image" width="1200" height="630">` : ''}
   <div class="article-body">
     ${post.body}

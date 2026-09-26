@@ -455,21 +455,39 @@
     var dt = new Date(d+'T00:00:00');
     return dt.toLocaleDateString('en-US',{month:'short', day:'numeric', year:'numeric'});
   }
-  document.getElementById('lastUpdate').textContent = fmtDate(POSTS[0].date);
+  
+  // Find first briefing for lastUpdate
+  var firstBriefing = POSTS.find(function(p){ return p.type !== 'article'; });
+  document.getElementById('lastUpdate').textContent = fmtDate(firstBriefing ? firstBriefing.date : POSTS[0].date);
 
   var listEl = document.getElementById('post-list');
   listEl.innerHTML = POSTS.map(function(p,i){
-    return '<div class="post-row" data-i="'+i+'">'+
-      '<div class="date mono">'+fmtDate(p.date)+'<br>'+p.read+' read</div>'+
-      '<div><h3>'+p.title+'</h3><div class="dek">'+p.dek+'</div><span class="tag">'+p.tag+'</span></div>'+
-      '<div class="arrow">→</div>'+
-    '</div>';
+    if (p.type === 'article') {
+      // Render article row
+      var seriesLabel = p.series ? ' &middot; Part ' + p.series.part + ' of ' + p.series.total : '';
+      return '<div class="post-row" data-i="'+i+'" data-type="article" data-slug="'+p.slug+'">'+
+        '<div class="date mono">'+fmtDate(p.date)+'<br>'+p.read+' read</div>'+
+        '<div><h3>'+p.title+'</h3><div class="dek">'+p.excerpt+'</div><span class="tag">Case Study'+seriesLabel+'</span></div>'+
+        '<div class="arrow">→</div>'+
+      '</div>';
+    } else {
+      // Render briefing row
+      return '<div class="post-row" data-i="'+i+'" data-type="briefing">'+
+        '<div class="date mono">'+fmtDate(p.date)+'<br>'+p.read+' read</div>'+
+        '<div><h3>'+p.title+'</h3><div class="dek">'+p.dek+'</div><span class="tag">'+p.tag+'</span></div>'+
+        '<div class="arrow">→</div>'+
+      '</div>';
+    }
   }).join('');
 
   var overlay = document.getElementById('overlay');
   var panel = document.getElementById('article-panel');
   function openPost(i){
     var p = POSTS[i];
+    // Defensive: only handle briefings
+    if (p.type === 'article' || !p.body || !Array.isArray(p.body) || !p.sources) {
+      return;
+    }
     var url = encodeURIComponent('https://awhind.com/briefing/'+p.date);
     var title = encodeURIComponent(p.title);
     panel.innerHTML =
@@ -491,7 +509,17 @@
   function closePost(){ overlay.classList.remove('open'); }
   listEl.addEventListener('click', function(e){
     var row = e.target.closest('.post-row');
-    if(row) openPost(parseInt(row.getAttribute('data-i'),10));
+    if(row) {
+      var rowType = row.getAttribute('data-type');
+      if (rowType === 'article') {
+        // Navigate to article page
+        var slug = row.getAttribute('data-slug');
+        window.location.href = '/articles/' + slug + '/';
+      } else {
+        // Open briefing overlay
+        openPost(parseInt(row.getAttribute('data-i'),10));
+      }
+    }
   });
   overlay.addEventListener('click', function(e){ if(e.target === overlay) closePost(); });
   document.addEventListener('keydown', function(e){ if(e.key === 'Escape') closePost(); });

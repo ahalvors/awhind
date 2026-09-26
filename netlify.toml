@@ -1,0 +1,13 @@
+[build]
+  command = "npm run build"
+  publish = "."
+
+[functions]
+  directory = "netlify/functions"
+  included_files = ["content/articles.json"]
+
+[[redirects]]
+  from = "/content/*"
+  to = "/404"
+  status = 404
+  force = true

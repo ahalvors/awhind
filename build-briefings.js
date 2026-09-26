@@ -218,6 +218,8 @@ posts.forEach(post => {
   const canonicalUrl = `https://awhind.com/articles/${post.slug}`;
   const ogTitle = escapeHtml(post.seo_title || post.title);
   const ogDescription = escapeHtml(post.meta_description);
+  const ogImageUrl = post.featured_image ? `https://awhind.com${post.featured_image}` : '';
+  const ogImageAlt = post.featured_image ? escapeHtml(`Featured image for ${post.title}`) : '';
   
   const jsonLd = {
     "@context": "https://schema.org",
@@ -229,6 +231,9 @@ posts.forEach(post => {
     "author": { "@type": "Organization", "name": "AWHIND", "url": "https://awhind.com" },
     "publisher": { "@type": "Organization", "name": "AWHIND", "url": "https://awhind.com" }
   };
+  if (post.featured_image) {
+    jsonLd.image = ogImageUrl;
+  }
 
   // Build series navigation if present
   let seriesNav = '';
@@ -265,12 +270,17 @@ posts.forEach(post => {
 <meta property="og:url" content="${canonicalUrl}">
 <meta property="og:title" content="${ogTitle}">
 <meta property="og:description" content="${ogDescription}">
-<meta property="og:site_name" content="AWHIND">
+<meta property="og:site_name" content="AWHIND">${post.featured_image ? `
+<meta property="og:image" content="${ogImageUrl}">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="${ogImageAlt}">` : ''}
 
 <!-- Twitter Card -->
-<meta name="twitter:card" content="summary">
+<meta name="twitter:card" content="${post.featured_image ? 'summary_large_image' : 'summary'}">
 <meta name="twitter:title" content="${ogTitle}">
-<meta name="twitter:description" content="${ogDescription}">
+<meta name="twitter:description" content="${ogDescription}">${post.featured_image ? `
+<meta name="twitter:image" content="${ogImageUrl}">` : ''}
 
 <script type="application/ld+json">
 ${JSON.stringify(jsonLd, null, 2)}
@@ -352,6 +362,7 @@ ${JSON.stringify(jsonLd, null, 2)}
   .meta{font-family:var(--mono); font-size:11.5px; color:var(--text-tertiary); letter-spacing:.03em; margin-bottom:16px;}
   article h1{font-size:32px; line-height:1.15;}
   .excerpt{font-size:16px; color:var(--text-secondary); margin-top:14px; font-family:var(--serif); font-style:italic;}
+  .featured-image{margin-top:28px; width:100%; height:auto; display:block;}
   .article-body{margin-top:28px; font-size:15.5px; color:var(--text); max-width:60ch;}
   .article-body p{margin:0 0 18px;}
   .article-body h2{font-size:24px; margin:32px 0 16px; line-height:1.25;}
@@ -381,7 +392,8 @@ ${JSON.stringify(jsonLd, null, 2)}
 <article>
   <div class="meta">${fmtDate(post.date)} &middot; ${post.read} read</div>
   <h1>${post.title}</h1>
-  <div class="excerpt">${post.excerpt}</div>
+  <div class="excerpt">${post.excerpt}</div>${post.featured_image ? `
+  <img src="${post.featured_image}" alt="${post.title}" class="featured-image" width="1200" height="630">` : ''}
   <div class="article-body">
     ${post.body}
   </div>${seriesNav}

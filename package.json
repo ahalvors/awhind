@@ -5,6 +5,8 @@
   "scripts": {
     "build": "node build-briefings.js && node build-sitemap.js"
   },
-  "devDependencies": {},
+  "devDependencies": {
+    "@netlify/zip-it-and-ship-it": "^16.2.0"
+  },
   "private": true
 }

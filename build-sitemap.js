@@ -3,6 +3,9 @@
 const fs = require('fs');
 
 const posts = JSON.parse(fs.readFileSync('posts.json', 'utf8'));
+const articles = fs.existsSync('articles.json') 
+  ? JSON.parse(fs.readFileSync('articles.json', 'utf8'))
+  : [];
 
 const staticUrls = [
   { loc: 'https://awhind.com/', lastmod: '2026-09-02', priority: '1.0' },
@@ -19,7 +22,13 @@ const briefingUrls = posts.map(post => ({
   priority: '0.6'
 }));
 
-const allUrls = [...staticUrls, ...briefingUrls];
+const articleUrls = articles.map(article => ({
+  loc: `https://awhind.com/articles/${article.slug}`,
+  lastmod: article.date,
+  priority: '0.7'
+}));
+
+const allUrls = [...staticUrls, ...articleUrls, ...briefingUrls];
 
 const sitemap = `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
@@ -32,4 +41,4 @@ ${allUrls.map(url => `  <url>
 `;
 
 fs.writeFileSync('sitemap.xml', sitemap, 'utf8');
-console.log(`Generated sitemap.xml with ${allUrls.length} URLs (${staticUrls.length} static + ${briefingUrls.length} briefings)`);
+console.log(`Generated sitemap.xml with ${allUrls.length} URLs (${staticUrls.length} static + ${articleUrls.length} articles + ${briefingUrls.length} briefings)`);

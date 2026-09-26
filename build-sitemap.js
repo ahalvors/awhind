@@ -13,13 +13,23 @@ const staticUrls = [
   { loc: 'https://awhind.com/capabilities/global-noc', lastmod: '2026-09-02', priority: '0.8' }
 ];
 
-const briefingUrls = posts.map(post => ({
-  loc: `https://awhind.com/briefing/${post.date}`,
-  lastmod: post.date,
-  priority: '0.6'
-}));
+const briefingUrls = posts
+  .filter(post => post.type !== 'article')
+  .map(post => ({
+    loc: `https://awhind.com/briefing/${post.date}`,
+    lastmod: post.date,
+    priority: '0.6'
+  }));
 
-const allUrls = [...staticUrls, ...briefingUrls];
+const articleUrls = posts
+  .filter(post => post.type === 'article')
+  .map(post => ({
+    loc: `https://awhind.com/articles/${post.slug}`,
+    lastmod: post.date,
+    priority: '0.7'
+  }));
+
+const allUrls = [...staticUrls, ...articleUrls, ...briefingUrls];
 
 const sitemap = `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
@@ -32,4 +42,4 @@ ${allUrls.map(url => `  <url>
 `;
 
 fs.writeFileSync('sitemap.xml', sitemap, 'utf8');
-console.log(`Generated sitemap.xml with ${allUrls.length} URLs (${staticUrls.length} static + ${briefingUrls.length} briefings)`);
+console.log(`Generated sitemap.xml with ${allUrls.length} URLs (${staticUrls.length} static + ${articleUrls.length} articles + ${briefingUrls.length} briefings)`);

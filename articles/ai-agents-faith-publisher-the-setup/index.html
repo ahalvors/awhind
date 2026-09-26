@@ -1,0 +1,231 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="How we run a daily devotional, a podcast and an iOS app with a small team of AI agents, and where the human stays in charge. Part 1: the setup.">
+<title>How a One-Person Faith Publisher Runs Daily Devotions with AI Agents</title>
+<link rel="canonical" href="https://awhind.com/articles/ai-agents-faith-publisher-the-setup">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='16' fill='%230B0F17'/%3E%3Ccircle cx='50' cy='50' r='16' fill='%23DD4E1E'/%3E%3C/svg%3E">
+
+<!-- Open Graph -->
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://awhind.com/articles/ai-agents-faith-publisher-the-setup">
+<meta property="og:title" content="How a One-Person Faith Publisher Runs Daily Devotions with AI Agents">
+<meta property="og:description" content="How we run a daily devotional, a podcast and an iOS app with a small team of AI agents, and where the human stays in charge. Part 1: the setup.">
+<meta property="og:site_name" content="AWHIND">
+
+<!-- Twitter Card -->
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="How a One-Person Faith Publisher Runs Daily Devotions with AI Agents">
+<meta name="twitter:description" content="How we run a daily devotional, a podcast and an iOS app with a small team of AI agents, and where the human stays in charge. Part 1: the setup.">
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "The Setup: How One Person Runs a Daily Devotional Operation with a Team of AI Agents",
+  "description": "How we run a daily devotional, a podcast and an iOS app with a small team of AI agents, and where the human stays in charge. Part 1: the setup.",
+  "datePublished": "2026-09-26",
+  "url": "https://awhind.com/articles/ai-agents-faith-publisher-the-setup",
+  "author": {
+    "@type": "Organization",
+    "name": "AWHIND",
+    "url": "https://awhind.com"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "AWHIND",
+    "url": "https://awhind.com"
+  }
+}
+</script>
+
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,500&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap');
+
+  :root{
+    --bg:#F1F2ED;
+    --bg-elevated:#FFFFFF;
+    --bg-sunken:#E7E8E1;
+    --text:#0B0F17;
+    --text-secondary:#566072;
+    --text-tertiary:#848d9b;
+    --line:#D9DAD2;
+    --line-strong:#c2c4ba;
+    --accent:#DD4E1E;
+    --accent-contrast:#FFFFFF;
+    --shadow: 0 1px 2px rgba(11,15,23,.04), 0 8px 24px rgba(11,15,23,.06);
+    --serif: 'Newsreader', Georgia, 'Times New Roman', serif;
+    --sans: 'IBM Plex Sans', -apple-system, 'Segoe UI', Roboto, sans-serif;
+    --mono: 'IBM Plex Mono', 'SF Mono', Consolas, monospace;
+  }
+  @media (prefers-color-scheme: dark){
+    :root:not([data-theme="light"]){
+      --bg:#0A0D14;
+      --bg-elevated:#12161F;
+      --bg-sunken:#080A10;
+      --text:#EEF0F4;
+      --text-secondary:#9AA3B4;
+      --text-tertiary:#6d7688;
+      --line:#232838;
+      --line-strong:#323951;
+      --accent:#FF7A47;
+      --accent-contrast:#0A0D14;
+      --shadow: 0 1px 2px rgba(0,0,0,.3), 0 8px 28px rgba(0,0,0,.4);
+    }
+  }
+  :root[data-theme="dark"]{
+    --bg:#0A0D14;
+    --bg-elevated:#12161F;
+    --bg-sunken:#080A10;
+    --text:#EEF0F4;
+    --text-secondary:#9AA3B4;
+    --text-tertiary:#6d7688;
+    --line:#232838;
+    --line-strong:#323951;
+    --accent:#FF7A47;
+    --accent-contrast:#0A0D14;
+    --shadow: 0 1px 2px rgba(0,0,0,.3), 0 8px 28px rgba(0,0,0,.4);
+  }
+
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0; background:var(--bg); color:var(--text);
+    font-family:var(--sans); font-size:16px; line-height:1.55;
+    -webkit-font-smoothing:antialiased;
+  }
+  a{color:inherit;}
+  h1,h2{font-family:var(--serif); font-weight:500; margin:0; text-wrap:balance; letter-spacing:-0.01em;}
+  .mono{font-family:var(--mono);}
+  .wrap{max-width:1120px; margin:0 auto; padding:0 28px;}
+  .btn{
+    display:inline-flex; align-items:center; gap:8px; font-family:var(--mono); font-size:13px;
+    letter-spacing:.04em; text-transform:uppercase; padding:12px 20px; border-radius:2px;
+    text-decoration:none; cursor:pointer; border:1px solid transparent;
+  }
+  .btn-ghost{border-color:var(--line-strong); color:var(--text);}
+  .btn-ghost:hover{border-color:var(--accent); color:var(--accent);}
+  .btn-sm{padding:8px 14px; font-size:11px;}
+
+  nav.wrap{display:flex; align-items:center; justify-content:space-between; padding-top:18px; padding-bottom:18px;}
+  .brand{font-family:var(--serif); font-weight:600; font-size:21px; letter-spacing:-.01em; text-decoration:none; color:var(--text); display:flex; align-items:center; gap:9px;}
+  .brand .mark{width:9px;height:9px;background:var(--accent);display:inline-block;}
+
+  article{max-width:720px; margin:44px auto; padding:0 28px;}
+  .meta{font-family:var(--mono); font-size:11.5px; color:var(--text-tertiary); letter-spacing:.03em; margin-bottom:16px;}
+  article h1{font-size:32px; line-height:1.15;}
+  .excerpt{font-size:16px; color:var(--text-secondary); margin-top:14px; font-family:var(--serif); font-style:italic;}
+  .article-body{margin-top:28px; font-size:15.5px; color:var(--text); max-width:60ch;}
+  .article-body p{margin:0 0 18px;}
+  .article-body h2{font-size:24px; margin:32px 0 16px; line-height:1.25;}
+  .article-body ul, .article-body ol{margin:0 0 18px; padding-left:28px;}
+  .article-body li{margin-bottom:8px;}
+  .article-body strong{font-weight:600;}
+  .article-body a{color:var(--accent); text-decoration:underline; text-decoration-color:var(--line-strong);}
+  .article-body a:hover{text-decoration-color:var(--accent);}
+  .back-link{margin-top:32px; display:inline-block;}
+  .series-nav{margin-top:40px; padding-top:20px; border-top:1px solid var(--line); font-size:13px;}
+  .series-label{font-family:var(--mono); color:var(--text-tertiary); letter-spacing:.03em; margin-bottom:12px;}
+  .series-links{display:flex; gap:16px;}
+  .series-link{color:var(--text-secondary); text-decoration:underline; text-decoration-color:var(--line-strong);}
+  .series-link:hover{color:var(--accent); text-decoration-color:var(--accent);}
+  .series-link-disabled{color:var(--text-tertiary);}
+</style>
+</head>
+<body>
+
+<nav class="wrap">
+  <a href="/" class="brand"><span class="mark"></span>AWHIND</a>
+  <div>
+    <a href="/" class="btn btn-ghost btn-sm">← Home</a>
+  </div>
+</nav>
+
+<article>
+  <div class="meta">Sep 26, 2026 &middot; 12 min read</div>
+  <h1>The Setup: How One Person Runs a Daily Devotional Operation with a Team of AI Agents</h1>
+  <div class="excerpt">Early in the morning, a short devotion goes out by email to readers of The Quiet Path. When a series is running, a matching podcast episode goes live on Apple Podcasts and Spotify at the same time. The website stays current, the Instagram account stays active, and the iOS app keeps getting new content.</div>
+  <div class="article-body">
+    <p>Early in the morning, a short devotion goes out by email to readers of The Quiet Path. When a series is running, a matching podcast episode goes live on Apple Podcasts and Spotify at the same time. The website stays current, the Instagram account stays active, and the iOS app keeps getting new content.</p>
+
+<p>There is one human behind all of it. That's me.</p>
+
+<p>To be clear, The Quiet Path is not an outside client. It's a faith-media venture we built and operate ourselves, and I'm writing about it because it is the most honest test bed I have. Everything here is something I actually run, with the same tools and rules I would bring to a ministry or small publisher. This is Part 1 of an ongoing series. I'll start with the setup: what we publish, the plumbing underneath it, and who does what on the team.</p>
+
+<h2>What The Quiet Path publishes</h2>
+
+<p>The Quiet Path started as a free iOS app for walking slowly through a single psalm. Today it offers three guided journeys, Psalm 23, Psalm 91 and Psalm 51, each with seven chapters. There are no ads, no accounts, no streaks and no scores. That last part matters to me. Scripture should not feel like a game you can lose.</p>
+
+<p>Around the app, the venture has grown into a small publishing operation:</p>
+
+<ul>
+<li><strong>A website</strong> at quietpathapp.com that serves as the product hub for everything below.</li>
+<li><strong>A daily devotion on Substack</strong>, written as series. September opened with a seven-day series on contrition, then a five-day series called You Belong. The plan is a new five-day series each week through the end of the year.</li>
+<li><strong>A podcast</strong> on Apple Podcasts and Spotify. The first series, You Belong, ran five episodes paired day by day with the written devotions.</li>
+<li><strong>Small-group guides</strong>: chapter-by-chapter Psalm 23 discussion guides built for a 30 to 60 minute gathering.</li>
+<li><strong>Instagram</strong> at @quietpathapp, scheduled through Buffer.</li>
+</ul>
+
+<p>That's a lot of surface area for one person. I spend about 20 hours a week on devotion content, and that is separate from my own time with the Lord.</p>
+
+<h2>The plumbing is cheap and boring, on purpose</h2>
+
+<p>The domain, quietpathapp.com, was registered through Cloudflare for about $10 a year and points at Netlify, which hosts the site. Cloudflare Email Routing forwards devo@, support@ and privacy@ to an agent inbox, so reader mail and support requests land in one place an agent can read and sort. Substack sends the daily email. The podcast feed and audio live on the website itself, and Apple Podcasts and Spotify pick up new episodes from there. Buffer schedules social posts. App Store Connect is where the app lives.</p>
+
+<p>None of this is exotic. That's the point. A boring foundation lets the agents spend their effort on the work instead of fighting the tools.</p>
+
+<h2>Meet the team</h2>
+
+<p>The agents run in the Grok Bot app. I call them Grok Bots, and each one has a name, a job description and a short set of rules written in plain English. The most important design choice I made was giving each agent one clear lane.</p>
+
+<p><strong>Shepherd</strong> owns The Quiet Path end to end: the iOS app, the website, the daily Substack and the small-group devotionals. I want to be honest about how the writing works, because it matters. The spiritual direction comes from my own Bible study. I use that time to build a framework for each week, breaking the devotion down by day and by theme. Shepherd takes that framework, drafts the five days and publishes them. The direction comes from time in the Word, and Shepherd carries it the rest of the way.</p>
+
+<p><strong>Mark</strong> is the CMO. He handles marketing and social across my brands, including The Quiet Path. He drafts campaigns, prepares posts and schedules approved work through Buffer. He also follows written house rules, like a "link in bio" line on Instagram instead of podcast URLs in the caption.</p>
+
+<p><strong>Allen</strong> is chief of staff. He runs daily coordination across all the agents: a morning digest around 7 a.m. on weekdays, and an afternoon stand-up that runs weekdays at about 2:47 p.m. (I still call it the 3 p.m. stand-up) where the day's work gets checked and rerouted. He reads each agent's last checkpoint, sets priorities and hands work to the right specialist. His instructions say to escalate conflicts, external messages, spending decisions and changes to important files to me. Nothing else needs me.</p>
+
+<p><strong>Forge</strong> handles code and deployments. Forge's rule is that a delivery doesn't count as done without evidence: test results, screenshots or files I can inspect. For The Quiet Path, that has meant things like updating the App Store listing through Apple's API after I created a key for it, and confirming the app already met a new launch-screen requirement before Apple started enforcing it.</p>
+
+<p><strong>Scout</strong> does inbound research. Every weekday morning Scout runs a content radar across the web, GitHub and industry news, and every item it reports needs three things: the source, why it's worth following and who should own it next.</p>
+
+<h2>The one rule: I approve anything that sends, spends or changes live systems</h2>
+
+<p>This is the rule that makes the rest possible. Agents can research, draft, build and check each other's work all day. But when something is about to leave the building, cost money or change a live system, it comes to me first.</p>
+
+<p>In practice that means a campaign gets approved before Mark schedules it. A new App Store listing waits for my go-ahead. Access to accounts is something I grant, one key at a time. When I do give a standing approval, such as an approved week of scheduled posts, it's written down in that agent's notes so there's no guessing later.</p>
+
+<p>For a ministry, this is the part I'd insist on. The agents are there to take the weight of the work, not the responsibility for it.</p>
+
+<h2>What a normal day looks like</h2>
+
+<p>A good example of the system working happened in early September. Scout's morning radar noticed that the website and App Store description were promoting Psalm 91, while the App Store subtitle still described the app as a Psalm 23 guide. Scout flagged it and routed it. Mark wrote a new subtitle. I held it for about a week so it could ship with the next app release, then approved it, and Forge pushed it through Apple's API. Nobody had to remember to check. The mismatch was caught because checking is somebody's job every morning.</p>
+
+<p>Most days look like that. Allen's digest tells me what needs a decision. Scout surfaces anything new. Shepherd keeps the devotions, site and guides moving. Mark fills the social calendar with approved posts. Forge ships and shows his work. By the afternoon stand-up, I know what's done, what's stuck and what's waiting on me.</p>
+
+<h2>What I'd tell a church or small publisher</h2>
+
+<p>Start smaller than you think. Give each agent one job and plain-language rules. Get the boring plumbing right first: domain, email routing, hosting, a scheduling tool. And keep a human on the send button.</p>
+
+<p>In Part 2, I'll follow one week of devotions from my framework to the inbox, the podcast and social posts.</p>
+
+<h2>Let's talk</h2>
+
+<p>If you lead a ministry, run communications for a church or publish devotional content on a small team, I'd be glad to talk about what a setup like this could look like for you. AWH Industries helps organizations put practical systems in place with the human firmly in charge. Email me at <a href="mailto:info@awhind.com">info@awhind.com</a>.</p>
+
+<!-- TODO: a Calendly booking link may be added here later. -->
+
+  </div>
+  <div class="series-nav">
+    <div class="series-label">AI Agents for a Faith Publisher &middot; Part 1 of 3</div>
+    <div class="series-links">
+      <span class="series-link-disabled">← Part ${prevPart}</span>
+      <a href="/articles/bible-study-to-inbox-devotion-workflow" class="series-link">Part 2 →</a>
+    </div>
+  </div>
+  <a href="/" class="btn btn-ghost btn-sm back-link">← Home</a>
+</article>
+
+</body>
+</html>

@@ -58,6 +58,26 @@ function getTodayInPacific() {
   return new Date(`${year}-${month}-${day}T00:00:00`);
 }
 
+// Format date as YYYY-MM-DD in Pacific timezone for logging
+function formatTodayPacific() {
+  if (process.env.PUBLISH_DATE_OVERRIDE) {
+    return process.env.PUBLISH_DATE_OVERRIDE;
+  }
+  
+  const now = new Date();
+  const formatter = new Intl.DateTimeFormat('en-US', {
+    timeZone: 'America/Los_Angeles',
+    year: 'numeric',
+    month: '2-digit',
+    day: '2-digit'
+  });
+  const parts = formatter.formatToParts(now);
+  const year = parts.find(p => p.type === 'year').value;
+  const month = parts.find(p => p.type === 'month').value;
+  const day = parts.find(p => p.type === 'day').value;
+  return `${year}-${month}-${day}`;
+}
+
 // Check if article is due
 function isArticleDue(article) {
   const articleDate = new Date(article.date + 'T00:00:00');
@@ -494,4 +514,4 @@ fs.writeFileSync('articles.json', JSON.stringify(publicArticles, null, 2), 'utf8
 console.log(`\nGenerated articles.json with ${publicArticles.length} due articles`);
 
 console.log(`\nGenerated ${briefingCount} briefing pages and ${articleCount} article pages.`);
-console.log(`Context: ${process.env.CONTEXT || 'local'}, Preview mode: ${isPreview}, Today: ${getTodayInPacific().toISOString().split('T')[0]}`);
+console.log(`Context: ${process.env.CONTEXT || 'local'}, Preview mode: ${isPreview}, Today: ${formatTodayPacific()}`);

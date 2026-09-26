@@ -2,9 +2,8 @@ import { readFileSync } from 'fs';
 import { fileURLToPath } from 'url';
 import { dirname, join } from 'path';
 
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = dirname(__filename);
-const articlesData = JSON.parse(readFileSync(join(__dirname, '../../content/articles.json'), 'utf8'));
+const fnDir = dirname(fileURLToPath(import.meta.url));
+const articlesData = JSON.parse(readFileSync(join(fnDir, '../../content/articles.json'), 'utf8'));
 
 export const config = {
   schedule: "10 12 * * *" // 12:10 UTC = 5:10 AM PDT / 4:10 AM PST
@@ -69,7 +68,7 @@ export default async function handler(req, context) {
     console.log('[scheduled-publish] Rebuild triggered successfully');
     return new Response('Rebuild triggered', { status: 200 });
   } catch (error) {
-    console.error('[scheduled-publish] Error triggering rebuild:', error.message);
-    return new Response(`Error: ${error.message}`, { status: 500 });
+    console.error('[scheduled-publish] Build hook request failed');
+    return new Response('Build hook request failed', { status: 500 });
   }
 }

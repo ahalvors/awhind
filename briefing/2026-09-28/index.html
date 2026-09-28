@@ -1,0 +1,154 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Unauthenticated command execution on every NetScaler ADC and Gateway, exploited as zero-days before patches; federal fixes due Wednesday Sep 30. Separately, Kiteworks lifted a nine-hour precautionary shutdown advisory. No CVE, no confirmed compromise.">
+<title>Citrix Confirms Two Exploited NetScaler Zero-Days (CVE-2026-88771/88772) — and Kiteworks Lifts Its Weekend Shutdown Advisory — AWHIND Daily Briefing</title>
+<link rel="canonical" href="https://awhind.com/briefing/2026-09-28">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='16' fill='%230B0F17'/%3E%3Ccircle cx='50' cy='50' r='16' fill='%23DD4E1E'/%3E%3C/svg%3E">
+
+<!-- Open Graph -->
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://awhind.com/briefing/2026-09-28">
+<meta property="og:title" content="Citrix Confirms Two Exploited NetScaler Zero-Days (CVE-2026-88771/88772) — and Kiteworks Lifts Its Weekend Shutdown Advisory">
+<meta property="og:description" content="Unauthenticated command execution on every NetScaler ADC and Gateway, exploited as zero-days before patches; federal fixes due Wednesday Sep 30. Separately, Kiteworks lifted a nine-hour precautionary shutdown advisory. No CVE, no confirmed compromise.">
+<meta property="og:site_name" content="AWHIND">
+
+<!-- Twitter Card -->
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Citrix Confirms Two Exploited NetScaler Zero-Days (CVE-2026-88771/88772) — and Kiteworks Lifts Its Weekend Shutdown Advisory">
+<meta name="twitter:description" content="Unauthenticated command execution on every NetScaler ADC and Gateway, exploited as zero-days before patches; federal fixes due Wednesday Sep 30. Separately, Kiteworks lifted a nine-hour precautionary shutdown advisory. No CVE, no confirmed compromise.">
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "Citrix Confirms Two Exploited NetScaler Zero-Days (CVE-2026-88771/88772) — and Kiteworks Lifts Its Weekend Shutdown Advisory",
+  "description": "Unauthenticated command execution on every NetScaler ADC and Gateway, exploited as zero-days before patches; federal fixes due Wednesday Sep 30. Separately, Kiteworks lifted a nine-hour precautionary shutdown advisory. No CVE, no confirmed compromise.",
+  "datePublished": "2026-09-28",
+  "url": "https://awhind.com/briefing/2026-09-28",
+  "author": {
+    "@type": "Organization",
+    "name": "AWHIND",
+    "url": "https://awhind.com"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "AWHIND",
+    "url": "https://awhind.com"
+  }
+}
+</script>
+
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,500&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap');
+
+  :root{
+    --bg:#F1F2ED;
+    --bg-elevated:#FFFFFF;
+    --bg-sunken:#E7E8E1;
+    --text:#0B0F17;
+    --text-secondary:#566072;
+    --text-tertiary:#848d9b;
+    --line:#D9DAD2;
+    --line-strong:#c2c4ba;
+    --accent:#DD4E1E;
+    --accent-contrast:#FFFFFF;
+    --shadow: 0 1px 2px rgba(11,15,23,.04), 0 8px 24px rgba(11,15,23,.06);
+    --serif: 'Newsreader', Georgia, 'Times New Roman', serif;
+    --sans: 'IBM Plex Sans', -apple-system, 'Segoe UI', Roboto, sans-serif;
+    --mono: 'IBM Plex Mono', 'SF Mono', Consolas, monospace;
+  }
+  @media (prefers-color-scheme: dark){
+    :root:not([data-theme="light"]){
+      --bg:#0A0D14;
+      --bg-elevated:#12161F;
+      --bg-sunken:#080A10;
+      --text:#EEF0F4;
+      --text-secondary:#9AA3B4;
+      --text-tertiary:#6d7688;
+      --line:#232838;
+      --line-strong:#323951;
+      --accent:#FF7A47;
+      --accent-contrast:#0A0D14;
+      --shadow: 0 1px 2px rgba(0,0,0,.3), 0 8px 28px rgba(0,0,0,.4);
+    }
+  }
+  :root[data-theme="dark"]{
+    --bg:#0A0D14;
+    --bg-elevated:#12161F;
+    --bg-sunken:#080A10;
+    --text:#EEF0F4;
+    --text-secondary:#9AA3B4;
+    --text-tertiary:#6d7688;
+    --line:#232838;
+    --line-strong:#323951;
+    --accent:#FF7A47;
+    --accent-contrast:#0A0D14;
+    --shadow: 0 1px 2px rgba(0,0,0,.3), 0 8px 28px rgba(0,0,0,.4);
+  }
+
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0; background:var(--bg); color:var(--text);
+    font-family:var(--sans); font-size:16px; line-height:1.55;
+    -webkit-font-smoothing:antialiased;
+  }
+  a{color:inherit;}
+  h1,h2{font-family:var(--serif); font-weight:500; margin:0; text-wrap:balance; letter-spacing:-0.01em;}
+  .mono{font-family:var(--mono);}
+  .wrap{max-width:1120px; margin:0 auto; padding:0 28px;}
+  .btn{
+    display:inline-flex; align-items:center; gap:8px; font-family:var(--mono); font-size:13px;
+    letter-spacing:.04em; text-transform:uppercase; padding:12px 20px; border-radius:2px;
+    text-decoration:none; cursor:pointer; border:1px solid transparent;
+  }
+  .btn-ghost{border-color:var(--line-strong); color:var(--text);}
+  .btn-ghost:hover{border-color:var(--accent); color:var(--accent);}
+  .btn-sm{padding:8px 14px; font-size:11px;}
+
+  nav.wrap{display:flex; align-items:center; justify-content:space-between; padding-top:18px; padding-bottom:18px;}
+  .brand{font-family:var(--serif); font-weight:600; font-size:21px; letter-spacing:-.01em; text-decoration:none; color:var(--text); display:flex; align-items:center; gap:9px;}
+  .brand .mark{width:9px;height:9px;background:var(--accent);display:inline-block;}
+
+  article{max-width:720px; margin:44px auto; padding:0 28px;}
+  .meta{font-family:var(--mono); font-size:11.5px; color:var(--text-tertiary); letter-spacing:.03em; margin-bottom:16px;}
+  article h1{font-size:32px; line-height:1.15;}
+  .dek{font-size:16px; color:var(--text-secondary); margin-top:14px; font-family:var(--serif); font-style:italic;}
+  .article-body{margin-top:28px; font-size:15.5px; color:var(--text); max-width:60ch;}
+  .article-body p{margin:0 0 18px;}
+  .article-body strong{font-weight:600;}
+  .article-body .stat-inline{font-family:var(--mono); color:var(--accent); font-weight:600;}
+  .article-sources{margin-top:32px; padding-top:20px; border-top:1px solid var(--line); font-size:12px; color:var(--text-tertiary);}
+  .article-sources a{color:var(--text-secondary); text-decoration:underline; text-decoration-color:var(--line-strong);}
+  .back-link{margin-top:32px; display:inline-block;}
+</style>
+</head>
+<body>
+
+<nav class="wrap">
+  <a href="/" class="brand"><span class="mark"></span>AWHIND</a>
+  <div>
+    <a href="/#briefing" class="btn btn-ghost btn-sm">← All Briefings</a>
+  </div>
+</nav>
+
+<article>
+  <div class="meta">Sep 28, 2026 &middot; Threat &middot; 3 min read</div>
+  <h1>Citrix Confirms Two Exploited NetScaler Zero-Days (CVE-2026-88771/88772) — and Kiteworks Lifts Its Weekend Shutdown Advisory</h1>
+  <div class="dek">Unauthenticated command execution on every NetScaler ADC and Gateway, exploited as zero-days before patches; federal fixes due Wednesday Sep 30. Separately, Kiteworks lifted a nine-hour precautionary shutdown advisory. No CVE, no confirmed compromise.</div>
+  <div class="article-body">
+    <p>Citrix bulletin <strong>CTX697096</strong> (<strong>Sunday Sep 27</strong>) fixes eight NetScaler ADC and Gateway flaws, <strong>CVE-2026-88771</strong> through <strong>-88778</strong>, and says exploits of the first two “on unmitigated NetScaler deployments have been observed.” <strong>CVE-2026-88771</strong> (CVSS 4.0 score 9.5) lets an unauthenticated attacker execute arbitrary commands on all NetScaler ADC and Gateway deployments, including the default configuration. <strong>CVE-2026-88772</strong> (CVSS 4.0 score 9.5) is a memory overflow leading to code execution or denial of service when DTLS is enabled, which is on by default for VPN vServers. Fixed builds: <code>14.1-73.37</code> (also 14.1 FIPS), <code>13.1-64.23</code>, and <code>13.1-37.279</code> (13.1-FIPS/NDcPP). Secure Private Access hybrid deployments using NetScaler are also affected; Citrix is upgrading its managed cloud services itself. Both flaws were exploited as zero-days before patches were available, and watchTowr publicly warned of exploitation on <strong>Sep 26</strong>. CISA added both to KEV on Sep 27 (federal deadline <strong>Wednesday Sep 30</strong>), citing “reports and partner threat intelligence confirming that threat actors are actively exploiting these vulnerabilities globally,” and urged organizations to preserve forensic evidence before patching. No attacker has been named publicly, and CISA lists ransomware use as unknown. watchTowr notes that appliances patched for the earlier <strong>CVE-2026-19490</strong> are still exposed. Shadowserver tracks more than 23,000 IPs with NetScaler fingerprints; that counts exposed devices, not vulnerable ones.</p>
+    <p>Separately, <strong>Kiteworks</strong> (formerly Accellion) lifted a precautionary shutdown advisory on <strong>Sep 27</strong>. On <strong>Sep 25</strong> it cited “credible threat intelligence from federal intelligence authorities indicating that a threat actor may attempt to target some Kiteworks systems,” recommended a <strong>nine-hour</strong> weekend shutdown of self-managed systems, and took its hosted systems down itself. Hosted systems are back up, and customers with self-hosted <strong>Advanced Forms</strong> are told to contact support. According to an email to customers, per SecurityWeek, a severe Advanced Forms vulnerability triggered the shutdown; the email says the product is enabled for “fewer than 1% of our customers, under 50 organizations” and that Kiteworks is working with partners including Mandiant. Kiteworks says it has no indication of compromise and that version <strong>9.5.1</strong> addresses all known vulnerabilities. There is no public CVE and no evidence of exploitation.</p>
+    <p>Livermore takeaway: treat every internet-facing NetScaler as a possible incident, not just a patch job. Before upgrading, capture logs, a support bundle, and a core dump (NCSC-NL says keep the memory dump and at least a month of logs), then run Citrix’s IoC scan in NetScaler Console. A clean scan is not proof: Citrix says its IoCs “might fail to identify actual compromises.” On 13.1, watchTowr says use <code>13.1-64.24</code> if <code>show ns variable</code> returns variables, to avoid a reboot loop; CVE-2026-88778 also needs the Enhanced ISN Generation config change. Afterward, rotate credentials, secrets, and certificates used by or stored on the appliance, and keep management interfaces off the internet. NetScaler 12.1 and 13.0 are end of life with no fix, so migrate them. For Kiteworks, confirm 9.5.1 and whether Advanced Forms is enabled; if it is, follow support’s guidance before re-exposing it. Both stories share a lesson: know which edge and file-transfer appliances face the internet, who can pull the plug on a weekend, and what evidence you’ll keep.</p>
+  </div>
+  <div class="article-sources">
+    Sources: <a href="https://support.citrix.com/external/article/CTX697096/citrix-netscaler-adc-and-citrix-netscale.html" target="_blank" rel="noopener">Citrix — CTX697096 NetScaler ADC and Gateway security bulletin</a> &middot; <a href="https://www.cisa.gov/news-events/alerts/2026/09/27/critical-zero-day-vulnerabilities-exploited-citrix-netscaler-adc-gateway" target="_blank" rel="noopener">CISA — critical zero-days exploited in Citrix NetScaler ADC and Gateway, Sep 27</a> &middot; <a href="https://www.cisa.gov/news-events/alerts/2026/09/27/cisa-adds-two-known-exploited-vulnerabilities-catalog" target="_blank" rel="noopener">CISA — two KEV additions, Sep 27 (CVE-2026-88771, CVE-2026-88772)</a> &middot; <a href="https://www.ncsc.nl/alerts/kwetsbaarheden-in-citrix-netscaler-adc-en-netscaler-gateway-update-nu" target="_blank" rel="noopener">NCSC-NL — Citrix NetScaler ADC and Gateway alert (Dutch)</a> &middot; <a href="https://watchtowr.com/intelligence/citrix-netscaler-zero-day-vulnerabilities-faq/" target="_blank" rel="noopener">watchTowr — Citrix NetScaler zero-day FAQ</a> &middot; <a href="https://www.bleepingcomputer.com/news/security/cisa-orders-feds-to-patch-exploited-citrix-flaws-by-wednesday/" target="_blank" rel="noopener">BleepingComputer — CISA orders feds to patch exploited Citrix flaws by Wednesday</a> &middot; <a href="https://www.kiteworks.com/company/press-releases/kiteworks-precautionary-shutdown-advisory/" target="_blank" rel="noopener">Kiteworks — precautionary shutdown advisory (lifted Sep 27)</a> &middot; <a href="https://www.securityweek.com/kiteworks-urges-server-shutdown-finds-advanced-forms-vulnerability/" target="_blank" rel="noopener">SecurityWeek — Kiteworks shutdown traced to Advanced Forms vulnerability</a>
+  </div>
+  <a href="/#briefing" class="btn btn-ghost btn-sm back-link">← All Briefings</a>
+</article>
+
+</body>
+</html>

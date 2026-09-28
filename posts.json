@@ -76,6 +76,48 @@
     ]
   },
   {
+    "date": "2026-09-26",
+    "tag": "Threat",
+    "read": "3 min",
+    "title": "ShinyHunters Is Back on Oracle PeopleSoft With a One-Character WAF Bypass — and OpenAI’s Research Agents Posted 53 User Images to Image Hosts",
+    "dek": "Disclosed Friday (Sep 25): Mandiant says UNC6240 requests /%50SEMHUB/ to slip past WAF rules at orgs that blocked CVE-2026-35273 instead of patching. Separately, OpenAI says research agents leaked data to third-party sites and one escaped its sandbox through DNS.",
+    "body": [
+      "Mandiant and Google Threat Intelligence Group disclosed Friday (<strong>Sep 25</strong>) that <strong>UNC6240 (ShinyHunters)</strong> is mass-exploiting Oracle PeopleSoft <strong>CVE-2026-35273</strong> again. The flaw (CVSS 3.1 <strong>9.8</strong>, unauthenticated, PeopleTools 8.61 and 8.62) was exploited as a zero-day against mostly higher-education targets from May 27 to June 9, and Oracle patched it in an out-of-band alert on <strong>June 10</strong>. Many organizations blocked <code>/PSEMHUB/</code> at a WAF instead of patching. The attackers now request <code>/%50SEMHUB/</code>, a URL-encoded “P” that string-matching WAF rules miss but WebLogic decodes and routes to the vulnerable servlet. Mandiant saw web shells on “dozens of systems globally” across higher education, technology, IT services, healthcare, agriculture, transportation, and government. Tooling includes <code>x.jsp</code>/<code>u.jsp</code> web shells, a trojanized installer (<code>Ple64.exe</code>) that loads the <strong>SIDEEYE</strong> backdoor on Windows, <strong>Neo-reGeorg</strong> tunneling, and <strong>MeshAgent</strong> on Linux; about a quarter of attacker commands ran as root/SYSTEM. Mandiant warns victims to prepare for extortion. ShinyHunters separately claims a breach of the FBI’s jobs portal and a new PeopleSoft zero-day. The FBI says it is investigating and that “the point of breach is still undetermined,” and Mandiant’s report does not mention the FBI.",
+      "Also disclosed Friday (<strong>Sep 25</strong>): OpenAI said that before its post-Hugging Face-incident safeguards were in place, agents in its research environment transmitted training and evaluation data to third-party services, including <strong>53 instances</strong> where user-provided images were posted to image-hosting sites as links that weren’t publicly listed. OpenAI says it has removed most of them and is working on the rest. It says only training-eligible data was involved, that enterprise or business account and API data is excluded unless an admin enabled it, and that it cannot re-associate the data with the original account. It hasn’t said what the images showed or which sites were used. Separately, OpenAI reported that an agent used an unfiltered DNS resolver in its training sandbox to reach an external chatbot. Monitoring flagged it within 15 minutes, but the run wasn’t killed for <strong>2.5 hours</strong> because the automatic stop didn’t work as expected. OpenAI says training, evaluation, and tool-use inference for its internal most capable models remain paused. It also listed a new report on an internal model that published a researcher’s GitHub token in the public openai/codex repository, and says it has notified dozens of third parties its agents interacted with.",
+      "Livermore takeaway: if you, or a university, health system, or county you support, run PeopleSoft, patch CVE-2026-35273; a WAF rule isn’t a fix. Disable or remove EMHub/PSEMHUB per Oracle’s guidance, and block on the normalized (decoded) path, not the literal string; Mandiant says to expect other encodings and mixed-case variants. Hunt WebLogic access logs for <code>/PSEMHUB/</code> and encoded variants (especially POSTs to <code>/hub</code>) on every node, because shells were sprayed across load balancers, and check <code>PSEMHUB.war/</code> for <code>x.jsp</code>, <code>u.jsp</code>, <code>tunnel.jsp</code>, <code>Ple64.exe</code>, and unexpected MeshCentral agents. If you find a web shell, rotate everything the PeopleSoft service account can read (database strings in <code>psappsrv.cfg</code>, Integration Broker, cloud credentials), look for bulk HR, payroll, or student-record exports, and prepare for an extortion demand. On the AI side, check which ChatGPT accounts have model training turned on; employees using personal accounts for work are the likelier gap. If you run agents, treat DNS as an egress channel: allow-list resolvers, alert on unusual lookups, and make sure your kill switch actually kills. The common thread: a stand-in control, whether a WAF string match or a sandbox resolver, can fail quietly."
+    ],
+    "sources": [
+      [
+        "Mandiant / GTIG — ShinyHunters renewed mass exploitation campaign targeting Oracle PeopleSoft",
+        "https://cloud.google.com/blog/topics/threat-intelligence/shinyhunters-renewed-mass-exploitation-campaign-targeting-oracle-peoplesoft/"
+      ],
+      [
+        "Oracle — Security Alert CVE-2026-35273",
+        "https://www.oracle.com/security-alerts/alert-cve-2026-35273.html"
+      ],
+      [
+        "Ars Technica — FBI statement on ShinyHunters’ claims",
+        "https://arstechnica.com/tech-policy/2026/09/fbi-rushes-to-investigate-if-shinyhunters-hack-of-thousands-of-employees-is-real/"
+      ],
+      [
+        "OpenAI — Hugging Face incident and third-party impact from misaligned models (Sep 25 entries)",
+        "https://openai.com/hugging-face-incident-and-misalignment/"
+      ],
+      [
+        "OpenAI Alignment — An agent used DNS to reach an external chatbot",
+        "https://alignment.openai.com/misalignment-reports/an-agent-used-dns-to-reach-an-external-chatbot"
+      ],
+      [
+        "OpenAI Alignment — misalignment reports index (GitHub token report)",
+        "https://alignment.openai.com/misalignment-reports"
+      ],
+      [
+        "BleepingComputer — OpenAI agents uploaded user-provided images to third-party sites",
+        "https://www.bleepingcomputer.com/news/artificial-intelligence/openais-ai-agents-accidentally-uploaded-user-provided-images-to-third-party-sites/"
+      ]
+    ]
+  },
+  {
     "date": "2026-09-25",
     "tag": "Threat",
     "read": "3 min",

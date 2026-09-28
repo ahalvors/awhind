@@ -1,5 +1,51 @@
 [
   {
+    "date": "2026-09-28",
+    "tag": "Threat",
+    "read": "3 min",
+    "title": "Citrix Confirms Two Exploited NetScaler Zero-Days (CVE-2026-88771/88772) — and Kiteworks Lifts Its Weekend Shutdown Advisory",
+    "dek": "Unauthenticated command execution on every NetScaler ADC and Gateway, exploited as zero-days before patches; federal fixes due Wednesday Sep 30. Separately, Kiteworks lifted a nine-hour precautionary shutdown advisory. No CVE, no confirmed compromise.",
+    "body": [
+      "Citrix bulletin <strong>CTX697096</strong> (<strong>Sunday Sep 27</strong>) fixes eight NetScaler ADC and Gateway flaws, <strong>CVE-2026-88771</strong> through <strong>-88778</strong>, and says exploits of the first two “on unmitigated NetScaler deployments have been observed.” <strong>CVE-2026-88771</strong> (CVSS 4.0 score 9.5) lets an unauthenticated attacker execute arbitrary commands on all NetScaler ADC and Gateway deployments, including the default configuration. <strong>CVE-2026-88772</strong> (CVSS 4.0 score 9.5) is a memory overflow leading to code execution or denial of service when DTLS is enabled, which is on by default for VPN vServers. Fixed builds: <code>14.1-73.37</code> (also 14.1 FIPS), <code>13.1-64.23</code>, and <code>13.1-37.279</code> (13.1-FIPS/NDcPP). Secure Private Access hybrid deployments using NetScaler are also affected; Citrix is upgrading its managed cloud services itself. Both flaws were exploited as zero-days before patches were available, and watchTowr publicly warned of exploitation on <strong>Sep 26</strong>. CISA added both to KEV on Sep 27 (federal deadline <strong>Wednesday Sep 30</strong>), citing “reports and partner threat intelligence confirming that threat actors are actively exploiting these vulnerabilities globally,” and urged organizations to preserve forensic evidence before patching. No attacker has been named publicly, and CISA lists ransomware use as unknown. watchTowr notes that appliances patched for the earlier <strong>CVE-2026-19490</strong> are still exposed. Shadowserver tracks more than 23,000 IPs with NetScaler fingerprints; that counts exposed devices, not vulnerable ones.",
+      "Separately, <strong>Kiteworks</strong> (formerly Accellion) lifted a precautionary shutdown advisory on <strong>Sep 27</strong>. On <strong>Sep 25</strong> it cited “credible threat intelligence from federal intelligence authorities indicating that a threat actor may attempt to target some Kiteworks systems,” recommended a <strong>nine-hour</strong> weekend shutdown of self-managed systems, and took its hosted systems down itself. Hosted systems are back up, and customers with self-hosted <strong>Advanced Forms</strong> are told to contact support. According to an email to customers, per SecurityWeek, a severe Advanced Forms vulnerability triggered the shutdown; the email says the product is enabled for “fewer than 1% of our customers, under 50 organizations” and that Kiteworks is working with partners including Mandiant. Kiteworks says it has no indication of compromise and that version <strong>9.5.1</strong> addresses all known vulnerabilities. There is no public CVE and no evidence of exploitation.",
+      "Livermore takeaway: treat every internet-facing NetScaler as a possible incident, not just a patch job. Before upgrading, capture logs, a support bundle, and a core dump (NCSC-NL says keep the memory dump and at least a month of logs), then run Citrix’s IoC scan in NetScaler Console. A clean scan is not proof: Citrix says its IoCs “might fail to identify actual compromises.” On 13.1, watchTowr says use <code>13.1-64.24</code> if <code>show ns variable</code> returns variables, to avoid a reboot loop; CVE-2026-88778 also needs the Enhanced ISN Generation config change. Afterward, rotate credentials, secrets, and certificates used by or stored on the appliance, and keep management interfaces off the internet. NetScaler 12.1 and 13.0 are end of life with no fix, so migrate them. For Kiteworks, confirm 9.5.1 and whether Advanced Forms is enabled; if it is, follow support’s guidance before re-exposing it. Both stories share a lesson: know which edge and file-transfer appliances face the internet, who can pull the plug on a weekend, and what evidence you’ll keep."
+    ],
+    "sources": [
+      [
+        "Citrix — CTX697096 NetScaler ADC and Gateway security bulletin",
+        "https://support.citrix.com/external/article/CTX697096/citrix-netscaler-adc-and-citrix-netscale.html"
+      ],
+      [
+        "CISA — critical zero-days exploited in Citrix NetScaler ADC and Gateway, Sep 27",
+        "https://www.cisa.gov/news-events/alerts/2026/09/27/critical-zero-day-vulnerabilities-exploited-citrix-netscaler-adc-gateway"
+      ],
+      [
+        "CISA — two KEV additions, Sep 27 (CVE-2026-88771, CVE-2026-88772)",
+        "https://www.cisa.gov/news-events/alerts/2026/09/27/cisa-adds-two-known-exploited-vulnerabilities-catalog"
+      ],
+      [
+        "NCSC-NL — Citrix NetScaler ADC and Gateway alert (Dutch)",
+        "https://www.ncsc.nl/alerts/kwetsbaarheden-in-citrix-netscaler-adc-en-netscaler-gateway-update-nu"
+      ],
+      [
+        "watchTowr — Citrix NetScaler zero-day FAQ",
+        "https://watchtowr.com/intelligence/citrix-netscaler-zero-day-vulnerabilities-faq/"
+      ],
+      [
+        "BleepingComputer — CISA orders feds to patch exploited Citrix flaws by Wednesday",
+        "https://www.bleepingcomputer.com/news/security/cisa-orders-feds-to-patch-exploited-citrix-flaws-by-wednesday/"
+      ],
+      [
+        "Kiteworks — precautionary shutdown advisory (lifted Sep 27)",
+        "https://www.kiteworks.com/company/press-releases/kiteworks-precautionary-shutdown-advisory/"
+      ],
+      [
+        "SecurityWeek — Kiteworks shutdown traced to Advanced Forms vulnerability",
+        "https://www.securityweek.com/kiteworks-urges-server-shutdown-finds-advanced-forms-vulnerability/"
+      ]
+    ]
+  },
+  {
     "date": "2026-09-25",
     "tag": "Threat",
     "read": "3 min",

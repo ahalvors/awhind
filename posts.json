@@ -1,5 +1,39 @@
 [
   {
+    "date": "2026-09-29",
+    "tag": "Threat",
+    "read": "2 min",
+    "title": "Update your iPhone, iPad, and Mac. Apple patched a flaw yesterday, and CISA listed it this morning",
+    "dek": "The updates are iOS 26.7.1, iPadOS 26.7.1, macOS Tahoe 26.7.1, and macOS Sequoia 15.8.1. Install them today. Federal agencies are due Friday, Oct 2. If the shop runs AI tools on the official Python MCP library that log into other services, update those and change the login secrets.",
+    "body": [
+      "Yesterday Apple released <a href=\"https://support.apple.com/en-us/149226\" target=\"_blank\" rel=\"noopener\"><strong>iOS 26.7.1</strong> and <strong>iPadOS 26.7.1</strong></a> (iPhone 11 and later; the iPad list is on Apple’s page), <a href=\"https://support.apple.com/en-us/149228\" target=\"_blank\" rel=\"noopener\"><strong>macOS Tahoe 26.7.1</strong></a>, and <a href=\"https://support.apple.com/en-us/149229\" target=\"_blank\" rel=\"noopener\"><strong>macOS Sequoia 15.8.1</strong></a>. The flaw is <strong>CVE-2026-86950</strong>. Apple credits Meta Product Security. Apple’s note, the same on each of those pages: processing a maliciously crafted file may lead to arbitrary code execution, and Apple is aware of a report that this issue may have been exploited in an extremely sophisticated attack against specific targeted individuals on versions of iOS before iOS 27. <a href=\"https://www.cisa.gov/known-exploited-vulnerabilities-catalog\" target=\"_blank\" rel=\"noopener\">CISA</a> added it to the Known Exploited Vulnerabilities catalog this morning. Federal agencies are due <strong>Friday, Oct 2</strong>.",
+      "What to do: if you use an iPhone, iPad, or a Mac on Tahoe or Sequoia, install the update today. Don’t wait for it to show up on its own. Apple’s sentence is a report about specific targeted individuals, not a count of victims, and these notes name no attacker.",
+      "One more item, for shops running AI tools. <a href=\"https://cycode.com/blog/mcp-python-sdk-oauth-account-takeover/\" target=\"_blank\" rel=\"noopener\">Cycode</a> disclosed yesterday that if those tools are built on the official Python MCP library and they log into other services, update to <strong>1.30.0</strong> or <strong>2.2.0</strong> and change those login secrets."
+    ],
+    "sources": [
+      [
+        "Apple — iOS 26.7.1 and iPadOS 26.7.1 (released Sep 28)",
+        "https://support.apple.com/en-us/149226"
+      ],
+      [
+        "Apple — macOS Tahoe 26.7.1 (released Sep 28)",
+        "https://support.apple.com/en-us/149228"
+      ],
+      [
+        "Apple — macOS Sequoia 15.8.1 (released Sep 28)",
+        "https://support.apple.com/en-us/149229"
+      ],
+      [
+        "CISA — Known Exploited Vulnerabilities catalog (added Sep 29)",
+        "https://www.cisa.gov/known-exploited-vulnerabilities-catalog"
+      ],
+      [
+        "Cycode — update the official Python MCP library (published Sep 28, updated Sep 29)",
+        "https://cycode.com/blog/mcp-python-sdk-oauth-account-takeover/"
+      ]
+    ]
+  },
+  {
     "date": "2026-09-28",
     "tag": "Threat",
     "read": "3 min",

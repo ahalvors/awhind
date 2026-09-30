@@ -1,5 +1,35 @@
 [
   {
+    "date": "2026-09-30",
+    "tag": "Threat",
+    "read": "2 min",
+    "title": "Update TeamViewer to 15.82. Yesterday’s bulletin says a remote user can ignore the session limits you set, and next month Microsoft’s sign-in page will block outside scripts",
+    "dek": "Full Client and Host, on Windows, Mac, and Linux. Install 15.82, or the fixed build on the bulletin if the PC is on an older line. The flaw is CVE-2026-92370. Also check whether a browser add-on rewrites the Microsoft login page before mid-October.",
+    "body": [
+      "Yesterday TeamViewer published bulletin <a href=\"https://www.teamviewer.com/en/resources/trust-center/security-bulletins/tv-2026-1010/\" target=\"_blank\" rel=\"noopener\"><strong>TV-2026-1010</strong></a>. The writeups landed this morning. It says all users should update <strong>Full Client</strong> and <strong>Host</strong> to <strong>15.82</strong>, or the latest version available, as soon as possible. The flaw is <strong>CVE-2026-92370</strong>. TeamViewer’s description: an authenticated remote attacker can bypass the permission settings configured for a session, perform actions those settings explicitly denied, and that may lead to code running on the PC. It applies before 15.82 on Windows, Linux, and macOS. TeamViewer says it is not aware of any public disclosure or active exploitation.",
+      "What to do: if TeamViewer is installed, for work or at home, install the update today. Don’t wait for it to show up on its own. If the PC is on a maintenance or legacy build, including the Windows 7 and 8 line, use the fixed build listed on the bulletin rather than assuming 15.82 is the right one. The other issues in the same bulletin are a separate matter. The action is still the update. “Not aware of attacks” is TeamViewer’s sentence, not a promise that nobody will try.",
+      "A separate reminder, not a breach. <a href=\"https://learn.microsoft.com/en-us/entra/identity-platform/content-security-policy\" target=\"_blank\" rel=\"noopener\">Microsoft’s own page</a> says browser sign-in at login.microsoftonline.com will start blocking scripts that are not from Microsoft in mid-to-late October. A third-party copy of message center post <a href=\"https://blog.tophhie.cloud/message-center/mc1481309\" target=\"_blank\" rel=\"noopener\">MC1481309</a>, dated September 29, says the change begins in mid-October and should finish by late October. That copy is not the admin center. Extensions or helpdesk tools that inject code into that page may stop working. People can still sign in. If the shop does not use those tools, there is nothing to configure."
+    ],
+    "sources": [
+      [
+        "TeamViewer — TV-2026-1010 (issued Sep 29)",
+        "https://www.teamviewer.com/en/resources/trust-center/security-bulletins/tv-2026-1010/"
+      ],
+      [
+        "BleepingComputer — TeamViewer patch writeup (Sep 30)",
+        "https://www.bleepingcomputer.com/news/security/teamviewer-urges-users-to-patch-severe-flaws-as-soon-as-possible/"
+      ],
+      [
+        "Microsoft Learn — Entra sign-in content security policy",
+        "https://learn.microsoft.com/en-us/entra/identity-platform/content-security-policy"
+      ],
+      [
+        "Third-party copy of MC1481309 (dated Sep 29, not the admin center)",
+        "https://blog.tophhie.cloud/message-center/mc1481309"
+      ]
+    ]
+  },
+  {
     "date": "2026-09-29",
     "tag": "Threat",
     "read": "2 min",

@@ -1,5 +1,35 @@
 [
   {
+    "date": "2026-10-01",
+    "tag": "Threat",
+    "read": "2 min",
+    "title": "Update Cisco's SD-WAN Manager. Yesterday's advisory says a stranger on the internet can get in as the admin, and MetaMask says don't share your recovery phrase",
+    "dek": "Install the fixed release on Cisco's table. Cisco-managed cloud 20.15.605 needs no customer install; confirm it in Help. CVE-2026-76504. MetaMask updated this morning: no indication wallets or customer funds were affected.",
+    "body": [
+      "Yesterday Cisco published an advisory for Catalyst SD-WAN Manager, and <a href=\"https://www.cisa.gov/news-events/alerts/2026/09/30/cisa-adds-one-known-exploited-vulnerability-catalog\" target=\"_blank\" rel=\"noopener\">CISA added it</a> to the known-exploited catalog the same day. Cisco's sentence: an unauthenticated attacker on the internet can reach the system with the privileges of the admin user, on any configuration, and there is no workaround. The flaw is <strong>CVE-2026-76504</strong>. Cisco scores it 9.8. Cisco says it learned of active exploitation in September and does not name an attacker or how many customers were hit. Federal civilian agencies are due Saturday, October 3. That date is in the catalog, not on CISA's alert page.",
+      "If that dashboard is yours, install the fixed release on <a href=\"https://sec.cloudapps.cisco.com/security/center/content/CiscoSecurityAdvisory/cisco-sa-sdwan-webauth-xr8beuuU\" target=\"_blank\" rel=\"noopener\">Cisco's table</a>: <strong>20.9.10.1</strong>, <strong>20.12.8.2</strong>, <strong>20.15.6.1</strong>, <strong>20.18.4.1</strong>, <strong>26.1.2.1</strong>, or <strong>26.2.1</strong>. Anything older than 20.9 has to move to a fixed release. If you cannot update today and the manager is reachable from the internet, Cisco's temporary step is to allow only known hosts. That is not a fix. Cisco-managed cloud release <strong>20.15.605</strong> needs no customer install; confirm the version in the Help menu. A different Cisco sentence says that internet restriction is already in place for cloud-hosted environments. Those are not the same claim. The update does not tell you whether someone already got in. If you need that answer, Cisco says open a support case titled with CVE-2026-76504 after collecting an admin-tech file. People who do not run this dashboard have nothing to install.",
+      "A separate note, not a drained wallet. <a href=\"https://metamask.io/news/user-update\" target=\"_blank\" rel=\"noopener\">MetaMask</a> posted Wednesday that there was no immediate threat to wallets, and updated the page this morning to say there is no indication that wallets or customer funds were affected. It is exiting affected staking validators and does not hold customers' withdrawal keys. <a href=\"https://research.lido.fi/t/security-disclosure-metamask-staking-precautionary-out-of-order-exits/11961\" target=\"_blank\" rel=\"noopener\">Lido</a> calls the same event an infrastructure compromise, says those validators should be exited but not fully withdrawn by October 7, and says stETH holders do not need to act. Ignore anyone who asks for the Secret Recovery Phrase because of this headline. MetaMask says it will never ask for that phrase."
+    ],
+    "sources": [
+      [
+        "Cisco — Catalyst SD-WAN Manager advisory (published Sep 30)",
+        "https://sec.cloudapps.cisco.com/security/center/content/CiscoSecurityAdvisory/cisco-sa-sdwan-webauth-xr8beuuU"
+      ],
+      [
+        "CISA — one known exploited vulnerability added Sep 30",
+        "https://www.cisa.gov/news-events/alerts/2026/09/30/cisa-adds-one-known-exploited-vulnerability-catalog"
+      ],
+      [
+        "MetaMask — user update (posted Sep 30, updated Oct 1)",
+        "https://metamask.io/news/user-update"
+      ],
+      [
+        "Lido — MetaMask staking exits (Sep 30)",
+        "https://research.lido.fi/t/security-disclosure-metamask-staking-precautionary-out-of-order-exits/11961"
+      ]
+    ]
+  },
+  {
     "date": "2026-09-30",
     "tag": "Threat",
     "read": "2 min",

@@ -1,5 +1,31 @@
 [
   {
+    "date": "2026-10-02",
+    "tag": "Threat",
+    "read": "2 min",
+    "title": "No FortiMail update to install yet. Yesterday’s advisory says a stranger can write files onto the email gateway — and Microsoft says the Clippy posts on its X account were not from Microsoft",
+    "dek": "Turn IBE off, or keep the management page off the internet. The named fixes are still upcoming. Do not buy the Clippy token, and do not reset a work login because of this.",
+    "body": [
+      "Yesterday Fortinet published an advisory for FortiMail, and <a href=\"https://www.cisa.gov/news-events/alerts/2026/10/01/cisa-adds-one-known-exploited-vulnerability-catalog\" target=\"_blank\" rel=\"noopener\">CISA added it</a> to the known-exploited catalog the same day. Fortinet’s sentence: an unauthenticated attacker can write files onto the system. Fortinet says this has been reported exploited and does not name an attacker or how many customers were hit. The flaw is <strong>CVE-2026-104286</strong>. Fortinet scores it 9.8. CISA lists ransomware use as unknown. Federal civilian agencies are due Sunday, October 4. That date is in the catalog, not on CISA’s alert page.",
+      "If that email gateway is yours, there is no fixed release to install yet. Fortinet labels the fixes upcoming: <strong>8.0.2</strong>, <strong>7.6.7</strong>, and <strong>7.4.9</strong>. On Fortinet’s table, 8.0.0 through 8.0.1, 7.6.0 through 7.6.6, and 7.4.0 through 7.4.8 are still affected. Do not treat a current 7.4 install as the fix, and do not treat a move from 7.2 onto today’s 7.4 build as done. Until a fixed release exists, do one of the two things on <a href=\"https://fortiguard.fortinet.com/psirt/FG-IR-26-175\" target=\"_blank\" rel=\"noopener\">the advisory</a>: turn IBE off under Encryption, IBE, IBE Service, or stop the management page from being reachable on the internet and allow only a trusted private network. Those are alternatives, not a suggestion to do neither. Turning the workaround on does not tell you whether someone already wrote files. Fortinet says to look for an archive account named archive234, remote IP 79.141.169.187, remote directory /uploads, and a second IP, 45.129.0.192. People who do not run FortiMail have nothing to change.",
+      "A separate note, not a work-login reset. Yesterday <a href=\"https://www.theverge.com/news/1003892/microsoft-x-twitter-account-clippy\" target=\"_blank\" rel=\"noopener\">Microsoft’s account on X</a> followed a Clippy cryptocurrency account, reposted it, and changed its picture to Clippy. Spokesperson Brent Colburn said the access was unauthorized, those posts did not come from Microsoft, and the account has been secured. Nothing reported here says a Microsoft 365 or work login was involved. Do not buy the token, do not connect a wallet, and do not reset a work password because of this."
+    ],
+    "sources": [
+      [
+        "Fortinet — FortiMail advisory FG-IR-26-175 (published Oct 1)",
+        "https://fortiguard.fortinet.com/psirt/FG-IR-26-175"
+      ],
+      [
+        "CISA — one known exploited vulnerability added Oct 1",
+        "https://www.cisa.gov/news-events/alerts/2026/10/01/cisa-adds-one-known-exploited-vulnerability-catalog"
+      ],
+      [
+        "The Verge — Microsoft’s X account (Oct 1)",
+        "https://www.theverge.com/news/1003892/microsoft-x-twitter-account-clippy"
+      ]
+    ]
+  },
+  {
     "date": "2026-10-01",
     "tag": "Threat",
     "read": "2 min",

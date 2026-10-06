@@ -1,0 +1,154 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Install the fixed Data Center version on your line, or take the server off the internet until you can. Atlassian Cloud needs nothing. In OpenOffice, untick &quot;Use a Java runtime environment.&quot; LibreOffice 26.2.5, 26.8.0, or newer is already covered.">
+<title>Upgrade self-hosted Jira, Confluence, and Bitbucket. Atlassian said Monday afternoon a stranger can read some files on them — and turn off Java in OpenOffice, which has no fix yet for a booby-trapped spreadsheet — AWHIND Daily Briefing</title>
+<link rel="canonical" href="https://awhind.com/briefing/2026-10-06">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='16' fill='%230B0F17'/%3E%3Ccircle cx='50' cy='50' r='16' fill='%23DD4E1E'/%3E%3C/svg%3E">
+
+<!-- Open Graph -->
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://awhind.com/briefing/2026-10-06">
+<meta property="og:title" content="Upgrade self-hosted Jira, Confluence, and Bitbucket. Atlassian said Monday afternoon a stranger can read some files on them — and turn off Java in OpenOffice, which has no fix yet for a booby-trapped spreadsheet">
+<meta property="og:description" content="Install the fixed Data Center version on your line, or take the server off the internet until you can. Atlassian Cloud needs nothing. In OpenOffice, untick &quot;Use a Java runtime environment.&quot; LibreOffice 26.2.5, 26.8.0, or newer is already covered.">
+<meta property="og:site_name" content="AWHIND">
+
+<!-- Twitter Card -->
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Upgrade self-hosted Jira, Confluence, and Bitbucket. Atlassian said Monday afternoon a stranger can read some files on them — and turn off Java in OpenOffice, which has no fix yet for a booby-trapped spreadsheet">
+<meta name="twitter:description" content="Install the fixed Data Center version on your line, or take the server off the internet until you can. Atlassian Cloud needs nothing. In OpenOffice, untick &quot;Use a Java runtime environment.&quot; LibreOffice 26.2.5, 26.8.0, or newer is already covered.">
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "Upgrade self-hosted Jira, Confluence, and Bitbucket. Atlassian said Monday afternoon a stranger can read some files on them — and turn off Java in OpenOffice, which has no fix yet for a booby-trapped spreadsheet",
+  "description": "Install the fixed Data Center version on your line, or take the server off the internet until you can. Atlassian Cloud needs nothing. In OpenOffice, untick \"Use a Java runtime environment.\" LibreOffice 26.2.5, 26.8.0, or newer is already covered.",
+  "datePublished": "2026-10-06",
+  "url": "https://awhind.com/briefing/2026-10-06",
+  "author": {
+    "@type": "Organization",
+    "name": "AWHIND",
+    "url": "https://awhind.com"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "AWHIND",
+    "url": "https://awhind.com"
+  }
+}
+</script>
+
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,500&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap');
+
+  :root{
+    --bg:#F1F2ED;
+    --bg-elevated:#FFFFFF;
+    --bg-sunken:#E7E8E1;
+    --text:#0B0F17;
+    --text-secondary:#566072;
+    --text-tertiary:#848d9b;
+    --line:#D9DAD2;
+    --line-strong:#c2c4ba;
+    --accent:#DD4E1E;
+    --accent-contrast:#FFFFFF;
+    --shadow: 0 1px 2px rgba(11,15,23,.04), 0 8px 24px rgba(11,15,23,.06);
+    --serif: 'Newsreader', Georgia, 'Times New Roman', serif;
+    --sans: 'IBM Plex Sans', -apple-system, 'Segoe UI', Roboto, sans-serif;
+    --mono: 'IBM Plex Mono', 'SF Mono', Consolas, monospace;
+  }
+  @media (prefers-color-scheme: dark){
+    :root:not([data-theme="light"]){
+      --bg:#0A0D14;
+      --bg-elevated:#12161F;
+      --bg-sunken:#080A10;
+      --text:#EEF0F4;
+      --text-secondary:#9AA3B4;
+      --text-tertiary:#6d7688;
+      --line:#232838;
+      --line-strong:#323951;
+      --accent:#FF7A47;
+      --accent-contrast:#0A0D14;
+      --shadow: 0 1px 2px rgba(0,0,0,.3), 0 8px 28px rgba(0,0,0,.4);
+    }
+  }
+  :root[data-theme="dark"]{
+    --bg:#0A0D14;
+    --bg-elevated:#12161F;
+    --bg-sunken:#080A10;
+    --text:#EEF0F4;
+    --text-secondary:#9AA3B4;
+    --text-tertiary:#6d7688;
+    --line:#232838;
+    --line-strong:#323951;
+    --accent:#FF7A47;
+    --accent-contrast:#0A0D14;
+    --shadow: 0 1px 2px rgba(0,0,0,.3), 0 8px 28px rgba(0,0,0,.4);
+  }
+
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0; background:var(--bg); color:var(--text);
+    font-family:var(--sans); font-size:16px; line-height:1.55;
+    -webkit-font-smoothing:antialiased;
+  }
+  a{color:inherit;}
+  h1,h2{font-family:var(--serif); font-weight:500; margin:0; text-wrap:balance; letter-spacing:-0.01em;}
+  .mono{font-family:var(--mono);}
+  .wrap{max-width:1120px; margin:0 auto; padding:0 28px;}
+  .btn{
+    display:inline-flex; align-items:center; gap:8px; font-family:var(--mono); font-size:13px;
+    letter-spacing:.04em; text-transform:uppercase; padding:12px 20px; border-radius:2px;
+    text-decoration:none; cursor:pointer; border:1px solid transparent;
+  }
+  .btn-ghost{border-color:var(--line-strong); color:var(--text);}
+  .btn-ghost:hover{border-color:var(--accent); color:var(--accent);}
+  .btn-sm{padding:8px 14px; font-size:11px;}
+
+  nav.wrap{display:flex; align-items:center; justify-content:space-between; padding-top:18px; padding-bottom:18px;}
+  .brand{font-family:var(--serif); font-weight:600; font-size:21px; letter-spacing:-.01em; text-decoration:none; color:var(--text); display:flex; align-items:center; gap:9px;}
+  .brand .mark{width:9px;height:9px;background:var(--accent);display:inline-block;}
+
+  article{max-width:720px; margin:44px auto; padding:0 28px;}
+  .meta{font-family:var(--mono); font-size:11.5px; color:var(--text-tertiary); letter-spacing:.03em; margin-bottom:16px;}
+  article h1{font-size:32px; line-height:1.15;}
+  .dek{font-size:16px; color:var(--text-secondary); margin-top:14px; font-family:var(--serif); font-style:italic;}
+  .article-body{margin-top:28px; font-size:15.5px; color:var(--text); max-width:60ch;}
+  .article-body p{margin:0 0 18px;}
+  .article-body strong{font-weight:600;}
+  .article-body .stat-inline{font-family:var(--mono); color:var(--accent); font-weight:600;}
+  .article-sources{margin-top:32px; padding-top:20px; border-top:1px solid var(--line); font-size:12px; color:var(--text-tertiary);}
+  .article-sources a{color:var(--text-secondary); text-decoration:underline; text-decoration-color:var(--line-strong);}
+  .back-link{margin-top:32px; display:inline-block;}
+</style>
+</head>
+<body>
+
+<nav class="wrap">
+  <a href="/" class="brand"><span class="mark"></span>AWHIND</a>
+  <div>
+    <a href="/#briefing" class="btn btn-ghost btn-sm">← All Briefings</a>
+  </div>
+</nav>
+
+<article>
+  <div class="meta">Oct 6, 2026 &middot; Threat &middot; 2 min read</div>
+  <h1>Upgrade self-hosted Jira, Confluence, and Bitbucket. Atlassian said Monday afternoon a stranger can read some files on them — and turn off Java in OpenOffice, which has no fix yet for a booby-trapped spreadsheet</h1>
+  <div class="dek">Install the fixed Data Center version on your line, or take the server off the internet until you can. Atlassian Cloud needs nothing. In OpenOffice, untick "Use a Java runtime environment." LibreOffice 26.2.5, 26.8.0, or newer is already covered.</div>
+  <div class="article-body">
+    <p>Monday afternoon Atlassian put out an out-of-cycle critical <a href="https://confluence.atlassian.com/spaces/SECURITY/pages/1870495748/CVE-2026-21589+-+Arbitrary+File+Access+Vulnerability+impacts+Multiple+Products" target="_blank" rel="noopener">security advisory</a> for the editions of its products that companies run on their own servers: Jira Software, Jira Service Management, Confluence, Bitbucket, Bamboo, and Crowd Data Center, plus Crucible and Fisheye. Someone with no login can read certain files inside the application's folder on the server, if they already know each file's exact name and location. Atlassian says some setups keep sensitive files there. The flaw is <strong>CVE-2026-21589</strong>, rated 9.3 in Atlassian's own assessment. Atlassian says its Cloud products are already patched and it found no evidence of exploitation there. It has not reported attacks on self-hosted servers, but says it cannot confirm whether a given server was already hit. Atlassian's regular bulletins come on the third Tuesday of the month; this one came early.</p>
+    <p>If any of those run on your own servers, put the upgrade at the top of the change list. Atlassian's advisory names these fixed versions; install the one on your line or newer: Jira Software <strong>9.12.40</strong>, <strong>10.3.26</strong>, or <strong>11.3.12</strong>; Jira Service Management <strong>5.12.40</strong>, <strong>10.3.26</strong>, or <strong>11.3.12</strong>; Confluence <strong>9.2.26</strong> or <strong>10.2.19</strong>; Bitbucket <strong>9.4.26</strong>, <strong>10.2.8</strong>, or <strong>10.5.1</strong>; Bamboo <strong>10.2.24</strong> or <strong>12.1.12</strong>; Crowd <strong>6.3.7</strong>, <strong>7.0.3</strong>, <strong>7.1.7</strong>, or <strong>7.2.4</strong>; Crucible and Fisheye <strong>4.9.15</strong>. Some other Atlassian records show different Crowd and Bamboo numbers; go by the advisory. Until the upgrade is on, take the server off the public internet — Atlassian says that applies even if it asks for a login — or put one of Atlassian's temporary blocking rules in front of it, which Atlassian says is not a replacement for patching. Ask whoever runs the server to check its access logs the way the advisory describes. The fix list covers the Data Center editions; if you still run an older Server edition, ask Atlassian support. Teams that only use Atlassian Cloud have nothing to do, and employees do not need to change passwords because of this.</p>
+    <p>A separate fix for home and office PCs. Apache OpenOffice said Friday that a booby-trapped spreadsheet can run code on the computer when it is opened, if Java support is turned on in the program. Every version through 4.1.16 is affected and there is no fix yet; 4.1.17 is still in testing, with no release date announced. Until it ships, OpenOffice's <a href="https://www.openoffice.org/security/cves/CVE-2026-59265.html" target="_blank" rel="noopener">advisory</a> says to go to Tools → Options → OpenOffice → Java (OpenOffice → Preferences → OpenOffice → Java on a Mac) and untick <strong>Use a Java runtime environment</strong>, and to avoid opening files from people you don't know. LibreOffice <a href="https://www.libreoffice.org/about-us/security/advisories/" target="_blank" rel="noopener">disclosed the same kind of flaw Monday</a>, but the fix was already in <strong>26.2.5</strong> and <strong>26.8.0</strong>, which shipped <a href="https://blog.documentfoundation.org/blog/2026/07/24/libreoffice-26-2-5/" target="_blank" rel="noopener">July 23</a> and <a href="https://www.libreoffice.org/download/release-notes/" target="_blank" rel="noopener">August 26</a>. In LibreOffice, check Help → About: 26.2.5 or newer on the 26.2 line, or 26.8.0 or newer, means you are covered; anything older, update. A proof of concept is public, but <a href="https://thehackernews.com/2026/10/libreoffice-and-openoffice-flaws-let.html" target="_blank" rel="noopener">no attacks have been reported</a>. People who use other office programs have nothing to change here.</p>
+  </div>
+  <div class="article-sources">
+    Sources: <a href="https://confluence.atlassian.com/spaces/SECURITY/pages/1870495748/CVE-2026-21589+-+Arbitrary+File+Access+Vulnerability+impacts+Multiple+Products" target="_blank" rel="noopener">Atlassian — Arbitrary File Access advisory, multiple Data Center products (Oct 5)</a> &middot; <a href="https://www.openoffice.org/security/cves/CVE-2026-59265.html" target="_blank" rel="noopener">Apache OpenOffice — security advisory and Java mitigation</a> &middot; <a href="https://www.libreoffice.org/about-us/security/advisories/" target="_blank" rel="noopener">LibreOffice — security advisories (announced Oct 5)</a> &middot; <a href="https://www.libreoffice.org/download/release-notes/" target="_blank" rel="noopener">LibreOffice — release notes (26.8.0, Aug 26)</a> &middot; <a href="https://blog.documentfoundation.org/blog/2026/07/24/libreoffice-26-2-5/" target="_blank" rel="noopener">The Document Foundation — LibreOffice 26.2.5 released (Jul 23)</a> &middot; <a href="https://thehackernews.com/2026/10/libreoffice-and-openoffice-flaws-let.html" target="_blank" rel="noopener">The Hacker News — LibreOffice and OpenOffice flaws (Oct 6)</a>
+  </div>
+  <a href="/#briefing" class="btn btn-ghost btn-sm back-link">← All Briefings</a>
+</article>
+
+</body>
+</html>

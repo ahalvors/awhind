@@ -1,5 +1,35 @@
 [
   {
+    "date": "2026-10-07",
+    "tag": "Threat",
+    "read": "2 min",
+    "title": "Reset your Fortinet firewall and VPN passwords — the FBI says a password-theft campaign is still locking owners out — and ignore the “ASOS HACKED” app alert",
+    "dek": "If your office has a FortiGate firewall or VPN, end all sessions, reset every admin and VPN password, and look for admin accounts you didn’t create. There is no patch to install. ASOS app users: delete the alert, don’t tap the link, and watch for scam emails.",
+    "body": [
+      "The FBI and Secret Service warned Tuesday in a <a href=\"https://www.ic3.gov/CSA/2026/261006.pdf\" target=\"_blank\" rel=\"noopener\">joint advisory</a> that a password-theft campaign against internet-facing Fortinet FortiGate firewalls and VPN gateways is still running. The campaign was first reported in June; the agencies cite security firm SOCRadar’s count of more than <strong>86,644</strong> compromised devices across 194 countries. The attackers log in with stolen or reused passwords, then collect more. Once in, they add their own admin accounts on the firewall, and some owners have been locked out when the real accounts were disabled or their passwords changed. The agencies say this access has been used as a way in for ransomware. This is not a new Fortinet bug: there is no CVE and no patch to install. It is also a different product and a different problem from the FortiMail email-gateway fixes we covered Oct 2 and Oct 5.",
+      "If your office runs a FortiGate, or your IT provider does, do this today. Take the admin page off the internet, or at least limit it to trusted addresses. End all logged-in admin and VPN sessions, then reset every Fortinet admin and VPN password. Require phishing-resistant MFA on VPN and admin logins. Then open the admin account list and look for names nobody created; <a href=\"https://thehackernews.com/2026/10/fbi-warns-fortibleed-remains-active.html\" target=\"_blank\" rel=\"noopener\">The Hacker News</a> lists examples from the advisory such as <strong>fortiAdmin</strong>, <strong>forticloud-sync</strong>, and <strong>support_fortinet</strong>. If you find one, isolate the device, save its logs, and report it to the FBI at ic3.gov. Staff who use the VPN only need to set a new password when asked. If you don’t use a Fortinet firewall or VPN, there is nothing to do.",
+      "A separate note for shoppers. Early Tuesday many users of the ASOS shopping app got a push alert reading “ASOS HACKED” with a link to a hacker channel. In a <a href=\"https://www.investegate.co.uk/announcement/rns/asos--asc/update-regarding-cyber-incident-/9809595\" target=\"_blank\" rel=\"noopener\">statement Tuesday</a>, ASOS said someone got into the outside services it uses to message customers and that names and contact details may have been accessed. ASOS said it does not believe card details or account passwords were affected, and it has told customers to ignore the alert and not click the link. The hackers claim to have taken more data; ASOS has not confirmed that, and it hasn’t said how many people are affected, <a href=\"https://www.bleepingcomputer.com/news/security/asos-confirms-data-breach-after-hacked-in-app-notifications/\" target=\"_blank\" rel=\"noopener\">BleepingComputer reports</a>. If you got the alert, delete it and don’t tap the link. You don’t need to cancel cards or change your ASOS password because of this, but expect scam emails or texts that use your name and “ASOS”; don’t click links in them, and open the app or type the site address yourself. IT managers: nothing to patch here; a one-line staff heads-up is enough."
+    ],
+    "sources": [
+      [
+        "FBI and Secret Service — FortiBleed joint advisory JCSA-20261006-01 (Oct 6)",
+        "https://www.ic3.gov/CSA/2026/261006.pdf"
+      ],
+      [
+        "The Hacker News — FBI warns FortiBleed remains active (Oct 7)",
+        "https://thehackernews.com/2026/10/fbi-warns-fortibleed-remains-active.html"
+      ],
+      [
+        "ASOS plc — Update regarding cyber incident, RNS statement (Oct 6)",
+        "https://www.investegate.co.uk/announcement/rns/asos--asc/update-regarding-cyber-incident-/9809595"
+      ],
+      [
+        "BleepingComputer — ASOS confirms data breach after hacked in-app notifications (Oct 6)",
+        "https://www.bleepingcomputer.com/news/security/asos-confirms-data-breach-after-hacked-in-app-notifications/"
+      ]
+    ]
+  },
+  {
     "date": "2026-10-06",
     "tag": "Threat",
     "read": "2 min",

@@ -1,5 +1,47 @@
 [
   {
+    "date": "2026-10-08",
+    "tag": "Threat",
+    "read": "3 min",
+    "title": "Schedule your Cisco Meraki firmware update — Cisco fixed serious flaws across the line Wednesday, with no attacks known — and don’t trust a too-cheap “S26 Ultra” Android phone",
+    "dek": "Meraki shops: check Cisco’s current fixed-version list and schedule the firmware update; a few fixes don’t arrive until late October or mid-November. Nexus 3000/9000 and License On-Prem owners have fixes too. Phone owners: treat a knockoff Android bought cheaply online as untrusted, and delete 13 Play apps Bitdefender flagged.",
+    "body": [
+      "Cisco published its scheduled October security fixes on Wednesday, and the one most offices will care about covers nearly the whole <a href=\"https://sec.cloudapps.cisco.com/security/center/content/CiscoSecurityAdvisory/cisco-sa-hardening-meraki-os-drbEX9GH\" target=\"_blank\" rel=\"noopener\">Meraki line</a>: MX security and SD-WAN appliances, MR Wi-Fi access points, MS switches, MV cameras, MG cellular gateways and Campus Gateways. Cisco says the flaws were found in its own testing, affect these devices however they are set up, and have no workaround. It also says it knows of no attacks using them, so this is a planned update, not an emergency. Cisco groups the Meraki bugs by type rather than describing each one; across the whole batch, <a href=\"https://www.securityweek.com/cisco-patches-a-dozen-critical-vulnerabilities/\" target=\"_blank\" rel=\"noopener\">SecurityWeek</a> counts 35 vulnerabilities, more than a dozen of them critical. Fixed firmware is out now for most Meraki lines, but not all of them: MS switches on the 18.1 train get theirs in mid-October, and some MR access point and Campus Gateway versions in late October or mid-November. Cisco has already revised the Meraki advisory once, on Wednesday evening, to add an MX fix, so go by the fixed-version table on Cisco’s current advisory rather than a list copied from somewhere else.",
+      "If your office runs Meraki, open the Meraki Dashboard, compare each network’s firmware with Cisco’s table, and schedule the upgrade for after hours, since firmware upgrades restart the devices. If an MX appliance doesn’t offer 18.107.14 or 19.2.9, Cisco says to contact Meraki support. For lines whose fix isn’t out yet, put a reminder on the calendar. If an IT provider manages your network, ask them when the update is scheduled. Two smaller groups have fixes in the <a href=\"https://sec.cloudapps.cisco.com/security/center/content/CiscoSecurityAdvisory/cisco-sa-notice-fBn58ELx\" target=\"_blank\" rel=\"noopener\">same batch</a>. Data-center teams with Nexus 3000 or 9000 switches should check Cisco’s fixed-release tables (Cisco updated the NX-API table Thursday morning) and upgrade; the critical Nexus flaws matter only if the optional NX-API, NGOAM or MPLS OAM features are turned on, so turn off any of those you don’t use until you can upgrade. And if you run <a href=\"https://sec.cloudapps.cisco.com/security/center/content/CiscoSecurityAdvisory/cisco-sa-ssm-access-nttb2dhE\" target=\"_blank\" rel=\"noopener\">Cisco License On-Prem</a> (called Smart Software Manager On-Prem in older versions), update to release <strong>10-202609</strong>: Cisco says earlier versions let someone with no login reset any account’s password, admins included. Older 9.x installs have to migrate to the new release. If you don’t have Cisco gear, there is nothing to do here.",
+      "A separate note for phone owners. Security firm Bitdefender said Thursday in a <a href=\"https://www.bitdefender.com/en-us/blog/labs/midnight-mimosa-malware\" target=\"_blank\" rel=\"noopener\">report</a> that malware it calls Midnight Mimosa comes built into the firmware of some low-cost Android phones that use MediaTek chips, including knockoffs that call themselves things like “S26 Ultra” or “17 Pro Max.” Bitdefender says the malware is on the phone before the owner first turns it on, can quietly install and remove apps, is used mainly for hidden ad fraud and to rent out the phone’s internet connection, and can’t be uninstalled. It saw the malware over about two years on thousands of devices in more than 150 countries, the US among the larger ones. <a href=\"https://therecord.media/cheap-androids-shipped-with-ad-fraud-malware\" target=\"_blank\" rel=\"noopener\">The Record</a> reports the phones are sold on mainstream online marketplaces, one of them for about $180, and that Bitdefender hasn’t determined who put the malware there. The most common models included the Doogee S200 X and Cubot KINGKONG X, but Bitdefender doesn’t say those companies were involved, and phones from mainstream brands bought from normal stores aren’t what this report is about. Our advice, not Bitdefender’s: if your Android phone is a no-name or lookalike model bought very cheaply online, don’t bank on it. Don’t use it for banking, work email or passwords, and plan to replace it, returning it if you still can. Bitdefender says removing the malware isn’t realistic for most owners and the lasting fix sits with the sellers and marketplaces; <a href=\"https://www.androidauthority.com/midnight-mimosa-malware-android-phones-3720493/\" target=\"_blank\" rel=\"noopener\">Android Authority</a> also calls replacing the phone the most viable option. Bitdefender also listed 13 Google Play apps carrying the same ad-fraud code. They don’t have the built-in malware’s deep access, but they show ads outside the app. All 13 were still listed on Google Play when we checked Thursday morning. Uninstall any you have, and match the developer name, because the app names are generic: <strong>Daily Weather</strong>, <strong>CoolWeather</strong> and <strong>WeatherGo</strong> (developer “cps”); <strong>App Icon DIY</strong>, <strong>All Deleted Messages Recovery</strong>, <strong>Wavrge</strong>, <strong>Audify</strong> and <strong>QR Pocket</strong> (fivedev); <strong>Lock &amp; Hide</strong> and <strong>NoteMaster</strong> (ailin); <strong>QuickText Extractor</strong> (lissa); <strong>Tap to Translate</strong> (InfinityApps Production); and <strong>Tasky</strong> (ATS Agro Tecnosul Seguranca). IT managers: if staff read work email on personal Android phones, this is a reason to require known brands or managed devices. There is nothing to patch."
+    ],
+    "sources": [
+      [
+        "Cisco — Meraki Security Hardening Release: October 2026 (Oct 7, revised Oct 7)",
+        "https://sec.cloudapps.cisco.com/security/center/content/CiscoSecurityAdvisory/cisco-sa-hardening-meraki-os-drbEX9GH"
+      ],
+      [
+        "Cisco — Advance notification and index of October 7, 2026 security advisories (Nexus, NX-OS and more)",
+        "https://sec.cloudapps.cisco.com/security/center/content/CiscoSecurityAdvisory/cisco-sa-notice-fBn58ELx"
+      ],
+      [
+        "Cisco — License (Smart Software Manager) On-Prem vulnerabilities (Oct 7)",
+        "https://sec.cloudapps.cisco.com/security/center/content/CiscoSecurityAdvisory/cisco-sa-ssm-access-nttb2dhE"
+      ],
+      [
+        "SecurityWeek — Cisco patches a dozen critical vulnerabilities (Oct 8)",
+        "https://www.securityweek.com/cisco-patches-a-dozen-critical-vulnerabilities/"
+      ],
+      [
+        "Bitdefender Labs — The rise of Midnight Mimosa (Oct 8)",
+        "https://www.bitdefender.com/en-us/blog/labs/midnight-mimosa-malware"
+      ],
+      [
+        "The Record — Cheap Androids shipped with ad-fraud malware (Oct 8)",
+        "https://therecord.media/cheap-androids-shipped-with-ad-fraud-malware"
+      ],
+      [
+        "Android Authority — Some cheap Android phones come with malware in their firmware (Oct 8)",
+        "https://www.androidauthority.com/midnight-mimosa-malware-android-phones-3720493/"
+      ]
+    ]
+  },
+  {
     "date": "2026-10-07",
     "tag": "Threat",
     "read": "2 min",

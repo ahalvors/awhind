@@ -35,3 +35,57 @@
   to = "/404"
   status = 404
   force = true
+
+[[redirects]]
+  from = "/index.html"
+  to = "/"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/package.json"
+  to = "/404"
+  status = 404
+  force = true
+
+[[redirects]]
+  from = "/package-lock.json"
+  to = "/404"
+  status = 404
+  force = true
+
+[[redirects]]
+  from = "/build-briefings.js"
+  to = "/404"
+  status = 404
+  force = true
+
+[[redirects]]
+  from = "/build-sitemap.js"
+  to = "/404"
+  status = 404
+  force = true
+
+[[redirects]]
+  from = "/test-function-bundle.mjs"
+  to = "/404"
+  status = 404
+  force = true
+
+[[redirects]]
+  from = "/test-scheduled-function.mjs"
+  to = "/404"
+  status = 404
+  force = true
+
+[[redirects]]
+  from = "/test-schedule.sh"
+  to = "/404"
+  status = 404
+  force = true
+
+[[redirects]]
+  from = "/netlify.toml"
+  to = "/404"
+  status = 404
+  force = true

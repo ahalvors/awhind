@@ -104,7 +104,7 @@ posts.forEach(post => {
     fs.mkdirSync(dateDir, { recursive: true });
   }
 
-  const canonicalUrl = `https://awhind.com/briefing/${post.date}`;
+  const canonicalUrl = `https://awhind.com/briefing/${post.date}/`;
   const ogTitle = escapeHtml(post.title);
   const ogDescription = escapeHtml(stripHtml(post.dek));
   const jsonLd = {
@@ -284,7 +284,7 @@ dueArticles.forEach(post => {
     fs.mkdirSync(slugDir, { recursive: true });
   }
 
-  const canonicalUrl = `https://awhind.com/articles/${post.slug}`;
+  const canonicalUrl = `https://awhind.com/articles/${post.slug}/`;
   const ogTitle = escapeHtml(post.seo_title || post.title);
   const ogDescription = escapeHtml(post.meta_description);
   const ogImageUrl = post.featured_image ? `https://awhind.com${post.featured_image}` : '';
@@ -326,8 +326,8 @@ dueArticles.forEach(post => {
   <div class="series-nav">
     <div class="series-label">${post.series.title} &middot; Part ${post.series.part}</div>
     <div class="series-links">
-      ${prevLink ? `<a href="/articles/${prevArticle.slug}" class="series-link">← Part ${prevPart}${prevLabel}</a>` : ''}
-      ${nextLink ? `<a href="/articles/${nextArticle.slug}" class="series-link">Part ${nextPart} →${nextLabel}</a>` : ''}
+      ${prevLink ? `<a href="/articles/${prevArticle.slug}/" class="series-link">← Part ${prevPart}${prevLabel}</a>` : ''}
+      ${nextLink ? `<a href="/articles/${nextArticle.slug}/" class="series-link">Part ${nextPart} →${nextLabel}</a>` : ''}
     </div>
   </div>`;
   }

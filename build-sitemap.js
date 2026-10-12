@@ -9,21 +9,21 @@ const articles = fs.existsSync('articles.json')
 
 const staticUrls = [
   { loc: 'https://awhind.com/', lastmod: '2026-09-02', priority: '1.0' },
-  { loc: 'https://awhind.com/shadow-ai', lastmod: '2026-09-02', priority: '0.9' },
-  { loc: 'https://awhind.com/capabilities/service-desk', lastmod: '2026-09-02', priority: '0.8' },
-  { loc: 'https://awhind.com/capabilities/ai-governance', lastmod: '2026-09-02', priority: '0.8' },
-  { loc: 'https://awhind.com/capabilities/endpoint-ops', lastmod: '2026-09-02', priority: '0.8' },
-  { loc: 'https://awhind.com/capabilities/global-noc', lastmod: '2026-09-02', priority: '0.8' }
+  { loc: 'https://awhind.com/shadow-ai/', lastmod: '2026-09-02', priority: '0.9' },
+  { loc: 'https://awhind.com/capabilities/service-desk/', lastmod: '2026-09-02', priority: '0.8' },
+  { loc: 'https://awhind.com/capabilities/ai-governance/', lastmod: '2026-09-02', priority: '0.8' },
+  { loc: 'https://awhind.com/capabilities/endpoint-ops/', lastmod: '2026-09-02', priority: '0.8' },
+  { loc: 'https://awhind.com/capabilities/global-noc/', lastmod: '2026-09-02', priority: '0.8' }
 ];
 
 const briefingUrls = posts.map(post => ({
-  loc: `https://awhind.com/briefing/${post.date}`,
+  loc: `https://awhind.com/briefing/${post.date}/`,
   lastmod: post.date,
   priority: '0.6'
 }));
 
 const articleUrls = articles.map(article => ({
-  loc: `https://awhind.com/articles/${article.slug}`,
+  loc: `https://awhind.com/articles/${article.slug}/`,
   lastmod: article.date,
   priority: '0.7'
 }));

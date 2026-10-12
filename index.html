@@ -498,7 +498,7 @@
     if (p.type === 'article' || !p.body || !Array.isArray(p.body) || !p.sources) {
       return;
     }
-    var url = encodeURIComponent('https://awhind.com/briefing/'+p.date);
+    var url = encodeURIComponent('https://awhind.com/briefing/'+p.date+'/');
     var title = encodeURIComponent(p.title);
     panel.innerHTML =
       '<button class="close" aria-label="Close">✕</button>'+

@@ -358,7 +358,7 @@ for p in PAGES:
         lede=p["lede"],
         sections=p["sections"],
         related=p["related"],
-        canonical_path="/" + p["slug"],
+        canonical_path="/" + p["slug"] + "/",
     )
     with open(out_path, "w", encoding="utf-8") as f:
         f.write(html)

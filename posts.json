@@ -1,5 +1,39 @@
 [
   {
+    "date": "2026-10-13",
+    "tag": "Patch",
+    "read": "2 min",
+    "title": "Install today’s Windows update, then move off 24H2 — it’s the last one for Home and Pro — and SAP shops have four critical fixes to apply",
+    "dek": "Windows 11 24H2 Home and Pro stop getting security updates after 6:59 AM PT Wednesday. Install today’s update, then move to 25H2 or 26H2; 26H2 is rolling out in phases, so your PC may not see it yet. It’s a deadline, not an attack. SAP admins: apply October’s notes, and BTP developers should update the Python SDK to 0.45.2.",
+    "body": [
+      "Today’s Windows update is the last regular security update for Windows 11 version 24H2 Home and Pro. <a href=\"https://learn.microsoft.com/en-us/lifecycle/products/windows-11-home-and-pro\" target=\"_blank\" rel=\"noopener\">Microsoft’s lifecycle page</a> says support ends at <strong>6:59 AM PT Wednesday, Oct 14</strong>. Nobody is attacking 24H2; after Wednesday it simply stops getting fixes. Newer versions keep going: 25H2 through October 2027 and 26H2 through October 2028. Microsoft’s October fixes are due later today. To check your PC, open <strong>Settings &gt; System &gt; About</strong> and look at “Version.” If it says 24H2, go to <strong>Settings &gt; Windows Update</strong>, install today’s update and restart. Then click “Check for updates” again and, when a newer Windows 11 version (25H2 or 26H2) is offered, choose “Download and install.” Microsoft’s <a href=\"https://learn.microsoft.com/en-us/windows/release-health/status-windows-11-25h2\" target=\"_blank\" rel=\"noopener\">release notes</a> say 26H2 is rolling out in phases over the next few months, so not every PC will see it yet. Turning on “Get the latest updates as soon as they’re available” can bring it sooner. If nothing is offered, check again in a few days rather than forcing it.",
+      "IT managers: pull a report of 24H2 <strong>Pro</strong> machines, which are common in small offices, from Intune, WSUS or your RMM, and schedule their feature update to 25H2 or 26H2. Pro machines that Windows Update for Business keeps paused on 24H2 fall out of support after today. Test first: Microsoft lists an open known issue where some apps that use Dolby Digital (AC-3) audio may close unexpectedly after updates released since Sept 22, on 24H2, 25H2 and 26H2. 24H2 Enterprise and Education are not ending; <a href=\"https://learn.microsoft.com/en-us/lifecycle/products/windows-11-enterprise-and-education\" target=\"_blank\" rel=\"noopener\">Microsoft</a> supports them until October 2027. 23H2 Enterprise and Education get their last update with November’s Patch Tuesday, Nov 10.",
+      "SAP shops: SAP’s <a href=\"https://support.sap.com/en/my-support/knowledge-base/security-notes-news/october-2026.html\" target=\"_blank\" rel=\"noopener\">October patch day</a> fixes 20 security issues (16 new notes and 4 GitHub advisories), four of them rated critical. The worst, rated the maximum 10, is in the SAP Cloud SDK for Python, which developers use to build apps on SAP’s cloud platform (BTP). Versions before <strong>0.45.2</strong> could leak an app’s credentials to an outsider in multi-tenant setups. The other critical fixes cover NetWeaver Visual Composer, an S/4HANA rules app, and Manufacturing Integration and Intelligence. SAP hasn’t reported any attacks, and none of these are on CISA’s exploited list. Ask your SAP Basis team or partner to apply the October notes this cycle, starting with Visual Composer, S/4HANA and MII if you run them. Developers on BTP should upgrade the Python SDK to 0.45.2 or later, or use SAP’s interim workaround until they can. Don’t wait for a quarterly window: <a href=\"https://www.bleepingcomputer.com/news/security/sap-warns-of-maximum-severity-oauth2-ssrf-security-flaw/\" target=\"_blank\" rel=\"noopener\">BleepingComputer</a> notes that a different SAP flaw was exploited in August, days after its fix. There is nothing here for everyday consumers."
+    ],
+    "sources": [
+      [
+        "Microsoft Lifecycle — Windows 11 Home and Pro",
+        "https://learn.microsoft.com/en-us/lifecycle/products/windows-11-home-and-pro"
+      ],
+      [
+        "Microsoft — Windows 11, version 25H2 release health (26H2 rollout, known issues)",
+        "https://learn.microsoft.com/en-us/windows/release-health/status-windows-11-25h2"
+      ],
+      [
+        "Microsoft Lifecycle — Windows 11 Enterprise and Education",
+        "https://learn.microsoft.com/en-us/lifecycle/products/windows-11-enterprise-and-education"
+      ],
+      [
+        "SAP — Security Patch Day, October 2026 (Oct 13)",
+        "https://support.sap.com/en/my-support/knowledge-base/security-notes-news/october-2026.html"
+      ],
+      [
+        "BleepingComputer — SAP warns of maximum-severity flaw (Oct 13)",
+        "https://www.bleepingcomputer.com/news/security/sap-warns-of-maximum-severity-oauth2-ssrf-security-flaw/"
+      ]
+    ]
+  },
+  {
     "date": "2026-10-12",
     "tag": "Patch",
     "read": "2 min",

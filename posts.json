@@ -1,5 +1,108 @@
 [
   {
+    "date": "2026-10-13",
+    "tag": "Patch",
+    "read": "2 min",
+    "title": "Install today’s Windows update, then move off 24H2 — it’s the last one for Home and Pro — and SAP shops have four critical fixes to apply",
+    "dek": "Windows 11 24H2 Home and Pro stop getting security updates after 6:59 AM PT Wednesday. Install today’s update, then move to 25H2 or 26H2; 26H2 is rolling out in phases, so your PC may not see it yet. It’s a deadline, not an attack. SAP admins: apply October’s notes, and BTP developers should update the Python SDK to 0.45.2.",
+    "body": [
+      "Today’s Windows update is the last regular security update for Windows 11 version 24H2 Home and Pro. <a href=\"https://learn.microsoft.com/en-us/lifecycle/products/windows-11-home-and-pro\" target=\"_blank\" rel=\"noopener\">Microsoft’s lifecycle page</a> says support ends at <strong>6:59 AM PT Wednesday, Oct 14</strong>. Nobody is attacking 24H2; after Wednesday it simply stops getting fixes. Newer versions keep going: 25H2 through October 2027 and 26H2 through October 2028. Microsoft’s October fixes are due later today. To check your PC, open <strong>Settings &gt; System &gt; About</strong> and look at “Version.” If it says 24H2, go to <strong>Settings &gt; Windows Update</strong>, install today’s update and restart. Then click “Check for updates” again and, when a newer Windows 11 version (25H2 or 26H2) is offered, choose “Download and install.” Microsoft’s <a href=\"https://learn.microsoft.com/en-us/windows/release-health/status-windows-11-25h2\" target=\"_blank\" rel=\"noopener\">release notes</a> say 26H2 is rolling out in phases over the next few months, so not every PC will see it yet. Turning on “Get the latest updates as soon as they’re available” can bring it sooner. If nothing is offered, check again in a few days rather than forcing it.",
+      "IT managers: pull a report of 24H2 <strong>Pro</strong> machines, which are common in small offices, from Intune, WSUS or your RMM, and schedule their feature update to 25H2 or 26H2. Pro machines that Windows Update for Business keeps paused on 24H2 fall out of support after today. Test first: Microsoft lists an open known issue where some apps that use Dolby Digital (AC-3) audio may close unexpectedly after updates released since Sept 22, on 24H2, 25H2 and 26H2. 24H2 Enterprise and Education are not ending; <a href=\"https://learn.microsoft.com/en-us/lifecycle/products/windows-11-enterprise-and-education\" target=\"_blank\" rel=\"noopener\">Microsoft</a> supports them until October 2027. 23H2 Enterprise and Education get their last update with November’s Patch Tuesday, Nov 10.",
+      "SAP shops: SAP’s <a href=\"https://support.sap.com/en/my-support/knowledge-base/security-notes-news/october-2026.html\" target=\"_blank\" rel=\"noopener\">October patch day</a> fixes 20 security issues (16 new notes and 4 GitHub advisories), four of them rated critical. The worst, rated the maximum 10, is in the SAP Cloud SDK for Python, which developers use to build apps on SAP’s cloud platform (BTP). Versions before <strong>0.45.2</strong> could leak an app’s credentials to an outsider in multi-tenant setups. The other critical fixes cover NetWeaver Visual Composer, an S/4HANA rules app, and Manufacturing Integration and Intelligence. SAP hasn’t reported any attacks, and none of these are on CISA’s exploited list. Ask your SAP Basis team or partner to apply the October notes this cycle, starting with Visual Composer, S/4HANA and MII if you run them. Developers on BTP should upgrade the Python SDK to 0.45.2 or later, or use SAP’s interim workaround until they can. Don’t wait for a quarterly window: <a href=\"https://www.bleepingcomputer.com/news/security/sap-warns-of-maximum-severity-oauth2-ssrf-security-flaw/\" target=\"_blank\" rel=\"noopener\">BleepingComputer</a> notes that a different SAP flaw was exploited in August, days after its fix. There is nothing here for everyday consumers."
+    ],
+    "sources": [
+      [
+        "Microsoft Lifecycle — Windows 11 Home and Pro",
+        "https://learn.microsoft.com/en-us/lifecycle/products/windows-11-home-and-pro"
+      ],
+      [
+        "Microsoft — Windows 11, version 25H2 release health (26H2 rollout, known issues)",
+        "https://learn.microsoft.com/en-us/windows/release-health/status-windows-11-25h2"
+      ],
+      [
+        "Microsoft Lifecycle — Windows 11 Enterprise and Education",
+        "https://learn.microsoft.com/en-us/lifecycle/products/windows-11-enterprise-and-education"
+      ],
+      [
+        "SAP — Security Patch Day, October 2026 (Oct 13)",
+        "https://support.sap.com/en/my-support/knowledge-base/security-notes-news/october-2026.html"
+      ],
+      [
+        "BleepingComputer — SAP warns of maximum-severity flaw (Oct 13)",
+        "https://www.bleepingcomputer.com/news/security/sap-warns-of-maximum-severity-oauth2-ssrf-security-flaw/"
+      ]
+    ]
+  },
+  {
+    "date": "2026-10-12",
+    "tag": "Patch",
+    "read": "2 min",
+    "title": "Upgrade your self-hosted GitLab today — a top-severity fix landed Monday — and check your Windows 11 version: 24H2 Home and Pro get their last security update Tuesday",
+    "dek": "Teams that run GitLab on their own servers should move to 19.4.2, 19.3.4 or 19.2.8 now; GitLab.com and GitLab Dedicated customers have nothing to do. Windows PC owners: if Settings shows version 24H2, install Tuesday’s update and then move to a newer Windows 11 version. It’s a deadline, not an attack.",
+    "body": [
+      "GitLab released versions <strong>19.4.2</strong>, <strong>19.3.4</strong> and <strong>19.2.8</strong> on Monday and, in its <a href=\"https://docs.gitlab.com/releases/patches/patch-release-gitlab-19-4-2-released/\" target=\"_blank\" rel=\"noopener\">release notes</a>, told everyone who runs GitLab on their own servers to upgrade “immediately.” The worst of the 24 fixes is rated the maximum 10 out of 10: under certain conditions, someone with no account could run their own code on the server. It affects both Community and Enterprise editions. GitLab.com is already patched, and GitLab Dedicated customers don’t need to do anything. GitLab hasn’t reported any attacks, and the bug isn’t on CISA’s exploited list. But <a href=\"https://www.bleepingcomputer.com/news/security/gitlab-warns-of-max-severity-rce-flaw-in-regex-compiler-engine/\" target=\"_blank\" rel=\"noopener\">BleepingComputer</a> notes that a different maximum-severity GitLab bug last month was added to that list a day after it was disclosed, so don’t leave this one for later.",
+      "First, find out whether you run your own GitLab at all. Check internal servers and cloud machines, and ask contractors and any dev team that set one up on its own. Then upgrade to the release that matches your current version line: 19.4.2, 19.3.4 or 19.2.8. If you’re older than 19.2, plan the jump to a supported version, because some of the other fixes reach back to much older releases. GitLab says single-server installs will go offline during the upgrade, so warn your developers first; larger multi-server setups can upgrade without downtime. One known issue: GitLab says 19.3.4 breaks merge request pages if the Ona integration is turned on, with a fix due in 19.3.5, so Ona users should go to 19.4.2 if they can. If you only use GitLab.com, there is nothing to do.",
+      "For everyone with a Windows PC: according to <a href=\"https://learn.microsoft.com/en-us/lifecycle/products/windows-11-home-and-pro\" target=\"_blank\" rel=\"noopener\">Microsoft’s lifecycle page</a>, Windows 11 version 24H2 Home and Pro gets its last security update this Tuesday, Oct 13. Nobody is attacking it; after Tuesday it simply stops getting fixes. To check, open <strong>Settings &gt; System &gt; About</strong> and look at “Version.” If it says 24H2, go to <strong>Settings &gt; Windows Update</strong>, install Tuesday’s update, and then install the newer Windows 11 version when it’s offered. Microsoft is rolling newer versions out in phases, so yours may not show up right away. IT managers: Windows 11 23H2 Enterprise and Education get their last update with November’s Patch Tuesday (Nov 10), according to a Microsoft notice <a href=\"https://www.bleepingcomputer.com/news/microsoft/microsoft-windows-11-23h2-reaches-end-of-support-in-30-days/\" target=\"_blank\" rel=\"noopener\">reported by BleepingComputer</a>. Pull a report of 24H2 Home/Pro and 23H2 Enterprise/Education machines from Intune, WSUS or your RMM and schedule their feature updates. 24H2 Enterprise and Education are not ending; <a href=\"https://learn.microsoft.com/en-us/lifecycle/products/windows-11-enterprise-and-education\" target=\"_blank\" rel=\"noopener\">Microsoft</a> supports them until October 2027."
+    ],
+    "sources": [
+      [
+        "GitLab — Critical Patch Release: 19.4.2, 19.3.4, 19.2.8 (Oct 12)",
+        "https://docs.gitlab.com/releases/patches/patch-release-gitlab-19-4-2-released/"
+      ],
+      [
+        "BleepingComputer — GitLab warns of max-severity flaw (Oct 12)",
+        "https://www.bleepingcomputer.com/news/security/gitlab-warns-of-max-severity-rce-flaw-in-regex-compiler-engine/"
+      ],
+      [
+        "Microsoft Lifecycle — Windows 11 Home and Pro",
+        "https://learn.microsoft.com/en-us/lifecycle/products/windows-11-home-and-pro"
+      ],
+      [
+        "Microsoft Lifecycle — Windows 11 Enterprise and Education",
+        "https://learn.microsoft.com/en-us/lifecycle/products/windows-11-enterprise-and-education"
+      ],
+      [
+        "BleepingComputer — Windows 11 23H2 reaches end of support in 30 days (Oct 12)",
+        "https://www.bleepingcomputer.com/news/microsoft/microsoft-windows-11-23h2-reaches-end-of-support-in-30-days/"
+      ]
+    ]
+  },
+  {
+    "date": "2026-10-09",
+    "tag": "Threat",
+    "read": "2 min",
+    "title": "Patch your SonicWall SMA1000 now — researchers saw attack attempts within days of the fix — and don’t install AI apps from search ads: a fake “Claude for Mac” page swapped in a malicious command",
+    "dek": "SMA1000 owners (models 6210, 7210, 8200v): install this week’s hotfix and check the appliance’s accounts and logs. SonicWall firewalls’ SSL-VPN and the SMA 100 series aren’t affected. Everyone: download apps only from the vendor’s own site, and never paste a command a web page hands you.",
+    "body": [
+      "Earlier this week SonicWall released hotfixes for its SMA1000 remote-access gateways (models 6210, 7210 and 8200v). One of them fixes a flaw rated the maximum 10 out of 10 that someone without a login could abuse. On Friday, security firms Previdian and Defused said they were seeing attack attempts against their own decoy SMA1000 devices, set up to catch attackers, <a href=\"https://www.bleepingcomputer.com/news/security/max-severity-sonicwall-sma1000-flaw-now-exploited-in-attacks/\" target=\"_blank\" rel=\"noopener\">BleepingComputer reported</a>. Nobody has confirmed that any real customer device was broken into, SonicWall hasn’t confirmed attacks, and the flaw isn’t on CISA’s exploited list. Shadowserver counts more than 400 SMA1000 appliances reachable from the internet. Only the SMA1000 line is involved; SonicWall firewalls’ own SSL-VPN and the SMA 100 series are not.",
+      "If you have an SMA1000, or an IT provider runs one for you, check its version. According to SonicWall’s <a href=\"https://nvd.nist.gov/vuln/detail/CVE-2026-102255\" target=\"_blank\" rel=\"noopener\">vulnerability record</a> (CVE-2026-102255), 12.4.3-03526 and 12.5.0-02952 and anything older are affected. SonicWall’s own advisory page still wouldn’t load when we checked Monday, so the fixed versions come from press reports: <a href=\"https://www.securityweek.com/critical-sonicwall-vulnerability-exploited-days-after-disclosure/\" target=\"_blank\" rel=\"noopener\">SecurityWeek</a> lists <strong>12.4.3-03670</strong> and <strong>12.5.0-03082</strong>. Confirm them in your SonicWall support portal before you install. Gateways patched for July’s and September’s SMA1000 problems still need this one. After patching, look through the appliance’s admin accounts and logs for anything you don’t recognize. If you can’t patch right away, limit who can reach the Work Place portal from the internet. If a provider manages it, ask them in writing when they patched.",
+      "For everyone: security firm <a href=\"https://pushsecurity.com/blog/adception-malvertising-another-search-engines-search-results\" target=\"_blank\" rel=\"noopener\">Push Security</a> said Friday that a Google search ad for “claude mac” sent people, through a Bing link and a hacked website, to a convincing fake Claude download page. According to Push, the page showed Anthropic’s real install command, but its copy button put a different command on the clipboard, one that downloads something from the attackers. This comes from a single research firm, and <a href=\"https://www.bleepingcomputer.com/news/security/hackers-abuse-google-ads-bing-redirects-to-push-claude-clickfix-attacks/\" target=\"_blank\" rel=\"noopener\">BleepingComputer</a> notes that what the download actually does is still unknown; there is no count of victims. What to do: skip “Sponsored” results when you download software, and type the company’s address yourself. Never paste a command from a web page into Terminal or PowerShell unless you reached that page from the vendor’s own site. If you already ran a Claude install command from an ad, disconnect from the internet, run your antivirus, and change the passwords saved in your browser from another device. IT managers: tell staff where approved AI tools come from, and consider blocking unapproved installers on managed Macs.",
+      "Still developing: grocery company Ahold Delhaize has taken systems offline after a cyberattack. It isn’t yet clear whether US stores or customers are affected; we’ll follow up if there’s something to do."
+    ],
+    "sources": [
+      [
+        "BleepingComputer — Max-severity SonicWall SMA1000 flaw now exploited in attacks (Oct 9)",
+        "https://www.bleepingcomputer.com/news/security/max-severity-sonicwall-sma1000-flaw-now-exploited-in-attacks/"
+      ],
+      [
+        "NVD — SonicWall SMA1000 vulnerability record (Oct 7)",
+        "https://nvd.nist.gov/vuln/detail/CVE-2026-102255"
+      ],
+      [
+        "SecurityWeek — Critical SonicWall vulnerability exploited days after disclosure (updated Oct 12)",
+        "https://www.securityweek.com/critical-sonicwall-vulnerability-exploited-days-after-disclosure/"
+      ],
+      [
+        "Push Security — Adception: malvertising via another search engine’s results (Oct 9)",
+        "https://pushsecurity.com/blog/adception-malvertising-another-search-engines-search-results"
+      ],
+      [
+        "BleepingComputer — Hackers abuse Google ads, Bing redirects in fake Claude attacks (Oct 9)",
+        "https://www.bleepingcomputer.com/news/security/hackers-abuse-google-ads-bing-redirects-to-push-claude-clickfix-attacks/"
+      ]
+    ]
+  },
+  {
     "date": "2026-10-08",
     "tag": "Threat",
     "read": "3 min",

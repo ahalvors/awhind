@@ -1,5 +1,55 @@
 [
   {
+    "date": "2026-10-14",
+    "tag": "Patch",
+    "read": "2 min",
+    "title": "Install Microsoft’s October update — attackers are already using one of the Windows flaws it fixes — and Ivanti VPN owners need to patch and check for break-ins",
+    "dek": "Microsoft’s October update fixes a Windows flaw attackers are already using to slip booby-trapped files past the “this came from the internet” warning. Install it this week; businesses should aim to finish by Friday. If you run Ivanti Connect Secure, upgrade today and check the box for signs of a break-in, because Ivanti’s own checker may miss it.",
+    "body": [
+      "Install Microsoft’s October security update this week. Go to <strong>Settings &gt; Windows Update</strong>, click “Check for updates,” install the October update and restart. On Windows 11 24H2 it’s <strong>KB5127648</strong>; to confirm it landed, open <strong>Settings &gt; System &gt; About</strong> and look for OS build 26100.9711 or later. Security firms counted more than 1,400 fixes in this release, and both <a href=\"https://www.tenable.com/blog/microsofts-october-2026-patch-tuesday-addresses-1407-cves-cve-2026-96951\" target=\"_blank\" rel=\"noopener\">Tenable</a> and <a href=\"https://threatprotect.qualys.com/2026/10/14/microsoft-patch-tuesday-october-2026-security-update-review/\" target=\"_blank\" rel=\"noopener\">Qualys</a> call it Microsoft’s largest Patch Tuesday ever. The one that matters most: <a href=\"https://msrc.microsoft.com/update-guide/releaseNote/2026-Oct\" target=\"_blank\" rel=\"noopener\">Microsoft</a> says attackers are already using a Windows flaw (CVE-2026-96951) that lets a booby-trapped file, sent by email or chat, open without the warning Windows normally shows for files from the internet. Someone still has to open the file, so until the update is installed, don’t open attachments you weren’t expecting, even from people you know. Windows 10 PCs outside Extended Security Updates don’t get this fix, which is one more reason to enroll or move off Windows 10.",
+      "IT managers: push the October cumulative updates with <strong>Friday, Oct 16</strong> as your target. That’s the deadline <a href=\"https://www.cisa.gov/known-exploited-vulnerabilities-catalog\" target=\"_blank\" rel=\"noopener\">CISA</a> gave federal agencies when it added the flaw to its exploited list Tuesday. Start with the machines people use for email and chat. Also schedule your servers this cycle: the Zero Day Initiative’s Dustin Childs, quoted by <a href=\"https://www.helpnetsecurity.com/2026/10/14/microsoft-patch-tuesday-cve-2026-96951-motw-bypass/\" target=\"_blank\" rel=\"noopener\">Help Net Security</a>, counts 55 “wormable” fixes across server roles such as DHCP Server, Remote Desktop Gateway and Network Policy Server. Find any Windows 10 machines outside ESU, since they can’t get the fix. And a reminder from yesterday: 24H2 Home and Pro machines need to move to 25H2 or 26H2 to keep getting updates.",
+      "Ivanti Connect Secure owners: upgrade the appliance today, then check it for signs of a break-in. <a href=\"https://www.cisa.gov/news-events/alerts/2026/10/13/cisa-urges-patching-newly-exploited-vulnerability-ivanti-connect-secure\" target=\"_blank\" rel=\"noopener\">CISA</a> says attackers have used a flaw in the VPN (CVE-2026-104935) to steal credentials and data, and <a href=\"https://www.volexity.com/blog/2026/10/13/a-series-of-unauthenticated-events-chained-exploitation-of-ivanti-connect-secure-zero-days/\" target=\"_blank\" rel=\"noopener\">Volexity</a>, which found the attacks, says they date to early October and let attackers take over some boxes without logging in. Ivanti calls the exploitation “limited,” but per <a href=\"https://www.bleepingcomputer.com/news/security/ivanti-warns-of-connect-secure-zero-day-exploited-in-attacks/\" target=\"_blank\" rel=\"noopener\">BleepingComputer</a> it says: “If you are running one of the impacted versions, Ivanti recommends you act immediately.” Fixed versions, per <a href=\"https://www.rapid7.com/blog/post/etr-ivanti-connect-secure-zero-day-exploited-in-the-wild-cve-2026-104935/\" target=\"_blank\" rel=\"noopener\">Rapid7</a>, are <strong>25.1.1.2, 25.1.3.x, or 22.8R2.5</strong> if you can’t move to 25.x yet. Don’t treat a clean result from Ivanti’s Integrity Checker as proof you’re safe: CISA warns it may not detect this, so review VPN logins and Active Directory activity since early October, bring in your incident-response provider if anything looks off, and reset credentials that passed through the appliance if you find signs of compromise. Volexity says a second flaw used in the attacks isn’t patched yet, so don’t assume this is fully fixed. Plan your move off 22.8 before it reaches end of life on Jan 31, 2027. CISA’s deadline for federal agencies is Friday. Consumers have nothing to do here; if your employer’s VPN acts up this week, it’s probably the patch."
+    ],
+    "sources": [
+      [
+        "Microsoft — October 2026 Security Updates (Oct 13)",
+        "https://msrc.microsoft.com/update-guide/releaseNote/2026-Oct"
+      ],
+      [
+        "CISA — Known Exploited Vulnerabilities Catalog (Oct 13 additions)",
+        "https://www.cisa.gov/known-exploited-vulnerabilities-catalog"
+      ],
+      [
+        "Tenable — Microsoft’s October 2026 Patch Tuesday (Oct 13)",
+        "https://www.tenable.com/blog/microsofts-october-2026-patch-tuesday-addresses-1407-cves-cve-2026-96951"
+      ],
+      [
+        "Qualys — Microsoft Patch Tuesday, October 2026 (Oct 14)",
+        "https://threatprotect.qualys.com/2026/10/14/microsoft-patch-tuesday-october-2026-security-update-review/"
+      ],
+      [
+        "Help Net Security — Microsoft Patch Tuesday, October 2026 (Oct 14)",
+        "https://www.helpnetsecurity.com/2026/10/14/microsoft-patch-tuesday-cve-2026-96951-motw-bypass/"
+      ],
+      [
+        "CISA — Alert: Ivanti Connect Secure (Oct 13)",
+        "https://www.cisa.gov/news-events/alerts/2026/10/13/cisa-urges-patching-newly-exploited-vulnerability-ivanti-connect-secure"
+      ],
+      [
+        "Rapid7 — Ivanti Connect Secure zero-day exploited (Oct 13)",
+        "https://www.rapid7.com/blog/post/etr-ivanti-connect-secure-zero-day-exploited-in-the-wild-cve-2026-104935/"
+      ],
+      [
+        "Volexity — Chained exploitation of Ivanti Connect Secure (Oct 13)",
+        "https://www.volexity.com/blog/2026/10/13/a-series-of-unauthenticated-events-chained-exploitation-of-ivanti-connect-secure-zero-days/"
+      ],
+      [
+        "BleepingComputer — Ivanti warns of Connect Secure zero-day (Oct 13)",
+        "https://www.bleepingcomputer.com/news/security/ivanti-warns-of-connect-secure-zero-day-exploited-in-attacks/"
+      ]
+    ]
+  },
+  {
     "date": "2026-10-13",
     "tag": "Patch",
     "read": "2 min",

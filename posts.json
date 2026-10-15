@@ -1,5 +1,48 @@
 [
   {
+    "date": "2026-10-15",
+    "tag": "Patch",
+    "read": "2 min",
+    "title": "Attackers are hitting Cisco’s email security gateways and Palo Alto firewalls — here’s what to update today",
+    "dek": "If your business runs Cisco Secure Email Gateway, update its scanning component today and check the box for signs of tampering: attackers are using a critical flaw that a single malicious email can trigger. Palo Alto firewall owners should update PAN-OS and keep the management interface off the internet. Nothing to do at home.",
+    "body": [
+      "Businesses running Cisco Secure Email Gateway, the box that filters incoming company mail, should update it today. <a href=\"https://sec.cloudapps.cisco.com/security/center/content/CiscoSecurityAdvisory/cisco-sa-esa-afw-zqYJkjxp\" target=\"_blank\" rel=\"noopener\">Cisco</a> said Wednesday that attackers are already exploiting a critical flaw (CVE-2026-76519) in on-premises and virtual gateways, and that a malicious email passing through an affected gateway can give an attacker full control of it, with no login needed. Only gateways with the <strong>File Reputation</strong> feature turned on and assigned to a mail policy, and running Content Scanner Tools older than <strong>25.3.0.5525</strong>, are affected. There’s no workaround. <a href=\"https://www.cisa.gov/known-exploited-vulnerabilities-catalog\" target=\"_blank\" rel=\"noopener\">CISA</a> added the flaw to its exploited list Wednesday and gave federal agencies until <strong>Saturday, Oct 17</strong>. Cisco’s cloud-hosted Secure Email Cloud Gateway needs no customer action, because Cisco already deployed the fix, per <a href=\"https://labs.beazley.security/advisories/BSL-A1229\" target=\"_blank\" rel=\"noopener\">Beazley Security</a>.",
+      "IT managers: check your Content Scanner Tools version and update to <strong>25.3.0.5525 or later</strong>, or move to AsyncOS <strong>15.5.5-014</strong> or <strong>16.5.0-780</strong>; gateways on 16.0 must migrate to a fixed release. Confirm whether File Reputation is enabled under <strong>Mail Policies &gt; Advanced Malware Protection</strong>. Then check the box for tampering: per <a href=\"https://www.bleepingcomputer.com/news/security/cisco-patches-actively-exploited-secure-email-gateway-zero-day/\" target=\"_blank\" rel=\"noopener\">BleepingComputer</a>, Cisco advises reviewing firewall and network logs for unusual traffic to or from the gateway, because attackers may remove evidence on the box itself. If anything looks off, rotate credentials and certificates on the gateway and call Cisco TAC. If you also run Secure Email and Web Manager, the <a href=\"https://www.cyber.gc.ca/en/alerts-advisories/cisco-security-advisory-av26-1042\" target=\"_blank\" rel=\"noopener\">Canadian Centre for Cyber Security</a> lists fixed releases 15.5.5-006 and 16.5.0-429. Cloud Gateway customers should watch for a Cisco notice.",
+      "Palo Alto Networks firewall owners: update PAN-OS and make sure the management interface isn’t reachable from the internet. <a href=\"https://security.paloaltonetworks.com/CVE-2026-0322\" target=\"_blank\" rel=\"noopener\">Palo Alto</a> said Wednesday it has seen “very limited exploitation” of a flaw (CVE-2026-0322) targeting the firewall management interface. It requires an attacker who already has or steals admin logins and can reach that interface, but it can then hand over full control of the firewall. PA-Series, VM-Series and Panorama are affected; Cloud NGFW and Prisma Access are not. Fixed builds include 12.2.4, 12.1.10-h2, 11.2.13-h3, 11.1.16-h3 and 10.2.18-h12; see Palo Alto’s advisory for your branch. Palo Alto lists the 11.2.16 build as due today, so check the advisory before planning around it. Today, limit management access to a jump box or trusted internal IPs, review admin accounts, and rotate admin passwords if management was ever exposed. CISA added this one Wednesday too, also due Oct 17. <a href=\"https://www.bleepingcomputer.com/news/security/palo-alto-networks-warns-of-pan-os-rce-flaw-exploited-in-attacks/\" target=\"_blank\" rel=\"noopener\">BleepingComputer</a> has more coverage.",
+      "Nothing to do at home: both of these are business equipment. As always, be wary of unexpected work emails asking you to log in or open files."
+    ],
+    "sources": [
+      [
+        "Cisco — Secure Email Gateway security advisory (Oct 14)",
+        "https://sec.cloudapps.cisco.com/security/center/content/CiscoSecurityAdvisory/cisco-sa-esa-afw-zqYJkjxp"
+      ],
+      [
+        "CISA — Known Exploited Vulnerabilities Catalog (Oct 14 additions)",
+        "https://www.cisa.gov/known-exploited-vulnerabilities-catalog"
+      ],
+      [
+        "Canadian Centre for Cyber Security — Cisco security advisory AV26-1042 (Oct 14)",
+        "https://www.cyber.gc.ca/en/alerts-advisories/cisco-security-advisory-av26-1042"
+      ],
+      [
+        "Beazley Security — Advisory BSL-A1229 (Oct 14)",
+        "https://labs.beazley.security/advisories/BSL-A1229"
+      ],
+      [
+        "BleepingComputer — Cisco patches actively exploited Secure Email Gateway zero-day (Oct 14)",
+        "https://www.bleepingcomputer.com/news/security/cisco-patches-actively-exploited-secure-email-gateway-zero-day/"
+      ],
+      [
+        "Palo Alto Networks — PAN-OS security advisory (Oct 14)",
+        "https://security.paloaltonetworks.com/CVE-2026-0322"
+      ],
+      [
+        "BleepingComputer — Palo Alto Networks warns of PAN-OS flaw exploited in attacks (Oct 14)",
+        "https://www.bleepingcomputer.com/news/security/palo-alto-networks-warns-of-pan-os-rce-flaw-exploited-in-attacks/"
+      ]
+    ]
+  },
+  {
     "date": "2026-10-14",
     "tag": "Patch",
     "read": "2 min",

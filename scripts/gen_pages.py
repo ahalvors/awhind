@@ -171,7 +171,7 @@ def page(slug, title_tag, meta_desc, eyebrow, h1, lede, sections, related, canon
   <div class="wrap">
     <h2 style="font-size:22px; margin-bottom:10px;">Tell us what's actually on fire.</h2>
     <p style="color:var(--text-secondary); font-size:14.5px; margin-bottom:18px;">One conversation, no deck required.</p>
-    <a href="mailto:ahalvor+awhind@mail.grokbot.com?subject=Readiness%20Assessment%20Request" class="btn btn-primary">Email ahalvor+awhind@mail.grokbot.com</a>
+    <a href="mailto:ahalvor+awhind@mail.grokbot.com?subject=Readiness%20Assessment%20Request" class="btn btn-primary">Request a Readiness Assessment</a>
   </div>
 </div>
 

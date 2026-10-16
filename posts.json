@@ -1,5 +1,50 @@
 [
   {
+    "date": "2026-10-16",
+    "tag": "Patch",
+    "read": "2 min",
+    "title": "Restart Chrome to finish this week’s security update — and patch self-hosted Jira and Confluence",
+    "dek": "Google shipped its second Chrome security update this week, with 10 more fixes, one rated critical. Relaunch Chrome so it reaches 155.0.8059.84 or later, then check Edge, Brave and other Chromium browsers. Businesses running self-hosted Jira, Confluence or Bitbucket should patch or apply Atlassian’s blocking rule today: CISA now lists the flaw as exploited. Cloud customers are already covered.",
+    "body": [
+      "Google released Chrome <strong>155.0.8059.84</strong> for Windows, Mac and Linux on Thursday, per <a href=\"https://chromereleases.googleblog.com/2026/10/\" target=\"_blank\" rel=\"noopener\">Chrome Releases</a>. It’s the second Chrome security update this week: Tuesday’s build fixed 37 security flaws, and Thursday’s fixes 10 more, including one rated critical (CVE-2026-110922) and six rated high. The worst case is a malicious web page. Google hasn’t reported any of these flaws being used in attacks, so this is routine but important. One catch: the update rolls out over days or weeks, and it doesn’t take effect until Chrome restarts.",
+      "At home: in Chrome, open <strong>Menu &gt; Help &gt; About Google Chrome</strong>, let it update, and click <strong>Relaunch</strong>. You want <strong>155.0.8059.84 or later</strong>. Edge, Brave and Opera are built on the same engine but ship on their own schedules, so check their About pages over the next few days too. On a phone, update Chrome from your app store.",
+      "IT managers: push Chrome 155.0.8059.84 or later through your management tool and set a relaunch deadline so the update actually applies. Track Edge and other Chromium browsers separately.",
+      "Businesses running self-hosted Atlassian software: patch today. <a href=\"https://www.cisa.gov/news-events/alerts/2026/10/15/cisa-adds-one-known-exploited-vulnerability-catalog\" target=\"_blank\" rel=\"noopener\">CISA</a> added an Atlassian flaw (CVE-2026-21589) to its exploited list on Thursday and gave federal agencies until <strong>Sunday, Oct 18</strong>. It affects Data Center versions of Jira Software, Jira Service Management, Confluence, Bitbucket, Bamboo and Crowd, plus Crucible and Fisheye, and lets someone with no login read specific files on the server. The flaw isn’t new: <a href=\"https://confluence.atlassian.com/security/cve-2026-21589-arbitrary-file-access-vulnerability-impacts-multiple-products-1870495748.html\" target=\"_blank\" rel=\"noopener\">Atlassian</a> released fixes on Oct 5. What’s new is CISA saying it’s now being exploited; CISA doesn’t say by whom or how widely.",
+      "IT managers: upgrade to the fixed version for your product in Atlassian’s advisory table. If you can’t today, apply Atlassian’s temporary blocking rule and take the servers off the open internet. Search your access logs using Atlassian’s guidance, and if anything matches, rotate secrets stored on the server. Atlassian Cloud is already patched, and Bitbucket Cloud isn’t affected. <a href=\"https://www.bleepingcomputer.com/news/security/atlassian-warns-of-critical-file-access-flaw-in-jira-confluence/\" target=\"_blank\" rel=\"noopener\">BleepingComputer</a> has more coverage.",
+      "Nothing to do at home for Atlassian: it’s workplace server software. Just restart Chrome."
+    ],
+    "sources": [
+      [
+        "Google — Chrome Releases, Stable Channel Update for Desktop (Oct 13 and Oct 15)",
+        "https://chromereleases.googleblog.com/2026/10/"
+      ],
+      [
+        "CIS — Multiple vulnerabilities in Google Chrome advisory (Oct 13 build)",
+        "https://www.cisecurity.org/advisory/multiple-vulnerabilities-in-google-chrome-could-allow-for-arbitrary-code-execution_2026-116"
+      ],
+      [
+        "Daily Security Review — Chrome 155 patches 10 flaws (Oct 16)",
+        "https://dailysecurityreview.com/resources/chrome-155-patches-10-flaws-including-critical-prerender-bug/"
+      ],
+      [
+        "Atlassian — Arbitrary file access vulnerability advisory (Oct 5)",
+        "https://confluence.atlassian.com/security/cve-2026-21589-arbitrary-file-access-vulnerability-impacts-multiple-products-1870495748.html"
+      ],
+      [
+        "CISA — Adds one known exploited vulnerability to catalog (Oct 15)",
+        "https://www.cisa.gov/news-events/alerts/2026/10/15/cisa-adds-one-known-exploited-vulnerability-catalog"
+      ],
+      [
+        "CISA — Known Exploited Vulnerabilities Catalog (Oct 15 addition)",
+        "https://www.cisa.gov/known-exploited-vulnerabilities-catalog"
+      ],
+      [
+        "BleepingComputer — Atlassian warns of critical file-access flaw in Jira, Confluence (Oct 6)",
+        "https://www.bleepingcomputer.com/news/security/atlassian-warns-of-critical-file-access-flaw-in-jira-confluence/"
+      ]
+    ]
+  },
+  {
     "date": "2026-10-15",
     "tag": "Patch",
     "read": "2 min",

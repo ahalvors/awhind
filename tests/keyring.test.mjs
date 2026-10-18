@@ -193,3 +193,13 @@ test('summarize exposes headlines only', () => {
   assert.deepEqual(Object.keys(s.issues[0]).sort(), ['level', 'title']);
   assert.equal(s.holders, undefined);
 });
+
+test('rate limit: per-IP cap returns 429 and does not burn the global budget', async () => {
+  const { rateLimit, LIMITS } = await import('../netlify/lib/keyring-guard.mjs');
+  const ip = '203.0.113.77-test';
+  for (let i = 0; i < LIMITS.scan.perIpHour; i++) assert.equal(await rateLimit('scan', ip), null, `request ${i + 1} allowed`);
+  const blocked = await rateLimit('scan', ip);
+  assert.equal(blocked.status, 429);
+  assert.equal(blocked.headers.get('retry-after'), '3600');
+  assert.equal(await rateLimit('scan', '198.51.100.9-test'), null, 'other visitors unaffected');
+});

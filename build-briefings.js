@@ -288,7 +288,10 @@ dueArticles.forEach(post => {
   const ogTitle = escapeHtml(post.seo_title || post.title);
   const ogDescription = escapeHtml(post.meta_description);
   const ogImageUrl = post.featured_image ? `https://awhind.com${post.featured_image}` : '';
-  const ogImageAlt = post.featured_image ? escapeHtml(`Featured image for ${post.title}`) : '';
+  const ogImageAlt = post.featured_image ? escapeHtml(post.featured_image_alt || `Featured image for ${post.title}`) : '';
+  const imgAlt = escapeHtml(post.featured_image_alt || post.title);
+  const imgW = post.featured_image_width || 1200;
+  const imgH = post.featured_image_height || 630;
   
   const jsonLd = {
     "@context": "https://schema.org",
@@ -359,15 +362,16 @@ dueArticles.forEach(post => {
 <meta property="og:description" content="${ogDescription}">
 <meta property="og:site_name" content="AWHIND">${post.featured_image ? `
 <meta property="og:image" content="${ogImageUrl}">
-<meta property="og:image:width" content="1200">
-<meta property="og:image:height" content="630">
+<meta property="og:image:width" content="${imgW}">
+<meta property="og:image:height" content="${imgH}">
 <meta property="og:image:alt" content="${ogImageAlt}">` : ''}
 
 <!-- Twitter Card -->
 <meta name="twitter:card" content="${post.featured_image ? 'summary_large_image' : 'summary'}">
 <meta name="twitter:title" content="${ogTitle}">
 <meta name="twitter:description" content="${ogDescription}">${post.featured_image ? `
-<meta name="twitter:image" content="${ogImageUrl}">` : ''}
+<meta name="twitter:image" content="${ogImageUrl}">
+<meta name="twitter:image:alt" content="${ogImageAlt}">` : ''}
 
 <script type="application/ld+json">
 ${JSON.stringify(jsonLd, null, 2)}
@@ -482,7 +486,7 @@ ${JSON.stringify(jsonLd, null, 2)}
 <article>
   <div class="meta">${fmtDate(post.date)} &middot; ${post.read} read</div>
   <h1>${post.title}</h1>${scheduledBanner}${post.featured_image ? `
-  <img src="${post.featured_image}" alt="${post.title}" class="featured-image" width="1200" height="630">` : ''}
+  <img src="${post.featured_image}" alt="${imgAlt}" class="featured-image" width="${imgW}" height="${imgH}">` : ''}
   <div class="article-body">
     ${post.body}
   </div>${seriesNav}

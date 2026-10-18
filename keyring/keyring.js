@@ -81,7 +81,9 @@
       if (s.fineCount) {
         var li = el('li');
         li.appendChild(el('span', 'kr-dot green'));
-        li.appendChild(el('span', null, s.fineCount + (s.fineCount === 1 ? ' other check looks fine.' : ' other checks look fine.')));
+        li.appendChild(el('span', null, s.issues.length
+          ? s.fineCount + (s.fineCount === 1 ? ' other check looks fine.' : ' other checks look fine.')
+          : 'All ' + s.fineCount + ' checks look fine.'));
         list.appendChild(li);
       }
       $('kr-summary').hidden = false;

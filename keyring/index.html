@@ -148,6 +148,39 @@
   .kr-check p{font-size:13.5px; color:var(--text-secondary); margin:8px 0 0;}
   .kr-cta-row{display:flex; gap:12px; flex-wrap:wrap; margin-top:18px;}
   .kr-thanks{margin-top:14px; font-size:15px; color:var(--status-good);}
+
+  .kr-sr{position:absolute; width:1px; height:1px; margin:-1px; padding:0; overflow:hidden; clip:rect(0 0 0 0); white-space:nowrap; border:0;}
+  .kr-steps{list-style:none; margin:0 0 28px; padding:0; display:flex; flex-direction:column; gap:10px;}
+  .kr-step{position:relative; display:grid; grid-template-columns:34px 1fr; gap:14px; align-items:center; background:var(--bg-elevated); border:1px solid var(--line); border-left:3px solid var(--line-strong); box-shadow:var(--shadow); padding:16px 20px 16px 16px; transition:border-color .3s ease;}
+  .kr-step.enter{animation:kr-slide .42s cubic-bezier(.2,.8,.2,1) both;}
+  @keyframes kr-slide{from{opacity:0; transform:translateY(16px) scale(.985);} to{opacity:1; transform:none;}}
+  .kr-step .num{font-family:var(--mono); font-size:10.5px; letter-spacing:.1em; text-transform:uppercase; color:var(--text-tertiary);}
+  .kr-step .finding{font-size:15px; margin-top:3px; line-height:1.45;}
+  .kr-step.scanning .finding{color:var(--text-secondary);}
+  .kr-step.scanning .finding::after{content:''; display:inline-block; width:1.2em; text-align:left; animation:kr-dots 1.2s steps(4) infinite; vertical-align:bottom; overflow:hidden; white-space:nowrap;}
+  @keyframes kr-dots{0%{content:'';} 25%{content:'.';} 50%{content:'..';} 75%{content:'...';}}
+  .kr-step.scanning::before{content:''; position:absolute; inset:0; background:linear-gradient(90deg, transparent, color-mix(in srgb, var(--accent) 7%, transparent), transparent); background-size:200% 100%; animation:kr-shimmer 1.1s linear infinite; pointer-events:none;}
+  @keyframes kr-shimmer{from{background-position:200% 0;} to{background-position:-200% 0;}}
+  .kr-icon{width:30px; height:30px; border-radius:50%; display:grid; place-items:center; font-family:var(--mono); font-size:15px; font-weight:600; color:#fff;}
+  .kr-step.scanning .kr-icon{border:2.5px solid var(--line-strong); border-top-color:var(--accent); animation:kr-spin .8s linear infinite;}
+  @keyframes kr-spin{to{transform:rotate(360deg);}}
+  .kr-step.resolved .kr-icon{animation:kr-pop .32s cubic-bezier(.2,1.4,.4,1) both;}
+  @keyframes kr-pop{from{transform:scale(.4); opacity:0;} to{transform:scale(1); opacity:1;}}
+  .kr-step.red{border-left-color:var(--status-critical);} .kr-step.red .kr-icon{background:var(--status-critical);}
+  .kr-step.yellow{border-left-color:var(--status-warn);} .kr-step.yellow .kr-icon{background:var(--status-warn);}
+  .kr-step.green{border-left-color:var(--status-good);} .kr-step.green .kr-icon{background:var(--status-good);}
+  .kr-step.unknown{border-left-color:var(--text-tertiary);} .kr-step.unknown .kr-icon{background:var(--text-tertiary);}
+  .kr-step .lvl{font-family:var(--mono); font-size:10px; letter-spacing:.08em; text-transform:uppercase; margin-left:8px;}
+  .kr-step.red .lvl{color:var(--status-critical);} .kr-step.yellow .lvl{color:var(--status-warn);} .kr-step.green .lvl{color:var(--status-good);} .kr-step.unknown .lvl{color:var(--text-tertiary);}
+  .kr-final.enter{animation:kr-slide .5s cubic-bezier(.2,.8,.2,1) both;}
+  .kr-final h2:focus{outline:none;}
+  .kr-final h2:focus-visible{outline:2px solid var(--accent); outline-offset:4px;}
+  @media (max-width:600px){ .kr-step{grid-template-columns:28px 1fr; gap:12px; padding:14px 14px 14px 12px;} .kr-icon{width:26px; height:26px; font-size:13px;} .kr-step .finding{font-size:14.5px;} }
+  @media (prefers-reduced-motion: reduce){
+    .kr-step.enter, .kr-final.enter, .kr-step.resolved .kr-icon{animation:none;}
+    .kr-step.scanning::before, .kr-step.scanning .kr-icon, .kr-step.scanning .finding::after{animation:none;}
+    html{scroll-behavior:auto;}
+  }
   [hidden]{display:none !important;}
 </style>
 </head>
@@ -181,16 +214,20 @@
     </form>
     <p class="kr-help">Public records only. No logins, no installs, nothing changes on your site.</p>
     <p class="kr-error" id="kr-scan-error" role="alert"></p>
-    <p class="kr-status" id="kr-scan-status" hidden aria-live="polite">Checking registration, DNS, email and security records&hellip;</p>
+    <p class="kr-status" id="kr-scan-status" hidden>Checking registration, DNS, email and security records&hellip;</p>
   </div>
 
-  <div class="kr-card" id="kr-summary" hidden aria-live="polite">
-    <div class="kr-overall">
+  <p class="kr-sr" id="kr-live" role="status" aria-live="polite" aria-atomic="true"></p>
+
+  <ol class="kr-steps" id="kr-steps" aria-label="Scan results" hidden></ol>
+
+  <div class="kr-card kr-final" id="kr-summary" hidden>
+    <p class="eyebrow">Overall score</p>
+    <div class="kr-overall" style="margin-top:10px;">
       <span class="kr-badge" id="kr-badge"></span>
-      <h2 id="kr-headline"></h2>
+      <h2 id="kr-headline" tabindex="-1"></h2>
     </div>
     <p class="kr-counts" id="kr-counts"></p>
-    <ul class="kr-list" id="kr-summary-list"></ul>
   </div>
 
   <div class="kr-card" id="kr-lead" hidden>

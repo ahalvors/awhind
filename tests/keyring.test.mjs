@@ -203,3 +203,26 @@ test('rate limit: per-IP cap returns 429 and does not burn the global budget', a
   assert.equal(blocked.headers.get('retry-after'), '3600');
   assert.equal(await rateLimit('scan', '198.51.100.9-test'), null, 'other visitors unaffected');
 });
+
+test('checks: seven steps in reveal order, levels follow the findings', () => {
+  const ORDER = ['domain', 'dns', 'email', 'spf', 'dmarc', 'ssl', 'hosting'];
+  const good = gradeReport(base(), NOW);
+  assert.deepEqual(good.checks.map((c) => c.id), ORDER);
+  assert.ok(good.checks.every((c) => c.level === 'green' && c.finding && c.label));
+  const demitri = gradeReport(base({
+    rdap: { registrar: 'Tucows Domains Inc.', expires: '2026-12-30T17:44:23Z', registrant: 'hidden' },
+    ns: ['ns01.squarespacedns.com', 'dns1.p07.nsone.net'], spf: parseSpf([]), dmarc: parseDmarc([])
+  }), NOW);
+  const lv = Object.fromEntries(demitri.checks.map((c) => [c.id, c.level]));
+  assert.deepEqual(lv, { domain: 'yellow', dns: 'yellow', email: 'green', spf: 'red', dmarc: 'red', ssl: 'green', hosting: 'green' });
+  const down = gradeReport(base({ web: { up: false, host: 'goodbiz.com', reason: 'it took too long to respond' } }), NOW);
+  assert.equal(down.checks.find((c) => c.id === 'hosting').level, 'red');
+  assert.equal(down.checks.find((c) => c.id === 'ssl').level, 'unknown');
+  const fail = gradeReport(base({ rdap: null, web: null, errors: { rdap: 'timeout', web: 'failed' } }), NOW);
+  assert.equal(fail.overall, 'unknown');
+  assert.equal(fail.checks.find((c) => c.id === 'domain').level, 'unknown');
+  assert.equal(fail.checks.find((c) => c.id === 'hosting').level, 'unknown');
+  const s = summarize(demitri);
+  assert.equal(s.checks.length, 7);
+  assert.deepEqual(Object.keys(s.checks[0]).sort(), ['finding', 'id', 'label', 'level']);
+});

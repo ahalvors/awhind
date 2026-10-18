@@ -56,43 +56,118 @@
     return parts.join(' \u00b7 ');
   }
 
-  // Step 1: instant summary
+  // Step 1: animated, step-by-step reveal driven by the real scan results
+  var STEPS = [
+    ['domain', 'Domain & renewal'], ['dns', 'DNS host'], ['email', 'Email provider'],
+    ['spf', 'SPF'], ['dmarc', 'DMARC'], ['ssl', 'SSL certificate'], ['hosting', 'Hosting & uptime']
+  ];
+  var ICON = { green: '\u2713', yellow: '!', red: '\u2715', unknown: '?' };
+  var LVL = { green: 'Good', yellow: 'Review', red: 'Urgent', unknown: 'Not checked' };
+  var STEP_SCAN_MS = 280;   // scanning state shown per panel once data is back
+  var STEP_GAP_MS = 170;    // pause after a panel resolves before the next slides in
+  var FIRST_MIN_MS = 450;   // minimum scanning time for the first panel
+  var runId = 0;
+
+  function reducedMotion() {
+    return !!(window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches);
+  }
+  function wait(ms) { return new Promise(function (r) { setTimeout(r, ms); }); }
+
+  function makeStep(i, animate) {
+    var li = el('li', 'kr-step scanning' + (animate ? ' enter' : ''));
+    li.setAttribute('data-step', STEPS[i][0]);
+    li.appendChild(el('span', 'kr-icon'));
+    var body = el('div');
+    var num = el('p', 'num', String(i + 1).padStart(2, '0') + ' \u00b7 ' + STEPS[i][1]);
+    num.style.margin = '0';
+    body.appendChild(num);
+    var f = el('p', 'finding', 'Checking');
+    f.style.margin = '3px 0 0';
+    body.appendChild(f);
+    li.appendChild(body);
+    $('kr-steps').appendChild(li);
+    return li;
+  }
+  function resolveStep(li, check) {
+    var level = check && check.level ? check.level : 'unknown';
+    li.className = 'kr-step resolved ' + level;
+    li.querySelector('.kr-icon').textContent = ICON[level];
+    li.querySelector('.kr-icon').setAttribute('aria-hidden', 'true');
+    var num = li.querySelector('.num');
+    var tag = el('span', 'lvl', LVL[level]);
+    num.appendChild(tag);
+    li.querySelector('.finding').textContent = (check && check.finding) || 'We couldn\u2019t finish this check.';
+  }
+  function showOverall(s, animate) {
+    badge($('kr-badge'), s.overall);
+    $('kr-headline').textContent = s.domain + ': ' + HEAD[s.overall];
+    $('kr-counts').textContent = counts(s.counts, s.incomplete);
+    var card = $('kr-summary');
+    card.classList.remove('enter');
+    if (animate) { void card.offsetWidth; card.classList.add('enter'); }
+    card.hidden = false;
+    $('kr-lead').hidden = false;
+    $('kr-steps').setAttribute('aria-busy', 'false');
+    $('kr-live').textContent = 'Scan complete for ' + s.domain + '. Overall: ' + LABEL[s.overall] + '. ' + counts(s.counts, s.incomplete) + '.';
+    try { $('kr-headline').focus({ preventScroll: true }); } catch (e) { $('kr-headline').focus(); }
+    card.scrollIntoView({ behavior: animate ? 'smooth' : 'auto', block: 'center' });
+  }
+  function checkFor(s, id) {
+    var list = s.checks || [];
+    for (var i = 0; i < list.length; i++) if (list[i].id === id) return list[i];
+    return null;
+  }
+
   $('kr-scan-form').addEventListener('submit', function (e) {
     e.preventDefault();
     var domain = $('kr-domain').value.trim();
     $('kr-scan-error').textContent = '';
     if (!domain) { $('kr-scan-error').textContent = 'Enter a domain name, like yourbusiness.com.'; return; }
+    var my = ++runId;
+    var animate = !reducedMotion();
     busy($('kr-scan-btn'), $('kr-scan-status'), true);
     ['kr-summary', 'kr-lead', 'kr-report', 'kr-cta'].forEach(function (id) { $(id).hidden = true; });
+    var steps = $('kr-steps');
+    clear(steps);
+    steps.hidden = false;
+    steps.setAttribute('aria-busy', 'true');
+    $('kr-live').textContent = 'Checking ' + domain + '\u2026';
+    var started = Date.now();
+    var first = animate ? makeStep(0, true) : null;
+    if (first) first.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+
     post('/api/keyring/scan', { domain: domain }).then(function (j) {
+      if (my !== runId) return;
       var s = j.summary;
       state.domain = s.domain;
-      badge($('kr-badge'), s.overall);
-      $('kr-headline').textContent = s.domain + ': ' + HEAD[s.overall];
-      $('kr-counts').textContent = counts(s.counts, s.incomplete);
-      var list = $('kr-summary-list');
-      clear(list);
-      s.issues.forEach(function (i) {
-        var li = el('li');
-        li.appendChild(el('span', 'kr-dot ' + i.level));
-        li.appendChild(el('span', null, i.title));
-        list.appendChild(li);
-      });
-      if (s.fineCount) {
-        var li = el('li');
-        li.appendChild(el('span', 'kr-dot green'));
-        li.appendChild(el('span', null, s.issues.length
-          ? s.fineCount + (s.fineCount === 1 ? ' other check looks fine.' : ' other checks look fine.')
-          : 'All ' + s.fineCount + ' checks look fine.'));
-        list.appendChild(li);
-      }
-      $('kr-summary').hidden = false;
-      $('kr-lead').hidden = false;
       track('keyring_scan', { overall: s.overall });
-      $('kr-summary').scrollIntoView({ behavior: 'smooth', block: 'start' });
+      if (!animate) {
+        for (var k = 0; k < STEPS.length; k++) resolveStep(makeStep(k, false), checkFor(s, STEPS[k][0]));
+        showOverall(s, false);
+        return;
+      }
+      // Reveal real results one panel at a time with short stagger timing.
+      var chain = wait(Math.max(0, FIRST_MIN_MS - (Date.now() - started)));
+      STEPS.forEach(function (st, i) {
+        chain = chain.then(function () {
+          if (my !== runId) throw new Error('cancelled');
+          var li = i === 0 ? first : makeStep(i, true);
+          if (i > 0) li.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+          return wait(i === 0 ? 0 : STEP_SCAN_MS).then(function () {
+            resolveStep(li, checkFor(s, st[0]));
+            return wait(STEP_GAP_MS);
+          });
+        });
+      });
+      return chain.then(function () { if (my === runId) showOverall(s, true); });
     }).catch(function (err) {
+      if (my !== runId || (err && err.message === 'cancelled')) return;
+      clear(steps);
+      steps.hidden = true;
+      steps.setAttribute('aria-busy', 'false');
+      $('kr-live').textContent = '';
       $('kr-scan-error').textContent = err.message;
-    }).then(function () { busy($('kr-scan-btn'), $('kr-scan-status'), false); });
+    }).then(function () { if (my === runId) busy($('kr-scan-btn'), $('kr-scan-status'), false); });
   });
 
   // Step 2: lead capture -> full report on the page
@@ -112,6 +187,7 @@
       renderReport(j.report);
       $('kr-lead').hidden = true;
       $('kr-summary').hidden = true;
+      $('kr-steps').hidden = true;
       $('kr-report').hidden = false;
       $('kr-cta').hidden = false;
       $('kr-cta-title').textContent = j.report.overall === 'green'

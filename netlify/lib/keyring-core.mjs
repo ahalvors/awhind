@@ -543,7 +543,79 @@ export function gradeReport(facts, now = Date.now()) {
     { piece: 'Email', company: hasMail ? mailProviders.join(' + ') : 'No email at this domain', yours: 'Unknown' }
   ];
 
-  return { domain: facts.domain, overall, incomplete, counts, issues, fine, notes, holders };
+  const checks = buildChecks({ facts, issues, err, rdap, nsProviders, mailProviders, hasMail, spf, dmarc, web, now });
+  return { domain: facts.domain, overall, incomplete, counts, issues, fine, notes, holders, checks };
+}
+
+// One status line per scan step, in the order the page reveals them.
+export const CHECK_ORDER = [
+  ['domain', 'Domain & renewal'],
+  ['dns', 'DNS host'],
+  ['email', 'Email provider'],
+  ['spf', 'SPF'],
+  ['dmarc', 'DMARC'],
+  ['ssl', 'SSL certificate'],
+  ['hosting', 'Hosting & uptime']
+];
+
+function buildChecks({ facts, issues, err, rdap, nsProviders, mailProviders, hasMail, spf, dmarc, web, now }) {
+  const byId = (...ids) => issues.find((i) => ids.includes(i.id));
+  const fromIssue = (i) => ({ level: i.level, finding: i.title });
+  const unknown = (finding) => ({ level: 'unknown', finding });
+  const out = {};
+
+  // Domain & renewal
+  const dIssue = byId('not-registered', 'expired', 'expiring');
+  if (dIssue) out.domain = fromIssue(dIssue);
+  else if (!rdap || err.rdap) out.domain = unknown('Couldn\u2019t reach the registration records right now.');
+  else if (rdap.expires) out.domain = { level: 'green', finding: `Registered${rdap.registrar ? ` with ${rdap.registrar}` : ''} through ${fmtDate(rdap.expires)}.` };
+  else out.domain = unknown('The registry record doesn\u2019t list an expiry date.');
+
+  // DNS host
+  const nIssue = byId('no-dns', 'mixed-dns');
+  if (nIssue) out.dns = fromIssue(nIssue);
+  else if (err.ns) out.dns = unknown('Couldn\u2019t look up your nameservers right now.');
+  else out.dns = { level: 'green', finding: `Hosted in one place: ${nsProviders[0]}.` };
+
+  // Email provider
+  if (err.mx) out.email = unknown('Couldn\u2019t look up your mail records right now.');
+  else if (hasMail) out.email = { level: 'green', finding: `Email runs on ${mailProviders.join(' and ')}.` };
+  else out.email = { level: 'green', finding: 'This domain doesn\u2019t receive email.' };
+
+  // SPF
+  const spoof = byId('spoofable');
+  const sIssue = byId('spf-missing', 'spf-multiple', 'spf-open');
+  if (err.spf || err.mx || err.dmarc) out.spf = unknown('Couldn\u2019t check your SPF record right now.');
+  else if (spoof) out.spf = { level: spoof.level, finding: 'No SPF record, so anyone can send email as you.' };
+  else if (sIssue) out.spf = fromIssue(sIssue);
+  else out.spf = { level: 'green', finding: 'SPF lists who may send email for you.' };
+
+  // DMARC
+  const mIssue = byId('dmarc-missing', 'dmarc-none', 'dmarc-partial', 'dmarc-broken');
+  if (err.dmarc || err.mx || err.spf) out.dmarc = unknown('Couldn\u2019t check your DMARC record right now.');
+  else if (spoof) out.dmarc = { level: spoof.level, finding: 'No DMARC record, so fake email in your name gets delivered.' };
+  else if (mIssue) out.dmarc = fromIssue(mIssue);
+  else out.dmarc = { level: 'green', finding: `DMARC is set to \u201c${dmarc.policy}\u201d, so fakes are blocked.` };
+
+  // SSL
+  const tIssue = byId('ssl-invalid', 'ssl-expiring');
+  if (tIssue) out.ssl = fromIssue(tIssue);
+  else if (web && web.up && web.tls?.validTo) out.ssl = { level: 'green', finding: `Valid security certificate through ${fmtDate(web.tls.validTo)}.` };
+  else if (web && web.up) out.ssl = { level: 'green', finding: 'The site loads securely.' };
+  else if (web && (web.skipped || !web.up)) out.ssl = unknown('Couldn\u2019t check the certificate because the site didn\u2019t load.');
+  else out.ssl = unknown('Couldn\u2019t check the certificate right now.');
+
+  // Hosting & uptime
+  const hIssue = byId('site-down', 'private-ip', 'single-vendor');
+  if (hIssue && hIssue.id !== 'single-vendor') out.hosting = fromIssue(hIssue);
+  else if (!web || err.web) out.hosting = unknown('Couldn\u2019t finish the website check right now.');
+  else if (hIssue) out.hosting = fromIssue(hIssue);
+  else {
+    const { platform, cdn, label } = web.host_info || {};
+    out.hosting = { level: 'green', finding: platform ? `Up and loading. Host: ${label}.` : cdn ? `Up and loading, behind ${cdn}.` : 'Up and loading.' };
+  }
+
+  return CHECK_ORDER.map(([id, label]) => ({ id, label, ...out[id] }));
 }
 
 export function humanTlsError(code) {
@@ -567,6 +639,7 @@ export function summarize(report) {
     incomplete: report.incomplete,
     counts: report.counts,
     issues: report.issues.map((i) => ({ level: i.level, title: i.title })),
+    checks: report.checks,
     fineCount: report.fine.length
   };
 }

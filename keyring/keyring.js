@@ -2,11 +2,12 @@
   'use strict';
   var $ = function (id) { return document.getElementById(id); };
   var state = { domain: null, name: null, email: null, leadId: null };
-  var LABEL = { red: 'Needs attention', yellow: 'Worth a look', green: 'Looking good' };
+  var LABEL = { red: 'Needs attention', yellow: 'Worth a look', green: 'Looking good', unknown: 'Incomplete' };
   var HEAD = {
     red: 'Something here could hurt your business soon.',
     yellow: 'Mostly fine, with a few things worth fixing.',
-    green: 'Your domain looks healthy.'
+    green: 'Your domain looks healthy.',
+    unknown: 'We couldn\u2019t finish every check. Nothing urgent turned up in the ones that ran.'
   };
 
   function track(name, params) {
@@ -46,11 +47,12 @@
     node.className = 'kr-badge ' + level;
     node.textContent = LABEL[level] || level;
   }
-  function counts(c) {
+  function counts(c, incomplete) {
     var parts = [];
     if (c.red) parts.push(c.red + ' urgent');
     if (c.yellow) parts.push(c.yellow + ' to review');
     parts.push(c.green + ' looking fine');
+    if (incomplete) parts.push('some checks didn\u2019t finish');
     return parts.join(' \u00b7 ');
   }
 
@@ -67,7 +69,7 @@
       state.domain = s.domain;
       badge($('kr-badge'), s.overall);
       $('kr-headline').textContent = s.domain + ': ' + HEAD[s.overall];
-      $('kr-counts').textContent = counts(s.counts);
+      $('kr-counts').textContent = counts(s.counts, s.incomplete);
       var list = $('kr-summary-list');
       clear(list);
       s.issues.forEach(function (i) {
@@ -123,7 +125,7 @@
   function renderReport(r) {
     badge($('kr-r-badge'), r.overall);
     $('kr-r-headline').textContent = 'Overall: ' + LABEL[r.overall];
-    $('kr-r-domain').textContent = 'Website: ' + r.domain + ' \u00b7 ' + counts(r.counts);
+    $('kr-r-domain').textContent = 'Website: ' + r.domain + ' \u00b7 ' + counts(r.counts, r.incomplete);
     var wrap = $('kr-r-issues');
     clear(wrap);
     r.issues.forEach(function (i, idx) {

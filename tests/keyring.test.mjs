@@ -65,6 +65,9 @@ test('parseDmarc', () => {
   assert.equal(parseDmarc(['v=DMARC1; p=quarantine; pct=25']).status, 'partial');
   assert.equal(parseDmarc(['v=DMARC1; rua=mailto:x@y.com']).status, 'invalid');
   assert.equal(parseDmarc(['v=DMARC1; p=none', 'v=DMARC1; p=reject']).status, 'multiple');
+  assert.equal(parseDmarc(['v=DMARC1; p=none; p=reject']).status, 'invalid', 'duplicate tags');
+  assert.equal(parseDmarc(['v=DMARC1; p=reject; pct=150']).status, 'invalid', 'pct out of range');
+  assert.equal(parseDmarc(['v=DMARC1; p=reject; pct=abc']).status, 'invalid');
 });
 
 test('parseRdap: registrar, expiry, redacted vs visible registrant', () => {
@@ -170,8 +173,10 @@ test('grade: registry not found and lookup failures', () => {
   const nf = gradeReport(base({ rdap: null, errors: { rdap: 'not_found' } }), NOW);
   assert.equal(nf.issues[0].id, 'not-registered');
   const fail = gradeReport(base({ rdap: null, ns: [], mx: [], spf: null, dmarc: null, web: null, errors: { rdap: 'timeout', ns: 'failed', mx: 'failed', spf: 'failed', dmarc: 'failed', web: 'failed' } }), NOW);
-  assert.equal(fail.overall, 'green');
+  assert.equal(fail.overall, 'unknown', 'never green when checks failed');
+  assert.equal(fail.incomplete, true);
   assert.equal(fail.issues.length, 0);
+  assert.equal(gradeReport(base({ web: null, errors: { web: 'failed' } }), NOW).overall, 'unknown');
   assert.ok(fail.notes.length >= 3, 'failures surface as notes, never as false alarms');
 });
 

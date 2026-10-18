@@ -30,46 +30,74 @@ export async function doh(name, type, { deadline, timeout = 3000 } = {}) {
 const unquoteTxt = (t) => t.replace(/^"|"$/g, '').replace(/"\s*"/g, '');
 
 async function publicIps(host, opts) {
+  let failures = 0;
   const [a, aaaa] = await Promise.all([
-    doh(host, 'A', opts).catch(() => []),
-    doh(host, 'AAAA', opts).catch(() => [])
+    doh(host, 'A', opts).catch(() => { failures++; return []; }),
+    doh(host, 'AAAA', opts).catch(() => { failures++; return []; })
   ]);
+  if (failures === 2) throw new Error('dns_lookup_failed'); // don't mistake a DoH outage for "no address"
   const all = [...a, ...aaaa];
   return { all, v4: a.filter(isPublicIp), v6: aaaa.filter(isPublicIp), anyPrivate: all.some((ip) => !isPublicIp(ip)) };
 }
 
 // ---------- RDAP ----------
 
-async function safeRdapUrl(href, opts) {
+// Validate an RDAP URL and return { url, ip }: https only, normal port, hostname that passes
+// the same validation as visitor input, resolved via dns.google to public IPs only.
+async function safeRdapTarget(href, opts) {
   let u;
   try { u = new URL(href); } catch { return null; }
   if (u.protocol !== 'https:' || u.username || u.password || (u.port && u.port !== '443')) return null;
   if (!/\/domain\//i.test(u.pathname)) return null;
   const v = validateDomain(u.hostname);
   if (!v.ok || v.host !== u.hostname.toLowerCase()) return null;
-  if (u.hostname === 'rdap.org') return u.toString();
   const ips = await publicIps(u.hostname, opts);
   if (ips.all.length === 0 || ips.anyPrivate) return null;
-  return u.toString();
+  const ip = ips.v4[0] || ips.v6[0];
+  return ip ? { url: u, ip } : null;
 }
 
-async function rdapFetch(url, opts, hops = 0) {
-  const res = await fetch(url, {
-    redirect: 'manual',
-    headers: { accept: 'application/rdap+json, application/json', 'user-agent': UA },
-    signal: timeoutSignal(opts.timeout || 4000, opts.deadline)
+// GET over HTTPS pinned to a pre-validated IP (no second DNS lookup, so no rebinding),
+// with normal certificate + hostname verification and a streaming size cap.
+function pinnedGet(u, ip, { timeout, deadline, maxBytes = 256 * 1024 }) {
+  return new Promise((resolve, reject) => {
+    const ms = Math.max(300, Math.min(timeout, deadline - Date.now()));
+    const req = https.request({
+      host: ip, port: 443, servername: u.hostname, method: 'GET',
+      path: (u.pathname + u.search).slice(0, 1024),
+      headers: { host: u.hostname, accept: 'application/rdap+json, application/json', 'user-agent': UA },
+      timeout: ms, family: ip.includes(':') ? 6 : 4,
+      lookup: (_h, _o, cb) => cb(new Error('no_dns'))
+    }, (res) => {
+      let size = 0;
+      const chunks = [];
+      res.on('data', (c) => {
+        size += c.length;
+        if (size > maxBytes) { req.destroy(new Error('rdap_too_large')); return; }
+        chunks.push(c);
+      });
+      res.on('end', () => resolve({ status: res.statusCode, location: res.headers.location || null, body: Buffer.concat(chunks).toString('utf8') }));
+      res.on('error', reject);
+    });
+    const timer = setTimeout(() => req.destroy(new Error('timeout')), ms + 100);
+    req.on('timeout', () => req.destroy(new Error('timeout')));
+    req.on('error', (e) => { clearTimeout(timer); reject(e); });
+    req.on('close', () => clearTimeout(timer));
+    req.end();
   });
+}
+
+async function rdapFetch(href, opts, hops = 0) {
+  const target = await safeRdapTarget(href, opts);
+  if (!target) throw new Error('rdap_bad_target');
+  const res = await pinnedGet(target.url, target.ip, { timeout: opts.timeout || 4000, deadline: opts.deadline });
   if (res.status >= 300 && res.status < 400) {
-    if (hops >= 3) throw new Error('rdap_redirects');
-    const next = await safeRdapUrl(new URL(res.headers.get('location') || '', url).toString(), opts);
-    if (!next) throw new Error('rdap_bad_redirect');
-    return rdapFetch(next, opts, hops + 1);
+    if (hops >= 3 || !res.location) throw new Error('rdap_redirects');
+    return rdapFetch(new URL(res.location, target.url).toString(), opts, hops + 1);
   }
   if (res.status === 404) return { notFound: true };
-  if (!res.ok) throw new Error(`rdap_http_${res.status}`);
-  const text = await res.text();
-  if (text.length > 512 * 1024) throw new Error('rdap_too_large');
-  return { json: JSON.parse(text), url };
+  if (res.status < 200 || res.status >= 300) throw new Error(`rdap_http_${res.status}`);
+  return { json: JSON.parse(res.body), url: target.url.toString() };
 }
 
 export async function rdapLookup(domain, opts) {
@@ -89,11 +117,8 @@ export async function rdapLookup(domain, opts) {
   const rel = (registry.links || []).find((l) => l.rel === 'related' && /rdap\+json/i.test(l.type || '') && /\/domain\//i.test(l.href || ''));
   if (rel) {
     try {
-      const href = await safeRdapUrl(rel.href, opts);
-      if (href) {
-        const r2 = await rdapFetch(href, { ...opts, timeout: 3000 });
-        if (r2.json) responses.push(r2.json);
-      }
+      const r2 = await rdapFetch(rel.href, { ...opts, timeout: 3000 });
+      if (r2.json) responses.push(r2.json);
     } catch { /* registrar RDAP is optional */ }
   }
   return { name, ...parseRdap(responses) };
@@ -153,8 +178,10 @@ export async function webCheck(domain, opts) {
   let sawPrivate = false;
   let sawAddress = false;
   let lastError = null;
+  let dnsFailed = 0;
   for (const host of candidates) {
-    const ips = await publicIps(host, opts);
+    let ips;
+    try { ips = await publicIps(host, opts); } catch { dnsFailed++; continue; }
     if (ips.all.length) sawAddress = true;
     if (ips.anyPrivate) { sawPrivate = true; continue; }
     const ip = ips.v4[0] || ips.v6[0];
@@ -162,19 +189,21 @@ export async function webCheck(domain, opts) {
     let r = await httpsHead(ip, host, '/', opts);
     if (r.error) { lastError = r.error; continue; }
     let finalHost = host;
+    let finalIp = ip;
     // Follow up to two redirects, only between the apex and www over HTTPS.
     for (let hop = 0; hop < 2 && r.status >= 300 && r.status < 400 && r.headers.location; hop++) {
       let u;
       try { u = new URL(r.headers.location, `https://${finalHost}/`); } catch { break; }
       const h = u.hostname.toLowerCase();
       if (u.protocol !== 'https:' || (h !== domain && h !== `www.${domain}`) || (u.port && u.port !== '443')) break;
-      const ips2 = h === finalHost ? { v4: [ip], v6: [], anyPrivate: false } : await publicIps(h, opts);
+      let ips2;
+      try { ips2 = h === finalHost ? { v4: [finalIp], v6: [], anyPrivate: false } : await publicIps(h, opts); } catch { break; }
       if (ips2.anyPrivate) break;
       const ip2 = ips2.v4[0] || ips2.v6[0];
       if (!ip2) break;
       const r2 = await httpsHead(ip2, h, (u.pathname + u.search).slice(0, 512) || '/', opts);
       if (r2.error) break;
-      r = r2; finalHost = h;
+      r = r2; finalHost = h; finalIp = ip2;
     }
     const cnames = await doh(finalHost, 'CNAME', opts).catch(() => []);
     return {
@@ -187,6 +216,7 @@ export async function webCheck(domain, opts) {
     };
   }
   if (sawPrivate) return { skipped: 'private_ip' };
+  if (dnsFailed === candidates.length) throw new Error('dns_lookup_failed');
   if (!sawAddress) return { skipped: 'no_address' };
   return { up: false, host: domain, reason: friendlyNetError(lastError) };
 }

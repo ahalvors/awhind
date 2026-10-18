@@ -23,21 +23,36 @@ export const LIMITS = {
   intent: { perIpHour: 6, globalDay: 150 }
 };
 
-async function bump(store, key, ttlMs) {
+function bumpMemory(key, ttlMs) {
   const now = Date.now();
-  if (store) {
-    try {
-      const cur = await store.get(key, { type: 'json' });
-      const n = (cur && cur.exp > now ? cur.n : 0) + 1;
-      await store.setJSON(key, { n, exp: cur && cur.exp > now ? cur.exp : now + ttlMs });
-      return n;
-    } catch { /* fall through to memory */ }
-  }
   const cur = memory.get(key);
   const n = (cur && cur.exp > now ? cur.n : 0) + 1;
   memory.set(key, { n, exp: cur && cur.exp > now ? cur.exp : now + ttlMs });
   if (memory.size > 5000) for (const [k, v] of memory) if (v.exp <= now) memory.delete(k);
   return n;
+}
+
+// Increment a counter with compare-and-swap (ETag) writes so concurrent requests
+// can't all read the same value. Falls back to a per-instance counter.
+async function bump(store, key, ttlMs) {
+  const local = bumpMemory(key, ttlMs);
+  if (!store) return local;
+  const now = Date.now();
+  try {
+    for (let attempt = 0; attempt < 4; attempt++) {
+      const cur = await store.getWithMetadata(key, { type: 'json' });
+      const live = cur && cur.data && cur.data.exp > now;
+      const n = (live ? cur.data.n : 0) + 1;
+      const value = { n, exp: live ? cur.data.exp : now + ttlMs };
+      const res = cur && cur.etag
+        ? await store.setJSON(key, value, { onlyIfMatch: cur.etag })
+        : await store.setJSON(key, value, { onlyIfNew: true });
+      if (res && res.modified !== false) return Math.max(n, local);
+    }
+    return Number.MAX_SAFE_INTEGER; // heavy contention on one key: fail closed
+  } catch {
+    return local;
+  }
 }
 
 /** Returns null when allowed, or a Response (429) when over the limit. */
@@ -46,13 +61,12 @@ export async function rateLimit(kind, ip) {
   const store = await getBlobStore('keyring-ratelimit');
   const hour = Math.floor(Date.now() / 3600000);
   const day = Math.floor(Date.now() / 86400000);
-  const [ipCount, globalCount] = await Promise.all([
-    bump(store, `${kind}/ip/${hashIp(ip)}/${hour}`, 3600000),
-    bump(store, `${kind}/global/${day}`, 86400000)
-  ]);
+  // Per-IP first, so requests that are already over their own limit don't burn the global budget.
+  const ipCount = await bump(store, `${kind}/ip/${hashIp(ip)}/${hour}`, 3600000);
   if (ipCount > lim.perIpHour) {
     return json({ error: 'You\u2019ve run a lot of checks in a short time. Please try again in an hour.' }, 429, { 'retry-after': '3600' });
   }
+  const globalCount = await bump(store, `${kind}/global/${day}`, 86400000);
   if (globalCount > lim.globalDay) {
     return json({ error: 'KeyRing is very busy right now. Please try again tomorrow, or email us and we\u2019ll run it for you.' }, 429, { 'retry-after': '43200' });
   }

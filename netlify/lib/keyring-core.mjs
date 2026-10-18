@@ -259,14 +259,19 @@ export function parseDmarc(txtRecords = []) {
   if (recs.length === 0) return { status: 'missing' };
   if (recs.length > 1) return { status: 'multiple', records: recs };
   const rec = recs[0].trim();
-  const tags = Object.fromEntries(rec.split(';').map((p) => p.trim()).filter(Boolean).map((p) => {
+  const pairs = rec.split(';').map((p) => p.trim()).filter(Boolean).map((p) => {
     const i = p.indexOf('=');
-    return i === -1 ? [p.toLowerCase(), ''] : [p.slice(0, i).trim().toLowerCase(), p.slice(i + 1).trim()];
-  }));
+    return i === -1 ? [p.toLowerCase(), null] : [p.slice(0, i).trim().toLowerCase(), p.slice(i + 1).trim()];
+  });
+  const tags = Object.fromEntries(pairs);
+  const duplicate = new Set(pairs.map(([k]) => k)).size !== pairs.length;
+  const malformed = pairs.some(([k, v]) => v === null || !/^[a-z]+$/.test(k));
   const p = (tags.p || '').toLowerCase();
-  const pct = tags.pct ? Number(tags.pct) : 100;
+  const pct = tags.pct !== undefined ? Number(tags.pct) : 100;
+  const badPct = !Number.isInteger(pct) || pct < 0 || pct > 100;
   let status;
-  if (p === 'reject' || p === 'quarantine') status = pct >= 100 ? 'enforced' : 'partial';
+  if (duplicate || malformed || badPct) status = 'invalid';
+  else if (p === 'reject' || p === 'quarantine') status = pct >= 100 ? 'enforced' : 'partial';
   else if (p === 'none') status = 'monitor';
   else status = 'invalid';
   return { status, policy: p || null, pct, rua: tags.rua || null, record: rec };
@@ -330,10 +335,12 @@ export function parseRdap(responses = []) {
 // ---------- grading ----------
 
 const DAY = 86400000;
+// Whole calendar days (UTC) between today and the date, e.g. Oct 18 -> Dec 30 = 73.
 export function daysUntil(iso, now = Date.now()) {
   const t = Date.parse(iso);
   if (Number.isNaN(t)) return null;
-  return Math.floor((t - now) / DAY);
+  const a = new Date(now); const b = new Date(t);
+  return Math.round((Date.UTC(b.getUTCFullYear(), b.getUTCMonth(), b.getUTCDate()) - Date.UTC(a.getUTCFullYear(), a.getUTCMonth(), a.getUTCDate())) / DAY);
 }
 export function fmtDate(iso) {
   const t = Date.parse(iso);
@@ -524,7 +531,10 @@ export function gradeReport(facts, now = Date.now()) {
   issues.sort((a, b) => LEVEL_RANK[b.level] - LEVEL_RANK[a.level]);
   const counts = { red: 0, yellow: 0, green: fine.length };
   for (const i of issues) if (i.level in counts) counts[i.level]++;
-  const overall = counts.red ? 'red' : counts.yellow ? 'yellow' : 'green';
+  // Never call a domain healthy if key checks couldn't run.
+  const failedChecks = ['rdap', 'ns', 'mx', 'web'].filter((k) => err[k] && err[k] !== 'not_found').length + (err.spf || err.dmarc ? 1 : 0);
+  const incomplete = failedChecks > 0;
+  const overall = counts.red ? 'red' : counts.yellow ? 'yellow' : incomplete ? 'unknown' : 'green';
 
   const holders = [
     { piece: 'Domain registration', company: rdap?.registrar || 'Unknown', yours: rdap?.registrant === 'visible' ? `Listed as \u201c${rdap.registrantName}\u201d` : 'Unknown (owner details are privacy-protected)' },
@@ -533,7 +543,7 @@ export function gradeReport(facts, now = Date.now()) {
     { piece: 'Email', company: hasMail ? mailProviders.join(' + ') : 'No email at this domain', yours: 'Unknown' }
   ];
 
-  return { domain: facts.domain, overall, counts, issues, fine, notes, holders };
+  return { domain: facts.domain, overall, incomplete, counts, issues, fine, notes, holders };
 }
 
 export function humanTlsError(code) {
@@ -554,6 +564,7 @@ export function summarize(report) {
   return {
     domain: report.domain,
     overall: report.overall,
+    incomplete: report.incomplete,
     counts: report.counts,
     issues: report.issues.map((i) => ({ level: i.level, title: i.title })),
     fineCount: report.fine.length

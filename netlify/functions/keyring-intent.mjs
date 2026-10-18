@@ -20,5 +20,8 @@ export default async function handler(req, context) {
     kind: 'intent', intent, name, email, domain: v.domain, relatedLead: leadId,
     site: new URL(req.url).host, createdAt: new Date().toISOString()
   });
-  return json({ ok: delivery.stored || delivery.emailed });
+  if (!delivery.stored && !delivery.emailed) {
+    return json({ error: 'We couldn\u2019t send that just now. Please try again, or use the Email us button below.' }, 502);
+  }
+  return json({ ok: true });
 }

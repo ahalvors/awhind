@@ -1,0 +1,281 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="KeyRing is a free website and domain health check from AWHIND. See in plain English whether your domain is about to lapse, whether scammers can send email as you, and who holds the keys to your site.">
+<title>KeyRing: Free Website &amp; Domain Health Check | AWHIND</title>
+<link rel="canonical" href="https://awhind.com/keyring/">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='16' fill='%230B0F17'/%3E%3Ccircle cx='50' cy='50' r='16' fill='%23DD4E1E'/%3E%3C/svg%3E">
+
+<!-- Open Graph -->
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://awhind.com/keyring/">
+<meta property="og:site_name" content="AWHIND">
+<meta property="og:title" content="KeyRing: Free Website &amp; Domain Health Check | AWHIND">
+<meta property="og:description" content="Is your domain about to lapse? Can scammers send email as you? Who holds the keys to your website? Find out free in about ten seconds.">
+
+<!-- Twitter Card -->
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="KeyRing: Free Website &amp; Domain Health Check | AWHIND">
+<meta name="twitter:description" content="Is your domain about to lapse? Can scammers send email as you? Who holds the keys to your website? Find out free in about ten seconds.">
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "KeyRing Website & Domain Health Check",
+  "url": "https://awhind.com/keyring/",
+  "applicationCategory": "BusinessApplication",
+  "operatingSystem": "Any",
+  "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+  "provider": { "@type": "Organization", "name": "AWHIND", "url": "https://awhind.com" }
+}
+</script>
+<!-- GA4 -->
+
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,500&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap');
+
+  :root{
+    --bg:#F1F2ED; --bg-elevated:#FFFFFF; --bg-sunken:#E7E8E1;
+    --text:#0B0F17; --text-secondary:#566072; --text-tertiary:#848d9b;
+    --line:#D9DAD2; --line-strong:#c2c4ba; --accent:#DD4E1E; --accent-contrast:#FFFFFF;
+    --shadow: 0 1px 2px rgba(11,15,23,.04), 0 8px 24px rgba(11,15,23,.06);
+    --serif: 'Newsreader', Georgia, 'Times New Roman', serif;
+    --sans: 'IBM Plex Sans', -apple-system, 'Segoe UI', Roboto, sans-serif;
+    --mono: 'IBM Plex Mono', 'SF Mono', Consolas, monospace;
+  }
+  @media (prefers-color-scheme: dark){
+    :root:not([data-theme="light"]){
+      --bg:#0A0D14; --bg-elevated:#12161F; --bg-sunken:#080A10;
+      --text:#EEF0F4; --text-secondary:#9AA3B4; --text-tertiary:#6d7688;
+      --line:#232838; --line-strong:#323951; --accent:#FF7A47; --accent-contrast:#0A0D14;
+      --shadow: 0 1px 2px rgba(0,0,0,.3), 0 8px 28px rgba(0,0,0,.4);
+    }
+  }
+  :root[data-theme="dark"]{
+    --bg:#0A0D14; --bg-elevated:#12161F; --bg-sunken:#080A10;
+    --text:#EEF0F4; --text-secondary:#9AA3B4; --text-tertiary:#6d7688;
+    --line:#232838; --line-strong:#323951; --accent:#FF7A47; --accent-contrast:#0A0D14;
+    --shadow: 0 1px 2px rgba(0,0,0,.3), 0 8px 28px rgba(0,0,0,.4);
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{margin:0; background:var(--bg); color:var(--text); font-family:var(--sans); font-size:16px; line-height:1.55; -webkit-font-smoothing:antialiased;}
+  a{color:inherit;}
+  h1,h2,h3{font-family:var(--serif); font-weight:500; margin:0; text-wrap:balance; letter-spacing:-0.01em;}
+  .mono{font-family:var(--mono);}
+  .eyebrow{font-family:var(--mono); font-size:11px; letter-spacing:.12em; text-transform:uppercase; color:var(--text-secondary);}
+  .wrap{max-width:1120px; margin:0 auto; padding:0 28px;}
+  .btn{display:inline-flex; align-items:center; gap:8px; font-family:var(--mono); font-size:13px; letter-spacing:.04em; text-transform:uppercase; padding:12px 20px; border-radius:2px; text-decoration:none; cursor:pointer; border:1px solid transparent;}
+  .btn-primary{background:var(--accent); color:var(--accent-contrast);}
+  .btn-primary:hover{filter:brightness(1.06);}
+  .btn-ghost{border-color:var(--line-strong); color:var(--text);}
+  .btn-ghost:hover{border-color:var(--accent); color:var(--accent);}
+  .btn-sm{padding:8px 14px; font-size:11px;}
+  nav.wrap{display:flex; align-items:center; justify-content:space-between; padding-top:18px; padding-bottom:18px;}
+  .brand{font-family:var(--serif); font-weight:600; font-size:21px; letter-spacing:-.01em; text-decoration:none; color:var(--text); display:flex; align-items:center; gap:9px;}
+  .brand .mark{width:9px;height:9px;background:var(--accent);display:inline-block;}
+  header.page-hero{padding:52px 0 44px; border-bottom:1px solid var(--line);}
+  header.page-hero h1{font-size:38px; line-height:1.14; margin-top:14px; max-width:820px;}
+  header.page-hero .lede{font-size:17px; color:var(--text-secondary); max-width:640px; margin-top:16px;}
+  article{max-width:720px; margin:0 auto; padding:44px 28px 20px;}
+  article section{margin-bottom:36px;}
+  article h2{font-size:24px; margin-bottom:14px;}
+  article p{margin:0 0 16px; font-size:15.5px; color:var(--text);}
+  article p.dek{font-size:16px; color:var(--text-secondary); font-family:var(--serif); font-style:italic; margin-bottom:8px;}
+  article strong{font-weight:600;}
+  article .stat-inline{font-family:var(--mono); color:var(--accent); font-weight:600;}
+  article ul, article ol{padding-left:22px; margin:0 0 16px;}
+  article li{margin-bottom:8px; font-size:15.5px;}
+  .related-row{display:flex; flex-wrap:wrap; gap:10px; margin-top:8px;}
+  .cta-band{background:var(--bg-elevated); border-top:1px solid var(--line); border-bottom:1px solid var(--line); padding:40px 0; margin:44px 0;}
+  .cta-band .wrap{max-width:720px;}
+  footer{padding:40px 0; }
+  footer .wrap{display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:12px;}
+  footer .copy{font-size:12px; color:var(--text-tertiary); font-family:var(--mono);}
+  footer a{font-size:12px; color:var(--text-secondary); text-decoration:none; margin-right:16px;}
+  footer a:hover{color:var(--accent);}
+</style>
+
+<style>
+  :root{ --status-good:#177562; --status-warn:#9c6b0a; --status-critical:#a63a2b; }
+  @media (prefers-color-scheme: dark){ :root:not([data-theme="light"]){ --status-good:#3FC3A8; --status-warn:#E3B341; --status-critical:#E5695A; } }
+  .kr-main{max-width:760px; margin:0 auto; padding:40px 28px 10px;}
+  .kr-card{background:var(--bg-elevated); border:1px solid var(--line); box-shadow:var(--shadow); padding:28px 28px 26px; margin-bottom:28px;}
+  @media (max-width:600px){ .kr-card{padding:22px 18px;} header.page-hero h1{font-size:30px;} }
+  .kr-form{display:flex; gap:10px; flex-wrap:wrap; margin-top:14px;}
+  .kr-form input{flex:1 1 240px; padding:13px 14px; border:1px solid var(--line-strong); background:var(--bg); color:var(--text); font-family:var(--sans); font-size:15px; border-radius:2px; min-width:0;}
+  .kr-form input:focus{outline:2px solid var(--accent); outline-offset:1px;}
+  .kr-form button[disabled]{opacity:.6; cursor:progress;}
+  .kr-fields{display:grid; grid-template-columns:1fr 1fr; gap:10px; margin-top:14px;}
+  .kr-fields input{padding:12px 13px; border:1px solid var(--line-strong); background:var(--bg); color:var(--text); font-family:var(--sans); font-size:14.5px; border-radius:2px; width:100%;}
+  .kr-fields input:focus{outline:2px solid var(--accent); outline-offset:1px;}
+  .kr-fields .full{grid-column:1 / -1;}
+  @media (max-width:600px){ .kr-fields{grid-template-columns:1fr;} }
+  .kr-hp{position:absolute; left:-9999px; width:1px; height:1px; overflow:hidden;}
+  .kr-help{font-size:12.5px; color:var(--text-tertiary); margin-top:10px; font-family:var(--mono);}
+  .kr-error{color:var(--status-critical); font-size:14px; margin-top:12px; min-height:1px;}
+  .kr-status{font-family:var(--mono); font-size:12.5px; color:var(--text-secondary); margin-top:14px;}
+  .kr-overall{display:flex; align-items:center; gap:14px; flex-wrap:wrap;}
+  .kr-badge{font-family:var(--mono); font-size:12px; letter-spacing:.08em; text-transform:uppercase; padding:6px 12px; border-radius:2px; color:#fff; font-weight:600;}
+  .kr-badge.red{background:var(--status-critical);} .kr-badge.yellow{background:var(--status-warn);} .kr-badge.green{background:var(--status-good);}
+  .kr-overall h2{font-size:24px;}
+  .kr-counts{font-family:var(--mono); font-size:12px; color:var(--text-secondary); margin-top:8px;}
+  .kr-list{list-style:none; padding:0; margin:18px 0 0;}
+  .kr-list li{display:flex; gap:12px; align-items:flex-start; padding:12px 0; border-top:1px solid var(--line); font-size:15px;}
+  .kr-dot{width:10px; height:10px; border-radius:50%; flex:none; margin-top:7px;}
+  .kr-dot.red{background:var(--status-critical);} .kr-dot.yellow{background:var(--status-warn);} .kr-dot.green{background:var(--status-good);}
+  .kr-issue{padding:20px 0; border-top:1px solid var(--line);}
+  .kr-issue h3{font-size:19px; display:flex; gap:12px; align-items:flex-start;}
+  .kr-issue h3 .kr-dot{margin-top:9px;}
+  .kr-issue p{margin:10px 0 0 22px; font-size:15px; color:var(--text);}
+  .kr-issue p.fix{color:var(--text-secondary);}
+  .kr-issue p.fix strong{color:var(--text);}
+  .kr-section-title{font-family:var(--mono); font-size:11px; letter-spacing:.12em; text-transform:uppercase; color:var(--text-secondary); margin:26px 0 6px;}
+  .kr-fine li{font-size:14.5px; color:var(--text);}
+  table.kr-table{width:100%; border-collapse:collapse; margin-top:10px; font-size:14px;}
+  .kr-table th{font-family:var(--mono); font-size:11px; letter-spacing:.06em; text-transform:uppercase; color:var(--text-tertiary); text-align:left; padding:8px 8px 8px 0; border-bottom:1px solid var(--line-strong); font-weight:500;}
+  .kr-table td{padding:10px 8px 10px 0; border-bottom:1px solid var(--line); vertical-align:top;}
+  .kr-note{font-size:13.5px; color:var(--text-secondary); font-style:italic; font-family:var(--serif); margin-top:14px;}
+  .kr-checks{display:grid; grid-template-columns:repeat(3,1fr); gap:1px; background:var(--line); border:1px solid var(--line); margin-top:16px;}
+  @media (max-width:760px){ .kr-checks{grid-template-columns:1fr 1fr;} }
+  @media (max-width:520px){ .kr-checks{grid-template-columns:1fr;} }
+  .kr-check{background:var(--bg-elevated); padding:20px 18px;}
+  .kr-check .id{font-family:var(--mono); font-size:11px; color:var(--accent); letter-spacing:.06em;}
+  .kr-check h3{font-size:17px; margin-top:8px;}
+  .kr-check p{font-size:13.5px; color:var(--text-secondary); margin:8px 0 0;}
+  .kr-cta-row{display:flex; gap:12px; flex-wrap:wrap; margin-top:18px;}
+  .kr-thanks{margin-top:14px; font-size:15px; color:var(--status-good);}
+  [hidden]{display:none !important;}
+</style>
+</head>
+
+<body>
+
+<nav class="wrap">
+  <a href="/" class="brand"><span class="mark"></span>AWHIND</a>
+  <div>
+    <a href="/#services" class="btn btn-ghost btn-sm" style="margin-right:8px;">Capabilities</a>
+    <a href="/#contact" class="btn btn-ghost btn-sm">Talk to Us</a>
+  </div>
+</nav>
+
+<header class="page-hero">
+  <div class="wrap">
+    <p class="eyebrow">KeyRing &middot; Free website &amp; domain health check</p>
+    <h1>Who holds the keys to your website and email?</h1>
+    <p class="lede">Enter your domain. In about ten seconds, KeyRing reads the public records behind your website and email and tells you, in plain English, what could break, what could be abused, and what to do about it.</p>
+  </div>
+</header>
+
+<main class="kr-main">
+
+  <div class="kr-card" id="kr-start">
+    <p class="eyebrow">Step 1 &middot; Check your domain</p>
+    <form class="kr-form" id="kr-scan-form" novalidate>
+      <label for="kr-domain" class="kr-hp">Your domain</label>
+      <input id="kr-domain" name="domain" type="text" inputmode="url" autocomplete="url" autocapitalize="off" spellcheck="false" maxlength="300" placeholder="yourbusiness.com" required>
+      <button class="btn btn-primary" type="submit" id="kr-scan-btn">Run free check</button>
+    </form>
+    <p class="kr-help">Public records only. No logins, no installs, nothing changes on your site.</p>
+    <p class="kr-error" id="kr-scan-error" role="alert"></p>
+    <p class="kr-status" id="kr-scan-status" hidden aria-live="polite">Checking registration, DNS, email and security records&hellip;</p>
+  </div>
+
+  <div class="kr-card" id="kr-summary" hidden aria-live="polite">
+    <div class="kr-overall">
+      <span class="kr-badge" id="kr-badge"></span>
+      <h2 id="kr-headline"></h2>
+    </div>
+    <p class="kr-counts" id="kr-counts"></p>
+    <ul class="kr-list" id="kr-summary-list"></ul>
+  </div>
+
+  <div class="kr-card" id="kr-lead" hidden>
+    <p class="eyebrow">Step 2 &middot; Get the full report</p>
+    <h2 style="font-size:22px; margin-top:10px;">See why each item matters and exactly what to do</h2>
+    <p style="color:var(--text-secondary); font-size:14.5px; margin:10px 0 0;">The full report explains every finding in plain English, lists who holds your domain, DNS, website and email, and gives a fix for each issue. It appears right here on the page.</p>
+    <form id="kr-lead-form" novalidate>
+      <div class="kr-fields">
+        <input id="kr-name" name="name" type="text" autocomplete="name" maxlength="100" placeholder="Your name" required aria-label="Your name">
+        <input id="kr-email" name="email" type="email" autocomplete="email" maxlength="254" placeholder="Work email" required aria-label="Work email">
+        <input id="kr-company" class="full" name="company" type="text" autocomplete="organization" maxlength="100" placeholder="Business name (optional)" aria-label="Business name (optional)">
+        <div class="kr-hp" aria-hidden="true"><label for="kr-website">Leave this empty</label><input id="kr-website" name="website" type="text" tabindex="-1" autocomplete="off"></div>
+      </div>
+      <div class="kr-form" style="margin-top:12px;">
+        <button class="btn btn-primary" type="submit" id="kr-lead-btn">Show my full report</button>
+      </div>
+      <p class="kr-help">Your name and email go to AWHIND so we can follow up about this report. We don&rsquo;t sell or share them, and we won&rsquo;t add you to a mailing list.</p>
+      <p class="kr-error" id="kr-lead-error" role="alert"></p>
+      <p class="kr-status" id="kr-lead-status" hidden aria-live="polite">Building your full report&hellip;</p>
+    </form>
+  </div>
+
+  <div class="kr-card" id="kr-report" hidden>
+    <p class="eyebrow">KeyRing report</p>
+    <div class="kr-overall" style="margin-top:10px;">
+      <span class="kr-badge" id="kr-r-badge"></span>
+      <h2 id="kr-r-headline"></h2>
+    </div>
+    <p class="kr-counts" id="kr-r-domain"></p>
+    <div id="kr-r-issues"></div>
+    <p class="kr-section-title" id="kr-r-fine-title">What looks fine</p>
+    <ul class="kr-list kr-fine" id="kr-r-fine"></ul>
+    <p class="kr-section-title">Who holds what (as far as public records show)</p>
+    <table class="kr-table">
+      <thead><tr><th>Piece</th><th>Company</th><th>In your name?</th></tr></thead>
+      <tbody id="kr-r-holders"></tbody>
+    </table>
+    <div id="kr-r-notes"></div>
+    <p class="kr-note">This report uses only public information. To confirm the &ldquo;In your name?&rdquo; column, we&rsquo;d need ten minutes with your registrar login.</p>
+  </div>
+
+  <div class="kr-card" id="kr-cta" hidden>
+    <p class="eyebrow">Next step</p>
+    <h2 style="font-size:24px; margin-top:10px;" id="kr-cta-title">Want AWHIND to handle this?</h2>
+    <p style="color:var(--text-secondary); font-size:15px; margin:10px 0 0;">We can fix these issues for you, done-for-you and explained in plain English, or keep watch on your domain, email and certificates so you hear about problems before your customers do.</p>
+    <div class="kr-cta-row">
+      <button class="btn btn-primary" type="button" data-intent="fix">Have AWHIND fix it</button>
+      <button class="btn btn-ghost" type="button" data-intent="monitor">Have AWHIND monitor it</button>
+    </div>
+    <p class="kr-thanks" id="kr-cta-thanks" hidden></p>
+    <p class="kr-error" id="kr-cta-error" role="alert"></p>
+  </div>
+
+  <section style="margin:44px 0 10px;">
+    <p class="eyebrow">What KeyRing checks</p>
+    <div class="kr-checks">
+      <div class="kr-check"><span class="id">01 &middot; RENEWAL</span><h3>Domain registration</h3><p>Who your registrar is, when the name expires, and whether the owner is visible or privacy-protected.</p></div>
+      <div class="kr-check"><span class="id">02 &middot; DNS</span><h3>Your domain&rsquo;s &ldquo;phone book&rdquo;</h3><p>Which company runs your nameservers, and whether leftover settings point two directions.</p></div>
+      <div class="kr-check"><span class="id">03 &middot; EMAIL</span><h3>Who handles your email</h3><p>Your email provider, read from the domain&rsquo;s mail records.</p></div>
+      <div class="kr-check"><span class="id">04 &middot; SPOOFING</span><h3>SPF &amp; DMARC</h3><p>Whether inboxes can tell real email from you apart from a scammer pretending to be you.</p></div>
+      <div class="kr-check"><span class="id">05 &middot; SECURITY</span><h3>Security certificate</h3><p>Whether your site loads securely, and when its certificate runs out.</p></div>
+      <div class="kr-check"><span class="id">06 &middot; UPTIME</span><h3>Website &amp; host</h3><p>Whether the site is up right now, and which company appears to host it.</p></div>
+    </div>
+    <p class="kr-note">KeyRing reads public records only: registry data, DNS and your site&rsquo;s public security certificate. It can&rsquo;t see inside your accounts, and it can&rsquo;t tell whether auto-renew is turned on.</p>
+  </section>
+
+</main>
+
+<div class="cta-band" style="margin-top:28px;">
+  <div class="wrap">
+    <h2 style="font-size:22px; margin-bottom:10px;">Rather talk it through?</h2>
+    <p style="color:var(--text-secondary); font-size:14.5px; margin-bottom:18px;">Tell us your domain and what&rsquo;s worrying you. One conversation, no deck required.</p>
+    <a href="mailto:ahalvor+awhind@mail.grokbot.com?subject=KeyRing%20question" class="btn btn-primary">Email us</a>
+  </div>
+</div>
+
+<footer>
+  <div class="wrap">
+    <div>
+      <a href="/">Home</a><a href="/#briefing">Daily Briefing</a><a href="/shadow-ai">What Is Shadow AI?</a><a href="/keyring/">KeyRing</a><a href="/#contact">Contact</a>
+    </div>
+    <div class="copy">&copy; AWHIND. All rights reserved.</div>
+  </div>
+</footer>
+
+<script src="/keyring/keyring.js" defer></script>
+</body>
+</html>

@@ -3,10 +3,14 @@
   "version": "1.0.0",
   "description": "AWHIND static site with generated briefing pages",
   "scripts": {
-    "build": "node build-briefings.js && node build-sitemap.js"
+    "build": "node build-briefings.js && node build-sitemap.js && node build-analytics.js",
+    "test": "node --test tests/"
   },
   "devDependencies": {
     "@netlify/zip-it-and-ship-it": "^16.2.0"
   },
-  "private": true
+  "private": true,
+  "dependencies": {
+    "@netlify/blobs": "^11.1.4"
+  }
 }

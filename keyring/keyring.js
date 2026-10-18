@@ -108,7 +108,9 @@
     card.hidden = false;
     $('kr-lead').hidden = false;
     $('kr-steps').setAttribute('aria-busy', 'false');
-    $('kr-live').textContent = 'Scan complete for ' + s.domain + '. Overall: ' + LABEL[s.overall] + '. ' + counts(s.counts, s.incomplete) + '.';
+    var flagged = (s.checks || []).filter(function (c) { return c.level !== 'green'; })
+      .map(function (c) { return c.label + ': ' + LVL[c.level] + ', ' + c.finding; });
+    $('kr-live').textContent = 'Scan complete for ' + s.domain + '. Overall: ' + LABEL[s.overall] + '. ' + counts(s.counts, s.incomplete) + '. ' + flagged.join(' ');
     try { $('kr-headline').focus({ preventScroll: true }); } catch (e) { $('kr-headline').focus(); }
     card.scrollIntoView({ behavior: animate ? 'smooth' : 'auto', block: 'center' });
   }
@@ -179,10 +181,12 @@
     if (!name) { $('kr-lead-error').textContent = 'Please enter your name.'; return; }
     if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) { $('kr-lead-error').textContent = 'Please enter a valid email address.'; return; }
     busy($('kr-lead-btn'), $('kr-lead-status'), true);
+    var gen = runId;
     post('/api/keyring/report', {
       domain: state.domain, name: name, email: email,
       company: $('kr-company').value.trim(), website: $('kr-website').value
     }).then(function (j) {
+      if (gen !== runId) return; // a new scan started; ignore this stale report
       state.name = name; state.email = email; state.leadId = j.leadId || null;
       renderReport(j.report);
       $('kr-lead').hidden = true;

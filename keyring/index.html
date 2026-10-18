@@ -151,11 +151,12 @@
 
   .kr-sr{position:absolute; width:1px; height:1px; margin:-1px; padding:0; overflow:hidden; clip:rect(0 0 0 0); white-space:nowrap; border:0;}
   .kr-steps{list-style:none; margin:0 0 28px; padding:0; display:flex; flex-direction:column; gap:10px;}
-  .kr-step{position:relative; display:grid; grid-template-columns:34px 1fr; gap:14px; align-items:center; background:var(--bg-elevated); border:1px solid var(--line); border-left:3px solid var(--line-strong); box-shadow:var(--shadow); padding:16px 20px 16px 16px; transition:border-color .3s ease;}
+  .kr-step{position:relative; display:grid; grid-template-columns:34px minmax(0,1fr); gap:14px; align-items:center; background:var(--bg-elevated); border:1px solid var(--line); border-left:3px solid var(--line-strong); box-shadow:var(--shadow); padding:16px 20px 16px 16px; transition:border-color .3s ease;}
   .kr-step.enter{animation:kr-slide .42s cubic-bezier(.2,.8,.2,1) both;}
   @keyframes kr-slide{from{opacity:0; transform:translateY(16px) scale(.985);} to{opacity:1; transform:none;}}
   .kr-step .num{font-family:var(--mono); font-size:10.5px; letter-spacing:.1em; text-transform:uppercase; color:var(--text-tertiary);}
-  .kr-step .finding{font-size:15px; margin-top:3px; line-height:1.45;}
+  .kr-step > div{min-width:0;}
+  .kr-step .finding{font-size:15px; margin-top:3px; line-height:1.45; overflow-wrap:anywhere;}
   .kr-step.scanning .finding{color:var(--text-secondary);}
   .kr-step.scanning .finding::after{content:''; display:inline-block; width:1.2em; text-align:left; animation:kr-dots 1.2s steps(4) infinite; vertical-align:bottom; overflow:hidden; white-space:nowrap;}
   @keyframes kr-dots{0%{content:'';} 25%{content:'.';} 50%{content:'..';} 75%{content:'...';}}
@@ -175,7 +176,7 @@
   .kr-final.enter{animation:kr-slide .5s cubic-bezier(.2,.8,.2,1) both;}
   .kr-final h2:focus{outline:none;}
   .kr-final h2:focus-visible{outline:2px solid var(--accent); outline-offset:4px;}
-  @media (max-width:600px){ .kr-step{grid-template-columns:28px 1fr; gap:12px; padding:14px 14px 14px 12px;} .kr-icon{width:26px; height:26px; font-size:13px;} .kr-step .finding{font-size:14.5px;} }
+  @media (max-width:600px){ .kr-step{grid-template-columns:28px minmax(0,1fr); gap:12px; padding:14px 14px 14px 12px;} .kr-icon{width:26px; height:26px; font-size:13px;} .kr-step .finding{font-size:14.5px;} }
   @media (prefers-reduced-motion: reduce){
     .kr-step.enter, .kr-final.enter, .kr-step.resolved .kr-icon{animation:none;}
     .kr-step.scanning::before, .kr-step.scanning .kr-icon, .kr-step.scanning .finding::after{animation:none;}
@@ -219,7 +220,8 @@
 
   <p class="kr-sr" id="kr-live" role="status" aria-live="polite" aria-atomic="true"></p>
 
-  <ol class="kr-steps" id="kr-steps" aria-label="Scan results" hidden></ol>
+  <h2 class="kr-sr" id="kr-steps-title">Scan results</h2>
+  <ol class="kr-steps" id="kr-steps" aria-labelledby="kr-steps-title" hidden></ol>
 
   <div class="kr-card kr-final" id="kr-summary" hidden>
     <p class="eyebrow">Overall score</p>

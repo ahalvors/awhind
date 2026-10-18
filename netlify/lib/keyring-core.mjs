@@ -575,7 +575,8 @@ function buildChecks({ facts, issues, err, rdap, nsProviders, mailProviders, has
   const nIssue = byId('no-dns', 'mixed-dns');
   if (nIssue) out.dns = fromIssue(nIssue);
   else if (err.ns) out.dns = unknown('Couldn\u2019t look up your nameservers right now.');
-  else out.dns = { level: 'green', finding: `Hosted in one place: ${nsProviders[0]}.` };
+  else if (nsProviders.length) out.dns = { level: 'green', finding: `Hosted in one place: ${nsProviders[0]}.` };
+  else out.dns = unknown('No nameservers found for this domain.');
 
   // Email provider
   if (err.mx) out.email = unknown('Couldn\u2019t look up your mail records right now.');

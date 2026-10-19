@@ -101,7 +101,7 @@
   function showOverall(s, animate) {
     badge($('kr-badge'), s.overall);
     $('kr-headline').textContent = s.domain + ': ' + HEAD[s.overall];
-    $('kr-counts').textContent = counts(s.counts, s.incomplete);
+    $('kr-counts').textContent = stepCounts(s);
     var card = $('kr-summary');
     card.classList.remove('enter');
     if (animate) { void card.offsetWidth; card.classList.add('enter'); }
@@ -110,9 +110,21 @@
     $('kr-steps').setAttribute('aria-busy', 'false');
     var flagged = (s.checks || []).filter(function (c) { return c.level !== 'green'; })
       .map(function (c) { return c.label + ': ' + LVL[c.level] + ', ' + c.finding; });
-    $('kr-live').textContent = 'Scan complete for ' + s.domain + '. Overall: ' + LABEL[s.overall] + '. ' + counts(s.counts, s.incomplete) + '. ' + flagged.join(' ');
+    $('kr-live').textContent = 'Scan complete for ' + s.domain + '. Overall: ' + LABEL[s.overall] + '. ' + stepCounts(s) + '. ' + flagged.join(' ');
     try { $('kr-headline').focus({ preventScroll: true }); } catch (e) { $('kr-headline').focus(); }
     card.scrollIntoView({ behavior: animate ? 'smooth' : 'auto', block: 'center' });
+  }
+  // Counts that match the seven panels the visitor just watched.
+  function stepCounts(s) {
+    if (!s.checks || !s.checks.length) return counts(s.counts, s.incomplete);
+    var c = { red: 0, yellow: 0, green: 0, unknown: 0 };
+    s.checks.forEach(function (x) { c[x.level] = (c[x.level] || 0) + 1; });
+    var parts = [];
+    if (c.red) parts.push(c.red + ' urgent');
+    if (c.yellow) parts.push(c.yellow + ' to review');
+    parts.push(c.green + ' of ' + s.checks.length + ' checks look good');
+    if (c.unknown) parts.push(c.unknown + ' couldn\u2019t be checked');
+    return parts.join(' \u00b7 ');
   }
   function checkFor(s, id) {
     var list = s.checks || [];

@@ -613,7 +613,7 @@ function buildChecks({ facts, issues, err, rdap, nsProviders, mailProviders, has
   else if (hIssue) out.hosting = fromIssue(hIssue);
   else {
     const { platform, cdn, label } = web.host_info || {};
-    out.hosting = { level: 'green', finding: platform ? `Up and loading. Host: ${label}.` : cdn ? `Up and loading, behind ${cdn}.` : 'Up and loading.' };
+    out.hosting = { level: 'green', finding: platform && /^an? /.test(platform) ? `Up and loading on ${label}.` : platform ? `Up and loading. Host: ${label}.` : cdn ? `Up and loading, behind ${cdn}.` : 'Up and loading.' };
   }
 
   return CHECK_ORDER.map(([id, label]) => ({ id, label, ...out[id] }));

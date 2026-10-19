@@ -1,0 +1,159 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Attackers used a stolen credential from ConnectWise Cloud Backup (formerly SkyKick) to sign in to businesses’ Microsoft 365 accounts, and multifactor login didn’t stop them. If you or your IT provider use it, keep its apps switched off and review sign-ins since Oct 13. Separately, CISA says a critical BeyondTrust Remote Support flaw is being exploited; self-hosted customers should apply patch BT26-05 today.">
+<title>Check Microsoft 365 for ConnectWise backup access — and patch BeyondTrust Remote Support today — AWHIND Daily Briefing</title>
+<link rel="canonical" href="https://awhind.com/briefing/2026-10-19">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='16' fill='%230B0F17'/%3E%3Ccircle cx='50' cy='50' r='16' fill='%23DD4E1E'/%3E%3C/svg%3E">
+
+<!-- Open Graph -->
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://awhind.com/briefing/2026-10-19">
+<meta property="og:title" content="Check Microsoft 365 for ConnectWise backup access — and patch BeyondTrust Remote Support today">
+<meta property="og:description" content="Attackers used a stolen credential from ConnectWise Cloud Backup (formerly SkyKick) to sign in to businesses’ Microsoft 365 accounts, and multifactor login didn’t stop them. If you or your IT provider use it, keep its apps switched off and review sign-ins since Oct 13. Separately, CISA says a critical BeyondTrust Remote Support flaw is being exploited; self-hosted customers should apply patch BT26-05 today.">
+<meta property="og:site_name" content="AWHIND">
+
+<!-- Twitter Card -->
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Check Microsoft 365 for ConnectWise backup access — and patch BeyondTrust Remote Support today">
+<meta name="twitter:description" content="Attackers used a stolen credential from ConnectWise Cloud Backup (formerly SkyKick) to sign in to businesses’ Microsoft 365 accounts, and multifactor login didn’t stop them. If you or your IT provider use it, keep its apps switched off and review sign-ins since Oct 13. Separately, CISA says a critical BeyondTrust Remote Support flaw is being exploited; self-hosted customers should apply patch BT26-05 today.">
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "Check Microsoft 365 for ConnectWise backup access — and patch BeyondTrust Remote Support today",
+  "description": "Attackers used a stolen credential from ConnectWise Cloud Backup (formerly SkyKick) to sign in to businesses’ Microsoft 365 accounts, and multifactor login didn’t stop them. If you or your IT provider use it, keep its apps switched off and review sign-ins since Oct 13. Separately, CISA says a critical BeyondTrust Remote Support flaw is being exploited; self-hosted customers should apply patch BT26-05 today.",
+  "datePublished": "2026-10-19",
+  "url": "https://awhind.com/briefing/2026-10-19",
+  "author": {
+    "@type": "Organization",
+    "name": "AWHIND",
+    "url": "https://awhind.com"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "AWHIND",
+    "url": "https://awhind.com"
+  }
+}
+</script>
+
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,500&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap');
+
+  :root{
+    --bg:#F1F2ED;
+    --bg-elevated:#FFFFFF;
+    --bg-sunken:#E7E8E1;
+    --text:#0B0F17;
+    --text-secondary:#566072;
+    --text-tertiary:#848d9b;
+    --line:#D9DAD2;
+    --line-strong:#c2c4ba;
+    --accent:#DD4E1E;
+    --accent-contrast:#FFFFFF;
+    --shadow: 0 1px 2px rgba(11,15,23,.04), 0 8px 24px rgba(11,15,23,.06);
+    --serif: 'Newsreader', Georgia, 'Times New Roman', serif;
+    --sans: 'IBM Plex Sans', -apple-system, 'Segoe UI', Roboto, sans-serif;
+    --mono: 'IBM Plex Mono', 'SF Mono', Consolas, monospace;
+  }
+  @media (prefers-color-scheme: dark){
+    :root:not([data-theme="light"]){
+      --bg:#0A0D14;
+      --bg-elevated:#12161F;
+      --bg-sunken:#080A10;
+      --text:#EEF0F4;
+      --text-secondary:#9AA3B4;
+      --text-tertiary:#6d7688;
+      --line:#232838;
+      --line-strong:#323951;
+      --accent:#FF7A47;
+      --accent-contrast:#0A0D14;
+      --shadow: 0 1px 2px rgba(0,0,0,.3), 0 8px 28px rgba(0,0,0,.4);
+    }
+  }
+  :root[data-theme="dark"]{
+    --bg:#0A0D14;
+    --bg-elevated:#12161F;
+    --bg-sunken:#080A10;
+    --text:#EEF0F4;
+    --text-secondary:#9AA3B4;
+    --text-tertiary:#6d7688;
+    --line:#232838;
+    --line-strong:#323951;
+    --accent:#FF7A47;
+    --accent-contrast:#0A0D14;
+    --shadow: 0 1px 2px rgba(0,0,0,.3), 0 8px 28px rgba(0,0,0,.4);
+  }
+
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0; background:var(--bg); color:var(--text);
+    font-family:var(--sans); font-size:16px; line-height:1.55;
+    -webkit-font-smoothing:antialiased;
+  }
+  a{color:inherit;}
+  h1,h2{font-family:var(--serif); font-weight:500; margin:0; text-wrap:balance; letter-spacing:-0.01em;}
+  .mono{font-family:var(--mono);}
+  .wrap{max-width:1120px; margin:0 auto; padding:0 28px;}
+  .btn{
+    display:inline-flex; align-items:center; gap:8px; font-family:var(--mono); font-size:13px;
+    letter-spacing:.04em; text-transform:uppercase; padding:12px 20px; border-radius:2px;
+    text-decoration:none; cursor:pointer; border:1px solid transparent;
+  }
+  .btn-ghost{border-color:var(--line-strong); color:var(--text);}
+  .btn-ghost:hover{border-color:var(--accent); color:var(--accent);}
+  .btn-sm{padding:8px 14px; font-size:11px;}
+
+  nav.wrap{display:flex; align-items:center; justify-content:space-between; padding-top:18px; padding-bottom:18px;}
+  .brand{font-family:var(--serif); font-weight:600; font-size:21px; letter-spacing:-.01em; text-decoration:none; color:var(--text); display:flex; align-items:center; gap:9px;}
+  .brand .mark{width:9px;height:9px;background:var(--accent);display:inline-block;}
+
+  article{max-width:720px; margin:44px auto; padding:0 28px;}
+  .meta{font-family:var(--mono); font-size:11.5px; color:var(--text-tertiary); letter-spacing:.03em; margin-bottom:16px;}
+  article h1{font-size:32px; line-height:1.15;}
+  .dek{font-size:16px; color:var(--text-secondary); margin-top:14px; font-family:var(--serif); font-style:italic;}
+  .article-body{margin-top:28px; font-size:15.5px; color:var(--text); max-width:60ch;}
+  .article-body p{margin:0 0 18px;}
+  .article-body strong{font-weight:600;}
+  .article-body .stat-inline{font-family:var(--mono); color:var(--accent); font-weight:600;}
+  .article-sources{margin-top:32px; padding-top:20px; border-top:1px solid var(--line); font-size:12px; color:var(--text-tertiary);}
+  .article-sources a{color:var(--text-secondary); text-decoration:underline; text-decoration-color:var(--line-strong);}
+  .back-link{margin-top:32px; display:inline-block;}
+
+</style>
+</head>
+<body>
+
+<nav class="wrap">
+  <a href="/" class="brand"><span class="mark"></span>AWHIND</a>
+  <div>
+    <a href="/#briefing" class="btn btn-ghost btn-sm">← All Briefings</a>
+  </div>
+</nav>
+
+<article>
+  <div class="meta">Monday, October 19, 2026 &middot; Threat &middot; 3 min read</div>
+  <h1>Check Microsoft 365 for ConnectWise backup access — and patch BeyondTrust Remote Support today</h1>
+  <div class="dek">Attackers used a stolen credential from ConnectWise Cloud Backup (formerly SkyKick) to sign in to businesses’ Microsoft 365 accounts, and multifactor login didn’t stop them. If you or your IT provider use it, keep its apps switched off and review sign-ins since Oct 13. Separately, CISA says a critical BeyondTrust Remote Support flaw is being exploited; self-hosted customers should apply patch BT26-05 today.</div>
+  <div class="article-body">
+    <p>Someone stole a credential that ConnectWise’s Cloud Backup service, formerly called SkyKick, uses to connect to customers’ Microsoft 365 accounts, and used it to sign in to businesses’ tenants starting on or around Oct 14, per <a href="https://www.huntress.com/blog/vendor-credential-enables-unauthorized-access" target="_blank" rel="noopener">Huntress</a>. Because those sign-ins came from the backup app itself rather than a person, multifactor login didn’t block them, and the app already had broad permission to read mail, files and Teams chats. Microsoft Threat Intelligence called it an active supply-chain attack, as reported by <a href="https://www.bleepingcomputer.com/news/security/hackers-breach-microsoft-365-tenants-via-connectwise-supply-chain-attack/" target="_blank" rel="noopener">BleepingComputer</a>. Huntress says it found more than 160 affected business accounts among the customers it watches. How the credential was stolen hasn’t been disclosed.</p>
+    <p><a href="https://www.connectwise.com/company/trust/advisories" target="_blank" rel="noopener">ConnectWise</a> switched off the affected connections early Saturday and suspended Cloud Backup, SaaS Security and Cloud Management. As of its 11:50 AM PT update today, scheduled backups, archive access and restores are still unavailable, with no restoration date. ConnectWise says its stored backup archives show no sign of being accessed, but stresses that this says nothing about whether your live Microsoft 365 data was touched. That has to be checked tenant by tenant. It also says not to reconnect affected applications until it provides formal restoration instructions. Its next update is due by <strong>6:00 PM PT tonight</strong>.</p>
+    <p>IT managers and MSPs: in the Entra admin center, under <strong>Enterprise applications</strong>, find the ConnectWise or SkyKick apps using the Application IDs in <a href="https://www.connectwise.com/contentassets/10777cd3364d440c86ed5270a94a5f24/connectwise-cloud-backup-technical-investigation-and-remediation-guide-1.pdf" target="_blank" rel="noopener">ConnectWise’s remediation guide</a> and make sure each one is <strong>disabled, not deleted</strong>. Check service-principal sign-ins (a separate tab from user sign-ins) since <strong>Oct 13</strong>, and review app credentials, admin role assignments, consent grants and mailbox forwarding rules for anything added recently. Huntress found one case where a ConnectWise app gave itself Global Administrator and added credentials to other apps, and switching the apps off doesn’t remove credentials already added. <a href="https://support.huntress.io/hc/en-us/articles/56492265597459-2026-October-SkyKick" target="_blank" rel="noopener">Huntress’s self-check</a> walks through the steps. Keep the apps off until ConnectWise says it’s safe, and arrange another Microsoft 365 backup in the meantime.</p>
+    <p>Small-business owners: if an IT company manages your email, ask them today whether they use ConnectWise or SkyKick backup and whether they’ve checked your account. Personal Microsoft accounts aren’t involved.</p>
+    <p>Businesses running self-hosted BeyondTrust Remote Support, the remote-access tool many help desks use: patch today. <a href="https://www.cisa.gov/news-events/alerts/2026/10/16/cisa-urges-patching-critical-vulnerability-beyondtrust-remote-support" target="_blank" rel="noopener">CISA</a> says attackers are exploiting a critical flaw in it (CVE-2026-102764) to get in, then dig in and move to other systems, and added it to its exploited list on Friday with a federal deadline of <strong>today, Oct 19</strong>. <a href="https://www.beyondtrust.com/blog/entry/bt26-05" target="_blank" rel="noopener">BeyondTrust</a> says a suspected China-linked espionage group used it before a fix existed, starting Aug 29. BeyondTrust released the fix Oct 8 and published its advisory Thursday. Its cloud-hosted customers were patched automatically.</p>
+    <p>IT managers: apply the <strong>BT26-05-RS</strong> patch from <a href="https://www.beyondtrust.com/trust-center/security-advisories/bt26-05" target="_blank" rel="noopener">BeyondTrust’s advisory</a>. It covers versions 24.3.1 through 26.2.3; older versions must upgrade first. If you run Privileged Remote Access, BeyondTrust recommends the patch there too. Take the admin interface off the open internet. Because the flaw was used before a patch existed, check the appliance for unknown admin sessions, unfamiliar scripts and gaps in your logs. If you find any, rebuild it and change every password it stored.</p>
+    <p>Nothing to do at home: both stories involve business systems, not personal PCs or Microsoft accounts.</p>
+  </div>
+  <div class="article-sources">
+    Sources: <a href="https://www.connectwise.com/company/trust/advisories" target="_blank" rel="noopener">ConnectWise — Cloud Backup (formerly SkyKick) Service Interruption advisory (updated Oct 19)</a> &middot; <a href="https://www.connectwise.com/contentassets/10777cd3364d440c86ed5270a94a5f24/connectwise-cloud-backup-technical-investigation-and-remediation-guide-1.pdf" target="_blank" rel="noopener">ConnectWise — Cloud Backup technical investigation and remediation guide (Oct 18)</a> &middot; <a href="https://www.huntress.com/blog/vendor-credential-enables-unauthorized-access" target="_blank" rel="noopener">Huntress — Vendor credential enables unauthorized access (Oct 16)</a> &middot; <a href="https://support.huntress.io/hc/en-us/articles/56492265597459-2026-October-SkyKick" target="_blank" rel="noopener">Huntress — October SkyKick self-check (Oct 16)</a> &middot; <a href="https://www.bleepingcomputer.com/news/security/hackers-breach-microsoft-365-tenants-via-connectwise-supply-chain-attack/" target="_blank" rel="noopener">BleepingComputer — Hackers breach Microsoft 365 tenants via ConnectWise supply-chain attack (Oct 17)</a> &middot; <a href="https://www.beyondtrust.com/trust-center/security-advisories/bt26-05" target="_blank" rel="noopener">BeyondTrust — Security advisory BT26-05 (Oct 15)</a> &middot; <a href="https://www.beyondtrust.com/blog/entry/bt26-05" target="_blank" rel="noopener">BeyondTrust — ARMORY CASTLE and BT26-05: What Security Teams Need to Know (updated Oct 16)</a> &middot; <a href="https://www.cisa.gov/news-events/alerts/2026/10/16/cisa-urges-patching-critical-vulnerability-beyondtrust-remote-support" target="_blank" rel="noopener">CISA — Urges patching critical vulnerability in BeyondTrust Remote Support (Oct 16)</a> &middot; <a href="https://www.cisa.gov/known-exploited-vulnerabilities-catalog" target="_blank" rel="noopener">CISA — Known Exploited Vulnerabilities Catalog (Oct 16 addition)</a>
+  </div>
+<a href="/#briefing" class="btn btn-ghost btn-sm back-link">← All Briefings</a>
+</article>
+
+</body>
+</html>

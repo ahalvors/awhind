@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<title>KeyRing PHP Check | AWHIND</title>
+<link rel="canonical" href="https://awhind.com/keyring/php/">
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Newsreader:opsz,wght@6..72,500&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap');
+  :root{--bg:#F1F2ED;--card:#fff;--text:#0B0F17;--muted:#566072;--line:#D9DAD2;--accent:#DD4E1E;--red:#C8341C;--yellow:#B7860B;--green:#2E7D4F;--unknown:#848d9b;}
+  @media (prefers-color-scheme: dark){:root{--bg:#0A0D14;--card:#12161F;--text:#EEF0F4;--muted:#9AA3B4;--line:#232838;--accent:#FF7A47;}}
+  *{box-sizing:border-box} body{margin:0;background:var(--bg);color:var(--text);font-family:'IBM Plex Sans',system-ui,sans-serif;line-height:1.5}
+  main{max-width:720px;margin:0 auto;padding:56px 20px}
+  .eyebrow{font-family:'IBM Plex Mono',monospace;font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--accent)}
+  h1{font-family:'Newsreader',Georgia,serif;font-weight:500;font-size:40px;margin:8px 0 12px;line-height:1.1}
+  p.lede{color:var(--muted);margin:0 0 28px}
+  form{display:flex;gap:10px} input{flex:1;font:inherit;padding:14px 16px;border:1px solid var(--line);background:var(--card);color:var(--text)}
+  button{font:inherit;font-weight:600;padding:14px 22px;border:0;background:var(--accent);color:#fff;cursor:pointer} button:disabled{opacity:.6}
+  .card{margin-top:28px;background:var(--card);border:1px solid var(--line);border-left:4px solid var(--unknown);padding:20px 22px}
+  .card.red{border-left-color:var(--red)} .card.yellow{border-left-color:var(--yellow)} .card.green{border-left-color:var(--green)}
+  .badge{font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.1em;text-transform:uppercase;padding:3px 8px;border-radius:3px;color:#fff;background:var(--unknown)}
+  .red .badge{background:var(--red)} .yellow .badge{background:var(--yellow)} .green .badge{background:var(--green)}
+  .finding{font-size:18px;margin:10px 0 0} ul{margin:12px 0 0;padding-left:20px;color:var(--muted);font-size:14px}
+  .meta{font-size:13px;color:var(--muted);margin-top:12px} .err{color:var(--red);margin-top:16px}
+  .how{margin-top:40px;font-size:14px;color:var(--muted)}
+</style>
+</head>
+<body>
+<main>
+  <div class="eyebrow">KeyRing &middot; PHP check</div>
+  <h1>Is your website running an outdated PHP?</h1>
+  <p class="lede">We load your home page once, like any visitor, and look only at what it shows publicly: headers, cookie names, links and generator tags. Then we compare any PHP version we find with php.net&rsquo;s supported list.</p>
+  <form id="f"><input id="d" name="domain" placeholder="yourbusiness.com" autocomplete="off" required aria-label="Domain"><button id="b">Check</button></form>
+  <div id="out" aria-live="polite"></div>
+  <p class="how"><strong>Red</strong>: end-of-life, no security fixes. <strong>Yellow</strong>: security fixes only. <strong>Green</strong>: actively supported, or no sign of PHP. <strong>Grey</strong>: PHP found but its version is hidden, so we don&rsquo;t guess. No logins, no scanning of other pages. This is one row of the full <a href="/keyring/">KeyRing audit</a>.</p>
+</main>
+<script>
+(function () {
+  var f = document.getElementById('f'), b = document.getElementById('b'), out = document.getElementById('out');
+  var LABEL = { red: 'End of life', yellow: 'Security fixes only', green: 'Looks fine', unknown: 'Version hidden' };
+  function el(t, c, txt) { var e = document.createElement(t); if (c) e.className = c; if (txt != null) e.textContent = txt; return e; }
+  function render(r) {
+    out.textContent = '';
+    var card = el('div', 'card ' + r.level);
+    var lab = r.level === 'unknown' && r.php !== true ? 'Couldn\u2019t check' : LABEL[r.level];
+    card.appendChild(el('span', 'badge', lab));
+    card.appendChild(el('p', 'finding', r.finding));
+    if (r.signals && r.signals.length) { var ul = el('ul'); r.signals.forEach(function (s) { ul.appendChild(el('li', null, s)); }); card.appendChild(ul); }
+    card.appendChild(el('div', 'meta', 'Checked ' + (r.host || r.domain) + ' \u00b7 support data: ' + (r.source || 'php.net')));
+    out.appendChild(card);
+  }
+  var q = new URLSearchParams(location.search).get('domain');
+  f.addEventListener('submit', function (e) { e.preventDefault(); run(document.getElementById('d').value); });
+  function run(domain) {
+    b.disabled = true; out.textContent = ''; out.appendChild(el('p', 'meta', 'Checking\u2026'));
+    fetch('/api/keyring/php', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ domain: domain }) })
+      .then(function (r) { return r.json(); })
+      .then(function (j) { if (j.error) { out.textContent = ''; out.appendChild(el('p', 'err', j.error)); } else render(j.result); })
+      .catch(function () { out.textContent = ''; out.appendChild(el('p', 'err', 'Something went wrong. Please try again.')); })
+      .finally(function () { b.disabled = false; });
+  }
+  if (q) { document.getElementById('d').value = q; run(q); }
+})();
+</script>
+</body>
+</html>

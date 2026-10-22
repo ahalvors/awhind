@@ -1,3 +1,4 @@
+import { scorePhp, PHP_BRANCHES_FALLBACK } from './keyring-php.mjs';
 // KeyRing core: pure helpers (validation, provider detection, grading).
 // No network access in this file so it can be unit tested offline.
 import { domainToASCII } from 'node:url';
@@ -506,6 +507,20 @@ export function gradeReport(facts, now = Date.now()) {
     notes.push('We couldn\u2019t finish the website check right now.');
   }
 
+  // 4b. PHP version
+  if (web && web.up && web.php && web.php.php && web.php.version) {
+    const r = scorePhp(web.php, facts.phpBranches || PHP_BRANCHES_FALLBACK, now);
+    if (r.level === 'red') add('red', 'php-eol', `Your website runs PHP ${r.version}, which no longer gets security fixes`,
+      'PHP is the software many sites (WordPress, Joomla, Drupal and others) run on. Once a version is end-of-life, newly found holes stay open, and attackers scan for exactly these sites.',
+      'Ask your web host or developer to move the site to a supported PHP version (see php.net/supported-versions). Test on a copy first.');
+    else if (r.level === 'yellow') add('yellow', 'php-security-only', `Your website runs PHP ${r.version}, which only gets security fixes now`,
+      `This version still gets security patches until ${(facts.phpBranches || PHP_BRANCHES_FALLBACK).find((b) => b.branch === r.branch)?.securityUntil}, then none. Upgrades take planning, so now is a good time.`,
+      'Ask your web host or developer to schedule an upgrade to an actively supported PHP version.');
+    else if (r.level === 'green') fine.push(`The site\u2019s PHP version (${r.version}) is actively supported.`);
+  } else if (web && web.up && web.php && web.php.php) {
+    notes.push('This site runs PHP, but it hides the PHP version, so we couldn\u2019t check whether it\u2019s still supported.');
+  }
+
   // 5. One vendor controls everything (only for builder/agency vendors, not big neutral providers)
   const webPlatform = web?.host_info?.platform || null;
   const neutral = /Google|Microsoft|Cloudflare|Amazon|Azure/;
@@ -555,7 +570,8 @@ export const CHECK_ORDER = [
   ['spf', 'SPF'],
   ['dmarc', 'DMARC'],
   ['ssl', 'SSL certificate'],
-  ['hosting', 'Hosting & uptime']
+  ['hosting', 'Hosting & uptime'],
+  ['php', 'PHP version']
 ];
 
 function buildChecks({ facts, issues, err, rdap, nsProviders, mailProviders, hasMail, spf, dmarc, web, now }) {
@@ -615,6 +631,12 @@ function buildChecks({ facts, issues, err, rdap, nsProviders, mailProviders, has
     const { platform, cdn, label } = web.host_info || {};
     out.hosting = { level: 'green', finding: platform && /^an? /.test(platform) ? `Up and loading on ${label}.` : platform ? `Up and loading. Host: ${label}.` : cdn ? `Up and loading, behind ${cdn}.` : 'Up and loading.' };
   }
+
+  // PHP version (public signals only)
+  if (web && web.up && web.php) {
+    const r = scorePhp(web.php, facts.phpBranches || PHP_BRANCHES_FALLBACK, now, facts.phpSource);
+    out.php = { level: r.level, finding: r.finding };
+  } else out.php = { level: 'unknown', finding: web && web.up ? 'Couldn\u2019t check for PHP right now.' : 'Couldn\u2019t check for PHP because the site didn\u2019t load.' };
 
   return CHECK_ORDER.map(([id, label]) => ({ id, label, ...out[id] }));
 }

@@ -4,9 +4,11 @@
 //     rdap.org redirects to or the registry response links to (hostname validated,
 //     resolved via dns.google to public IPs only)
 //   - one HTTPS/TLS connection to the validated domain (or www.), pinned to an IP that
-//     dns.google returned and that passed the public-IP check.
+//     dns.google returned and that passed the public-IP check (home page only, body capped).
+//   - https://www.php.net/supported-versions.php (cached; built-in fallback if unreachable)
 import https from 'node:https';
 import { validateDomain, isPublicIp, parseSpf, parseDmarc, parseRdap, inferWebHost, gradeReport } from './keyring-core.mjs';
+import { detectPhp, parseSupportedVersions, scorePhp, PHP_BRANCHES_FALLBACK } from './keyring-php.mjs';
 
 const UA = 'AWHIND-KeyRing/1.0 (+https://awhind.com/keyring/)';
 const TYPE = { A: 1, NS: 2, CNAME: 5, MX: 15, TXT: 16, AAAA: 28 };
@@ -126,6 +128,8 @@ export async function rdapLookup(domain, opts) {
 
 // ---------- Website / TLS ----------
 
+const MAX_PAGE = 512 * 1024;
+
 function httpsHead(ip, hostname, path, { timeout, deadline }) {
   return new Promise((resolve) => {
     const ms = Math.max(300, Math.min(timeout, deadline - Date.now()));
@@ -145,6 +149,7 @@ function httpsHead(ip, hostname, path, { timeout, deadline }) {
       const cert = typeof sock.getPeerCertificate === 'function' ? sock.getPeerCertificate() : null;
       const out = {
         status: res.statusCode,
+        url: `https://${hostname}${path}`,
         headers: res.headers,
         tls: {
           authorized: sock.authorized === true,
@@ -153,8 +158,14 @@ function httpsHead(ip, hostname, path, { timeout, deadline }) {
           issuer: cert?.issuer?.O || null
         }
       };
-      res.destroy();
-      resolve(out);
+      // Read the page body (capped) so the PHP detector can see links and generator tags.
+      const chunks = [];
+      let size = 0;
+      const finish = () => { out.body = Buffer.concat(chunks).toString('utf8'); res.destroy(); resolve(out); };
+      if (res.statusCode >= 300 && res.statusCode < 400) { out.body = ''; res.destroy(); resolve(out); return; }
+      res.on('data', (c) => { if (size >= MAX_PAGE) return; chunks.push(c); size += c.length; if (size >= MAX_PAGE) finish(); });
+      res.on('end', finish);
+      res.on('error', finish);
     });
     const timer = setTimeout(() => req.destroy(new Error('timeout')), ms + 100);
     req.on('timeout', () => req.destroy(new Error('timeout')));
@@ -212,6 +223,7 @@ export async function webCheck(domain, opts) {
       status: r.status,
       tls: r.tls,
       host_info: inferWebHost(r.headers, cnames),
+      php: detectPhp({ headers: r.headers, html: r.body || '', url: r.url, status: r.status }),
       reason: r.status >= 500 ? `the server returned an error (${r.status})` : null
     };
   }
@@ -219,6 +231,34 @@ export async function webCheck(domain, opts) {
   if (dnsFailed === candidates.length) throw new Error('dns_lookup_failed');
   if (!sawAddress) return { skipped: 'no_address' };
   return { up: false, host: domain, reason: friendlyNetError(lastError) };
+}
+
+// ---------- php.net supported versions ----------
+
+let phpCache = null; // { at, branches, source }
+export async function phpBranches({ deadline, timeout = 3000 } = {}) {
+  if (phpCache && Date.now() - phpCache.at < 6 * 3600 * 1000) return phpCache;
+  try {
+    const res = await fetch('https://www.php.net/supported-versions.php', { headers: { 'user-agent': UA }, signal: timeoutSignal(timeout, deadline), redirect: 'follow' });
+    if (!res.ok) throw new Error(`php_http_${res.status}`);
+    const branches = parseSupportedVersions(await res.text());
+    if (branches.length < 2) throw new Error('php_parse');
+    phpCache = { at: Date.now(), branches, source: 'php.net (live)' };
+  } catch {
+    phpCache = { at: Date.now() - 5.5 * 3600 * 1000, branches: PHP_BRANCHES_FALLBACK, source: 'php.net (cached 2026-10-21)' }; // retry in ~30 min
+  }
+  return phpCache;
+}
+
+/** Standalone PHP check: one normal home-page fetch plus php.net's list. */
+export async function phpAudit(domain, { budgetMs = 8000 } = {}) {
+  const deadline = Date.now() + budgetMs;
+  const [web, list] = await Promise.all([
+    webCheck(domain, { deadline, timeout: 4000 }).catch(() => null),
+    phpBranches({ deadline })
+  ]);
+  const row = scorePhp(web && web.up ? web.php : null, list.branches, Date.now(), list.source);
+  return { domain, host: web?.host || null, ...row, source: list.source };
 }
 
 // ---------- Orchestration ----------
@@ -229,13 +269,14 @@ export async function runAudit(domain, { budgetMs = 8500 } = {}) {
   const errors = {};
   const settle = (key, p) => p.catch((e) => { errors[key] = e?.message === 'not_found' ? 'not_found' : (e?.name === 'TimeoutError' ? 'timeout' : 'failed'); return null; });
 
-  const [rdap, ns, mx, txt, dmarcTxt, web] = await Promise.all([
+  const [rdap, ns, mx, txt, dmarcTxt, web, phpList] = await Promise.all([
     settle('rdap', rdapLookup(domain, { deadline, timeout: 4000 }).then((r) => { if (r.notFound) throw new Error('not_found'); return r; })),
     settle('ns', doh(domain, 'NS', opts).then((a) => a.map((h) => h.toLowerCase().replace(/\.$/, '')))),
     settle('mx', doh(domain, 'MX', opts).then((a) => a.map((m) => m.split(/\s+/).pop().toLowerCase().replace(/\.$/, '')).filter((h) => h && h !== '.' && h !== ''))),
     settle('spf', doh(domain, 'TXT', opts).then((a) => a.map(unquoteTxt))),
     settle('dmarc', doh(`_dmarc.${domain}`, 'TXT', opts).then((a) => a.map(unquoteTxt))),
-    settle('web', webCheck(domain, { deadline, timeout: 4000 }))
+    settle('web', webCheck(domain, { deadline, timeout: 4000 })),
+    phpBranches({ deadline })
   ]);
 
   // A "null MX" (RFC 7505, "0 .") means the domain explicitly accepts no mail.
@@ -247,6 +288,8 @@ export async function runAudit(domain, { budgetMs = 8500 } = {}) {
     spf: txt ? parseSpf(txt) : null,
     dmarc: dmarcTxt ? parseDmarc(dmarcTxt) : null,
     web,
+    phpBranches: phpList.branches,
+    phpSource: phpList.source,
     errors
   };
   const report = gradeReport(facts);
@@ -258,7 +301,7 @@ export async function runAudit(domain, { budgetMs = 8500 } = {}) {
     mx: facts.mx,
     spf: facts.spf?.record || facts.spf?.status || null,
     dmarc: facts.dmarc?.record || facts.dmarc?.status || null,
-    web: web ? { host: web.host || null, status: web.status || null, up: !!web.up, certValidTo: web.tls?.validTo || null, certValid: web.tls?.authorized ?? null, platform: web.host_info?.label || null } : null,
+    web: web ? { host: web.host || null, status: web.status || null, up: !!web.up, certValidTo: web.tls?.validTo || null, certValid: web.tls?.authorized ?? null, platform: web.host_info?.label || null, php: web.php ? { detected: web.php.php, version: web.php.version, cms: web.php.cms } : null } : null,
     errors
   };
   return report;

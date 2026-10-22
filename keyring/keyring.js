@@ -59,7 +59,7 @@
   // Step 1: animated, step-by-step reveal driven by the real scan results
   var STEPS = [
     ['domain', 'Domain & renewal'], ['dns', 'DNS host'], ['email', 'Email provider'],
-    ['spf', 'SPF'], ['dmarc', 'DMARC'], ['ssl', 'SSL certificate'], ['hosting', 'Hosting & uptime']
+    ['spf', 'SPF'], ['dmarc', 'DMARC'], ['ssl', 'SSL certificate'], ['hosting', 'Hosting & uptime'], ['php', 'PHP version']
   ];
   var ICON = { green: '\u2713', yellow: '!', red: '\u2715', unknown: '?' };
   var LVL = { green: 'Good', yellow: 'Review', red: 'Urgent', unknown: 'Not checked' };
@@ -114,7 +114,7 @@
     try { $('kr-headline').focus({ preventScroll: true }); } catch (e) { $('kr-headline').focus(); }
     card.scrollIntoView({ behavior: animate ? 'smooth' : 'auto', block: 'center' });
   }
-  // Counts that match the seven panels the visitor just watched.
+  // Counts that match the eight panels the visitor just watched.
   function stepCounts(s) {
     if (!s.checks || !s.checks.length) return counts(s.counts, s.incomplete);
     var c = { red: 0, yellow: 0, green: 0, unknown: 0 };

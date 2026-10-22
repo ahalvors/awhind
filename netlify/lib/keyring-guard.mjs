@@ -20,7 +20,8 @@ export function hashIp(ip) {
 export const LIMITS = {
   scan: { perIpHour: 10, globalDay: 300 },
   report: { perIpHour: 4, globalDay: 100 },
-  intent: { perIpHour: 6, globalDay: 150 }
+  intent: { perIpHour: 6, globalDay: 150 },
+  php: { perIpHour: 10, globalDay: 300 }
 };
 
 function bumpMemory(key, ttlMs) {

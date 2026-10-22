@@ -112,7 +112,7 @@ const base = (over = {}) => ({
   mx: ['aspmx.l.google.com'],
   spf: parseSpf(['v=spf1 include:_spf.google.com ~all']),
   dmarc: parseDmarc(['v=DMARC1; p=reject']),
-  web: { up: true, host: 'goodbiz.com', status: 200, tls: { authorized: true, validTo: inDays(60) }, host_info: { platform: 'Netlify', label: 'Netlify' } },
+  web: { up: true, host: 'goodbiz.com', status: 200, tls: { authorized: true, validTo: inDays(60) }, host_info: { platform: 'Netlify', label: 'Netlify' }, php: { php: false, version: null, branch: null, cms: null, signals: [] } },
   errors: {},
   ...over
 });
@@ -204,8 +204,8 @@ test('rate limit: per-IP cap returns 429 and does not burn the global budget', a
   assert.equal(await rateLimit('scan', '198.51.100.9-test'), null, 'other visitors unaffected');
 });
 
-test('checks: seven steps in reveal order, levels follow the findings', () => {
-  const ORDER = ['domain', 'dns', 'email', 'spf', 'dmarc', 'ssl', 'hosting'];
+test('checks: eight steps in reveal order, levels follow the findings', () => {
+  const ORDER = ['domain', 'dns', 'email', 'spf', 'dmarc', 'ssl', 'hosting', 'php'];
   const good = gradeReport(base(), NOW);
   assert.deepEqual(good.checks.map((c) => c.id), ORDER);
   assert.ok(good.checks.every((c) => c.level === 'green' && c.finding && c.label));
@@ -214,7 +214,7 @@ test('checks: seven steps in reveal order, levels follow the findings', () => {
     ns: ['ns01.squarespacedns.com', 'dns1.p07.nsone.net'], spf: parseSpf([]), dmarc: parseDmarc([])
   }), NOW);
   const lv = Object.fromEntries(demitri.checks.map((c) => [c.id, c.level]));
-  assert.deepEqual(lv, { domain: 'yellow', dns: 'yellow', email: 'green', spf: 'red', dmarc: 'red', ssl: 'green', hosting: 'green' });
+  assert.deepEqual(lv, { domain: 'yellow', dns: 'yellow', email: 'green', spf: 'red', dmarc: 'red', ssl: 'green', hosting: 'green', php: 'green' });
   const down = gradeReport(base({ web: { up: false, host: 'goodbiz.com', reason: 'it took too long to respond' } }), NOW);
   assert.equal(down.checks.find((c) => c.id === 'hosting').level, 'red');
   assert.equal(down.checks.find((c) => c.id === 'ssl').level, 'unknown');
@@ -223,6 +223,6 @@ test('checks: seven steps in reveal order, levels follow the findings', () => {
   assert.equal(fail.checks.find((c) => c.id === 'domain').level, 'unknown');
   assert.equal(fail.checks.find((c) => c.id === 'hosting').level, 'unknown');
   const s = summarize(demitri);
-  assert.equal(s.checks.length, 7);
+  assert.equal(s.checks.length, 8);
   assert.deepEqual(Object.keys(s.checks[0]).sort(), ['finding', 'id', 'label', 'level']);
 });

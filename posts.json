@@ -1,5 +1,39 @@
 [
   {
+    "date": "2026-10-23",
+    "tag": "AI Safety",
+    "read": "3 min",
+    "title": "Banks are locking out AI agents that use your login — here’s the safer way to let AI near your money",
+    "dek": "Several major US banks are restricting or blocking AI agents that sign in with a customer’s own username and password. Separately, a flaw in the x402 payment SDKs let a malicious API ask an AI agent for its full token balance. The lesson for managers is the same: give agents limited access and a spending cap, never your keys.",
+    "body": [
+      "AI agents are signing into bank accounts with usernames and passwords that customers handed them, without the bank’s approval. That breaks bank policies requiring account holders to log in personally, and several major US banks, including Morgan Stanley, JPMorgan, Bank of America, Wells Fargo and Citi, are now restricting or blocking outside AI agents, <a href=\"https://the-decoder.com/major-us-banks-are-locking-out-ai-agents-that-log-in-with-customer-credentials/\" target=\"_blank\" rel=\"noopener\">The Decoder</a> reports, citing Axios. Morgan Stanley said it has not seen any \"rogue AI agents\" on its platforms.",
+      "<strong>Why banks are worried.</strong> Most banks want agents limited to read-only access: they can view account data but not take any action. Many banks also can’t tell whether an agent is acting on a user’s behalf or on its own. Agents can reach accounts through a browser using computer-use tools or open-source agent software, which is hard for banks to block from their side. OpenAI has launched a ChatGPT service for financial tasks in the US with read-only access to financial data.",
+      "<strong>A second warning: agents that pay.</strong> Security firm V12 said on Oct 22 that AI agents paying for API calls with the x402 software kits could sign a payment for their full balance of a supported token if a malicious API asked for it, per <a href=\"https://thehackernews.com/2026/10/critical-x402-sdk-flaw-could-let.html\" target=\"_blank\" rel=\"noopener\">The Hacker News</a>. The cause: the default client set no spending limit until fixes released Aug 18, which now cap each payment at $1 by default. No attacks have been publicly reported. But the x402 Foundation published no security advisory, so as of Oct 23 routine checks like npm audit and PyPI showed no warning to upgrade.",
+      "<strong>Action item: Does any AI tool have your keys?</strong> This week, ask yourself or your team:<br>1. Have we given any AI assistant or agent a person’s actual bank, payroll or card login? If so, change that password and remove the login from the tool.<br>2. Where an AI tool needs financial data, is it connected with read-only access through an official connection, not a shared password?<br>3. Can any agent spend money on its own? If yes, set a cap per payment and in total, and keep a person approving anything that moves money.<br>4. Developers using x402: update @x402/fetch or @x402/axios to 2.23.0 or later (apps using sign-in also need @x402/extensions 2.23.0+, Solana facilitators need @x402/svm 2.23.0+). Don’t pass <code>spendControls: false</code>. If you can’t upgrade yet, register a payment policy with a maximum amount.",
+      "Don’t count on your security scanner to flag this one. The fix shipped without an advisory, so check versions directly.",
+      "<strong>Also today</strong>",
+      "<strong>PHP2Shell follow-up.</strong> Cloudflare’s CEO said exploit attempts against PHP servers reached \"millions,\" and Ox Security found about 99% of instances it could identify were still unpatched 24 hours after the fix (<a href=\"https://www.bankinfosecurity.com/millions-exploit-attempts-logged-against-php-servers-a-33179\" target=\"_blank\" rel=\"noopener\">BankInfoSecurity</a>). If you haven’t asked your web host yet, see <a href=\"https://awhind.com/briefing/2026-10-22/\" target=\"_blank\" rel=\"noopener\">yesterday’s briefing</a>."
+    ],
+    "sources": [
+      [
+        "The Decoder (Oct 22)",
+        "https://the-decoder.com/major-us-banks-are-locking-out-ai-agents-that-log-in-with-customer-credentials/"
+      ],
+      [
+        "Axios (Oct 22)",
+        "https://www.axios.com/2026/10/22/ai-agents-banks-unauthorized-accounts-access"
+      ],
+      [
+        "The Hacker News (Oct 23)",
+        "https://thehackernews.com/2026/10/critical-x402-sdk-flaw-could-let.html"
+      ],
+      [
+        "BankInfoSecurity (Oct 22)",
+        "https://www.bankinfosecurity.com/millions-exploit-attempts-logged-against-php-servers-a-33179"
+      ]
+    ]
+  },
+  {
     "date": "2026-10-22",
     "tag": "Threat",
     "read": "3 min",

@@ -8,6 +8,7 @@ const articles = fs.existsSync('articles.json')
   : [];
 
 const staticUrls = [
+  { loc: 'https://awhind.com/school/', lastmod: '2026-10-25', priority: '0.8' },
   { loc: 'https://awhind.com/', lastmod: '2026-09-02', priority: '1.0' },
   { loc: 'https://awhind.com/shadow-ai/', lastmod: '2026-09-02', priority: '0.9' },
   { loc: 'https://awhind.com/capabilities/service-desk/', lastmod: '2026-09-02', priority: '0.8' },

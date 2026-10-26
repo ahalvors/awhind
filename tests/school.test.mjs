@@ -1,0 +1,10 @@
+import test from 'node:test';import assert from 'node:assert/strict';import{score,questions}from '../school/model.mjs';
+const all=v=>Object.fromEntries(questions.map(q=>[q.id,v]));
+test('unanswered cannot get a grade',()=>assert.equal(score({}).grade,'Incomplete'));
+test('unknown is unverified, never a passing grade',()=>{const s=score(all('u'));assert.equal(s.grade,'Unverified');assert.equal(s.value,0);});
+test('tested baseline earns A',()=>{const s=score(all('2'));assert.equal(s.grade,'A');assert.equal(s.value,100);assert.equal(s.gaps.length,0);});
+test('each core gap caps otherwise excellent scores',()=>{for(const q of questions.filter(q=>q.critical)){const s=score({...all('2'),[q.id]:'1'});assert.equal(s.value,69);assert.equal(s.grade,'D');assert.ok(s.capped);}});
+test('absent controls yield F',()=>assert.equal(score(all('0')).grade,'F'));
+test('unknowns remain in denominator',()=>{const q=questions.find(q=>!q.critical);const s=score({...all('2'),[q.id]:'u'});assert.equal(s.raw,93);assert.equal(s.known,14);});
+test('invalid values do not count as answered',()=>assert.equal(score(all('unexpected')).grade,'Incomplete'));
+test('all untested cannot pass',()=>{const s=score(all('1'));assert.equal(s.value,50);assert.equal(s.grade,'F');});

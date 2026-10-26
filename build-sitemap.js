@@ -15,6 +15,7 @@ const staticUrls = [
   { loc: 'https://awhind.com/capabilities/ai-governance/', lastmod: '2026-09-02', priority: '0.8' },
   { loc: 'https://awhind.com/capabilities/endpoint-ops/', lastmod: '2026-09-02', priority: '0.8' },
   { loc: 'https://awhind.com/capabilities/global-noc/', lastmod: '2026-09-02', priority: '0.8' },
+  { loc: 'https://awhind.com/security-checklist/', lastmod: '2026-10-26', priority: '0.8' },
   { loc: 'https://awhind.com/keyring/', lastmod: '2026-10-18', priority: '0.8' }
 ];
 

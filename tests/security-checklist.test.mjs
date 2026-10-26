@@ -1,0 +1,11 @@
+import test from 'node:test'; import assert from 'node:assert/strict'; import fs from 'node:fs';
+import { score, questions, areas } from '../security-checklist/model.mjs';
+const all = v => Object.fromEntries(questions.map(q => [q[0], v]));
+test('15-20 checks covering every area', () => { assert.ok(questions.length >= 15 && questions.length <= 20); areas.forEach((_, i) => assert.ok(questions.some(q => q[1] === i))); });
+test('ids unique and every check has a fix', () => { assert.equal(new Set(questions.map(q => q[0])).size, questions.length); questions.forEach(q => assert.ok(q[3].length > 20)); });
+test('empty is not started', () => { const s = score({}); assert.equal(s.rating, 'Not started'); assert.equal(s.percent, 0); });
+test('all yes is 100 Strong with no fixes', () => { const s = score(all('yes')); assert.equal(s.percent, 100); assert.equal(s.rating, 'Strong'); assert.equal(s.fixes.length, 0); });
+test('each no produces its fix', () => { const s = score({ ...all('yes'), 'mfa-email': 'no' }); assert.equal(s.fixes.length, 1); assert.equal(s.fixes[0].id, 'mfa-email'); assert.ok(s.percent < 100); });
+test('all no is High risk with every fix', () => { const s = score(all('no')); assert.equal(s.rating, 'High risk'); assert.equal(s.fixes.length, questions.length); });
+test('invalid answers ignored', () => assert.equal(score(all('maybe')).answered, 0));
+test('client code never stores or sends data', () => { for (const f of ['security-checklist/app.mjs','security-checklist/model.mjs']) { const c = fs.readFileSync(f,'utf8').replace(/\/\/.*$/gm,''); for (const bad of ['localStorage','sessionStorage','fetch(','XMLHttpRequest','sendBeacon','WebSocket','document.cookie','indexedDB']) assert.ok(!c.includes(bad), `${f} uses ${bad}`); } assert.ok(!/<form/i.test(fs.readFileSync('security-checklist/index.html','utf8'))); });

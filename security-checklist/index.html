@@ -103,7 +103,7 @@
   #fix-list{padding-left:20px;} #fix-list li{margin-bottom:10px; font-size:15px;} #fix-list .mono{display:block; font-size:11px; letter-spacing:.08em; text-transform:uppercase; color:var(--accent);}
   #fix-list .empty{list-style:none; margin-left:-20px; color:var(--text-secondary);}
   button.btn{background:transparent; font:inherit; font-family:var(--mono); font-size:11px;}
-  @media (max-width:860px){ .tool{grid-template-columns:1fr; padding:24px 18px 0;} .scorecard{order:-1; position:sticky; top:0; z-index:2; padding:12px 16px;} .scorecard .privacy, .scorecard #reset{display:none;} .score-num{font-size:40px;} header.page-hero h1{font-size:30px;} nav.wrap > div .btn:first-child{display:none;} }
+  @media (max-width:860px){ .tool{grid-template-columns:1fr; padding:24px 18px 0;} .scorecard{order:-1; position:sticky; top:0; z-index:2; padding:12px 16px;} .scorecard .privacy{margin-top:6px;} .scorecard #reset{display:none;} .score-num{font-size:40px;} header.page-hero h1{font-size:30px;} nav.wrap > div .btn:first-child{display:none;} }
 </style>
 <script type="module" src="./app.mjs"></script>
 </head>
@@ -139,6 +139,7 @@
 </div>
 
 <section class="fixes" aria-labelledby="fix-heading">
+  <p style="margin:0 0 12px;"><button type="button" class="btn btn-ghost btn-sm" onclick="document.getElementById('reset').click()">Start over</button></p>
   <h2 id="fix-heading">Your fix list</h2>
   <ol id="fix-list"></ol>
 </section>

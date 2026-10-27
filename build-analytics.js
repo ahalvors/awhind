@@ -3,7 +3,7 @@
 // GA4_MEASUREMENT_ID environment variable (set in Netlify). No ID -> no tag.
 const fs = require('fs');
 
-const PAGES = ['keyring/index.html'];
+const PAGES = ['keyring/index.html', 'security-checklist/index.html'];
 const id = (process.env.GA4_MEASUREMENT_ID || '').trim();
 const valid = /^G-[A-Z0-9]{4,15}$/.test(id);
 

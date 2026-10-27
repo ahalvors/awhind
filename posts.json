@@ -1,5 +1,79 @@
 [
   {
+    "date": "2026-10-27",
+    "tag": "Threat",
+    "read": "3 min",
+    "title": "\"IT Support\" messaging you on Teams? It’s probably not IT. Lock down outside chat today, and update Authenticator on Android",
+    "dek": "Arctic Wolf has tracked more than 400 incidents where attackers flooded a victim’s inbox, then posed as IT on Microsoft Teams to get remote access, sometimes ending in ransomware. The fix is a Teams setting plus one rule for staff. Separately, Microsoft fixed an Authenticator for Android flaw that could hand a rogue app your work account’s sign-in tokens. Check that phones are on 6.2606.4246 or later.",
+    "body": [
+      "First, your inbox fills with hundreds of newsletter and subscription confirmations in a few minutes. Then a Teams message arrives from \"IT Support (Internal)\" offering to fix it. <a href=\"https://arcticwolf.com/resources/blog/threat-actors-abuse-microsoft-teams-external-chat-for-initial-access/\" target=\"_blank\" rel=\"noopener\">Arctic Wolf</a> says it has seen this pattern in more than 400 incidents. Attackers set up their own Microsoft 365 accounts with help desk-style names and use Teams’ outside chat feature to message employees, per <a href=\"https://thehackernews.com/2026/10/attackers-use-microsoft-teams-it.html\" target=\"_blank\" rel=\"noopener\">The Hacker News</a>. Recently they’ve started putting the target company’s name in their display name. Teams still labels them \"External,\" and that label is the tell.",
+      "<strong>What happens next.</strong> The fake help desk often calls the victim inside Teams and talks them into installing or opening a remote-access tool. Quick Assist, which is built into Windows and only needs the user to read back a six-digit code, was the most common, and attackers also used tools like AnyDesk, ScreenConnect and TeamViewer. Once a victim engages, Arctic Wolf says attackers can be running their own software in under 15 minutes. From there they steal data and, in some cases, deploy ransomware. Sophos has tied related attacks to Chaos ransomware.",
+      "<strong>Why small offices are exposed.</strong> Teams ships with outside chat (Microsoft calls it external access) turned on by default, and this attack doesn’t use any software bug. \"It exploits trust rather than a software vulnerability,\" Arctic Wolf said. Offices without a formal help desk are the easiest place for a fake one to step in.",
+      "<strong>Action item: Close the door and set one rule.</strong><br>1. <strong>Limit outside chat.</strong> In the Teams admin center, under Users &gt; External access, switch to \"Allow only specific external domains\" and add only the partners you actually work with. Arctic Wolf also recommends blocking chat with unmanaged Teams accounts and with trial-only Microsoft 365 tenants.<br>2. <strong>Restrict remote-access tools.</strong> Limit Quick Assist to the people who do IT, or remove it where it isn’t used, and block remote-access tools your IT provider didn’t install.<br>3. <strong>Tell staff the one rule:</strong> real IT will never cold-message you on Teams. Write down exactly how your IT person or provider will contact people, and require a callback to a known number before anyone grants remote access.<br>4. <strong>Watch for the flood.</strong> If someone’s inbox suddenly fills with sign-up emails, treat any \"help\" that shows up next as part of the attack.",
+      "<strong>Second item: Update Microsoft Authenticator on Android.</strong> Microsoft fixed a flaw, CVE-2026-80097, that let a malicious app on an Android phone pose as Teams and get the sign-in tokens Authenticator hands to Microsoft apps, per <a href=\"https://www.helpnetsecurity.com/2026/10/27/microsoft-authenticator-vulnerability-patchedcve-2026-80097/\" target=\"_blank\" rel=\"noopener\">Help Net Security</a>. In researchers’ tests at <a href=\"https://enclave.ai/blog/authmask-we-made-microsoft-authenticator-hand-over-tokens\" target=\"_blank\" rel=\"noopener\">Enclave</a>, those tokens could read and send email, change files and calendars, and even change the account’s sign-in methods, including passkeys. Someone would first have to install a malicious app. Enclave says no further taps were needed after that, while Microsoft says the user would also have to complete a sign-in step. Microsoft says the flaw has not been used in attacks, per <a href=\"https://thehackernews.com/2026/10/microsoft-authenticator-flaw-let.html\" target=\"_blank\" rel=\"noopener\">The Hacker News</a>. It’s fixed in version 6.2606.4246, part of September’s updates.",
+      "<strong>Everyone on Android:</strong> open Authenticator in the Google Play Store and confirm you’re on 6.2606.4246 or later.",
+      "<strong>If you manage company phones:</strong> require that minimum version in your device management, and only allow apps from trusted stores.",
+      "<strong>Also today</strong>",
+      "<strong>Yesterday’s check still applies.</strong> If you think someone’s Microsoft 365 sign-in was stolen, by a fake help desk or a rogue app, the device, sign-in method and inbox-rule checks are in <a href=\"https://awhind.com/briefing/2026-10-26/\" target=\"_blank\" rel=\"noopener\">yesterday’s briefing</a>."
+    ],
+    "sources": [
+      [
+        "Arctic Wolf Labs (Oct 26)",
+        "https://arcticwolf.com/resources/blog/threat-actors-abuse-microsoft-teams-external-chat-for-initial-access/"
+      ],
+      [
+        "The Hacker News: Teams scams (Oct 26)",
+        "https://thehackernews.com/2026/10/attackers-use-microsoft-teams-it.html"
+      ],
+      [
+        "Help Net Security (Oct 27)",
+        "https://www.helpnetsecurity.com/2026/10/27/microsoft-authenticator-vulnerability-patchedcve-2026-80097/"
+      ],
+      [
+        "The Hacker News: Authenticator",
+        "https://thehackernews.com/2026/10/microsoft-authenticator-flaw-let.html"
+      ],
+      [
+        "Enclave (Oct 23)",
+        "https://enclave.ai/blog/authmask-we-made-microsoft-authenticator-hand-over-tokens"
+      ],
+      [
+        "Microsoft advisory CVE-2026-80097",
+        "https://msrc.microsoft.com/update-guide/vulnerability/CVE-2026-80097"
+      ]
+    ]
+  },
+  {
+    "date": "2026-10-26",
+    "tag": "Security",
+    "read": "3 min",
+    "title": "MFA was on, and attackers still got in: the Microsoft 365 checks that show whether someone replayed a stolen sign-in",
+    "dek": "Huntress tracked a campaign that used fake sign-in pages to grab Microsoft 365 sessions, then replayed them to take over 97 accounts at 79 organizations. Attackers added their own authenticator apps and hid payroll and deposit emails. Here are the checks that show whether it happened to you. Separately, more fixes have landed for the Brotli flaw, and the update only works once you restart.",
+    "body": [
+      "Multi-factor sign-in (MFA) stops most stolen passwords. It doesn’t stop an attacker who steals the \"proof of login\" Microsoft hands you after you pass MFA. Security firm <a href=\"https://www.huntress.com/blog/token-replay-spray\" target=\"_blank\" rel=\"noopener\">Huntress</a> tracked a Microsoft 365 campaign between July 14 and Sept 22, 2026 that did exactly that. Victims typed their password and MFA code into a fake sign-in page, which passed them to the real Microsoft page and kept the sign-in token. The attackers then replayed those tokens from their own devices within minutes. Huntress counted more than 200,000 attempts, 497 successful sign-ins, 97 compromised accounts and 48 rogue devices across 79 organizations, per <a href=\"https://thehackernews.com/2026/10/microsoft-365-token-replay-attacks.html\" target=\"_blank\" rel=\"noopener\">The Hacker News</a>.",
+      "<strong>How they stayed in.</strong> Once inside, the attackers added their own authenticator app so they could pass MFA again after the stolen session expired. In at least 19 organizations, the victim’s existing MFA methods were removed and a new one registered within three hours of the first sign-in. They also registered fake computers in the company’s Microsoft directory, which stay there until someone deletes them. Huntress says the stolen tokens came from fake sign-in pages, device-code phishing and social engineering during a real login.",
+      "<strong>Why finance teams should care.</strong> The attackers set up hidden inbox rules with names like \".\" or \"sss\" that deleted incoming mail mentioning payroll, deposit and bonus, or moved it into rarely opened folders like RSS Feeds and Conversation History. One hijacked mailbox was used to send spam to hundreds of outside recipients before Microsoft flagged the account as high risk.",
+      "<strong>Action item: Did someone replay a sign-in?</strong> This week, have whoever runs your Microsoft 365 check:<br>1. <strong>Sign-in methods.</strong> Look at each person’s registered MFA methods. Is there an authenticator app or phone nobody recognizes, or did someone’s usual method disappear?<br>2. <strong>Devices.</strong> Review the devices registered in Microsoft Entra. Delete any computer you can’t match to a real person and machine.<br>3. <strong>Inbox rules.</strong> Open the rules on finance and payroll mailboxes. Look for rules with odd one- or two-character names, or rules that delete or move mail about payroll, deposits or bonuses.<br>4. <strong>Apps.</strong> Check for new enterprise applications nobody remembers approving.<br>5. <strong>If you find anything:</strong> revoke that user’s sessions and reset the password, then remove the rogue method, device or rule.",
+      "Longer term, Huntress recommends using Conditional Access to restrict device-code sign-in, and to require MFA (or block) for all users, all cloud apps and all client app types, with no exceptions. And tell payroll staff to confirm any direct-deposit change by phone, using a number already on file.",
+      "<strong>Also today</strong>",
+      "<strong>Brotli flaw: patched isn’t fixed until you restart.</strong> More fixes have shipped for CVE-2026-111497, a bug in Google’s Brotli decompression code that’s built into Node.js, Bun, .NET, Python packages and more. OpenAI’s Codex Security team reported it, and no real-world attacks have been reported, per <a href=\"https://thehackernews.com/2026/10/brotli-decoder-flaw-behind-nodejs-rce.html\" target=\"_blank\" rel=\"noopener\">The Hacker News</a>. Microsoft shipped .NET fixes on Oct 25 (8.0.33, 9.0.22, 10.0.14), and Node.js is fixed in 22.23.4, 24.22.1 and 26.12.1. After updating, restart the service and rebuild any container images, because a running program keeps the old code until it restarts. Developers using Python’s Brotli or brotlicffi packages should check versions by hand (1.2.1 or 1.2.1.0 and later), because Dependabot may not flag them yet."
+    ],
+    "sources": [
+      [
+        "Huntress research",
+        "https://www.huntress.com/blog/token-replay-spray"
+      ],
+      [
+        "The Hacker News: token replay (Oct 26)",
+        "https://thehackernews.com/2026/10/microsoft-365-token-replay-attacks.html"
+      ],
+      [
+        "The Hacker News: Brotli (Oct 24, updated Oct 26)",
+        "https://thehackernews.com/2026/10/brotli-decoder-flaw-behind-nodejs-rce.html"
+      ]
+    ]
+  },
+  {
     "date": "2026-10-23",
     "tag": "AI Safety",
     "read": "3 min",

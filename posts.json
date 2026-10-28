@@ -1,5 +1,43 @@
 [
   {
+    "date": "2026-10-28",
+    "tag": "AI Safety",
+    "read": "3 min",
+    "title": "RBC is blocking customers’ personal AI agents. Block stolen logins, not the customer’s own assistant",
+    "dek": "Canada’s largest bank says third-party personal AI agents will lose direct access to online banking. The worry is real, but a blanket ban is the wrong fix. Also today: CISA adds Node2Shell and PolyShell to its exploited list, so Node.js and Magento owners should patch now.",
+    "body": [
+      "Royal Bank of Canada has decided to block third-party personal AI agents from direct access to its authenticated digital properties, including online banking, the bank said in an <a href=\"https://www.rbcroyalbank.com/en-ca/my-money-matters/money-academy/cyber-security/understanding-cyber-security/understanding-third-party-ai-agents-and-your-rbc-banking/\" target=\"_blank\" rel=\"noopener\">Oct 27 post</a>. Clients who use an AI agent to reach their RBC accounts will see those connections stop working. RBC acknowledged the move \"may be disappointing for the small portion of our clients who use these tools,\" <a href=\"https://financialpost.com/fp-finance/banking/rbc-block-personal-ai-agents-from-online-banking\" target=\"_blank\" rel=\"noopener\">Financial Post</a> reports, and CEO Dave McKay wrote that as agents become more autonomous, the stakes rise, from fraud and consumer harm to risks that could ripple through the financial system.",
+      "<strong>Why I think a ban is the wrong fix.</strong> RBC’s own post names the real problem: agents need access to your accounts and “may store your passwords to get there.” Banks should absolutely stop hacker bots running on stolen logins. But a customer’s own assistant, acting with the customer’s permission, isn’t that. The better answer is a key the bank issues to the customer’s agent, with limits the customer sets (read-only, or a spending cap), that can be revoked at any time. That lets the bank tell a trusted agent apart from an attacker, instead of locking everyone out.",
+      "This follows the US banks restricting agents that sign in with customer passwords, covered in our <a href=\"https://awhind.com/briefing/2026-10-23/\" target=\"_blank\" rel=\"noopener\">Oct 23 briefing</a>.",
+      "<strong>Action item: If your team uses AI near money.</strong><br>1. If anyone has given an AI tool their real bank login, change that password and remove it from the tool. Sharing a password can also affect a bank’s fraud guarantee; RBC’s terms exclude losses if you share your passwords.<br>2. Use the bank’s own app and official, read-only connections where they exist.<br>3. Keep a person approving anything that moves money.<br>4. Tell your bank you want agent keys with limits you control. Banks build what customers ask for.",
+      "<strong>Also today</strong>",
+      "<strong>Patch now: Node2Shell and PolyShell.</strong> CISA on Oct 27 added two actively exploited flaws to its Known Exploited Vulnerabilities catalog, per <a href=\"https://thehackernews.com/2026/10/adobe-commerce-polyshell-attacks-breach.html\" target=\"_blank\" rel=\"noopener\">The Hacker News</a>. CVE-2026-111497 (CVSS 9.2, “Node2Shell”) is a flaw in Google’s Brotli decoder; ELLIO reported exploit traffic in the wild that gets a shell on vulnerable Node.js builds. Node.js fixed it in 22.23.4, 24.22.1 and 26.12.1, and there is no workaround, so upgrade (move off any discontinued release line). PHP shipped fixed builds 8.5.12-1, 8.4.27-1, 8.3.36-1 and 8.2.35-1, and Bun, Envoy, Istio, .NET, Python and others have patches or advisories. CVE-2026-48356 (CVSS 9.3, “PolyShell”) is a file-upload flaw in Adobe Commerce and Magento; Sansec saw attackers use it to breach hundreds of stores. If you run a Magento store, apply Adobe’s security update now and ask your developer to check CMS blocks for injected code. Federal agencies must fix both by Nov 10.",
+      "<strong>Vet your ransomware recovery vendor before you need one.</strong> A federal grand jury indicted MonsterCloud CEO Zohar Pinhasi, who allegedly told ransomware victims he could recover files without paying hackers while secretly paying ransoms, charging clients more than $19 million and paying more than $8 million in ransoms, <a href=\"https://www.propublica.org/article/zohar-pinhasi-monstercloud-ransomware-indictment\" target=\"_blank\" rel=\"noopener\">ProPublica</a> reports. He has pleaded not guilty. Ask any recovery firm in writing whether it pays ransoms."
+    ],
+    "sources": [
+      [
+        "RBC (Oct 27)",
+        "https://www.rbcroyalbank.com/en-ca/my-money-matters/money-academy/cyber-security/understanding-cyber-security/understanding-third-party-ai-agents-and-your-rbc-banking/"
+      ],
+      [
+        "Financial Post (Oct 28)",
+        "https://financialpost.com/fp-finance/banking/rbc-block-personal-ai-agents-from-online-banking"
+      ],
+      [
+        "The Hacker News (Oct 28)",
+        "https://thehackernews.com/2026/10/adobe-commerce-polyshell-attacks-breach.html"
+      ],
+      [
+        "ProPublica (Oct 26)",
+        "https://www.propublica.org/article/zohar-pinhasi-monstercloud-ransomware-indictment"
+      ],
+      [
+        "AWHIND briefing (Oct 23)",
+        "https://awhind.com/briefing/2026-10-23/"
+      ]
+    ]
+  },
+  {
     "date": "2026-10-27",
     "tag": "Threat",
     "read": "3 min",

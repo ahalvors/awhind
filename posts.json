@@ -1,5 +1,54 @@
 [
   {
+    "date": "2026-10-29",
+    "tag": "Security",
+    "read": "3 min",
+    "title": "Binance confirms a multi-billion-dollar security incident. Expect the scams that follow",
+    "dek": "The world's largest crypto exchange paused deposits and withdrawals after an attacker submitted unauthorized withdrawals. Binance puts the impact near $6.3 billion and says it will cover losses. The next risk for everyone else is the phishing wave.",
+    "body": [
+      "On Thursday, Binance said its initial investigation suggests a compromised DevOps engineer's laptop let an attacker reach a service container and submit unauthorized withdrawal transactions. It said it found no evidence of a wallet private key leak, estimated total impact at about $6.3 billion, and reported about $3 billion frozen on-chain so far, in a <a href=\"https://x.com/binance/status/2115993361517891592\" target=\"_blank\" rel=\"noopener\">post on X</a>. Binance said it will cover all losses from its SAFU fund and company funds, and that deposits and withdrawals are suspended while security checks finish. It promised a technical post-mortem.",
+      "Early figures varied. Chainalysis estimated about $5.9 billion at the time of theft, <a href=\"https://www.coindesk.com/business/2026/10/29/potential-multi-billion-binance-hack-hitting-crypto-markets\" target=\"_blank\" rel=\"noopener\">CoinDesk</a> reports. Tether and Circle froze more than $2.3 billion in stablecoins tied to the attacker. Investigator ZachXBT said North Korea's Lazarus Group is the likely culprit; that attribution is not confirmed by Binance or law enforcement. Widely shared posts claiming \"$5.6 billion stolen\" came from aggregators before Binance gave any figure.",
+      "<strong>What it means for you.</strong> Binance customers don't need to do anything to be made whole, according to the company. The real risk now is criminals using the headline. Expect fake \"Binance support\" calls and texts, emails promising refunds, and \"verify your wallet\" sites. Binance itself told users to rely only on official channels.",
+      "<strong>Action item: this week.</strong><br>1. Tell staff and family: no real support agent asks for a password, a code or a seed phrase.<br>2. Check exchange news only in the official app or by typing the address yourself.<br>3. Turn on a withdrawal allowlist and use a passkey or hardware key to sign in.<br>4. If your business holds crypto, confirm who can approve a withdrawal and that it takes two people.<br>5. Admins: one laptop was the reported starting point here. Review who has standing access to systems that move money.",
+      "<strong>Also today</strong>",
+      "<strong>Polymarket users lost about $2.6 million through a compromised vendor script.</strong> Polymarket said one of its third-party providers was compromised, briefly halted trading on its international site, and will fully reimburse affected traders, per <a href=\"https://www.cnbc.com/2026/10/29/polymarket-reports-outage-on-international-exchange-halts-trading.html\" target=\"_blank\" rel=\"noopener\">CNBC</a> and <a href=\"https://www.bleepingcomputer.com/news/security/polymarket-halts-trading-after-crypto-draining-script-breach-25m-traced/\" target=\"_blank\" rel=\"noopener\">BleepingComputer</a>. Its US platform was not affected. If your website loads outside scripts, know which vendors they come from. Separately, KuCoin said it was not affected despite social media claims."
+    ],
+    "sources": [
+      [
+        "Binance on X, initial investigation (Oct 29, 7:25 PM PT)",
+        "https://x.com/binance/status/2115993361517891592"
+      ],
+      [
+        "Binance on X, losses covered, deposits/withdrawals paused (Oct 29, 6:36 PM PT)",
+        "https://x.com/binance/status/2115981055043981791"
+      ],
+      [
+        "Binance announcement",
+        "https://www.binance.com/en/support/announcement/detail/c5a8729a97ac486d963784d96c5642d7"
+      ],
+      [
+        "CoinDesk (Oct 29)",
+        "https://www.coindesk.com/business/2026/10/29/potential-multi-billion-binance-hack-hitting-crypto-markets"
+      ],
+      [
+        "ZachXBT on X (Oct 29, 6:05 PM PT)",
+        "https://x.com/zachxbt/status/2115973357753733157"
+      ],
+      [
+        "AP (Oct 29)",
+        "https://apnews.com/article/binance-cryptocurrency-security-39cda8ceb8095e036334a18549d3d20d"
+      ],
+      [
+        "CNBC on Polymarket (Oct 29)",
+        "https://www.cnbc.com/2026/10/29/polymarket-reports-outage-on-international-exchange-halts-trading.html"
+      ],
+      [
+        "BleepingComputer on Polymarket (Oct 29)",
+        "https://www.bleepingcomputer.com/news/security/polymarket-halts-trading-after-crypto-draining-script-breach-25m-traced/"
+      ]
+    ]
+  },
+  {
     "date": "2026-10-28",
     "tag": "AI Safety",
     "read": "3 min",

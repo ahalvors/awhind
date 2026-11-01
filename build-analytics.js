@@ -5,7 +5,7 @@
 const fs = require('fs');
 const path = require('path');
 
-const GA4_ID = 'G-XXXXXXXXXX';
+const GA4_ID = 'G-25EMLK6VCM';
 const PLACEHOLDER = 'G-XXXXXXXXXX';
 const SKIP_DIRS = new Set(['.git', 'node_modules', 'tests', 'drafts', 'netlify', 'content', 'scripts', 'screenshots', '.netlify', 'dl']);
 

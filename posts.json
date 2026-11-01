@@ -1,5 +1,40 @@
 [
   {
+    "date": "2026-11-01",
+    "tag": "AI",
+    "read": "3 min",
+    "title": "Claude's invisible watermark expands Tuesday. It's not snitching, but know what it does",
+    "dek": "Starting Nov 3, four more Claude models will hide a pattern in their word choices that marks the text as likely Claude-written. It doesn't identify you. Content creators, brand teams and law firms should still know it's there.",
+    "body": [
+      "Anthropic emailed customers that \"On November 3, 2026, Anthropic will begin applying its text watermark to outputs from\" Claude Mythos 5, Opus 4.7, Opus 4.6 and Sonnet 4.6. Rollout on Amazon Bedrock may take a few more days. Newer models, including Opus 5.5, already carry the mark. Anthropic's help center says the marking applies across the API, the Claude apps, Claude Code, Cowork and Claude Tag, worldwide. It's part of Anthropic's commitments under the EU AI Act's Article 50 transparency rules.",
+      "A viral post said \"Claude gonna start snitching.\" That's not what this does. Anthropic says the watermark \"carries no identifying information and can't be traced to a specific person, organization, or chat.\" The mark is a pattern in word choice, with no hidden characters. It survives copy and paste and \"may persist through some editing.\" A complete rewrite removes it. Light proofreading of your own writing leaves \"very little (if anything)\" to detect, per Anthropic. Text Claude writes or translates from scratch does carry it. Detection is in private preview for regulators, law enforcement, media, fact-checkers, researchers and companies with their own EU compliance duties. The Decoder reports that on Opus 4.6 and Sonnet 4.6 the mark only applies at default sampling settings.",
+      "<strong>What it means for you.</strong> Using AI isn't the problem. Not knowing what your tools do is. A detected mark says Claude was likely involved. It can't say who, or how much.<br>&bull; Content creators and brand teams: if your brand voice is drafted by Claude, assume a fact-checker or journalist could someday tell. Be honest wherever you claim a personal touch, and keep a human editor who makes the final call.<br>&bull; Law firms: AI-drafted client documents and filings may carry a detectable signal. Check your court's and bar's rules on AI disclosure, and treat it as a reason to verify every citation, not to hide the tool. Assume drafts and prompts could come up in discovery, and keep your AI use policy current.<br>&bull; Companies selling into the EU: Article 50 may put transparency duties on you as a deployer. Anthropic says you \"should independently assess what Article 50 requires.\"",
+      "<strong>Action item: this week.</strong><br>1. List where your team uses Claude (apps, API, Claude Code, cloud partners).<br>2. Write a one-page AI use and disclosure policy: what's allowed, what gets disclosed, and who signs off.<br>3. Keep a human editor on anything published or filed.<br>4. Law firms: check your local court rules on AI disclosure and your engagement letters.<br>5. Don't build anything around dodging the mark. Build it around being able to defend the work."
+    ],
+    "sources": [
+      [
+        "Anthropic customer email, as shared by Pete Sena on X",
+        "https://x.com/petesena/status/2116243133956796806"
+      ],
+      [
+        "Claude Help Center, \"How Claude marks AI-generated content\"",
+        "https://support.claude.com/en/articles/16266773-how-claude-marks-ai-generated-content"
+      ],
+      [
+        "Anthropic, \"How Claude's text watermark works\" (Aug 14)",
+        "https://www.anthropic.com/news/claude-text-watermark"
+      ],
+      [
+        "Mashable",
+        "https://sea.mashable.com/tech/56556/anthropic-expands-text-watermarking-to-older-claude-versions-beginning-november-3"
+      ],
+      [
+        "The Decoder",
+        "https://the-decoder.com/anthropics-watermark-rollout-leaves-a-loophole-on-two-older-claude-models/"
+      ]
+    ]
+  },
+  {
     "date": "2026-10-29",
     "tag": "Security",
     "read": "3 min",

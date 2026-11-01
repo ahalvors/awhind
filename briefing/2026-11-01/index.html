@@ -1,0 +1,155 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Starting Nov 3, four more Claude models will hide a pattern in their word choices that marks the text as likely Claude-written. It doesn&#039;t identify you. Content creators, brand teams and law firms should still know it&#039;s there.">
+<title>Claude&#039;s invisible watermark expands Tuesday. It&#039;s not snitching, but know what it does — AWHIND Daily Briefing</title>
+<link rel="canonical" href="https://awhind.com/briefing/2026-11-01/">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='16' fill='%230B0F17'/%3E%3Ccircle cx='50' cy='50' r='16' fill='%23DD4E1E'/%3E%3C/svg%3E">
+
+<!-- Open Graph -->
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://awhind.com/briefing/2026-11-01/">
+<meta property="og:title" content="Claude&#039;s invisible watermark expands Tuesday. It&#039;s not snitching, but know what it does">
+<meta property="og:description" content="Starting Nov 3, four more Claude models will hide a pattern in their word choices that marks the text as likely Claude-written. It doesn&#039;t identify you. Content creators, brand teams and law firms should still know it&#039;s there.">
+<meta property="og:site_name" content="AWHIND">
+
+<!-- Twitter Card -->
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Claude&#039;s invisible watermark expands Tuesday. It&#039;s not snitching, but know what it does">
+<meta name="twitter:description" content="Starting Nov 3, four more Claude models will hide a pattern in their word choices that marks the text as likely Claude-written. It doesn&#039;t identify you. Content creators, brand teams and law firms should still know it&#039;s there.">
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "Claude's invisible watermark expands Tuesday. It's not snitching, but know what it does",
+  "description": "Starting Nov 3, four more Claude models will hide a pattern in their word choices that marks the text as likely Claude-written. It doesn't identify you. Content creators, brand teams and law firms should still know it's there.",
+  "datePublished": "2026-11-01",
+  "url": "https://awhind.com/briefing/2026-11-01/",
+  "author": {
+    "@type": "Organization",
+    "name": "AWHIND",
+    "url": "https://awhind.com"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "AWHIND",
+    "url": "https://awhind.com"
+  }
+}
+</script>
+
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,500&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap');
+
+  :root{
+    --bg:#F1F2ED;
+    --bg-elevated:#FFFFFF;
+    --bg-sunken:#E7E8E1;
+    --text:#0B0F17;
+    --text-secondary:#566072;
+    --text-tertiary:#848d9b;
+    --line:#D9DAD2;
+    --line-strong:#c2c4ba;
+    --accent:#DD4E1E;
+    --accent-contrast:#FFFFFF;
+    --shadow: 0 1px 2px rgba(11,15,23,.04), 0 8px 24px rgba(11,15,23,.06);
+    --serif: 'Newsreader', Georgia, 'Times New Roman', serif;
+    --sans: 'IBM Plex Sans', -apple-system, 'Segoe UI', Roboto, sans-serif;
+    --mono: 'IBM Plex Mono', 'SF Mono', Consolas, monospace;
+  }
+  @media (prefers-color-scheme: dark){
+    :root:not([data-theme="light"]){
+      --bg:#0A0D14;
+      --bg-elevated:#12161F;
+      --bg-sunken:#080A10;
+      --text:#EEF0F4;
+      --text-secondary:#9AA3B4;
+      --text-tertiary:#6d7688;
+      --line:#232838;
+      --line-strong:#323951;
+      --accent:#FF7A47;
+      --accent-contrast:#0A0D14;
+      --shadow: 0 1px 2px rgba(0,0,0,.3), 0 8px 28px rgba(0,0,0,.4);
+    }
+  }
+  :root[data-theme="dark"]{
+    --bg:#0A0D14;
+    --bg-elevated:#12161F;
+    --bg-sunken:#080A10;
+    --text:#EEF0F4;
+    --text-secondary:#9AA3B4;
+    --text-tertiary:#6d7688;
+    --line:#232838;
+    --line-strong:#323951;
+    --accent:#FF7A47;
+    --accent-contrast:#0A0D14;
+    --shadow: 0 1px 2px rgba(0,0,0,.3), 0 8px 28px rgba(0,0,0,.4);
+  }
+
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0; background:var(--bg); color:var(--text);
+    font-family:var(--sans); font-size:16px; line-height:1.55;
+    -webkit-font-smoothing:antialiased;
+  }
+  a{color:inherit;}
+  h1,h2{font-family:var(--serif); font-weight:500; margin:0; text-wrap:balance; letter-spacing:-0.01em;}
+  .mono{font-family:var(--mono);}
+  .wrap{max-width:1120px; margin:0 auto; padding:0 28px;}
+  .btn{
+    display:inline-flex; align-items:center; gap:8px; font-family:var(--mono); font-size:13px;
+    letter-spacing:.04em; text-transform:uppercase; padding:12px 20px; border-radius:2px;
+    text-decoration:none; cursor:pointer; border:1px solid transparent;
+  }
+  .btn-ghost{border-color:var(--line-strong); color:var(--text);}
+  .btn-ghost:hover{border-color:var(--accent); color:var(--accent);}
+  .btn-sm{padding:8px 14px; font-size:11px;}
+
+  nav.wrap{display:flex; align-items:center; justify-content:space-between; padding-top:18px; padding-bottom:18px;}
+  .brand{font-family:var(--serif); font-weight:600; font-size:21px; letter-spacing:-.01em; text-decoration:none; color:var(--text); display:flex; align-items:center; gap:9px;}
+  .brand .mark{width:9px;height:9px;background:var(--accent);display:inline-block;}
+
+  article{max-width:720px; margin:44px auto; padding:0 28px;}
+  .meta{font-family:var(--mono); font-size:11.5px; color:var(--text-tertiary); letter-spacing:.03em; margin-bottom:16px;}
+  article h1{font-size:32px; line-height:1.15;}
+  .dek{font-size:16px; color:var(--text-secondary); margin-top:14px; font-family:var(--serif); font-style:italic;}
+  .article-body{margin-top:28px; font-size:15.5px; color:var(--text); max-width:60ch;}
+  .article-body p{margin:0 0 18px;}
+  .article-body strong{font-weight:600;}
+  .article-body .stat-inline{font-family:var(--mono); color:var(--accent); font-weight:600;}
+  .article-sources{margin-top:32px; padding-top:20px; border-top:1px solid var(--line); font-size:12px; color:var(--text-tertiary);}
+  .article-sources a{color:var(--text-secondary); text-decoration:underline; text-decoration-color:var(--line-strong);}
+  .back-link{margin-top:32px; display:inline-block;}
+</style>
+</head>
+<body>
+
+<nav class="wrap">
+  <a href="/" class="brand"><span class="mark"></span>AWHIND</a>
+  <div>
+    <a href="/#briefing" class="btn btn-ghost btn-sm">← All Briefings</a>
+  </div>
+</nav>
+
+<article>
+  <div class="meta">Nov 1, 2026 &middot; AI &middot; 3 min read</div>
+  <h1>Claude's invisible watermark expands Tuesday. It's not snitching, but know what it does</h1>
+  <div class="dek">Starting Nov 3, four more Claude models will hide a pattern in their word choices that marks the text as likely Claude-written. It doesn't identify you. Content creators, brand teams and law firms should still know it's there.</div>
+  <div class="article-body">
+    <p>Anthropic emailed customers that "On November 3, 2026, Anthropic will begin applying its text watermark to outputs from" Claude Mythos 5, Opus 4.7, Opus 4.6 and Sonnet 4.6. Rollout on Amazon Bedrock may take a few more days. Newer models, including Opus 5.5, already carry the mark. Anthropic's help center says the marking applies across the API, the Claude apps, Claude Code, Cowork and Claude Tag, worldwide. It's part of Anthropic's commitments under the EU AI Act's Article 50 transparency rules.</p>
+    <p>A viral post said "Claude gonna start snitching." That's not what this does. Anthropic says the watermark "carries no identifying information and can't be traced to a specific person, organization, or chat." The mark is a pattern in word choice, with no hidden characters. It survives copy and paste and "may persist through some editing." A complete rewrite removes it. Light proofreading of your own writing leaves "very little (if anything)" to detect, per Anthropic. Text Claude writes or translates from scratch does carry it. Detection is in private preview for regulators, law enforcement, media, fact-checkers, researchers and companies with their own EU compliance duties. The Decoder reports that on Opus 4.6 and Sonnet 4.6 the mark only applies at default sampling settings.</p>
+    <p><strong>What it means for you.</strong> Using AI isn't the problem. Not knowing what your tools do is. A detected mark says Claude was likely involved. It can't say who, or how much.<br>&bull; Content creators and brand teams: if your brand voice is drafted by Claude, assume a fact-checker or journalist could someday tell. Be honest wherever you claim a personal touch, and keep a human editor who makes the final call.<br>&bull; Law firms: AI-drafted client documents and filings may carry a detectable signal. Check your court's and bar's rules on AI disclosure, and treat it as a reason to verify every citation, not to hide the tool. Assume drafts and prompts could come up in discovery, and keep your AI use policy current.<br>&bull; Companies selling into the EU: Article 50 may put transparency duties on you as a deployer. Anthropic says you "should independently assess what Article 50 requires."</p>
+    <p><strong>Action item: this week.</strong><br>1. List where your team uses Claude (apps, API, Claude Code, cloud partners).<br>2. Write a one-page AI use and disclosure policy: what's allowed, what gets disclosed, and who signs off.<br>3. Keep a human editor on anything published or filed.<br>4. Law firms: check your local court rules on AI disclosure and your engagement letters.<br>5. Don't build anything around dodging the mark. Build it around being able to defend the work.</p>
+  </div>
+  <div class="article-sources">
+    Sources: <a href="https://x.com/petesena/status/2116243133956796806" target="_blank" rel="noopener">Anthropic customer email, as shared by Pete Sena on X</a> &middot; <a href="https://support.claude.com/en/articles/16266773-how-claude-marks-ai-generated-content" target="_blank" rel="noopener">Claude Help Center, "How Claude marks AI-generated content"</a> &middot; <a href="https://www.anthropic.com/news/claude-text-watermark" target="_blank" rel="noopener">Anthropic, "How Claude's text watermark works" (Aug 14)</a> &middot; <a href="https://sea.mashable.com/tech/56556/anthropic-expands-text-watermarking-to-older-claude-versions-beginning-november-3" target="_blank" rel="noopener">Mashable</a> &middot; <a href="https://the-decoder.com/anthropics-watermark-rollout-leaves-a-loophole-on-two-older-claude-models/" target="_blank" rel="noopener">The Decoder</a>
+  </div>
+  <a href="/#briefing" class="btn btn-ghost btn-sm back-link">← All Briefings</a>
+</article>
+
+</body>
+</html>

@@ -2,3 +2,4 @@
 articles/
 articles.json
 node_modules/
+!images/og/articles/

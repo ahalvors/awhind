@@ -1,0 +1,168 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Attackers took over a website vendor&#039;s DNS at its domain registrar and swapped a harmless page-speed script for one that drained signed-in traders&#039; wallets. Your own site likely loads outside scripts the same way. Separately, Google took down a botnet of 1.3 million Android TV boxes whose maker built in the backdoor.">
+<title>A vendor&#039;s web address got hijacked, and $2.7 million walked out of Polymarket. Lock your own domain, and unplug no-name TV boxes — AWHIND Daily Briefing</title>
+<link rel="canonical" href="https://awhind.com/briefing/2026-11-02/">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='16' fill='%230B0F17'/%3E%3Ccircle cx='50' cy='50' r='16' fill='%23DD4E1E'/%3E%3C/svg%3E">
+
+<!-- Open Graph -->
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://awhind.com/briefing/2026-11-02/">
+<meta property="og:title" content="A vendor&#039;s web address got hijacked, and $2.7 million walked out of Polymarket. Lock your own domain, and unplug no-name TV boxes">
+<meta property="og:description" content="Attackers took over a website vendor&#039;s DNS at its domain registrar and swapped a harmless page-speed script for one that drained signed-in traders&#039; wallets. Your own site likely loads outside scripts the same way. Separately, Google took down a botnet of 1.3 million Android TV boxes whose maker built in the backdoor.">
+<meta property="og:site_name" content="AWHIND">
+
+<!-- Twitter Card -->
+<meta name="twitter:title" content="A vendor&#039;s web address got hijacked, and $2.7 million walked out of Polymarket. Lock your own domain, and unplug no-name TV boxes">
+<meta name="twitter:description" content="Attackers took over a website vendor&#039;s DNS at its domain registrar and swapped a harmless page-speed script for one that drained signed-in traders&#039; wallets. Your own site likely loads outside scripts the same way. Separately, Google took down a botnet of 1.3 million Android TV boxes whose maker built in the backdoor.">
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "A vendor's web address got hijacked, and $2.7 million walked out of Polymarket. Lock your own domain, and unplug no-name TV boxes",
+  "description": "Attackers took over a website vendor's DNS at its domain registrar and swapped a harmless page-speed script for one that drained signed-in traders' wallets. Your own site likely loads outside scripts the same way. Separately, Google took down a botnet of 1.3 million Android TV boxes whose maker built in the backdoor.",
+  "datePublished": "2026-11-02",
+  "url": "https://awhind.com/briefing/2026-11-02/",
+  "author": {
+    "@type": "Organization",
+    "name": "AWHIND",
+    "url": "https://awhind.com"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "AWHIND",
+    "url": "https://awhind.com"
+  }
+}
+</script>
+
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,500&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap');
+
+  :root{
+    --bg:#F1F2ED;
+    --bg-elevated:#FFFFFF;
+    --bg-sunken:#E7E8E1;
+    --text:#0B0F17;
+    --text-secondary:#566072;
+    --text-tertiary:#848d9b;
+    --line:#D9DAD2;
+    --line-strong:#c2c4ba;
+    --accent:#DD4E1E;
+    --accent-contrast:#FFFFFF;
+    --shadow: 0 1px 2px rgba(11,15,23,.04), 0 8px 24px rgba(11,15,23,.06);
+    --serif: 'Newsreader', Georgia, 'Times New Roman', serif;
+    --sans: 'IBM Plex Sans', -apple-system, 'Segoe UI', Roboto, sans-serif;
+    --mono: 'IBM Plex Mono', 'SF Mono', Consolas, monospace;
+  }
+  @media (prefers-color-scheme: dark){
+    :root:not([data-theme="light"]){
+      --bg:#0A0D14;
+      --bg-elevated:#12161F;
+      --bg-sunken:#080A10;
+      --text:#EEF0F4;
+      --text-secondary:#9AA3B4;
+      --text-tertiary:#6d7688;
+      --line:#232838;
+      --line-strong:#323951;
+      --accent:#FF7A47;
+      --accent-contrast:#0A0D14;
+      --shadow: 0 1px 2px rgba(0,0,0,.3), 0 8px 28px rgba(0,0,0,.4);
+    }
+  }
+  :root[data-theme="dark"]{
+    --bg:#0A0D14;
+    --bg-elevated:#12161F;
+    --bg-sunken:#080A10;
+    --text:#EEF0F4;
+    --text-secondary:#9AA3B4;
+    --text-tertiary:#6d7688;
+    --line:#232838;
+    --line-strong:#323951;
+    --accent:#FF7A47;
+    --accent-contrast:#0A0D14;
+    --shadow: 0 1px 2px rgba(0,0,0,.3), 0 8px 28px rgba(0,0,0,.4);
+  }
+
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0; background:var(--bg); color:var(--text);
+    font-family:var(--sans); font-size:16px; line-height:1.55;
+    -webkit-font-smoothing:antialiased;
+  }
+  a{color:inherit;}
+  h1,h2{font-family:var(--serif); font-weight:500; margin:0; text-wrap:balance; letter-spacing:-0.01em;}
+  .mono{font-family:var(--mono);}
+  .wrap{max-width:1120px; margin:0 auto; padding:0 28px;}
+  .btn{
+    display:inline-flex; align-items:center; gap:8px; font-family:var(--mono); font-size:13px;
+    letter-spacing:.04em; text-transform:uppercase; padding:12px 20px; border-radius:2px;
+    text-decoration:none; cursor:pointer; border:1px solid transparent;
+  }
+  .btn-ghost{border-color:var(--line-strong); color:var(--text);}
+  .btn-ghost:hover{border-color:var(--accent); color:var(--accent);}
+  .btn-sm{padding:8px 14px; font-size:11px;}
+
+  nav.wrap{display:flex; align-items:center; justify-content:space-between; padding-top:18px; padding-bottom:18px;}
+  .brand{font-family:var(--serif); font-weight:600; font-size:21px; letter-spacing:-.01em; text-decoration:none; color:var(--text); display:flex; align-items:center; gap:9px;}
+  .brand .mark{width:9px;height:9px;background:var(--accent);display:inline-block;}
+
+  article{max-width:720px; margin:44px auto; padding:0 28px;}
+  .meta{font-family:var(--mono); font-size:11.5px; color:var(--text-tertiary); letter-spacing:.03em; margin-bottom:16px;}
+  article h1{font-size:32px; line-height:1.15;}
+  .dek{font-size:16px; color:var(--text-secondary); margin-top:14px; font-family:var(--serif); font-style:italic;}
+  .article-body{margin-top:28px; font-size:15.5px; color:var(--text); max-width:60ch;}
+  .article-body p{margin:0 0 18px;}
+  .article-body strong{font-weight:600;}
+  .article-body .stat-inline{font-family:var(--mono); color:var(--accent); font-weight:600;}
+  .article-sources{margin-top:32px; padding-top:20px; border-top:1px solid var(--line); font-size:12px; color:var(--text-tertiary);}
+  .article-sources a{color:var(--text-secondary); text-decoration:underline; text-decoration-color:var(--line-strong);}
+  .back-link{margin-top:32px; display:inline-block;}
+</style>
+<meta property="og:image" content="https://awhind.com/images/og/briefing/2026-11-02.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Preview card: A vendor&#039;s web address got hijacked, and $2.7 million walked out of Polymarket. Lock your own domain, and unplug no-name TV boxes">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:site" content="@awhxtech">
+<meta name="twitter:image" content="https://awhind.com/images/og/briefing/2026-11-02.png">
+<meta name="twitter:image:alt" content="Preview card: A vendor&#039;s web address got hijacked, and $2.7 million walked out of Polymarket. Lock your own domain, and unplug no-name TV boxes">
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-25EMLK6VCM"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-25EMLK6VCM');</script>
+</head>
+<body>
+
+<nav class="wrap">
+  <a href="/" class="brand"><span class="mark"></span>AWHIND</a>
+  <div>
+    <a href="/#briefing" class="btn btn-ghost btn-sm">← All Briefings</a>
+  </div>
+</nav>
+
+<article>
+  <div class="meta">Nov 2, 2026 &middot; Threat &middot; 3 min read</div>
+  <h1>A vendor's web address got hijacked, and $2.7 million walked out of Polymarket. Lock your own domain, and unplug no-name TV boxes</h1>
+  <div class="dek">Attackers took over a website vendor's DNS at its domain registrar and swapped a harmless page-speed script for one that drained signed-in traders' wallets. Your own site likely loads outside scripts the same way. Separately, Google took down a botnet of 1.3 million Android TV boxes whose maker built in the backdoor.</div>
+  <div class="article-body">
+    <p>On Oct 29, prediction market Polymarket halted trading after users reported withdrawals they never made. The code doing it wasn't Polymarket's. It came from DebugBear, a company whose script measures how fast pages load for real visitors. On Nov 2, DebugBear said "our DNS server records were compromised through our domain registrar," per <a href="https://www.securityweek.com/polymarket-returns-3-9-million-to-traders-as-debugbear-cites-dns-hijack/" target="_blank" rel="noopener">SecurityWeek</a>. Whoever controls a domain's DNS decides what a web address serves. The attackers pointed DebugBear's script address at their own server and swapped Polymarket's copy for a wallet drainer.</p>
+    <p><strong>What it did.</strong> The fake script used traders' open sessions to sell positions or move funds to the attacker, per <a href="https://thehackernews.com/2026/11/hackers-steal-about-27-million-from.html" target="_blank" rel="noopener">The Hacker News</a>. Polymarket counts 726 affected wallets and about $2.7 million stolen. It's returning $3.9 million in total, including losses from the trading pause. DebugBear says it found no sign its own systems were breached, and it hasn't explained how the attackers got into its registrar account.</p>
+    <p><strong>Why small businesses should care.</strong> Your website probably loads scripts from outside companies too: analytics, chat widgets, booking tools, ad pixels. Each is a door you don't control. And your own domain sits at a registrar, guarded by one login. If someone takes over that login, they can redirect your site and your email.</p>
+    <p><strong>Action item: Lock the keys to your domain.</strong><br>1. <strong>Secure the registrar login.</strong> Turn on two-factor at your registrar (GoDaddy, Namecheap, Squarespace and so on), and make sure the account email is one you still check.<br>2. <strong>Ask for registrar lock or registry lock.</strong> Transfer lock is usually free. Registry lock costs more but blocks DNS changes without a manual check.<br>3. <strong>List your outside scripts.</strong> Ask your web developer which third-party scripts your site loads, and remove any you no longer use. Sites that handle payments or logins should ask about serving reviewed copies from their own domain.</p>
+    <p>Not sure who holds your domain or when it expires? <a href="https://awhind.com/keyring/" target="_blank" rel="noopener">KeyRing</a> checks it free in about 10 seconds.</p>
+    <p><strong>Second item: Unplug no-name Android TV boxes.</strong> Google and industry partners took down a botnet of more than 1.3 million Android TV set-top boxes, per <a href="https://krebsonsecurity.com/2026/11/tech-firms-dismantle-botnet-that-turned-1-3m-tv-boxes-into-proxies/" target="_blank" rel="noopener">Krebs on Security</a>. Google says the maker, Videostrong, deliberately loaded the malware, which rented owners' internet connections to strangers and ran ad fraud. The same malware turned up in telehealth devices, karaoke machines and digital signage. <a href="https://thehackernews.com/2026/11/google-disrupts-13-million-device.html" target="_blank" rel="noopener">The Hacker News</a> reports owners can't remove it themselves.<br>&bull; <strong>If you have a cheap streaming box</strong> sold on promises of "free" TV channels, unplug it.<br>&bull; <strong>If you keep it,</strong> move it to your guest Wi-Fi, away from work laptops and the office file server.</p>
+    <p><strong>Also today</strong></p>
+    <p><strong>"IT support" on Teams may not be IT.</strong> Microsoft reported two break-ins where attackers messaged staff on Teams from outside accounts posing as the help desk, then talked them into opening Quick Assist, per <a href="https://thehackernews.com/2026/11/attackers-pose-as-it-support-on.html" target="_blank" rel="noopener">The Hacker News</a>. There's no patch because nothing was broken. Tell staff to confirm any unexpected support call through a known channel before sharing a screen, and limit which outside organizations can message your team.</p>
+  </div>
+  <div class="article-sources">
+    Sources: <a href="https://www.securityweek.com/polymarket-returns-3-9-million-to-traders-as-debugbear-cites-dns-hijack/" target="_blank" rel="noopener">SecurityWeek (Nov 2)</a> &middot; <a href="https://thehackernews.com/2026/11/hackers-steal-about-27-million-from.html" target="_blank" rel="noopener">The Hacker News: Polymarket</a> &middot; <a href="https://therecord.media/polymarket-returning-funds-to-customers-after-site-compromise" target="_blank" rel="noopener">The Record</a> &middot; <a href="https://krebsonsecurity.com/2026/11/tech-firms-dismantle-botnet-that-turned-1-3m-tv-boxes-into-proxies/" target="_blank" rel="noopener">Krebs on Security (Nov 2)</a> &middot; <a href="https://thehackernews.com/2026/11/google-disrupts-13-million-device.html" target="_blank" rel="noopener">The Hacker News: TV box botnet (Nov 2)</a> &middot; <a href="https://thehackernews.com/2026/11/attackers-pose-as-it-support-on.html" target="_blank" rel="noopener">The Hacker News: Teams help desk (Nov 2)</a>
+  </div>
+  <a href="/#briefing" class="btn btn-ghost btn-sm back-link">← All Briefings</a>
+</article>
+
+</body>
+</html>

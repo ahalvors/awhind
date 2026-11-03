@@ -1,5 +1,48 @@
 [
   {
+    "date": "2026-11-02",
+    "tag": "Threat",
+    "read": "3 min",
+    "title": "A vendor's web address got hijacked, and $2.7 million walked out of Polymarket. Lock your own domain, and unplug no-name TV boxes",
+    "dek": "Attackers took over a website vendor's DNS at its domain registrar and swapped a harmless page-speed script for one that drained signed-in traders' wallets. Your own site likely loads outside scripts the same way. Separately, Google took down a botnet of 1.3 million Android TV boxes whose maker built in the backdoor.",
+    "body": [
+      "On Oct 29, prediction market Polymarket halted trading after users reported withdrawals they never made. The code doing it wasn't Polymarket's. It came from DebugBear, a company whose script measures how fast pages load for real visitors. On Nov 2, DebugBear said \"our DNS server records were compromised through our domain registrar,\" per <a href=\"https://www.securityweek.com/polymarket-returns-3-9-million-to-traders-as-debugbear-cites-dns-hijack/\" target=\"_blank\" rel=\"noopener\">SecurityWeek</a>. Whoever controls a domain's DNS decides what a web address serves. The attackers pointed DebugBear's script address at their own server and swapped Polymarket's copy for a wallet drainer.",
+      "<strong>What it did.</strong> The fake script used traders' open sessions to sell positions or move funds to the attacker, per <a href=\"https://thehackernews.com/2026/11/hackers-steal-about-27-million-from.html\" target=\"_blank\" rel=\"noopener\">The Hacker News</a>. Polymarket counts 726 affected wallets and about $2.7 million stolen. It's returning $3.9 million in total, including losses from the trading pause. DebugBear says it found no sign its own systems were breached, and it hasn't explained how the attackers got into its registrar account.",
+      "<strong>Why small businesses should care.</strong> Your website probably loads scripts from outside companies too: analytics, chat widgets, booking tools, ad pixels. Each is a door you don't control. And your own domain sits at a registrar, guarded by one login. If someone takes over that login, they can redirect your site and your email.",
+      "<strong>Action item: Lock the keys to your domain.</strong><br>1. <strong>Secure the registrar login.</strong> Turn on two-factor at your registrar (GoDaddy, Namecheap, Squarespace and so on), and make sure the account email is one you still check.<br>2. <strong>Ask for registrar lock or registry lock.</strong> Transfer lock is usually free. Registry lock costs more but blocks DNS changes without a manual check.<br>3. <strong>List your outside scripts.</strong> Ask your web developer which third-party scripts your site loads, and remove any you no longer use. Sites that handle payments or logins should ask about serving reviewed copies from their own domain.",
+      "Not sure who holds your domain or when it expires? <a href=\"https://awhind.com/keyring/\" target=\"_blank\" rel=\"noopener\">KeyRing</a> checks it free in about 10 seconds.",
+      "<strong>Second item: Unplug no-name Android TV boxes.</strong> Google and industry partners took down a botnet of more than 1.3 million Android TV set-top boxes, per <a href=\"https://krebsonsecurity.com/2026/11/tech-firms-dismantle-botnet-that-turned-1-3m-tv-boxes-into-proxies/\" target=\"_blank\" rel=\"noopener\">Krebs on Security</a>. Google says the maker, Videostrong, deliberately loaded the malware, which rented owners' internet connections to strangers and ran ad fraud. The same malware turned up in telehealth devices, karaoke machines and digital signage. <a href=\"https://thehackernews.com/2026/11/google-disrupts-13-million-device.html\" target=\"_blank\" rel=\"noopener\">The Hacker News</a> reports owners can't remove it themselves.<br>&bull; <strong>If you have a cheap streaming box</strong> sold on promises of \"free\" TV channels, unplug it.<br>&bull; <strong>If you keep it,</strong> move it to your guest Wi-Fi, away from work laptops and the office file server.",
+      "<strong>Also today</strong>",
+      "<strong>\"IT support\" on Teams may not be IT.</strong> Microsoft reported two break-ins where attackers messaged staff on Teams from outside accounts posing as the help desk, then talked them into opening Quick Assist, per <a href=\"https://thehackernews.com/2026/11/attackers-pose-as-it-support-on.html\" target=\"_blank\" rel=\"noopener\">The Hacker News</a>. There's no patch because nothing was broken. Tell staff to confirm any unexpected support call through a known channel before sharing a screen, and limit which outside organizations can message your team."
+    ],
+    "sources": [
+      [
+        "SecurityWeek (Nov 2)",
+        "https://www.securityweek.com/polymarket-returns-3-9-million-to-traders-as-debugbear-cites-dns-hijack/"
+      ],
+      [
+        "The Hacker News: Polymarket",
+        "https://thehackernews.com/2026/11/hackers-steal-about-27-million-from.html"
+      ],
+      [
+        "The Record",
+        "https://therecord.media/polymarket-returning-funds-to-customers-after-site-compromise"
+      ],
+      [
+        "Krebs on Security (Nov 2)",
+        "https://krebsonsecurity.com/2026/11/tech-firms-dismantle-botnet-that-turned-1-3m-tv-boxes-into-proxies/"
+      ],
+      [
+        "The Hacker News: TV box botnet (Nov 2)",
+        "https://thehackernews.com/2026/11/google-disrupts-13-million-device.html"
+      ],
+      [
+        "The Hacker News: Teams help desk (Nov 2)",
+        "https://thehackernews.com/2026/11/attackers-pose-as-it-support-on.html"
+      ]
+    ]
+  },
+  {
     "date": "2026-11-01",
     "tag": "AI",
     "read": "3 min",

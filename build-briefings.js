@@ -114,8 +114,8 @@ posts.forEach(post => {
     "description": stripHtml(post.dek),
     "datePublished": post.date,
     "url": canonicalUrl,
-    "author": { "@type": "Organization", "name": "AWHIND", "url": "https://awhind.com" },
-    "publisher": { "@type": "Organization", "name": "AWHIND", "url": "https://awhind.com" }
+    "author": { "@type": "Organization", "name": "AWHIND", "url": "https://awhind.com", "telephone": "+1-689-225-0286" },
+    "publisher": { "@type": "Organization", "name": "AWHIND", "url": "https://awhind.com", "telephone": "+1-689-225-0286" }
   };
   
   const html = `<!doctype html>
@@ -300,8 +300,8 @@ dueArticles.forEach(post => {
     "description": post.meta_description,
     "datePublished": post.date,
     "url": canonicalUrl,
-    "author": { "@type": "Organization", "name": "AWHIND", "url": "https://awhind.com" },
-    "publisher": { "@type": "Organization", "name": "AWHIND", "url": "https://awhind.com" }
+    "author": { "@type": "Organization", "name": "AWHIND", "url": "https://awhind.com", "telephone": "+1-689-225-0286" },
+    "publisher": { "@type": "Organization", "name": "AWHIND", "url": "https://awhind.com", "telephone": "+1-689-225-0286" }
   };
   if (post.featured_image) {
     jsonLd.image = ogImageUrl;

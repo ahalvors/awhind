@@ -78,7 +78,7 @@ def footer():
     return '''<footer>
   <div class="wrap">
     <div>
-      <a href="/">Home</a><a href="/#briefing">Daily Briefing</a><a href="/shadow-ai">What Is Shadow AI?</a><a href="/#contact">Contact</a>
+      <a href="/">Home</a><a href="/#briefing">Daily Briefing</a><a href="/shadow-ai">What Is Shadow AI?</a><a href="/#contact">Contact</a><a href="tel:+16892250286">(689) 225-0286</a>
     </div>
     <div class="copy">&copy; 2026 AWHIND. All rights reserved.</div>
   </div>
@@ -135,7 +135,8 @@ def page(slug, title_tag, meta_desc, eyebrow, h1, lede, sections, related, canon
   "publisher": {{
     "@type": "Organization",
     "name": "AWHIND",
-    "url": "https://awhind.com"
+    "url": "https://awhind.com",
+    "telephone": "+1-689-225-0286"
   }}
 }}
 </script>

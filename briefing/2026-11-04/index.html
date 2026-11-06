@@ -1,0 +1,167 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="A phishing operation sent calendar invites from real, hacked accounts that led to a live copy of Google&#039;s sign-in page, relaying text codes, app codes and push approvals to steal whole sessions. Separately, mSecure told current and former customers to change passwords after an encrypted vault database was reportedly stolen.">
+<title>A Google Calendar invite from someone you know got past MFA. Move key accounts to passkeys, and mSecure users should reset now — AWHIND Daily Briefing</title>
+<link rel="canonical" href="https://awhind.com/briefing/2026-11-04/">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='16' fill='%230B0F17'/%3E%3Ccircle cx='50' cy='50' r='16' fill='%23DD4E1E'/%3E%3C/svg%3E">
+
+<!-- Open Graph -->
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://awhind.com/briefing/2026-11-04/">
+<meta property="og:title" content="A Google Calendar invite from someone you know got past MFA. Move key accounts to passkeys, and mSecure users should reset now">
+<meta property="og:description" content="A phishing operation sent calendar invites from real, hacked accounts that led to a live copy of Google&#039;s sign-in page, relaying text codes, app codes and push approvals to steal whole sessions. Separately, mSecure told current and former customers to change passwords after an encrypted vault database was reportedly stolen.">
+<meta property="og:site_name" content="AWHIND">
+
+<!-- Twitter Card -->
+<meta name="twitter:title" content="A Google Calendar invite from someone you know got past MFA. Move key accounts to passkeys, and mSecure users should reset now">
+<meta name="twitter:description" content="A phishing operation sent calendar invites from real, hacked accounts that led to a live copy of Google&#039;s sign-in page, relaying text codes, app codes and push approvals to steal whole sessions. Separately, mSecure told current and former customers to change passwords after an encrypted vault database was reportedly stolen.">
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "A Google Calendar invite from someone you know got past MFA. Move key accounts to passkeys, and mSecure users should reset now",
+  "description": "A phishing operation sent calendar invites from real, hacked accounts that led to a live copy of Google's sign-in page, relaying text codes, app codes and push approvals to steal whole sessions. Separately, mSecure told current and former customers to change passwords after an encrypted vault database was reportedly stolen.",
+  "datePublished": "2026-11-04",
+  "url": "https://awhind.com/briefing/2026-11-04/",
+  "author": {
+    "@type": "Organization",
+    "name": "AWHIND",
+    "url": "https://awhind.com",
+    "telephone": "+1-689-225-0286"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "AWHIND",
+    "url": "https://awhind.com",
+    "telephone": "+1-689-225-0286"
+  }
+}
+</script>
+
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,500&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap');
+
+  :root{
+    --bg:#F1F2ED;
+    --bg-elevated:#FFFFFF;
+    --bg-sunken:#E7E8E1;
+    --text:#0B0F17;
+    --text-secondary:#566072;
+    --text-tertiary:#848d9b;
+    --line:#D9DAD2;
+    --line-strong:#c2c4ba;
+    --accent:#DD4E1E;
+    --accent-contrast:#FFFFFF;
+    --shadow: 0 1px 2px rgba(11,15,23,.04), 0 8px 24px rgba(11,15,23,.06);
+    --serif: 'Newsreader', Georgia, 'Times New Roman', serif;
+    --sans: 'IBM Plex Sans', -apple-system, 'Segoe UI', Roboto, sans-serif;
+    --mono: 'IBM Plex Mono', 'SF Mono', Consolas, monospace;
+  }
+  @media (prefers-color-scheme: dark){
+    :root:not([data-theme="light"]){
+      --bg:#0A0D14;
+      --bg-elevated:#12161F;
+      --bg-sunken:#080A10;
+      --text:#EEF0F4;
+      --text-secondary:#9AA3B4;
+      --text-tertiary:#6d7688;
+      --line:#232838;
+      --line-strong:#323951;
+      --accent:#FF7A47;
+      --accent-contrast:#0A0D14;
+      --shadow: 0 1px 2px rgba(0,0,0,.3), 0 8px 28px rgba(0,0,0,.4);
+    }
+  }
+  :root[data-theme="dark"]{
+    --bg:#0A0D14;
+    --bg-elevated:#12161F;
+    --bg-sunken:#080A10;
+    --text:#EEF0F4;
+    --text-secondary:#9AA3B4;
+    --text-tertiary:#6d7688;
+    --line:#232838;
+    --line-strong:#323951;
+    --accent:#FF7A47;
+    --accent-contrast:#0A0D14;
+    --shadow: 0 1px 2px rgba(0,0,0,.3), 0 8px 28px rgba(0,0,0,.4);
+  }
+
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0; background:var(--bg); color:var(--text);
+    font-family:var(--sans); font-size:16px; line-height:1.55;
+    -webkit-font-smoothing:antialiased;
+  }
+  a{color:inherit;}
+  h1,h2{font-family:var(--serif); font-weight:500; margin:0; text-wrap:balance; letter-spacing:-0.01em;}
+  .mono{font-family:var(--mono);}
+  .wrap{max-width:1120px; margin:0 auto; padding:0 28px;}
+  .btn{
+    display:inline-flex; align-items:center; gap:8px; font-family:var(--mono); font-size:13px;
+    letter-spacing:.04em; text-transform:uppercase; padding:12px 20px; border-radius:2px;
+    text-decoration:none; cursor:pointer; border:1px solid transparent;
+  }
+  .btn-ghost{border-color:var(--line-strong); color:var(--text);}
+  .btn-ghost:hover{border-color:var(--accent); color:var(--accent);}
+  .btn-sm{padding:8px 14px; font-size:11px;}
+
+  nav.wrap{display:flex; align-items:center; justify-content:space-between; padding-top:18px; padding-bottom:18px;}
+  .brand{font-family:var(--serif); font-weight:600; font-size:21px; letter-spacing:-.01em; text-decoration:none; color:var(--text); display:flex; align-items:center; gap:9px;}
+  .brand .mark{width:9px;height:9px;background:var(--accent);display:inline-block;}
+
+  article{max-width:720px; margin:44px auto; padding:0 28px;}
+  .meta{font-family:var(--mono); font-size:11.5px; color:var(--text-tertiary); letter-spacing:.03em; margin-bottom:16px;}
+  article h1{font-size:32px; line-height:1.15;}
+  .dek{font-size:16px; color:var(--text-secondary); margin-top:14px; font-family:var(--serif); font-style:italic;}
+  .article-body{margin-top:28px; font-size:15.5px; color:var(--text); max-width:60ch;}
+  .article-body p{margin:0 0 18px;}
+  .article-body strong{font-weight:600;}
+  .article-body .stat-inline{font-family:var(--mono); color:var(--accent); font-weight:600;}
+  .article-sources{margin-top:32px; padding-top:20px; border-top:1px solid var(--line); font-size:12px; color:var(--text-tertiary);}
+  .article-sources a{color:var(--text-secondary); text-decoration:underline; text-decoration-color:var(--line-strong);}
+  .back-link{margin-top:32px; display:inline-block;}
+</style>
+<meta property="og:image" content="https://awhind.com/images/og/briefing/2026-11-04.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Preview card: A Google Calendar invite from someone you know got past MFA. Move key accounts to passkeys, and mSecure users should reset now">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:site" content="@awhxtech">
+<meta name="twitter:image" content="https://awhind.com/images/og/briefing/2026-11-04.png">
+<meta name="twitter:image:alt" content="Preview card: A Google Calendar invite from someone you know got past MFA. Move key accounts to passkeys, and mSecure users should reset now">
+</head>
+<body>
+
+<nav class="wrap">
+  <a href="/" class="brand"><span class="mark"></span>AWHIND</a>
+  <div>
+    <a href="/#briefing" class="btn btn-ghost btn-sm">← All Briefings</a>
+  </div>
+</nav>
+
+<article>
+  <div class="meta">Nov 4, 2026 &middot; Threat &middot; 3 min read</div>
+  <h1>A Google Calendar invite from someone you know got past MFA. Move key accounts to passkeys, and mSecure users should reset now</h1>
+  <div class="dek">A phishing operation sent calendar invites from real, hacked accounts that led to a live copy of Google's sign-in page, relaying text codes, app codes and push approvals to steal whole sessions. Separately, mSecure told current and former customers to change passwords after an encrypted vault database was reportedly stolen.</div>
+  <div class="article-body">
+    <p>Since mid-August, a phishing operation has been stealing live Google sessions from corporate users, per <a href="https://www.bleepingcomputer.com/news/security/google-calendar-phishing-campaign-hijacks-sessions-bypasses-mfa/" target="_blank" rel="noopener">BleepingComputer</a>, reporting on research by Material Security. The lures arrived as Google Calendar invites, often from an organization the victim had already emailed with. The pretexts were boring on purpose: voicemail notices, RFP requests, court summonses, missed payments.</p>
+    <p><strong>How it beat MFA.</strong> The links mostly pointed at Google's own redirector, Google Drive or share.google, so every reputation check came back clean. Behind them sat a live relay in front of the real Google sign-in page. Victims typed their password, got a real prompt, approved it, and the attacker passed every code to Google in real time: text codes, authenticator codes, number matching, even phone-based recovery. The attacker walked away with the signed-in session, which reaches mail, Drive, and the power to grant app access in the victim's name. Material counted 8,570 hacked sender addresses across 6,354 domains in one month, and says the operator has an unused Microsoft 365 version ready to go.</p>
+    <p><strong>Why small businesses should care.</strong> Your team trusts invites from customers and vendors. In this campaign, those were exactly the accounts sending the bait. And MFA codes and push prompts, the protection most small offices rely on, didn't stop it.</p>
+    <p><strong>Action item: Close the gap MFA left open.</strong><br>1. <strong>Move key accounts to passkeys or security keys.</strong> Start with owners, whoever pays bills, and whoever runs IT. A passkey won't sign in to a lookalike page, so it can't be relayed.<br>2. <strong>Tell staff the rule:</strong> a sign-in prompt you didn't expect gets a "no," and a sign-in page reached from an invite link gets closed. Go to the site directly instead.<br>3. <strong>Limit who can drop events on your calendar.</strong> In Google Calendar on a computer: Settings, Event settings, "Add invitations to my calendar," then "Only if the sender is known."<br>4. <strong>Know how to kill a session.</strong> If someone thinks they signed in through a strange link, sign them out everywhere, reset the password, and check which apps have access. Practice doing it in under an hour.</p>
+    <p>Want help switching your office to passkeys? Call us at +1 (689) 225-0286, or start with the free <a href="https://awhind.com/security-checklist/" target="_blank" rel="noopener">security checklist</a>.</p>
+    <p><strong>Second item: mSecure users, reset your passwords.</strong> mSeven Software told current and former mSecure customers on Nov 3 to change passwords, reset two-factor, and remove passkeys stored in the app, per <a href="https://www.bleepingcomputer.com/news/security/msecure-password-manager-hack-prompts-password-reset-warnings/" target="_blank" rel="noopener">BleepingComputer</a>. Support replies shared by customers say a hacker stole an encrypted database from mSecure Cloud, affecting users who synced through it. The company says it has no evidence the encrypted contents were accessed. But a stolen vault can be attacked offline for as long as the attacker likes, and a new master password doesn't change the copy they already have.</p>
+    <p>&bull; <strong>If you synced mSecure to its cloud,</strong> change your most important passwords first: email, bank, payroll, and your domain registrar.<br>&bull; <strong>Then reset two-factor</strong> on those accounts, and replace any passkeys stored in mSecure.</p>
+  </div>
+  <div class="article-sources">
+    Sources: <a href="https://www.bleepingcomputer.com/news/security/google-calendar-phishing-campaign-hijacks-sessions-bypasses-mfa/" target="_blank" rel="noopener">BleepingComputer: Calendar phishing (Nov 4)</a> &middot; <a href="https://www.bleepingcomputer.com/news/security/msecure-password-manager-hack-prompts-password-reset-warnings/" target="_blank" rel="noopener">BleepingComputer: mSecure (Nov 4)</a>
+  </div>
+  <a href="/#briefing" class="btn btn-ghost btn-sm back-link">← All Briefings</a>
+</article>
+
+</body>
+</html>

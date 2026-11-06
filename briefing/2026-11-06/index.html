@@ -1,0 +1,167 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="D-Link published an interim advisory for unpatched flaws in the DGS-3130-30TS managed switch&#039;s Discovery Protocol. Until firmware ships, disable DDP, remove default SNMP community strings, and keep SSH, the web page and SNMP on a management network only. Separately, DigiCert says an exposed archive let outsiders read business contacts, and for some customers, ID documents used in validation.">
+<title>There&#039;s no patch yet for D-Link&#039;s DGS-3130 Discovery Protocol flaws. Disable DDP, drop default SNMP, and keep management off the internet — AWHIND Daily Briefing</title>
+<link rel="canonical" href="https://awhind.com/briefing/2026-11-06/">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='16' fill='%230B0F17'/%3E%3Ccircle cx='50' cy='50' r='16' fill='%23DD4E1E'/%3E%3C/svg%3E">
+
+<!-- Open Graph -->
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://awhind.com/briefing/2026-11-06/">
+<meta property="og:title" content="There&#039;s no patch yet for D-Link&#039;s DGS-3130 Discovery Protocol flaws. Disable DDP, drop default SNMP, and keep management off the internet">
+<meta property="og:description" content="D-Link published an interim advisory for unpatched flaws in the DGS-3130-30TS managed switch&#039;s Discovery Protocol. Until firmware ships, disable DDP, remove default SNMP community strings, and keep SSH, the web page and SNMP on a management network only. Separately, DigiCert says an exposed archive let outsiders read business contacts, and for some customers, ID documents used in validation.">
+<meta property="og:site_name" content="AWHIND">
+
+<!-- Twitter Card -->
+<meta name="twitter:title" content="There&#039;s no patch yet for D-Link&#039;s DGS-3130 Discovery Protocol flaws. Disable DDP, drop default SNMP, and keep management off the internet">
+<meta name="twitter:description" content="D-Link published an interim advisory for unpatched flaws in the DGS-3130-30TS managed switch&#039;s Discovery Protocol. Until firmware ships, disable DDP, remove default SNMP community strings, and keep SSH, the web page and SNMP on a management network only. Separately, DigiCert says an exposed archive let outsiders read business contacts, and for some customers, ID documents used in validation.">
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "There's no patch yet for D-Link's DGS-3130 Discovery Protocol flaws. Disable DDP, drop default SNMP, and keep management off the internet",
+  "description": "D-Link published an interim advisory for unpatched flaws in the DGS-3130-30TS managed switch's Discovery Protocol. Until firmware ships, disable DDP, remove default SNMP community strings, and keep SSH, the web page and SNMP on a management network only. Separately, DigiCert says an exposed archive let outsiders read business contacts, and for some customers, ID documents used in validation.",
+  "datePublished": "2026-11-06",
+  "url": "https://awhind.com/briefing/2026-11-06/",
+  "author": {
+    "@type": "Organization",
+    "name": "AWHIND",
+    "url": "https://awhind.com",
+    "telephone": "+1-689-225-0286"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "AWHIND",
+    "url": "https://awhind.com",
+    "telephone": "+1-689-225-0286"
+  }
+}
+</script>
+
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,500&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap');
+
+  :root{
+    --bg:#F1F2ED;
+    --bg-elevated:#FFFFFF;
+    --bg-sunken:#E7E8E1;
+    --text:#0B0F17;
+    --text-secondary:#566072;
+    --text-tertiary:#848d9b;
+    --line:#D9DAD2;
+    --line-strong:#c2c4ba;
+    --accent:#DD4E1E;
+    --accent-contrast:#FFFFFF;
+    --shadow: 0 1px 2px rgba(11,15,23,.04), 0 8px 24px rgba(11,15,23,.06);
+    --serif: 'Newsreader', Georgia, 'Times New Roman', serif;
+    --sans: 'IBM Plex Sans', -apple-system, 'Segoe UI', Roboto, sans-serif;
+    --mono: 'IBM Plex Mono', 'SF Mono', Consolas, monospace;
+  }
+  @media (prefers-color-scheme: dark){
+    :root:not([data-theme="light"]){
+      --bg:#0A0D14;
+      --bg-elevated:#12161F;
+      --bg-sunken:#080A10;
+      --text:#EEF0F4;
+      --text-secondary:#9AA3B4;
+      --text-tertiary:#6d7688;
+      --line:#232838;
+      --line-strong:#323951;
+      --accent:#FF7A47;
+      --accent-contrast:#0A0D14;
+      --shadow: 0 1px 2px rgba(0,0,0,.3), 0 8px 28px rgba(0,0,0,.4);
+    }
+  }
+  :root[data-theme="dark"]{
+    --bg:#0A0D14;
+    --bg-elevated:#12161F;
+    --bg-sunken:#080A10;
+    --text:#EEF0F4;
+    --text-secondary:#9AA3B4;
+    --text-tertiary:#6d7688;
+    --line:#232838;
+    --line-strong:#323951;
+    --accent:#FF7A47;
+    --accent-contrast:#0A0D14;
+    --shadow: 0 1px 2px rgba(0,0,0,.3), 0 8px 28px rgba(0,0,0,.4);
+  }
+
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0; background:var(--bg); color:var(--text);
+    font-family:var(--sans); font-size:16px; line-height:1.55;
+    -webkit-font-smoothing:antialiased;
+  }
+  a{color:inherit;}
+  h1,h2{font-family:var(--serif); font-weight:500; margin:0; text-wrap:balance; letter-spacing:-0.01em;}
+  .mono{font-family:var(--mono);}
+  .wrap{max-width:1120px; margin:0 auto; padding:0 28px;}
+  .btn{
+    display:inline-flex; align-items:center; gap:8px; font-family:var(--mono); font-size:13px;
+    letter-spacing:.04em; text-transform:uppercase; padding:12px 20px; border-radius:2px;
+    text-decoration:none; cursor:pointer; border:1px solid transparent;
+  }
+  .btn-ghost{border-color:var(--line-strong); color:var(--text);}
+  .btn-ghost:hover{border-color:var(--accent); color:var(--accent);}
+  .btn-sm{padding:8px 14px; font-size:11px;}
+
+  nav.wrap{display:flex; align-items:center; justify-content:space-between; padding-top:18px; padding-bottom:18px;}
+  .brand{font-family:var(--serif); font-weight:600; font-size:21px; letter-spacing:-.01em; text-decoration:none; color:var(--text); display:flex; align-items:center; gap:9px;}
+  .brand .mark{width:9px;height:9px;background:var(--accent);display:inline-block;}
+
+  article{max-width:720px; margin:44px auto; padding:0 28px;}
+  .meta{font-family:var(--mono); font-size:11.5px; color:var(--text-tertiary); letter-spacing:.03em; margin-bottom:16px;}
+  article h1{font-size:32px; line-height:1.15;}
+  .dek{font-size:16px; color:var(--text-secondary); margin-top:14px; font-family:var(--serif); font-style:italic;}
+  .article-body{margin-top:28px; font-size:15.5px; color:var(--text); max-width:60ch;}
+  .article-body p{margin:0 0 18px;}
+  .article-body strong{font-weight:600;}
+  .article-body .stat-inline{font-family:var(--mono); color:var(--accent); font-weight:600;}
+  .article-sources{margin-top:32px; padding-top:20px; border-top:1px solid var(--line); font-size:12px; color:var(--text-tertiary);}
+  .article-sources a{color:var(--text-secondary); text-decoration:underline; text-decoration-color:var(--line-strong);}
+  .back-link{margin-top:32px; display:inline-block;}
+</style>
+<meta property="og:image" content="https://awhind.com/images/og/briefing/2026-11-06.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Preview card: There&#039;s no patch yet for D-Link&#039;s DGS-3130 Discovery Protocol flaws. Disable DDP, drop default SNMP, and keep management off the internet">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:site" content="@awhxtech">
+<meta name="twitter:image" content="https://awhind.com/images/og/briefing/2026-11-06.png">
+<meta name="twitter:image:alt" content="Preview card: There&#039;s no patch yet for D-Link&#039;s DGS-3130 Discovery Protocol flaws. Disable DDP, drop default SNMP, and keep management off the internet">
+</head>
+<body>
+
+<nav class="wrap">
+  <a href="/" class="brand"><span class="mark"></span>AWHIND</a>
+  <div>
+    <a href="/#briefing" class="btn btn-ghost btn-sm">← All Briefings</a>
+  </div>
+</nav>
+
+<article>
+  <div class="meta">Nov 6, 2026 &middot; Patch &middot; 3 min read</div>
+  <h1>There's no patch yet for D-Link's DGS-3130 Discovery Protocol flaws. Disable DDP, drop default SNMP, and keep management off the internet</h1>
+  <div class="dek">D-Link published an interim advisory for unpatched flaws in the DGS-3130-30TS managed switch's Discovery Protocol. Until firmware ships, disable DDP, remove default SNMP community strings, and keep SSH, the web page and SNMP on a management network only. Separately, DigiCert says an exposed archive let outsiders read business contacts, and for some customers, ID documents used in validation.</div>
+  <div class="article-body">
+    <p>On Nov 6, D-Link published an interim security advisory for multiple unpatched flaws in its DGS-3130-30TS managed switch, found in the D-Link Discovery Protocol (DDP) and parts of the firmware, per <a href="https://www.bleepingcomputer.com/news/security/d-link-warns-of-multiple-zero-days-in-dgs-3130-series-switches/" target="_blank" rel="noopener">BleepingComputer</a> and D-Link's <a href="https://supportannouncement.us.dlink.com/security/publication.aspx?name=SAP10523" target="_blank" rel="noopener">SAP10523</a>. The company has not released fixed firmware yet, and CVE identifiers are not public. Other DGS-3130 models and other D-Link switch lines are still under investigation.</p>
+    <p><strong>What the flaws can do.</strong> An attacker who can reach the switch on the network may be able to read device and network settings, change admin credentials, expose SNMP community strings, reset the switch, or disrupt service. Separate findings cover SSH configuration, how the device protects operating-system credentials, and firmware encryption. Disabling DDP cuts the main known DDP attack path, but D-Link says it does not fix those other firmware issues.</p>
+    <p><strong>Why small businesses should care.</strong> The DGS-3130 is aimed at small and mid-size offices and metro Ethernet setups. Like the Zyxel GS1900 story earlier this week, a managed switch that sits forgotten in a closet is still in the middle of every office conversation. There is no patch to install today, so the interim steps matter.</p>
+    <p><strong>Action item: Mitigate until firmware ships.</strong><br>1. <strong>Check the label.</strong> Look for "DGS-3130," especially a DGS-3130-30TS. Note the hardware revision and firmware version before you change anything.<br>2. <strong>Disable DDP.</strong> On the switch CLI, use <code>no ddp</code> in global and interface configuration, confirm with <code>show ddp</code>, then save so the setting survives a reboot. D-Link says this is the primary interim step for the DDP findings.<br>3. <strong>Remove default SNMP communities.</strong> Delete <code>public</code> and <code>private</code> (and any other unused communities). If you still need SNMP, prefer SNMPv3 with authentication, limited to known admin hosts.<br>4. <strong>Keep management off the internet.</strong> Restrict SSH, the web UI and SNMP to a small management network or named admin machines. Save an offline config backup, and watch logs for unexpected reboots, config changes or factory resets.<br>5. <strong>Watch for the real fix.</strong> Follow D-Link's <a href="https://supportannouncement.us.dlink.com/security/publication.aspx?name=SAP10523" target="_blank" rel="noopener">SAP10523</a> advisory. When firmware ships, match model and hardware revision before you install it.</p>
+    <p>Not sure what's in your network closet? Call us at +1 (689) 225-0286, or start with the free <a href="https://awhind.com/security-checklist/" target="_blank" rel="noopener">security checklist</a>.</p>
+    <p><strong>Second item: DigiCert customers, expect fake "re-upload your ID" emails.</strong> DigiCert says an archive system that held business customer records was left reachable from the internet after a network move, and an attacker used a self-registration feature (no MFA) to create a read-only account, per <a href="https://www.securityweek.com/digicert-data-breach-impacts-business-customer-information/" target="_blank" rel="noopener">SecurityWeek</a>. That account could read names, emails, phones and business addresses between June 27 and July 2. For some customers, driver's licenses, passports or utility bills used in validation were also exposed. DigiCert says certificate systems were not affected and certificates still work.</p>
+    <p>&bull; <strong>Open CertCentral by typing the address</strong>, not from a scary message asking you to re-upload an ID or "fix validation."<br>&bull; <strong>Treat unexpected DigiCert mail as phishing</strong> until you check it inside the real portal.</p>
+  </div>
+  <div class="article-sources">
+    Sources: <a href="https://www.bleepingcomputer.com/news/security/d-link-warns-of-multiple-zero-days-in-dgs-3130-series-switches/" target="_blank" rel="noopener">BleepingComputer: D-Link DGS-3130 (Nov 6)</a> &middot; <a href="https://supportannouncement.us.dlink.com/security/publication.aspx?name=SAP10523" target="_blank" rel="noopener">D-Link SAP10523</a> &middot; <a href="https://www.securityweek.com/digicert-data-breach-impacts-business-customer-information/" target="_blank" rel="noopener">SecurityWeek: DigiCert (Nov 6)</a>
+  </div>
+  <a href="/#briefing" class="btn btn-ghost btn-sm back-link">← All Briefings</a>
+</article>
+
+</body>
+</html>

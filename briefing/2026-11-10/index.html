@@ -1,0 +1,166 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="A new OpenSSH flaw lets attackers into certain accounts that were never supposed to accept a password, just by sending a very long one. It only hits Linux systems built on musl, such as Alpine, OpenWrt, Buildroot and Yocto, and the fix shipped Nov 5. Exploitation started within days.">
+<title>Attackers are already using SSHole to log in to Alpine Linux servers without a password. Update OpenSSH to 10.6p2 or turn off SSH passwords — AWHIND Daily Briefing</title>
+<link rel="canonical" href="https://awhind.com/briefing/2026-11-10/">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='16' fill='%230B0F17'/%3E%3Ccircle cx='50' cy='50' r='16' fill='%23DD4E1E'/%3E%3C/svg%3E">
+
+<!-- Open Graph -->
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://awhind.com/briefing/2026-11-10/">
+<meta property="og:title" content="Attackers are already using SSHole to log in to Alpine Linux servers without a password. Update OpenSSH to 10.6p2 or turn off SSH passwords">
+<meta property="og:description" content="A new OpenSSH flaw lets attackers into certain accounts that were never supposed to accept a password, just by sending a very long one. It only hits Linux systems built on musl, such as Alpine, OpenWrt, Buildroot and Yocto, and the fix shipped Nov 5. Exploitation started within days.">
+<meta property="og:site_name" content="AWHIND">
+
+<!-- Twitter Card -->
+<meta name="twitter:title" content="Attackers are already using SSHole to log in to Alpine Linux servers without a password. Update OpenSSH to 10.6p2 or turn off SSH passwords">
+<meta name="twitter:description" content="A new OpenSSH flaw lets attackers into certain accounts that were never supposed to accept a password, just by sending a very long one. It only hits Linux systems built on musl, such as Alpine, OpenWrt, Buildroot and Yocto, and the fix shipped Nov 5. Exploitation started within days.">
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "Attackers are already using SSHole to log in to Alpine Linux servers without a password. Update OpenSSH to 10.6p2 or turn off SSH passwords",
+  "description": "A new OpenSSH flaw lets attackers into certain accounts that were never supposed to accept a password, just by sending a very long one. It only hits Linux systems built on musl, such as Alpine, OpenWrt, Buildroot and Yocto, and the fix shipped Nov 5. Exploitation started within days.",
+  "datePublished": "2026-11-10",
+  "url": "https://awhind.com/briefing/2026-11-10/",
+  "author": {
+    "@type": "Organization",
+    "name": "AWHIND",
+    "url": "https://awhind.com",
+    "telephone": "+1-689-225-0286"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "AWHIND",
+    "url": "https://awhind.com",
+    "telephone": "+1-689-225-0286"
+  }
+}
+</script>
+
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,500&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap');
+
+  :root{
+    --bg:#F1F2ED;
+    --bg-elevated:#FFFFFF;
+    --bg-sunken:#E7E8E1;
+    --text:#0B0F17;
+    --text-secondary:#566072;
+    --text-tertiary:#848d9b;
+    --line:#D9DAD2;
+    --line-strong:#c2c4ba;
+    --accent:#DD4E1E;
+    --accent-contrast:#FFFFFF;
+    --shadow: 0 1px 2px rgba(11,15,23,.04), 0 8px 24px rgba(11,15,23,.06);
+    --serif: 'Newsreader', Georgia, 'Times New Roman', serif;
+    --sans: 'IBM Plex Sans', -apple-system, 'Segoe UI', Roboto, sans-serif;
+    --mono: 'IBM Plex Mono', 'SF Mono', Consolas, monospace;
+  }
+  @media (prefers-color-scheme: dark){
+    :root:not([data-theme="light"]){
+      --bg:#0A0D14;
+      --bg-elevated:#12161F;
+      --bg-sunken:#080A10;
+      --text:#EEF0F4;
+      --text-secondary:#9AA3B4;
+      --text-tertiary:#6d7688;
+      --line:#232838;
+      --line-strong:#323951;
+      --accent:#FF7A47;
+      --accent-contrast:#0A0D14;
+      --shadow: 0 1px 2px rgba(0,0,0,.3), 0 8px 28px rgba(0,0,0,.4);
+    }
+  }
+  :root[data-theme="dark"]{
+    --bg:#0A0D14;
+    --bg-elevated:#12161F;
+    --bg-sunken:#080A10;
+    --text:#EEF0F4;
+    --text-secondary:#9AA3B4;
+    --text-tertiary:#6d7688;
+    --line:#232838;
+    --line-strong:#323951;
+    --accent:#FF7A47;
+    --accent-contrast:#0A0D14;
+    --shadow: 0 1px 2px rgba(0,0,0,.3), 0 8px 28px rgba(0,0,0,.4);
+  }
+
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0; background:var(--bg); color:var(--text);
+    font-family:var(--sans); font-size:16px; line-height:1.55;
+    -webkit-font-smoothing:antialiased;
+  }
+  a{color:inherit;}
+  h1,h2{font-family:var(--serif); font-weight:500; margin:0; text-wrap:balance; letter-spacing:-0.01em;}
+  .mono{font-family:var(--mono);}
+  .wrap{max-width:1120px; margin:0 auto; padding:0 28px;}
+  .btn{
+    display:inline-flex; align-items:center; gap:8px; font-family:var(--mono); font-size:13px;
+    letter-spacing:.04em; text-transform:uppercase; padding:12px 20px; border-radius:2px;
+    text-decoration:none; cursor:pointer; border:1px solid transparent;
+  }
+  .btn-ghost{border-color:var(--line-strong); color:var(--text);}
+  .btn-ghost:hover{border-color:var(--accent); color:var(--accent);}
+  .btn-sm{padding:8px 14px; font-size:11px;}
+
+  nav.wrap{display:flex; align-items:center; justify-content:space-between; padding-top:18px; padding-bottom:18px;}
+  .brand{font-family:var(--serif); font-weight:600; font-size:21px; letter-spacing:-.01em; text-decoration:none; color:var(--text); display:flex; align-items:center; gap:9px;}
+  .brand .mark{width:9px;height:9px;background:var(--accent);display:inline-block;}
+
+  article{max-width:720px; margin:44px auto; padding:0 28px;}
+  .meta{font-family:var(--mono); font-size:11.5px; color:var(--text-tertiary); letter-spacing:.03em; margin-bottom:16px;}
+  article h1{font-size:32px; line-height:1.15;}
+  .dek{font-size:16px; color:var(--text-secondary); margin-top:14px; font-family:var(--serif); font-style:italic;}
+  .article-body{margin-top:28px; font-size:15.5px; color:var(--text); max-width:60ch;}
+  .article-body p{margin:0 0 18px;}
+  .article-body strong{font-weight:600;}
+  .article-body .stat-inline{font-family:var(--mono); color:var(--accent); font-weight:600;}
+  .article-sources{margin-top:32px; padding-top:20px; border-top:1px solid var(--line); font-size:12px; color:var(--text-tertiary);}
+  .article-sources a{color:var(--text-secondary); text-decoration:underline; text-decoration-color:var(--line-strong);}
+  .back-link{margin-top:32px; display:inline-block;}
+</style>
+<meta property="og:image" content="https://awhind.com/images/og/briefing/2026-11-10.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Preview card: Attackers are already using SSHole to log in to Alpine Linux servers without a password. Update OpenSSH to 10.6p2 or turn off SSH passwords">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:site" content="@awhxtech">
+<meta name="twitter:image" content="https://awhind.com/images/og/briefing/2026-11-10.png">
+<meta name="twitter:image:alt" content="Preview card: Attackers are already using SSHole to log in to Alpine Linux servers without a password. Update OpenSSH to 10.6p2 or turn off SSH passwords">
+</head>
+<body>
+
+<nav class="wrap">
+  <a href="/" class="brand"><span class="mark"></span>AWHIND</a>
+  <div>
+    <a href="/#briefing" class="btn btn-ghost btn-sm">← All Briefings</a>
+  </div>
+</nav>
+
+<article>
+  <div class="meta">Nov 10, 2026 &middot; Patch &middot; 3 min read</div>
+  <h1>Attackers are already using SSHole to log in to Alpine Linux servers without a password. Update OpenSSH to 10.6p2 or turn off SSH passwords</h1>
+  <div class="dek">A new OpenSSH flaw lets attackers into certain accounts that were never supposed to accept a password, just by sending a very long one. It only hits Linux systems built on musl, such as Alpine, OpenWrt, Buildroot and Yocto, and the fix shipped Nov 5. Exploitation started within days.</div>
+  <div class="article-body">
+    <p>On Nov 5, OpenSSH released version 10.6p2 to fix a password authentication bypass nicknamed "SSHole" (CVE-2026-123158, CVSS 8.1), per the <a href="https://www.openssh.org/releasenotes.html" target="_blank" rel="noopener">OpenSSH release notes</a> and the <a href="https://www.openwall.com/lists/oss-security/2026/11/05/3" target="_blank" rel="noopener">oss-security disclosure</a>. Exploit code showed up a few hours later, and by the weekend GreyNoise, watchTowr and Previdian were all reporting attacks in the wild, per <a href="https://www.bleepingcomputer.com/news/security/hackers-exploit-sshole-openssh-flaw-to-breach-linux-systems/" target="_blank" rel="noopener">BleepingComputer</a> and <a href="https://www.securityweek.com/hackers-exploiting-sshole-authentication-bypass-in-openssh/" target="_blank" rel="noopener">SecurityWeek</a>.</p>
+    <p><strong>What the flaw does.</strong> Some accounts, like root on Alpine, are set up so they can never log in with a password; their stored password is just an asterisk. On Linux systems that use the musl C library with PAM turned off, sending a password longer than 256 characters makes musl's hashing function fail and return an asterisk. OpenSSH then sees that it matches and lets the attacker in. Accounts with real passwords are not affected, and neither are glibc-based distributions, systems using PAM, or the Dropbear SSH server, per <a href="https://www.getastra.com/blog/security-advisory/sshole-cve-2026-123158/" target="_blank" rel="noopener">Astra Security</a>.</p>
+    <p><strong>What attackers are doing with it.</strong> GreyNoise logged its first successful break-in on Nov 7. Attackers looked around the system and containers, queried cloud metadata services, tried to read password hashes and root SSH keys, and added their own SSH keys to keep access. In one case they got root and installed a remote-control program called TAC Agent. watchTowr says only botnets and crypto miners have picked it up so far.</p>
+    <p><strong>Why small businesses should care.</strong> You may not think you run Alpine Linux, but it is common inside cloud servers, Docker containers and appliances, and OpenWrt and Yocto show up in routers and embedded devices. If a contractor or vendor set up a small server, VPN box or device for you, it could be one of them. Anything with SSH open to the internet is getting scanned right now.</p>
+    <p><strong>Action item: Check anything that runs SSH this week.</strong><br>1. <strong>Find your SSH systems.</strong> List servers, cloud instances, containers and network devices that accept SSH, especially anything reachable from the internet. Ask your vendor if you're not sure what an appliance runs.<br>2. <strong>Update OpenSSH.</strong> Install OpenSSH 10.6p2 or your distribution's patched package. On Alpine, run <code>apk upgrade openssh</code>. Upgrading doesn't restart the running SSH service, so restart it afterward.<br>3. <strong>Can't patch yet? Turn off SSH passwords.</strong> Set <code>PasswordAuthentication no</code> in <code>/etc/ssh/sshd_config</code> and restart SSH. Confirm key-based login works first so you don't lock yourself out.<br>4. <strong>Look for signs of a break-in.</strong> Check SSH logs for successful password logins to accounts that shouldn't have one, look for SSH keys you didn't add in <code>authorized_keys</code> files, and check for unfamiliar startup services.</p>
+    <p>Not sure what's running SSH on your network? Call us at +1 (689) 225-0286.</p>
+  </div>
+  <div class="article-sources">
+    Sources: <a href="https://www.openssh.org/releasenotes.html" target="_blank" rel="noopener">OpenSSH 10.6p2 release notes (Nov 5)</a> &middot; <a href="https://www.openwall.com/lists/oss-security/2026/11/05/3" target="_blank" rel="noopener">oss-security disclosure (Nov 5)</a> &middot; <a href="https://www.bleepingcomputer.com/news/security/openssh-flaw-lets-attackers-log-into-password-disabled-linux-accounts/" target="_blank" rel="noopener">BleepingComputer: OpenSSH flaw lets attackers log into password-disabled Linux accounts</a> &middot; <a href="https://www.bleepingcomputer.com/news/security/hackers-exploit-sshole-openssh-flaw-to-breach-linux-systems/" target="_blank" rel="noopener">BleepingComputer: Hackers exploit SSHole OpenSSH flaw</a> &middot; <a href="https://www.securityweek.com/hackers-exploiting-sshole-authentication-bypass-in-openssh/" target="_blank" rel="noopener">SecurityWeek</a> &middot; <a href="https://www.getastra.com/blog/security-advisory/sshole-cve-2026-123158/" target="_blank" rel="noopener">Astra Security advisory</a>
+  </div>
+  <a href="/#briefing" class="btn btn-ghost btn-sm back-link">← All Briefings</a>
+</article>
+
+</body>
+</html>

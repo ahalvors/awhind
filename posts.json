@@ -1,5 +1,51 @@
 [
   {
+    "date": "2026-11-11",
+    "tag": "Patch",
+    "read": "3 min",
+    "title": "Attackers are using an Outlook flaw to steal Windows logins from one opened file. Install this week's Office update, and relaunch Chrome too",
+    "dek": "Microsoft's November Patch Tuesday fixed one flaw that attackers are already using: a booby-trapped message file that makes Outlook quietly hand over your login hash. Google also patched an exploited Chrome bug on Monday. Both fixes are out now.",
+    "body": [
+      "Microsoft's November Patch Tuesday on Nov 10 fixed 1,093 vulnerabilities, and one of them is already being used in attacks: an Outlook flaw tracked as CVE-2026-124194, per <a href=\"https://www.ivanti.com/blog/november-2026-patch-tuesday\" target=\"_blank\" rel=\"noopener\">Ivanti</a> and <a href=\"https://therecord.media/patch-tuesday-microsoft-1000-bugs-again\" target=\"_blank\" rel=\"noopener\">The Record</a>. CISA added it to its Known Exploited Vulnerabilities catalog the same day and gave federal agencies until Nov 24 to patch, per <a href=\"https://securityonline.info/outlook-zero-day-cve-2026-124194/\" target=\"_blank\" rel=\"noopener\">SecurityOnline</a>.",
+      "<strong>What the flaw does.</strong> An attacker sends a specially crafted message file and gets someone to open it in Outlook. Opening it makes Outlook connect to a server the attacker controls without showing the usual external-content warning, and that connection hands over the user's NTLMv2 password hash, per <a href=\"https://www.bleepingcomputer.com/news/microsoft/microsoft-november-2026-patch-tuesday-fixes-1-235-flaws-outlook-zero-day/\" target=\"_blank\" rel=\"noopener\">BleepingComputer</a>. The attacker can relay that hash to sign in to other systems as the user or try to crack it to recover the password, per <a href=\"https://www.csoonline.com/article/4247015/november-2026-patch-tuesday-63-critical-microsoft-fixes-plus-an-outlook-zero-day-that-allows-theft-of-hashed-credentials.html\" target=\"_blank\" rel=\"noopener\">CSO Online</a>. Microsoft says the Preview Pane is not a way in, so the file has to be opened.",
+      "<strong>Don't let the score fool you.</strong> Microsoft rates it only Moderate, with a CVSS score of 6.5, but working attack code exists and it is being used now. Ivanti recommends treating it as Critical. Microsoft hasn't said who is behind the attacks or how many people were hit.",
+      "<strong>Who's affected.</strong> Microsoft 365 Apps for Enterprise and Office LTSC 2021 and 2024. The fixed LTSC builds are 16.0.14334.21048 and 16.0.17932.21140.",
+      "<strong>Chrome too.</strong> On Nov 9, Google released Chrome 157.0.8103.50/.51 for Windows and Mac and 157.0.8103.50 for Linux to fix CVE-2026-125350, a bug in how Chrome handles XML that attackers are already exploiting, per <a href=\"https://chromereleases.googleblog.com/2026/11/stable-channel-update-for-desktop_018223192.html\" target=\"_blank\" rel=\"noopener\">Google's release notes</a>. It's Chrome's eighth exploited zero-day this year, per <a href=\"https://thehackernews.com/2026/11/google-issues-chrome-security-update.html\" target=\"_blank\" rel=\"noopener\">The Hacker News</a>. Edge and other Chromium-based browsers need the same fix as their updates arrive.",
+      "<strong>Action item: Patch Office and browsers this week.</strong><br>1. <strong>Update Office on every PC that runs Outlook.</strong> In Outlook, go to File > Office Account > Update Options > Update Now. If you manage updates centrally, confirm the November Office updates actually reached each machine.<br>2. <strong>Relaunch Chrome and Edge.</strong> The fix doesn't apply until the browser restarts. Check Help > About Google Chrome and confirm you're on 157.0.8103.50 or later.<br>3. <strong>Tell staff not to open unexpected message files</strong>, even from people they know, until Office is patched.<br>4. <strong>Block outbound SMB to the internet.</strong> SecurityOnline suggests blocking outbound SMB and NTLM traffic at the firewall, which stops this kind of hash leak from reaching an outside server.",
+      "Not sure every PC got the update? Call us at +1 (689) 225-0286."
+    ],
+    "sources": [
+      [
+        "Ivanti: November 2026 Patch Tuesday",
+        "https://www.ivanti.com/blog/november-2026-patch-tuesday"
+      ],
+      [
+        "The Record",
+        "https://therecord.media/patch-tuesday-microsoft-1000-bugs-again"
+      ],
+      [
+        "BleepingComputer: November 2026 Patch Tuesday",
+        "https://www.bleepingcomputer.com/news/microsoft/microsoft-november-2026-patch-tuesday-fixes-1-235-flaws-outlook-zero-day/"
+      ],
+      [
+        "CSO Online",
+        "https://www.csoonline.com/article/4247015/november-2026-patch-tuesday-63-critical-microsoft-fixes-plus-an-outlook-zero-day-that-allows-theft-of-hashed-credentials.html"
+      ],
+      [
+        "SecurityOnline: Outlook zero-day CVE-2026-124194",
+        "https://securityonline.info/outlook-zero-day-cve-2026-124194/"
+      ],
+      [
+        "Google Chrome release notes (Nov 9)",
+        "https://chromereleases.googleblog.com/2026/11/stable-channel-update-for-desktop_018223192.html"
+      ],
+      [
+        "The Hacker News: Chrome zero-day",
+        "https://thehackernews.com/2026/11/google-issues-chrome-security-update.html"
+      ]
+    ]
+  },
+  {
     "date": "2026-11-10",
     "tag": "Patch",
     "read": "3 min",

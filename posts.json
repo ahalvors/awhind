@@ -1,5 +1,39 @@
 [
   {
+    "date": "2026-11-12",
+    "tag": "Advisory",
+    "read": "3 min",
+    "title": "The remote-management tool many IT providers use to run your computers just had 33 flaws dumped online. Ask your provider one question this week",
+    "dek": "Exploit code for N-able N-central, a tool managed service providers use to monitor and control client PCs, went public on Nov 9. A fix is out, but on-premises servers and the agents on your machines have to be updated. Here's what to ask.",
+    "body": [
+      "If an outside IT company looks after your office computers, there's a good chance it uses a remote monitoring and management (RMM) tool: software that lets it see, patch and control every PC from one console. N-able N-central is one of the widely used ones. N-able says its tools are used at more than 500,000 organizations in over 140 countries, per <a href=\"https://www.bleepingcomputer.com/news/security/n-able-releases-security-hotfixes-for-zero-day-vulnerabilities/\" target=\"_blank\" rel=\"noopener\">BleepingComputer</a>.",
+      "<strong>What happened.</strong> On Nov 9, a researcher published a write-up called Able2Shell describing 33 alleged N-central vulnerabilities, with proof-of-concept attack code, per <a href=\"https://www.tenable.com/blog/able2shell-frequently-asked-questions-for-reported-n-able-n-central-zero-day-vulnerabilities\" target=\"_blank\" rel=\"noopener\">Tenable</a>. The researcher says one attack chain needs no password at all and ends with the attacker running commands on the server. BleepingComputer reports the code can also create a rogue administrator account in the N-central console. N-able took its hosted N-central service offline across the Americas, Europe and Asia-Pacific that same day and told customers running their own N-central servers to take them offline too.",
+      "<strong>The fix.</strong> On Nov 10, N-able released N-central 2026.4 Hotfix 2 (build 2026.4.1.26), which fixes seven CVEs rated 8.3 to 9.3, per Tenable. N-able says it has upgraded all hosted servers and they're back online, and that every flaw an attacker could use without logging in has been addressed, per <a href=\"https://www.n-able.com/blog/update-on-n-central-2026-4-hf2-and-ongoing-security-response\" target=\"_blank\" rel=\"noopener\">N-able</a>. More fixes are coming in a follow-up hotfix.",
+      "<strong>Is anyone being hit?</strong> Attackers are scanning for it. N-able says it sees scanning tied to the published code but no signs of compromise on its hosted servers. Security firms have logged exploitation attempts against decoy N-central servers, but as of Nov 10 no confirmed compromise of a customer server had been reported, per Tenable. Shadowserver counted 1,338 N-central servers exposed online on Monday and just over 148 by the time BleepingComputer reported it, so most have been pulled offline or locked down.",
+      "<strong>Why this matters to you.</strong> You don't run N-central yourself. Your IT provider does. If its console were taken over, an attacker could reach every computer it manages, including yours. Hosted customers still have to update the agents and probes on client networks themselves, per N-able.",
+      "<strong>Action item: Ask your IT provider this week.</strong><br>1. <strong>\"Do you use N-able N-central, and is it on Hotfix 2 (build 2026.4.1.26)?\"</strong> If they run their own N-central server, it should stay off the internet until that upgrade is done, per N-able.<br>2. <strong>\"Have the agents and probes on our machines been updated?\"</strong> Tenable notes agents go first, because an updated probe can't talk to agents that haven't been updated.<br>3. <strong>\"Did you check for new admin accounts or odd remote sessions since Nov 8?\"</strong> That is the review Huntress recommends, per Tenable.<br>4. <strong>Don't accept \"we're cloud, so we're fine.\"</strong> Hosted servers were patched by N-able, but the agents on your PCs still need the update.",
+      "Not sure what tools your IT provider uses, or want a second set of eyes? Call us at +1 (689) 225-0286."
+    ],
+    "sources": [
+      [
+        "N-able: Update on N-central 2026.4 HF2",
+        "https://www.n-able.com/blog/update-on-n-central-2026-4-hf2-and-ongoing-security-response"
+      ],
+      [
+        "Tenable: Able2Shell FAQ",
+        "https://www.tenable.com/blog/able2shell-frequently-asked-questions-for-reported-n-able-n-central-zero-day-vulnerabilities"
+      ],
+      [
+        "BleepingComputer: N-able releases security hotfixes for zero-day vulnerabilities",
+        "https://www.bleepingcomputer.com/news/security/n-able-releases-security-hotfixes-for-zero-day-vulnerabilities/"
+      ],
+      [
+        "Cybersecurity Dive",
+        "https://www.cybersecuritydive.com/news/n-able-hotfix-researcher-pocs-zero-days/874388/"
+      ]
+    ]
+  },
+  {
     "date": "2026-11-11",
     "tag": "Patch",
     "read": "3 min",

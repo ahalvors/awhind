@@ -1,5 +1,35 @@
 [
   {
+    "date": "2026-11-13",
+    "tag": "Advisory",
+    "read": "3 min",
+    "title": "Outlook and Teams have been down for most of a day. Microsoft says it's not an attack. Here's what to do while it recovers, and what to fix before the next one",
+    "dek": "A Microsoft 365 outage that began Thursday morning knocked out Exchange Online, Teams, SharePoint and more, and was still degraded Friday morning. Don't reset passwords or keep resending mail. Here's what actually helps.",
+    "body": [
+      "If your office runs on Microsoft 365, you probably noticed Thursday. Outlook wouldn't connect, Teams calls dropped, and shared files wouldn't open. You weren't hacked, and it wasn't your internet.",
+      "<strong>What happened.</strong> Microsoft's incident record for Exchange Online starts at 11:17 a.m. ET Thursday (8:17 a.m. Pacific), per <a href=\"https://www.webpronews.com/microsoft-365-outlook-outage-servers-health-checks-no-root-cause/\" target=\"_blank\" rel=\"noopener\">WebProNews</a>. Microsoft says a number of servers failed automated health checks and dropped out of service, which overloaded the rest, per <a href=\"https://www.cnbc.com/2026/11/12/microsoft-outage-outlook-aws-google.html\" target=\"_blank\" rel=\"noopener\">CNBC</a>. Microsoft later said a process on those servers that sets up secure connections was getting overwhelmed. Nearly 130,000 people reported Outlook problems on Downdetector just after 1 p.m. ET. Exchange Online, Teams, SharePoint, Copilot, Intune and Defender for Office 365 were all listed as potentially affected. Even the admin tools IT people would use to troubleshoot went down, per <a href=\"https://www.theregister.com/saas/2026/11/12/microsoft-struggling-to-fix-massive-cloud-outage-thats-taken-down-email-and-intune/5309531\" target=\"_blank\" rel=\"noopener\">The Register</a>.",
+      "<strong>Is it an attack?</strong> Microsoft says no. It says there is no indication of malicious activity and that it will publish a full root-cause report once the problem is fixed, per WebProNews.",
+      "<strong>Where it stands.</strong> As of 7:00 a.m. ET Friday (4:00 a.m. Pacific), Microsoft said recovery was improving in Europe and North America, but some users may still see intermittent problems, and it had not said when full service will return, per CNBC and WebProNews. Microsoft extended the window for delayed email to keep retrying delivery to 48 hours, so messages stuck in the queue shouldn't simply be lost.",
+      "<strong>Action items for today.</strong><br>1. <strong>Don't reset passwords or reinstall Office.</strong> Your account is fine. Resets during an outage just add lockouts and help-desk tickets.<br>2. <strong>Don't keep resending the same email.</strong> Microsoft is holding delayed mail for up to 48 hours. Resending creates duplicates when the queue clears. If something is truly urgent, pick up the phone.<br>3. <strong>Check status in one place.</strong> Your IT admin can see the incident in the Microsoft 365 admin center under Health > Service health (Microsoft's incident IDs are EX1550543 and MO1550821, per WebProNews). Everyone else can follow @MSFT365Status on X.<br>4. <strong>Be suspicious of \"fix your mailbox\" messages.</strong> Outages are a natural cover story for phishing. If a text or email shows up today with a link to \"restore\" your account, don't sign in from it. Open Outlook or office.com the way you normally do.<br>5. <strong>Tell customers another way.</strong> If clients email you for orders or appointments, a short note on your website or a phone greeting saying email is delayed beats silence.",
+      "<strong>Before the next one.</strong> The last big Microsoft 365 outage was only in September, per WebProNews. Take 30 minutes next week to write down:<br>&bull; <strong>A phone list</strong> for staff and your top customers that doesn't live in Outlook.<br>&bull; <strong>One backup way to talk</strong>, like a group text, so the team isn't stuck when Teams is down.<br>&bull; <strong>Which files you can't work without</strong>, and make sure they're synced to each PC through OneDrive so they open offline.<br>&bull; <strong>Who calls whom.</strong> One person checks status and updates everyone.",
+      "Want help putting that one-page plan together? Call us at +1 (689) 225-0286."
+    ],
+    "sources": [
+      [
+        "CNBC: Outlook outage continues as Microsoft flags 'encouraging recovery progress'",
+        "https://www.cnbc.com/2026/11/12/microsoft-outage-outlook-aws-google.html"
+      ],
+      [
+        "WebProNews: Microsoft 365 outage cuts off Outlook for hours",
+        "https://www.webpronews.com/microsoft-365-outlook-outage-servers-health-checks-no-root-cause/"
+      ],
+      [
+        "The Register: Microsoft struggling to fix massive cloud outage",
+        "https://www.theregister.com/saas/2026/11/12/microsoft-struggling-to-fix-massive-cloud-outage-thats-taken-down-email-and-intune/5309531"
+      ]
+    ]
+  },
+  {
     "date": "2026-11-12",
     "tag": "Advisory",
     "read": "3 min",

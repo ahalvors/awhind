@@ -1,5 +1,47 @@
 [
   {
+    "date": "2026-11-14",
+    "tag": "Advisory",
+    "read": "3 min",
+    "title": "Attackers are hitting Barracuda email gateways through their admin page. If yours is reachable from the internet, fix that today",
+    "dek": "Barracuda says two patched flaws in its Email Security Gateway are now being exploited, and one needs no password, only access to the admin page. Check Point also shipped emergency fixes this week. Here's what a small office should check.",
+    "body": [
+      "A lot of small offices have a Barracuda box sitting in front of their email, filtering spam before it reaches the mailboxes. If yours is one of them, this is the week to make sure it's patched, and to check who can reach its admin page.",
+      "<strong>What happened.</strong> On Nov. 2, Barracuda released patches for two flaws, CVE-2026-116606 and CVE-2026-111560. On Nov. 5 it clarified that the first one needs no login at all, only access to the appliance's admin interface. Used together, the two give an attacker root control of the device, per <a href=\"https://trust.barracuda.com/security/pre-authentication-authorization-bypass-command-injection\" target=\"_blank\" rel=\"noopener\">Barracuda's advisory</a>. On Nov. 9 Barracuda added that it has seen exploitation affecting a small number of organizations, per <a href=\"https://www.bleepingcomputer.com/news/security/hackers-exploit-barracuda-email-security-gateway-flaws-to-get-root-access/\" target=\"_blank\" rel=\"noopener\">BleepingComputer</a>. CISA added both flaws to its Known Exploited Vulnerabilities list on Nov. 10, per the <a href=\"https://www.cyber.gc.ca/en/alerts-advisories/barracuda-networks-security-advisory-av26-1112\" target=\"_blank\" rel=\"noopener\">Canadian Centre for Cyber Security</a>.",
+      "<strong>Which products.</strong> The Email Security Gateway (ESG) has both flaws. The second flaw also affects Barracuda's Load Balancer ADC, Message Archiver, Web Application Firewall, WAF Control Center and Web Security Gateway, per Barracuda.",
+      "<strong>Why it matters more than a normal patch.</strong> An email gateway sees every message coming into the company. Root on that box means access to your mail and a foothold to move into the rest of your network, per <a href=\"https://cypheron.cz/en/blog/vulnerability-roundup-2026-11-13\" target=\"_blank\" rel=\"noopener\">CypherOn's weekly roundup</a>.",
+      "<strong>Not a Barracuda shop?</strong> The same week, Check Point released emergency hotfixes for CVE-2026-123039, a Gaia OS flaw that lets an attacker who already has a foothold get root. Check Point says it saw it exploited against a couple of dozen customers, and attacks go back to late October, per <a href=\"https://www.bleepingcomputer.com/news/security/check-point-patches-zero-day-that-lets-hackers-get-root-access/\" target=\"_blank\" rel=\"noopener\">BleepingComputer</a>. CISA added it to the exploited list on Nov. 13, per <a href=\"https://www.cisa.gov/news-events/alerts/2026/11/13/cisa-adds-two-known-exploited-vulnerabilities-catalog\" target=\"_blank\" rel=\"noopener\">CISA</a>.",
+      "<strong>Action items for this weekend.</strong><br>1. <strong>Check the firmware.</strong> Log in to the appliance and confirm it shows the latest firmware with patches applied. For the ESG, the patches are BNSF-40425 (firmware 9.4.017 and later) or BNSF-40430 (earlier builds), per Barracuda. If the box is several versions behind, it may need more than one update.<br>2. <strong>Turn automatic patching back on.</strong> If someone switched it off, Barracuda recommends turning it back on so the next fix lands without waiting on anyone.<br>3. <strong>Take the admin page off the internet.</strong> Barracuda says devices whose admin interfaces aren't reachable from the internet are less exposed. Limit it to your office network or a VPN.<br>4. <strong>If it was exposed, look for changes.</strong> Review recent configuration changes and admin accounts on the device, and change the passwords and keys stored on it, per CypherOn.<br>5. <strong>Ask your IT provider one question.</strong> \"Which of our devices have an admin page reachable from the internet?\" That covers the email filter, the firewall, the Wi-Fi controller and the NAS. The answer should be none.",
+      "Not sure what's sitting at the edge of your network? Call us at +1 (689) 225-0286."
+    ],
+    "sources": [
+      [
+        "Barracuda: Pre-Authentication Authorization Bypass and Command Injection Vulnerabilities",
+        "https://trust.barracuda.com/security/pre-authentication-authorization-bypass-command-injection"
+      ],
+      [
+        "BleepingComputer: Hackers now exploit critical Barracuda ESG flaws to gain root access",
+        "https://www.bleepingcomputer.com/news/security/hackers-exploit-barracuda-email-security-gateway-flaws-to-get-root-access/"
+      ],
+      [
+        "Canadian Centre for Cyber Security: Barracuda Networks security advisory (AV26-1112)",
+        "https://www.cyber.gc.ca/en/alerts-advisories/barracuda-networks-security-advisory-av26-1112"
+      ],
+      [
+        "CypherOn: Vulnerability Roundup 13 November 2026",
+        "https://cypheron.cz/en/blog/vulnerability-roundup-2026-11-13"
+      ],
+      [
+        "BleepingComputer: Check Point warns of zero-day flaw exploited for root access",
+        "https://www.bleepingcomputer.com/news/security/check-point-patches-zero-day-that-lets-hackers-get-root-access/"
+      ],
+      [
+        "CISA: CISA Adds Two Known Exploited Vulnerabilities to Catalog",
+        "https://www.cisa.gov/news-events/alerts/2026/11/13/cisa-adds-two-known-exploited-vulnerabilities-catalog"
+      ]
+    ]
+  },
+  {
     "date": "2026-11-13",
     "tag": "Advisory",
     "read": "3 min",

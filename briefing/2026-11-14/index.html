@@ -1,0 +1,167 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Barracuda says two patched flaws in its Email Security Gateway are now being exploited, and one needs no password, only access to the admin page. Check Point also shipped emergency fixes this week. Here&#039;s what a small office should check.">
+<title>Attackers are hitting Barracuda email gateways through their admin page. If yours is reachable from the internet, fix that today — AWHIND Daily Briefing</title>
+<link rel="canonical" href="https://awhind.com/briefing/2026-11-14/">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='16' fill='%230B0F17'/%3E%3Ccircle cx='50' cy='50' r='16' fill='%23DD4E1E'/%3E%3C/svg%3E">
+
+<!-- Open Graph -->
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://awhind.com/briefing/2026-11-14/">
+<meta property="og:title" content="Attackers are hitting Barracuda email gateways through their admin page. If yours is reachable from the internet, fix that today">
+<meta property="og:description" content="Barracuda says two patched flaws in its Email Security Gateway are now being exploited, and one needs no password, only access to the admin page. Check Point also shipped emergency fixes this week. Here&#039;s what a small office should check.">
+<meta property="og:site_name" content="AWHIND">
+
+<!-- Twitter Card -->
+<meta name="twitter:title" content="Attackers are hitting Barracuda email gateways through their admin page. If yours is reachable from the internet, fix that today">
+<meta name="twitter:description" content="Barracuda says two patched flaws in its Email Security Gateway are now being exploited, and one needs no password, only access to the admin page. Check Point also shipped emergency fixes this week. Here&#039;s what a small office should check.">
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "Attackers are hitting Barracuda email gateways through their admin page. If yours is reachable from the internet, fix that today",
+  "description": "Barracuda says two patched flaws in its Email Security Gateway are now being exploited, and one needs no password, only access to the admin page. Check Point also shipped emergency fixes this week. Here's what a small office should check.",
+  "datePublished": "2026-11-14",
+  "url": "https://awhind.com/briefing/2026-11-14/",
+  "author": {
+    "@type": "Organization",
+    "name": "AWHIND",
+    "url": "https://awhind.com",
+    "telephone": "+1-689-225-0286"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "AWHIND",
+    "url": "https://awhind.com",
+    "telephone": "+1-689-225-0286"
+  }
+}
+</script>
+
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,500&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap');
+
+  :root{
+    --bg:#F1F2ED;
+    --bg-elevated:#FFFFFF;
+    --bg-sunken:#E7E8E1;
+    --text:#0B0F17;
+    --text-secondary:#566072;
+    --text-tertiary:#848d9b;
+    --line:#D9DAD2;
+    --line-strong:#c2c4ba;
+    --accent:#DD4E1E;
+    --accent-contrast:#FFFFFF;
+    --shadow: 0 1px 2px rgba(11,15,23,.04), 0 8px 24px rgba(11,15,23,.06);
+    --serif: 'Newsreader', Georgia, 'Times New Roman', serif;
+    --sans: 'IBM Plex Sans', -apple-system, 'Segoe UI', Roboto, sans-serif;
+    --mono: 'IBM Plex Mono', 'SF Mono', Consolas, monospace;
+  }
+  @media (prefers-color-scheme: dark){
+    :root:not([data-theme="light"]){
+      --bg:#0A0D14;
+      --bg-elevated:#12161F;
+      --bg-sunken:#080A10;
+      --text:#EEF0F4;
+      --text-secondary:#9AA3B4;
+      --text-tertiary:#6d7688;
+      --line:#232838;
+      --line-strong:#323951;
+      --accent:#FF7A47;
+      --accent-contrast:#0A0D14;
+      --shadow: 0 1px 2px rgba(0,0,0,.3), 0 8px 28px rgba(0,0,0,.4);
+    }
+  }
+  :root[data-theme="dark"]{
+    --bg:#0A0D14;
+    --bg-elevated:#12161F;
+    --bg-sunken:#080A10;
+    --text:#EEF0F4;
+    --text-secondary:#9AA3B4;
+    --text-tertiary:#6d7688;
+    --line:#232838;
+    --line-strong:#323951;
+    --accent:#FF7A47;
+    --accent-contrast:#0A0D14;
+    --shadow: 0 1px 2px rgba(0,0,0,.3), 0 8px 28px rgba(0,0,0,.4);
+  }
+
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0; background:var(--bg); color:var(--text);
+    font-family:var(--sans); font-size:16px; line-height:1.55;
+    -webkit-font-smoothing:antialiased;
+  }
+  a{color:inherit;}
+  h1,h2{font-family:var(--serif); font-weight:500; margin:0; text-wrap:balance; letter-spacing:-0.01em;}
+  .mono{font-family:var(--mono);}
+  .wrap{max-width:1120px; margin:0 auto; padding:0 28px;}
+  .btn{
+    display:inline-flex; align-items:center; gap:8px; font-family:var(--mono); font-size:13px;
+    letter-spacing:.04em; text-transform:uppercase; padding:12px 20px; border-radius:2px;
+    text-decoration:none; cursor:pointer; border:1px solid transparent;
+  }
+  .btn-ghost{border-color:var(--line-strong); color:var(--text);}
+  .btn-ghost:hover{border-color:var(--accent); color:var(--accent);}
+  .btn-sm{padding:8px 14px; font-size:11px;}
+
+  nav.wrap{display:flex; align-items:center; justify-content:space-between; padding-top:18px; padding-bottom:18px;}
+  .brand{font-family:var(--serif); font-weight:600; font-size:21px; letter-spacing:-.01em; text-decoration:none; color:var(--text); display:flex; align-items:center; gap:9px;}
+  .brand .mark{width:9px;height:9px;background:var(--accent);display:inline-block;}
+
+  article{max-width:720px; margin:44px auto; padding:0 28px;}
+  .meta{font-family:var(--mono); font-size:11.5px; color:var(--text-tertiary); letter-spacing:.03em; margin-bottom:16px;}
+  article h1{font-size:32px; line-height:1.15;}
+  .dek{font-size:16px; color:var(--text-secondary); margin-top:14px; font-family:var(--serif); font-style:italic;}
+  .article-body{margin-top:28px; font-size:15.5px; color:var(--text); max-width:60ch;}
+  .article-body p{margin:0 0 18px;}
+  .article-body strong{font-weight:600;}
+  .article-body .stat-inline{font-family:var(--mono); color:var(--accent); font-weight:600;}
+  .article-sources{margin-top:32px; padding-top:20px; border-top:1px solid var(--line); font-size:12px; color:var(--text-tertiary);}
+  .article-sources a{color:var(--text-secondary); text-decoration:underline; text-decoration-color:var(--line-strong);}
+  .back-link{margin-top:32px; display:inline-block;}
+</style>
+<meta property="og:image" content="https://awhind.com/images/og/briefing/2026-11-14.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Preview card: Attackers are hitting Barracuda email gateways through their admin page. If yours is reachable from the internet, fix that today">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:site" content="@awhxtech">
+<meta name="twitter:image" content="https://awhind.com/images/og/briefing/2026-11-14.png">
+<meta name="twitter:image:alt" content="Preview card: Attackers are hitting Barracuda email gateways through their admin page. If yours is reachable from the internet, fix that today">
+</head>
+<body>
+
+<nav class="wrap">
+  <a href="/" class="brand"><span class="mark"></span>AWHIND</a>
+  <div>
+    <a href="/#briefing" class="btn btn-ghost btn-sm">← All Briefings</a>
+  </div>
+</nav>
+
+<article>
+  <div class="meta">Nov 14, 2026 &middot; Advisory &middot; 3 min read</div>
+  <h1>Attackers are hitting Barracuda email gateways through their admin page. If yours is reachable from the internet, fix that today</h1>
+  <div class="dek">Barracuda says two patched flaws in its Email Security Gateway are now being exploited, and one needs no password, only access to the admin page. Check Point also shipped emergency fixes this week. Here's what a small office should check.</div>
+  <div class="article-body">
+    <p>A lot of small offices have a Barracuda box sitting in front of their email, filtering spam before it reaches the mailboxes. If yours is one of them, this is the week to make sure it's patched, and to check who can reach its admin page.</p>
+    <p><strong>What happened.</strong> On Nov. 2, Barracuda released patches for two flaws, CVE-2026-116606 and CVE-2026-111560. On Nov. 5 it clarified that the first one needs no login at all, only access to the appliance's admin interface. Used together, the two give an attacker root control of the device, per <a href="https://trust.barracuda.com/security/pre-authentication-authorization-bypass-command-injection" target="_blank" rel="noopener">Barracuda's advisory</a>. On Nov. 9 Barracuda added that it has seen exploitation affecting a small number of organizations, per <a href="https://www.bleepingcomputer.com/news/security/hackers-exploit-barracuda-email-security-gateway-flaws-to-get-root-access/" target="_blank" rel="noopener">BleepingComputer</a>. CISA added both flaws to its Known Exploited Vulnerabilities list on Nov. 10, per the <a href="https://www.cyber.gc.ca/en/alerts-advisories/barracuda-networks-security-advisory-av26-1112" target="_blank" rel="noopener">Canadian Centre for Cyber Security</a>.</p>
+    <p><strong>Which products.</strong> The Email Security Gateway (ESG) has both flaws. The second flaw also affects Barracuda's Load Balancer ADC, Message Archiver, Web Application Firewall, WAF Control Center and Web Security Gateway, per Barracuda.</p>
+    <p><strong>Why it matters more than a normal patch.</strong> An email gateway sees every message coming into the company. Root on that box means access to your mail and a foothold to move into the rest of your network, per <a href="https://cypheron.cz/en/blog/vulnerability-roundup-2026-11-13" target="_blank" rel="noopener">CypherOn's weekly roundup</a>.</p>
+    <p><strong>Not a Barracuda shop?</strong> The same week, Check Point released emergency hotfixes for CVE-2026-123039, a Gaia OS flaw that lets an attacker who already has a foothold get root. Check Point says it saw it exploited against a couple of dozen customers, and attacks go back to late October, per <a href="https://www.bleepingcomputer.com/news/security/check-point-patches-zero-day-that-lets-hackers-get-root-access/" target="_blank" rel="noopener">BleepingComputer</a>. CISA added it to the exploited list on Nov. 13, per <a href="https://www.cisa.gov/news-events/alerts/2026/11/13/cisa-adds-two-known-exploited-vulnerabilities-catalog" target="_blank" rel="noopener">CISA</a>.</p>
+    <p><strong>Action items for this weekend.</strong><br>1. <strong>Check the firmware.</strong> Log in to the appliance and confirm it shows the latest firmware with patches applied. For the ESG, the patches are BNSF-40425 (firmware 9.4.017 and later) or BNSF-40430 (earlier builds), per Barracuda. If the box is several versions behind, it may need more than one update.<br>2. <strong>Turn automatic patching back on.</strong> If someone switched it off, Barracuda recommends turning it back on so the next fix lands without waiting on anyone.<br>3. <strong>Take the admin page off the internet.</strong> Barracuda says devices whose admin interfaces aren't reachable from the internet are less exposed. Limit it to your office network or a VPN.<br>4. <strong>If it was exposed, look for changes.</strong> Review recent configuration changes and admin accounts on the device, and change the passwords and keys stored on it, per CypherOn.<br>5. <strong>Ask your IT provider one question.</strong> "Which of our devices have an admin page reachable from the internet?" That covers the email filter, the firewall, the Wi-Fi controller and the NAS. The answer should be none.</p>
+    <p>Not sure what's sitting at the edge of your network? Call us at +1 (689) 225-0286.</p>
+  </div>
+  <div class="article-sources">
+    Sources: <a href="https://trust.barracuda.com/security/pre-authentication-authorization-bypass-command-injection" target="_blank" rel="noopener">Barracuda: Pre-Authentication Authorization Bypass and Command Injection Vulnerabilities</a> &middot; <a href="https://www.bleepingcomputer.com/news/security/hackers-exploit-barracuda-email-security-gateway-flaws-to-get-root-access/" target="_blank" rel="noopener">BleepingComputer: Hackers now exploit critical Barracuda ESG flaws to gain root access</a> &middot; <a href="https://www.cyber.gc.ca/en/alerts-advisories/barracuda-networks-security-advisory-av26-1112" target="_blank" rel="noopener">Canadian Centre for Cyber Security: Barracuda Networks security advisory (AV26-1112)</a> &middot; <a href="https://cypheron.cz/en/blog/vulnerability-roundup-2026-11-13" target="_blank" rel="noopener">CypherOn: Vulnerability Roundup 13 November 2026</a> &middot; <a href="https://www.bleepingcomputer.com/news/security/check-point-patches-zero-day-that-lets-hackers-get-root-access/" target="_blank" rel="noopener">BleepingComputer: Check Point warns of zero-day flaw exploited for root access</a> &middot; <a href="https://www.cisa.gov/news-events/alerts/2026/11/13/cisa-adds-two-known-exploited-vulnerabilities-catalog" target="_blank" rel="noopener">CISA: CISA Adds Two Known Exploited Vulnerabilities to Catalog</a>
+  </div>
+  <a href="/#briefing" class="btn btn-ghost btn-sm back-link">← All Briefings</a>
+</article>
+
+</body>
+</html>

@@ -1,5 +1,43 @@
 [
   {
+    "date": "2026-11-15",
+    "tag": "Patch",
+    "read": "3 min",
+    "title": "Still running Exchange 2016 or 2019 in the back closet? Microsoft now calls it permanently vulnerable. Plan the move this month",
+    "dek": "November's Exchange fixes went to the Subscription Edition only. Older Exchange servers got nothing and won't again, and this month's worst email-server flaw needs no click at all. Here's what a small office should check.",
+    "body": [
+      "Most small offices moved their email to Microsoft 365 years ago. Some didn't, and some moved but kept an old Exchange server around for management. If either sounds like your office, this month's update cycle changes things.",
+      "<strong>What happened.</strong> On Nov. 10, Microsoft released its November security update for Exchange Server, and only for the Subscription Edition (SE). In the same post it said Exchange 2016 and 2019 \"are no longer tested for vulnerabilities and there are no updates released,\" and that anyone still using them \"should consider them permanently vulnerable and should upgrade your organization immediately,\" per <a href=\"https://techcommunity.microsoft.com/blog/exchange/released-november-2026-exchange-server-security-updates/4570368\" target=\"_blank\" rel=\"noopener\">Microsoft's Exchange Team</a>. Support ended in October 2025. Microsoft then sold extended security updates, and the final ones for 2016 and 2019 shipped on Oct. 13, per <a href=\"https://www.theregister.com/saas/2026/11/12/microsoft-exchange-server-2016-and-2019-enter-their-permanently-vulnerable-era/5309401\" target=\"_blank\" rel=\"noopener\">The Register</a>.",
+      "<strong>What November fixed.</strong> The SE update covers nine Exchange flaws, including a critical one, CVE-2026-118207, per The Register. Microsoft says an attacker with any low-level login could send a specially crafted request and run code on the server, with no user interaction. It was not exploited or public at release, but Microsoft rates exploitation \"more likely,\" per <a href=\"https://msrc.microsoft.com/update-guide/vulnerability/CVE-2026-118207\" target=\"_blank\" rel=\"noopener\">Microsoft's Security Update Guide</a>.",
+      "<strong>The one that needs no click.</strong> A separate Windows Search flaw, CVE-2026-116928, is rated 9.8 out of 10. Microsoft says an attacker with no login could send an email with a booby-trapped attachment, and because Exchange automatically indexes attachments, nobody has to open anything, per <a href=\"https://msrc.microsoft.com/update-guide/vulnerability/CVE-2026-116928\" target=\"_blank\" rel=\"noopener\">Microsoft</a>. That fix comes in November's Windows Server updates, not the Exchange update.",
+      "<strong>Already on Microsoft 365?</strong> Exchange Online customers are already protected and don't need to do anything, per Microsoft. The exception is a hybrid setup: any Exchange server you kept, even one used only for management, still needs the update.",
+      "<strong>Action items for this week.</strong><br>1. <strong>Find out if you have an Exchange server.</strong> Ask whoever runs your IT. Include leftover servers from a past move to Microsoft 365 and any PC running the Exchange Management Tools.<br>2. <strong>Check the version.</strong> Microsoft's Exchange Server Health Checker script reports whether a server is behind on updates. The current SE build is 15.2.2562.57, released Nov. 10, per <a href=\"https://learn.microsoft.com/en-us/exchange/new-features/build-numbers-and-release-dates\" target=\"_blank\" rel=\"noopener\">Microsoft Learn</a>.<br>3. <strong>If it's SE, install both updates.</strong> Install November's Exchange update and November's Windows Server update. Order doesn't matter. Reboot, then confirm all Exchange services have started. If some are disabled, the install was interrupted, per Microsoft.<br>4. <strong>If it's 2016 or 2019, start the move now.</strong> Upgrade to Exchange SE or move the mailboxes to Exchange Online. Microsoft's build list shows the last 2019 update was Oct. 13. Every flaw found after that stays open.<br>5. <strong>Don't skip the Windows update in the meantime.</strong> The no-click Windows Search fix is in November's Windows Server updates, so install them on the Exchange server today.",
+      "Not sure what's still running in your server closet? Call us at +1 (689) 225-0286."
+    ],
+    "sources": [
+      [
+        "Microsoft Exchange Team: Released: November 2026 Exchange Server Security Updates",
+        "https://techcommunity.microsoft.com/blog/exchange/released-november-2026-exchange-server-security-updates/4570368"
+      ],
+      [
+        "The Register: Microsoft Exchange Server 2016 and 2019 enter their 'permanently vulnerable' era",
+        "https://www.theregister.com/saas/2026/11/12/microsoft-exchange-server-2016-and-2019-enter-their-permanently-vulnerable-era/5309401"
+      ],
+      [
+        "Microsoft Security Update Guide: CVE-2026-118207",
+        "https://msrc.microsoft.com/update-guide/vulnerability/CVE-2026-118207"
+      ],
+      [
+        "Microsoft Security Update Guide: CVE-2026-116928",
+        "https://msrc.microsoft.com/update-guide/vulnerability/CVE-2026-116928"
+      ],
+      [
+        "Microsoft Learn: Exchange Server build numbers and release dates",
+        "https://learn.microsoft.com/en-us/exchange/new-features/build-numbers-and-release-dates"
+      ]
+    ]
+  },
+  {
     "date": "2026-11-14",
     "tag": "Advisory",
     "read": "3 min",

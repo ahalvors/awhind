@@ -1,5 +1,43 @@
 [
   {
+    "date": "2026-11-16",
+    "tag": "Phishing",
+    "read": "3 min",
+    "title": "Got an email saying mail held during the Microsoft outage will be deleted in 24 hours? It's phishing. Here's what to check this week",
+    "dek": "Microsoft says scammers are sending fake outage notices that cite the real incident number. The outage is over. The lures, fake support calls and payment-change requests are not. Here's what a small office should do.",
+    "body": [
+      "Last week's Microsoft 365 outage is fixed. Microsoft says it was \"a technical issue not related to cyber,\" and it marked the Exchange Online incident, EX1550543, resolved on Nov. 13, per <a href=\"https://www.securityweek.com/microsoft-rules-out-cyberattack-in-outage-warns-of-phishing-campaign/\" target=\"_blank\" rel=\"noopener\">SecurityWeek</a>. Scammers are now using that outage as cover.",
+      "<strong>What Microsoft is seeing.</strong> Microsoft Threat Intelligence says it found an active phishing campaign posing as Microsoft 365 service health notices and citing the real incident number, per <a href=\"https://x.com/MsftSecIntel/status/2121491564161581148\" target=\"_blank\" rel=\"noopener\">Microsoft Threat Intelligence on X</a>. Some of the emails, detected Nov. 13, claimed messages held during the outage would be deleted within 24 hours unless you clicked to restore them. Subject lines follow the pattern \"Outage -\" plus a six-character code. Sender names start with your organization's name and end in \"Outage Notification\" or \"Service Health,\" per <a href=\"https://www.itnews.com.au/news/phishers-quick-to-exploit-extended-m365-outage-630347\" target=\"_blank\" rel=\"noopener\">iTnews</a>.",
+      "<strong>The details to block.</strong> Microsoft named three sending domains: moments-notice[.]com, planetmaison[.]com and newbooker[.]com. Links in the emails redirect to reallifeaccounting[.]com, per iTnews. Microsoft calls the activity consistent with credential phishing but says it has not confirmed that passwords were collected or malware delivered, and it says its security products are now blocking the campaign, per SecurityWeek. Don't visit those domains to check.",
+      "<strong>It's not just email.</strong> Security firm Field Effect found a version that copies Microsoft's quarantine digest, with a \"RESTORE MESSAGES\" button leading to a fake sign-in page. It also reports outage-themed texts, fake IT support calls, and a manager or supplier saying their email is down and asking by text for a payment to a new account, per <a href=\"https://fieldeffect.com/blog/microsoft-365-outage-theme\" target=\"_blank\" rel=\"noopener\">Field Effect</a>.",
+      "<strong>Why the right number doesn't help.</strong> A real incident ID makes the fake look real. It proves nothing about the link. Microsoft posts outage updates on the Service health page in the Microsoft 365 admin center, not in emails asking you to click, per <a href=\"https://cybersecuritynews.com/active-password-stealing-attack-microsoft-365/\" target=\"_blank\" rel=\"noopener\">Cybersecurity News</a>.",
+      "<strong>Action items for this week.</strong><br>1. <strong>Tell your team today.</strong> Any email about the outage that asks you to restore mail, verify an account, reset a password or re-enroll MFA gets deleted or reported, not clicked.<br>2. <strong>Know what the real one looks like.</strong> Genuine quarantine digests come from quarantine@messaging.microsoft.com with the subject \"Microsoft 365 security: You have messages in quarantine,\" per Field Effect.<br>3. <strong>Block the senders.</strong> Have whoever runs your Microsoft 365 add the three sending domains to your block list and search for messages with \"Outage -\" subjects.<br>4. <strong>Check anyone who clicked.</strong> A click alone doesn't mean a stolen password. If someone entered a password, look for new sign-in locations, inbox rules or forwarding, app consents and new MFA methods since Nov. 12. Remove anything unknown, then reset the password and sign out all sessions. A password reset alone leaves those rules and methods in place, per Field Effect.<br>5. <strong>Call back before you pay.</strong> Confirm any payment, bank-detail, password or MFA change requested since the outage by calling the person back on a number you already have.<br>6. <strong>Shut the fake-support door.</strong> Only your IT staff should run remote support tools like Quick Assist. If anyone let a \"Microsoft support\" caller into their PC, unplug it from the network and call your IT provider.",
+      "Not sure whether anyone in your office clicked? Call us at +1 (689) 225-0286."
+    ],
+    "sources": [
+      [
+        "Microsoft Threat Intelligence (@MsftSecIntel) on X, Nov. 14, 2026",
+        "https://x.com/MsftSecIntel/status/2121491564161581148"
+      ],
+      [
+        "SecurityWeek: Microsoft Rules Out Cyberattack in Outage, Warns of Phishing Campaign",
+        "https://www.securityweek.com/microsoft-rules-out-cyberattack-in-outage-warns-of-phishing-campaign/"
+      ],
+      [
+        "iTnews: Phishers quick to exploit extended M365 outage",
+        "https://www.itnews.com.au/news/phishers-quick-to-exploit-extended-m365-outage-630347"
+      ],
+      [
+        "Field Effect: Microsoft 365 outage theme drives credential phishing and support scams",
+        "https://fieldeffect.com/blog/microsoft-365-outage-theme"
+      ],
+      [
+        "Cybersecurity News: Microsoft Warns of Active Password Stealing Attack Exploiting the Microsoft 365 Service Disruption",
+        "https://cybersecuritynews.com/active-password-stealing-attack-microsoft-365/"
+      ]
+    ]
+  },
+  {
     "date": "2026-11-15",
     "tag": "Patch",
     "read": "3 min",

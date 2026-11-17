@@ -1,5 +1,43 @@
 [
   {
+    "date": "2026-11-17",
+    "tag": "Websites",
+    "read": "3 min",
+    "title": "Malware rode in on a trusted script and hit CNN, Zoom and the BBC. Your small-business site loads outside scripts too. Here's what to check",
+    "dek": "Attackers broke into Optimizely, a web testing service, and slipped card-skimming code onto the sites of 178 organizations on Monday. You probably don't use Optimizely. You almost certainly load someone else's code on your website. Here's a short list to review this week.",
+    "body": [
+      "On Monday, visitors to some of the biggest sites on the web got malware from a service those sites trusted. Optimizely, a platform companies use to test and personalize their web pages, says an unauthorized party exploited a vulnerability in its Experimentation product and used it to add malicious JavaScript to some customer projects, per <a href=\"https://status.optimizely.com/\" target=\"_blank\" rel=\"noopener\">Optimizely's status page</a>.",
+      "<strong>What happened.</strong> Security researcher Scott Helme of Report URI found 188 infected Optimizely scripts belonging to 178 organizations, per <a href=\"https://www.bleepingcomputer.com/news/security/optimizely-supply-chain-attack-infects-major-brands-sites-with-malware/\" target=\"_blank\" rel=\"noopener\">BleepingComputer</a>. BleepingComputer confirmed the malicious script loaded, or tried to load, on sites including Zoom, CNN, the BBC, GitLab and Salesforce. The code swapped cryptocurrency wallet addresses for the attacker's, looked for card numbers typed into pages, collected cookies and screenshots, and tried to load iOS exploit kits on iPhones and iPads.",
+      "<strong>What Optimizely says it did.</strong> The company told BleepingComputer it blocked the vulnerable path, deployed a fix, removed the injected code, ended active sessions, revoked tokens and reset access for affected user accounts. Report URI found one customer's script was cleaned and then re-infected, which suggests the attacker still had access at that point, per <a href=\"https://thehackernews.com/2026/11/hijacked-optimizely-scripts-served-card.html\" target=\"_blank\" rel=\"noopener\">The Hacker News</a>.",
+      "<strong>Why a small business should care.</strong> Your website almost certainly loads code from other companies: analytics, ad pixels, chat widgets, booking tools, review badges. Each of those runs with the same power as your own code. If one of those companies gets broken into, your visitors get whatever the attacker adds, and your site's name is on it. Optimizely's customers didn't do anything wrong on Monday. The weak point was a vendor.",
+      "<strong>One detail worth knowing.</strong> Report URI recommends a Content Security Policy, a browser rule that limits which outside code a page may run and where it may send data. It also notes that simply allowing cdn.optimizely.com would not have helped, because the bad code came from that same host, per The Hacker News. A policy helps most when it also limits where scripts can send data.",
+      "<strong>Action items for this week.</strong><br>1. <strong>If you visited a big-name site Monday and paid by card,</strong> watch your statements. If you sent crypto that day, compare the address you paid against the one you meant to pay, per BleepingComputer.<br>2. <strong>Update iPhones and iPads.</strong> Report URI advises iOS 18.7.3 or later, or iOS 26.3 or later, for anyone who visited an affected site, per The Hacker News. It's a good idea regardless.<br>3. <strong>List the outside scripts on your own site.</strong> Ask whoever built it, or check your site's settings and plugins. Remove anything nobody uses anymore. Old tracking pixels and abandoned widgets are pure risk.<br>4. <strong>Keep extra scripts off your payment page.</strong> Take card details through your payment provider's own hosted fields or checkout page, so outside scripts on your site never touch card numbers, per The Hacker News.<br>5. <strong>Lock down the vendor accounts.</strong> Every service that can change code on your site (web host, site builder, tag manager, plugins) needs multi-factor sign-in and only the people who still need access.<br>6. <strong>If you use Optimizely,</strong> follow Report URI's checklist: review your project JavaScript and experiment code for anything you didn't write, rotate API tokens and check who can write to the account, per The Hacker News.",
+      "Not sure what your website is loading behind the scenes? Call us at +1 (689) 225-0286."
+    ],
+    "sources": [
+      [
+        "Optimizely Service Status: Web Experimentation Security Incident, Nov. 17, 2026",
+        "https://status.optimizely.com/"
+      ],
+      [
+        "BleepingComputer: Optimizely hack infected CNN, Fox News, BBC, Salesforce sites with malware",
+        "https://www.bleepingcomputer.com/news/security/optimizely-supply-chain-attack-infects-major-brands-sites-with-malware/"
+      ],
+      [
+        "The Hacker News: Hijacked Optimizely Scripts Served Card Skimmer and iOS Exploit Kits to CNN, BBC and Zoom Visitors",
+        "https://thehackernews.com/2026/11/hijacked-optimizely-scripts-served-card.html"
+      ],
+      [
+        "Help Net Security: Malware spread through Optimizely hits 178 organizations, including BBC, CNN and Zoom",
+        "https://www.helpnetsecurity.com/2026/11/17/optimizely-vulnerability-malicious-javascript/"
+      ],
+      [
+        "Report URI Blog: World's Largest Brands Infected With Malware Via Optimizely",
+        "https://blog.report-uri.com/"
+      ]
+    ]
+  },
+  {
     "date": "2026-11-16",
     "tag": "Phishing",
     "read": "3 min",

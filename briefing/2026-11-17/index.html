@@ -1,0 +1,167 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Attackers broke into Optimizely, a web testing service, and slipped card-skimming code onto the sites of 178 organizations on Monday. You probably don&#039;t use Optimizely. You almost certainly load someone else&#039;s code on your website. Here&#039;s a short list to review this week.">
+<title>Malware rode in on a trusted script and hit CNN, Zoom and the BBC. Your small-business site loads outside scripts too. Here&#039;s what to check — AWHIND Daily Briefing</title>
+<link rel="canonical" href="https://awhind.com/briefing/2026-11-17/">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='16' fill='%230B0F17'/%3E%3Ccircle cx='50' cy='50' r='16' fill='%23DD4E1E'/%3E%3C/svg%3E">
+
+<!-- Open Graph -->
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://awhind.com/briefing/2026-11-17/">
+<meta property="og:title" content="Malware rode in on a trusted script and hit CNN, Zoom and the BBC. Your small-business site loads outside scripts too. Here&#039;s what to check">
+<meta property="og:description" content="Attackers broke into Optimizely, a web testing service, and slipped card-skimming code onto the sites of 178 organizations on Monday. You probably don&#039;t use Optimizely. You almost certainly load someone else&#039;s code on your website. Here&#039;s a short list to review this week.">
+<meta property="og:site_name" content="AWHIND">
+
+<!-- Twitter Card -->
+<meta name="twitter:title" content="Malware rode in on a trusted script and hit CNN, Zoom and the BBC. Your small-business site loads outside scripts too. Here&#039;s what to check">
+<meta name="twitter:description" content="Attackers broke into Optimizely, a web testing service, and slipped card-skimming code onto the sites of 178 organizations on Monday. You probably don&#039;t use Optimizely. You almost certainly load someone else&#039;s code on your website. Here&#039;s a short list to review this week.">
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "Malware rode in on a trusted script and hit CNN, Zoom and the BBC. Your small-business site loads outside scripts too. Here's what to check",
+  "description": "Attackers broke into Optimizely, a web testing service, and slipped card-skimming code onto the sites of 178 organizations on Monday. You probably don't use Optimizely. You almost certainly load someone else's code on your website. Here's a short list to review this week.",
+  "datePublished": "2026-11-17",
+  "url": "https://awhind.com/briefing/2026-11-17/",
+  "author": {
+    "@type": "Organization",
+    "name": "AWHIND",
+    "url": "https://awhind.com",
+    "telephone": "+1-689-225-0286"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "AWHIND",
+    "url": "https://awhind.com",
+    "telephone": "+1-689-225-0286"
+  }
+}
+</script>
+
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,500&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap');
+
+  :root{
+    --bg:#F1F2ED;
+    --bg-elevated:#FFFFFF;
+    --bg-sunken:#E7E8E1;
+    --text:#0B0F17;
+    --text-secondary:#566072;
+    --text-tertiary:#848d9b;
+    --line:#D9DAD2;
+    --line-strong:#c2c4ba;
+    --accent:#DD4E1E;
+    --accent-contrast:#FFFFFF;
+    --shadow: 0 1px 2px rgba(11,15,23,.04), 0 8px 24px rgba(11,15,23,.06);
+    --serif: 'Newsreader', Georgia, 'Times New Roman', serif;
+    --sans: 'IBM Plex Sans', -apple-system, 'Segoe UI', Roboto, sans-serif;
+    --mono: 'IBM Plex Mono', 'SF Mono', Consolas, monospace;
+  }
+  @media (prefers-color-scheme: dark){
+    :root:not([data-theme="light"]){
+      --bg:#0A0D14;
+      --bg-elevated:#12161F;
+      --bg-sunken:#080A10;
+      --text:#EEF0F4;
+      --text-secondary:#9AA3B4;
+      --text-tertiary:#6d7688;
+      --line:#232838;
+      --line-strong:#323951;
+      --accent:#FF7A47;
+      --accent-contrast:#0A0D14;
+      --shadow: 0 1px 2px rgba(0,0,0,.3), 0 8px 28px rgba(0,0,0,.4);
+    }
+  }
+  :root[data-theme="dark"]{
+    --bg:#0A0D14;
+    --bg-elevated:#12161F;
+    --bg-sunken:#080A10;
+    --text:#EEF0F4;
+    --text-secondary:#9AA3B4;
+    --text-tertiary:#6d7688;
+    --line:#232838;
+    --line-strong:#323951;
+    --accent:#FF7A47;
+    --accent-contrast:#0A0D14;
+    --shadow: 0 1px 2px rgba(0,0,0,.3), 0 8px 28px rgba(0,0,0,.4);
+  }
+
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0; background:var(--bg); color:var(--text);
+    font-family:var(--sans); font-size:16px; line-height:1.55;
+    -webkit-font-smoothing:antialiased;
+  }
+  a{color:inherit;}
+  h1,h2{font-family:var(--serif); font-weight:500; margin:0; text-wrap:balance; letter-spacing:-0.01em;}
+  .mono{font-family:var(--mono);}
+  .wrap{max-width:1120px; margin:0 auto; padding:0 28px;}
+  .btn{
+    display:inline-flex; align-items:center; gap:8px; font-family:var(--mono); font-size:13px;
+    letter-spacing:.04em; text-transform:uppercase; padding:12px 20px; border-radius:2px;
+    text-decoration:none; cursor:pointer; border:1px solid transparent;
+  }
+  .btn-ghost{border-color:var(--line-strong); color:var(--text);}
+  .btn-ghost:hover{border-color:var(--accent); color:var(--accent);}
+  .btn-sm{padding:8px 14px; font-size:11px;}
+
+  nav.wrap{display:flex; align-items:center; justify-content:space-between; padding-top:18px; padding-bottom:18px;}
+  .brand{font-family:var(--serif); font-weight:600; font-size:21px; letter-spacing:-.01em; text-decoration:none; color:var(--text); display:flex; align-items:center; gap:9px;}
+  .brand .mark{width:9px;height:9px;background:var(--accent);display:inline-block;}
+
+  article{max-width:720px; margin:44px auto; padding:0 28px;}
+  .meta{font-family:var(--mono); font-size:11.5px; color:var(--text-tertiary); letter-spacing:.03em; margin-bottom:16px;}
+  article h1{font-size:32px; line-height:1.15;}
+  .dek{font-size:16px; color:var(--text-secondary); margin-top:14px; font-family:var(--serif); font-style:italic;}
+  .article-body{margin-top:28px; font-size:15.5px; color:var(--text); max-width:60ch;}
+  .article-body p{margin:0 0 18px;}
+  .article-body strong{font-weight:600;}
+  .article-body .stat-inline{font-family:var(--mono); color:var(--accent); font-weight:600;}
+  .article-sources{margin-top:32px; padding-top:20px; border-top:1px solid var(--line); font-size:12px; color:var(--text-tertiary);}
+  .article-sources a{color:var(--text-secondary); text-decoration:underline; text-decoration-color:var(--line-strong);}
+  .back-link{margin-top:32px; display:inline-block;}
+</style>
+<meta property="og:image" content="https://awhind.com/images/og/briefing/2026-11-17.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Preview card: Malware rode in on a trusted script and hit CNN, Zoom and the BBC. Your small-business site loads outside scripts too. Here&#039;s what to check">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:site" content="@awhxtech">
+<meta name="twitter:image" content="https://awhind.com/images/og/briefing/2026-11-17.png">
+<meta name="twitter:image:alt" content="Preview card: Malware rode in on a trusted script and hit CNN, Zoom and the BBC. Your small-business site loads outside scripts too. Here&#039;s what to check">
+</head>
+<body>
+
+<nav class="wrap">
+  <a href="/" class="brand"><span class="mark"></span>AWHIND</a>
+  <div>
+    <a href="/#briefing" class="btn btn-ghost btn-sm">← All Briefings</a>
+  </div>
+</nav>
+
+<article>
+  <div class="meta">Nov 17, 2026 &middot; Websites &middot; 3 min read</div>
+  <h1>Malware rode in on a trusted script and hit CNN, Zoom and the BBC. Your small-business site loads outside scripts too. Here's what to check</h1>
+  <div class="dek">Attackers broke into Optimizely, a web testing service, and slipped card-skimming code onto the sites of 178 organizations on Monday. You probably don't use Optimizely. You almost certainly load someone else's code on your website. Here's a short list to review this week.</div>
+  <div class="article-body">
+    <p>On Monday, visitors to some of the biggest sites on the web got malware from a service those sites trusted. Optimizely, a platform companies use to test and personalize their web pages, says an unauthorized party exploited a vulnerability in its Experimentation product and used it to add malicious JavaScript to some customer projects, per <a href="https://status.optimizely.com/" target="_blank" rel="noopener">Optimizely's status page</a>.</p>
+    <p><strong>What happened.</strong> Security researcher Scott Helme of Report URI found 188 infected Optimizely scripts belonging to 178 organizations, per <a href="https://www.bleepingcomputer.com/news/security/optimizely-supply-chain-attack-infects-major-brands-sites-with-malware/" target="_blank" rel="noopener">BleepingComputer</a>. BleepingComputer confirmed the malicious script loaded, or tried to load, on sites including Zoom, CNN, the BBC, GitLab and Salesforce. The code swapped cryptocurrency wallet addresses for the attacker's, looked for card numbers typed into pages, collected cookies and screenshots, and tried to load iOS exploit kits on iPhones and iPads.</p>
+    <p><strong>What Optimizely says it did.</strong> The company told BleepingComputer it blocked the vulnerable path, deployed a fix, removed the injected code, ended active sessions, revoked tokens and reset access for affected user accounts. Report URI found one customer's script was cleaned and then re-infected, which suggests the attacker still had access at that point, per <a href="https://thehackernews.com/2026/11/hijacked-optimizely-scripts-served-card.html" target="_blank" rel="noopener">The Hacker News</a>.</p>
+    <p><strong>Why a small business should care.</strong> Your website almost certainly loads code from other companies: analytics, ad pixels, chat widgets, booking tools, review badges. Each of those runs with the same power as your own code. If one of those companies gets broken into, your visitors get whatever the attacker adds, and your site's name is on it. Optimizely's customers didn't do anything wrong on Monday. The weak point was a vendor.</p>
+    <p><strong>One detail worth knowing.</strong> Report URI recommends a Content Security Policy, a browser rule that limits which outside code a page may run and where it may send data. It also notes that simply allowing cdn.optimizely.com would not have helped, because the bad code came from that same host, per The Hacker News. A policy helps most when it also limits where scripts can send data.</p>
+    <p><strong>Action items for this week.</strong><br>1. <strong>If you visited a big-name site Monday and paid by card,</strong> watch your statements. If you sent crypto that day, compare the address you paid against the one you meant to pay, per BleepingComputer.<br>2. <strong>Update iPhones and iPads.</strong> Report URI advises iOS 18.7.3 or later, or iOS 26.3 or later, for anyone who visited an affected site, per The Hacker News. It's a good idea regardless.<br>3. <strong>List the outside scripts on your own site.</strong> Ask whoever built it, or check your site's settings and plugins. Remove anything nobody uses anymore. Old tracking pixels and abandoned widgets are pure risk.<br>4. <strong>Keep extra scripts off your payment page.</strong> Take card details through your payment provider's own hosted fields or checkout page, so outside scripts on your site never touch card numbers, per The Hacker News.<br>5. <strong>Lock down the vendor accounts.</strong> Every service that can change code on your site (web host, site builder, tag manager, plugins) needs multi-factor sign-in and only the people who still need access.<br>6. <strong>If you use Optimizely,</strong> follow Report URI's checklist: review your project JavaScript and experiment code for anything you didn't write, rotate API tokens and check who can write to the account, per The Hacker News.</p>
+    <p>Not sure what your website is loading behind the scenes? Call us at +1 (689) 225-0286.</p>
+  </div>
+  <div class="article-sources">
+    Sources: <a href="https://status.optimizely.com/" target="_blank" rel="noopener">Optimizely Service Status: Web Experimentation Security Incident, Nov. 17, 2026</a> &middot; <a href="https://www.bleepingcomputer.com/news/security/optimizely-supply-chain-attack-infects-major-brands-sites-with-malware/" target="_blank" rel="noopener">BleepingComputer: Optimizely hack infected CNN, Fox News, BBC, Salesforce sites with malware</a> &middot; <a href="https://thehackernews.com/2026/11/hijacked-optimizely-scripts-served-card.html" target="_blank" rel="noopener">The Hacker News: Hijacked Optimizely Scripts Served Card Skimmer and iOS Exploit Kits to CNN, BBC and Zoom Visitors</a> &middot; <a href="https://www.helpnetsecurity.com/2026/11/17/optimizely-vulnerability-malicious-javascript/" target="_blank" rel="noopener">Help Net Security: Malware spread through Optimizely hits 178 organizations, including BBC, CNN and Zoom</a> &middot; <a href="https://blog.report-uri.com/" target="_blank" rel="noopener">Report URI Blog: World's Largest Brands Infected With Malware Via Optimizely</a>
+  </div>
+  <a href="/#briefing" class="btn btn-ghost btn-sm back-link">← All Briefings</a>
+</article>
+
+</body>
+</html>

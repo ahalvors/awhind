@@ -1,5 +1,43 @@
 [
   {
+    "date": "2026-11-19",
+    "tag": "Storage",
+    "read": "3 min",
+    "title": "CISA says attackers are now using a Synology NAS flaw. If your office files live on a DiskStation or BeeStation, check the version today",
+    "dek": "Synology fixed this remote code execution bug in late 2024, but CISA added it to its exploited list on Nov 18, 2026, and gave federal agencies until Saturday, Nov 21, to deal with it. Any office NAS that never got those updates is a target. Here's how to check yours and what to do.",
+    "body": [
+      "Plenty of small offices keep their shared drive, scanned documents and backups on a Synology box in a closet. On Nov 18, CISA added a Synology flaw, CVE-2024-10441, to its Known Exploited Vulnerabilities list, which means it has evidence attackers are using it, per <a href=\"https://www.cisa.gov/news-events/alerts/2026/11/18/cisa-adds-four-known-exploited-vulnerabilities-catalog\" target=\"_blank\" rel=\"noopener\">CISA</a>. Federal agencies have until Nov 21 to act, per the <a href=\"https://nvd.nist.gov/vuln/detail/cve-2024-10441\" target=\"_blank\" rel=\"noopener\">NVD entry</a>. Hong Kong's HKCERT rated it \"Extremely High Risk\" on Nov 19, per its <a href=\"https://www.hkcert.org/security-bulletin/synology-diskstation-manager-remote-code-execution-vulnerability_20261119\" target=\"_blank\" rel=\"noopener\">bulletin</a>.",
+      "<strong>What the flaw does.</strong> It's a bug in the system plugin daemon of Synology DiskStation Manager (DSM) and BeeStation OS (BSM). It lets a remote attacker run code on the device, and Synology rates it Critical with a CVSS score of 9.8, per <a href=\"https://www.synology.com/en-us/security/advisory/Synology_SA_24_20\" target=\"_blank\" rel=\"noopener\">Synology's advisory Synology-SA-24:20</a>. Code running on your NAS means someone can read, change or encrypt the files on it.",
+      "<strong>This is an old fix, not a new one.</strong> Synology first published the advisory on Nov 5, 2024, after the bug was shown at Pwn2Own, and the updates have been out since late 2024, per the advisory. So the boxes at risk are the ones that never got updated. That's common with a NAS that \"just works\" and nobody logs into.",
+      "<strong>Fixed versions.</strong> Per Synology's advisory:<br>- DSM 7.2.2: 7.2.2-72806-1 or later<br>- DSM 7.2.1: 7.2.1-69057-6 or later<br>- DSM 7.2: 7.2-64570-4 or later<br>- DSM 7.1: 7.1.1-42962-7 or later<br>- BeeStation OS: 1.1-65374 or later (per the <a href=\"https://nvd.nist.gov/vuln/detail/cve-2024-10441\" target=\"_blank\" rel=\"noopener\">NVD entry</a>)",
+      "The same advisory lists DSM 6.2 as Moderate, fixed in 6.2.4-25556-8 or later, for two lesser bugs fixed in the same update. Synology lists no workaround: the fix is the update.",
+      "<strong>Action items for today.</strong><br>1. <strong>Find every Synology box.</strong> Check the office closet, the back room and anyone's home office that syncs to work. Note the model and the DSM or BSM version.<br>2. <strong>Check the version.</strong> In DSM, open Control Panel, then Update &amp; Restore. Compare the version to the list above.<br>3. <strong>Update it.</strong> If you're behind, install the update after hours. Make sure a backup copy of the important files exists somewhere else first.<br>4. <strong>Get it off the open internet.</strong> CISA tells agencies to check each device's internet exposure. If the NAS login page is reachable from outside your office through port forwarding, close that. Use a VPN for remote access instead.<br>5. <strong>Look for trouble.</strong> If the NAS was out of date and reachable from the internet, review its admin accounts and recent logins, and change the admin password after updating. Unknown accounts or changed files are a reason to call for help before you trust the box again.",
+      "Not sure what's in your closet or when it was last updated? Call us at +1 (689) 225-0286."
+    ],
+    "sources": [
+      [
+        "CISA: Adds Four Known Exploited Vulnerabilities to Catalog, Nov. 18, 2026",
+        "https://www.cisa.gov/news-events/alerts/2026/11/18/cisa-adds-four-known-exploited-vulnerabilities-catalog"
+      ],
+      [
+        "Synology-SA-24:20 DSM (PWN2OWN 2024)",
+        "https://www.synology.com/en-us/security/advisory/Synology_SA_24_20"
+      ],
+      [
+        "NVD: CVE-2024-10441",
+        "https://nvd.nist.gov/vuln/detail/cve-2024-10441"
+      ],
+      [
+        "HKCERT: Synology DiskStation Manager Multiple Vulnerabilities",
+        "https://www.hkcert.org/security-bulletin/synology-diskstation-manager-remote-code-execution-vulnerability_20261119"
+      ],
+      [
+        "NamiQ: Daily threat watch, 18 November 2026",
+        "https://namiq.io/insights/daily-threat-watch-2026-11-18"
+      ]
+    ]
+  },
+  {
     "date": "2026-11-18",
     "tag": "Network",
     "read": "3 min",

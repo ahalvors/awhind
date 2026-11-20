@@ -14,6 +14,10 @@ export function subtotal(items) {
   return cents(items.reduce((sum, item) => sum + lineTotal(item), 0));
 }
 
+export function isInstallHardware(item) {
+  return item.section === 'install-hardware';
+}
+
 export function amazonItems(items) {
   return items.filter((item) => item.affiliate && item.asin);
 }
@@ -55,27 +59,20 @@ function buyCell(item, bom) {
   return `<a class="${cls}" href="${escapeHtml(url)}" target="_blank" rel="${rel}">${label}</a>`;
 }
 
-export function renderBom(bom, root) {
-  const items = bom.items || [];
-  const cartUrl = amazonCartUrl(bom);
-  root.querySelector('[data-title]').textContent = bom.title;
-  const note = root.querySelector('[data-price-note]');
-  if (note) note.textContent = bom.priceCheckedNote;
-
-  const body = items.map((item) => {
-    const noteBits = [];
-    if (item.note) noteBits.push(`<div class="item-note">${escapeHtml(item.note)}</div>`);
-    if (item.alternate && item.alternate.url) {
-      const alt = item.alternate;
-      const price = alt.unitPrice != null ? ` — ${money(alt.unitPrice)}` : '';
-      const availability = alt.availability ? ` — ${escapeHtml(alt.availability)}` : '';
-      noteBits.push(`<div class="item-note">Alternate (non-affiliate): <a href="${escapeHtml(alt.url)}" target="_blank" rel="nofollow noopener">${escapeHtml(alt.retailer)}</a>${price}${availability}.</div>`);
-    }
-    const noteRow = noteBits.join('');
-    const list = item.listPrice
-      ? `<div class="list-price">List ${money(item.listPrice)}</div>`
-      : '';
-    return `<tr>
+function itemRow(item, bom) {
+  const noteBits = [];
+  if (item.note) noteBits.push(`<div class="item-note">${escapeHtml(item.note)}</div>`);
+  if (item.alternate && item.alternate.url) {
+    const alt = item.alternate;
+    const price = alt.unitPrice != null ? ` — ${money(alt.unitPrice)}` : '';
+    const availability = alt.availability ? ` — ${escapeHtml(alt.availability)}` : '';
+    noteBits.push(`<div class="item-note">Alternate (non-affiliate): <a href="${escapeHtml(alt.url)}" target="_blank" rel="nofollow noopener">${escapeHtml(alt.retailer)}</a>${price}${availability}.</div>`);
+  }
+  const noteRow = noteBits.join('');
+  const list = item.listPrice
+    ? `<div class="list-price">List ${money(item.listPrice)}</div>`
+    : '';
+  return `<tr>
       <td data-label="Item">
         <div class="item-name">${escapeHtml(item.item)}</div>
         <div class="item-model">${escapeHtml(item.model)}</div>
@@ -87,9 +84,27 @@ export function renderBom(bom, root) {
       <td data-label="Retailer">${escapeHtml(item.retailer)}</td>
       <td class="buy" data-label="Buy">${buyCell(item, bom)}</td>
     </tr>`;
-  }).join('');
+}
 
-  root.querySelector('[data-rows]').innerHTML = body;
+export function renderBom(bom, root) {
+  const items = bom.items || [];
+  const gear = items.filter((item) => !isInstallHardware(item));
+  const hardware = items.filter(isInstallHardware);
+  const cartUrl = amazonCartUrl(bom);
+  root.querySelector('[data-title]').textContent = bom.title;
+  const note = root.querySelector('[data-price-note]');
+  if (note) note.textContent = bom.priceCheckedNote;
+
+  const gearBody = root.querySelector('[data-rows-gear]');
+  const hardwareBody = root.querySelector('[data-rows-hardware]');
+  if (gearBody) gearBody.innerHTML = gear.map((item) => itemRow(item, bom)).join('');
+  if (hardwareBody) hardwareBody.innerHTML = hardware.map((item) => itemRow(item, bom)).join('');
+
+  const legacyBody = root.querySelector('[data-rows]');
+  if (legacyBody && !gearBody && !hardwareBody) {
+    legacyBody.innerHTML = items.map((item) => itemRow(item, bom)).join('');
+  }
+
   root.querySelector('[data-subtotal]').textContent = money(subtotal(items));
 
   const cart = root.querySelector('[data-amazon-cart]');

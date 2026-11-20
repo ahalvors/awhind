@@ -61,6 +61,11 @@
   force = true
 
 [[headers]]
+  for = "/clients/*"
+  [headers.values]
+    X-Robots-Tag = "noindex, nofollow"
+
+[[headers]]
   for = "/dl/*"
   [headers.values]
     X-Robots-Tag = "noindex, nofollow"

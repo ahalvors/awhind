@@ -1,0 +1,101 @@
+{
+  "title": "Story Coffee #2 sound system",
+  "client": "Story Coffee",
+  "project": "Location #2 sound system",
+  "priceCheckedNote": "Prices checked Nov 19, 2026; may change.",
+  "amazonAssociateTag": "weighhere-20",
+  "items": [
+    {
+      "id": "jbl-control-65pt-bundle",
+      "item": "JBL Control 65P/T pendant speakers, white, 3-pair bundle (6 speakers)",
+      "model": "Control 65P/T-WH 3-pair bundle",
+      "qty": 1,
+      "unitPrice": 1199.85,
+      "priceChecked": "2026-11-19",
+      "retailer": "Amazon",
+      "asin": "B0CV2HW5LT",
+      "affiliate": true,
+      "note": "Amazon listing matched this bundle and returned HTTP 200, but the buy box was listed as currently unavailable. The $1,199.85 figure is from the client brief (a fullPrice of 1199 also appeared in the page data). Live unit price could not be reconfirmed."
+    },
+    {
+      "id": "wiim-pro",
+      "item": "WiiM Pro music streamer",
+      "model": "WiiM Pro (ASR002)",
+      "qty": 1,
+      "unitPrice": 135.2,
+      "listPrice": 169.0,
+      "priceChecked": "2026-11-19",
+      "retailer": "Amazon",
+      "asin": "B0BJDY6D1W",
+      "affiliate": true,
+      "note": "Amazon buy-box price on Nov 19, 2026 was $135.20 (20% off the $169.00 list price)."
+    },
+    {
+      "id": "jbl-control-25-1-wh",
+      "item": "JBL Control 25-1-WH compact indoor/outdoor speakers, white, sold as a pair",
+      "model": "Control 25-1-WH (pair)",
+      "qty": 1,
+      "unitPrice": 398.0,
+      "priceChecked": "2026-11-19",
+      "retailer": "Amazon",
+      "asin": "B01BT3DNN2",
+      "affiliate": true
+    },
+    {
+      "id": "atlas-at35",
+      "item": "Atlas AT35 35W commercial attenuator",
+      "model": "AT35",
+      "qty": 1,
+      "unitPrice": 43.99,
+      "priceChecked": "2026-11-19",
+      "retailer": "Amazon",
+      "asin": "B001POEZHO",
+      "affiliate": true
+    },
+    {
+      "id": "jbl-mtc-pc2",
+      "item": "JBL MTC-PC2 weather-resistant panel cover",
+      "model": "MTC-PC2",
+      "qty": 1,
+      "unitPrice": 46.5,
+      "priceChecked": "2026-11-19",
+      "retailer": "Amazon",
+      "asin": "B008BMMJYE",
+      "affiliate": true,
+      "note": "Amazon buy-box price on Nov 19, 2026 was $46.50. An earlier brief figure of $37.68 was not the current listed price."
+    },
+    {
+      "id": "jbl-csa-280z",
+      "item": "JBL CSA 280Z commercial amplifier (2 x 80W). The Crown 280A is discontinued.",
+      "model": "CSA 280Z",
+      "qty": 1,
+      "unitPrice": 498.0,
+      "priceChecked": "2026-11-19",
+      "retailer": "B&H",
+      "url": "https://www.bhphotovideo.com/c/product/1070955-REG/jbl_csa280z_2x80w_amplifier_fanless_70_100v.html",
+      "affiliate": false
+    },
+    {
+      "id": "monoprice-cmp-16awg-500",
+      "item": "Monoprice CMP plenum speaker wire, 16AWG, 2-conductor, 500 ft, black",
+      "model": "Monoprice 13725",
+      "qty": 1,
+      "unitPrice": 216.72,
+      "priceChecked": "2026-11-19",
+      "retailer": "Monoprice",
+      "url": "https://www.monoprice.com/product?p_id=13725",
+      "affiliate": false
+    },
+    {
+      "id": "small-hardware",
+      "item": "Small hardware (connectors, fittings, and install sundries)",
+      "model": "AWH-supplied estimate",
+      "qty": 1,
+      "unitPrice": 190.0,
+      "priceChecked": "2026-11-19",
+      "retailer": "AWH-supplied estimate",
+      "affiliate": false,
+      "estimate": true
+    }
+  ]
+}

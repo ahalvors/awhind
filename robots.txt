@@ -1,4 +1,4 @@
 User-agent: *
-Disallow:
+Disallow: /clients/
 
 Sitemap: https://awhind.com/sitemap.xml

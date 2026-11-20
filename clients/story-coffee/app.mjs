@@ -18,13 +18,6 @@ export function amazonItems(items) {
   return items.filter((item) => item.affiliate && item.asin);
 }
 
-export function itemUrl(item, associateTag) {
-  if (item.affiliate && item.asin) {
-    return `https://www.amazon.com/dp/${item.asin}?tag=${encodeURIComponent(associateTag)}`;
-  }
-  return item.url || null;
-}
-
 export function amazonCartUrl(bom) {
   const params = new URLSearchParams();
   params.set('AssociateTag', bom.amazonAssociateTag);
@@ -36,6 +29,11 @@ export function amazonCartUrl(bom) {
   return `https://www.amazon.com/gp/aws/cart/add.html?${params.toString()}`;
 }
 
+export function buyUrl(item, bom) {
+  if (item.affiliate && item.asin) return amazonCartUrl(bom);
+  return item.url || null;
+}
+
 function escapeHtml(value) {
   return String(value)
     .replaceAll('&', '&amp;')
@@ -45,21 +43,21 @@ function escapeHtml(value) {
     .replaceAll("'", '&#39;');
 }
 
-function buyCell(item, associateTag) {
+function buyCell(item, bom) {
   if (item.estimate) {
     return '<span class="muted">AWH-supplied estimate</span>';
   }
-  const url = itemUrl(item, associateTag);
+  const url = buyUrl(item, bom);
   if (!url) return '<span class="muted">—</span>';
   const rel = item.affiliate ? 'sponsored nofollow noopener' : 'nofollow noopener';
-  const label = item.affiliate ? 'Buy' : 'Buy (non-affiliate)';
+  const label = item.affiliate ? 'Buy all on Amazon' : 'Buy (non-affiliate)';
   const cls = item.affiliate ? 'btn btn-primary btn-sm' : 'btn btn-ghost btn-sm';
   return `<a class="${cls}" href="${escapeHtml(url)}" target="_blank" rel="${rel}">${label}</a>`;
 }
 
 export function renderBom(bom, root) {
-  const associateTag = bom.amazonAssociateTag;
   const items = bom.items || [];
+  const cartUrl = amazonCartUrl(bom);
   root.querySelector('[data-title]').textContent = bom.title;
   const note = root.querySelector('[data-price-note]');
   if (note) note.textContent = bom.priceCheckedNote;
@@ -81,7 +79,7 @@ export function renderBom(bom, root) {
       <td class="num" data-label="Unit price">${money(item.unitPrice)}${list}</td>
       <td class="num" data-label="Line total">${money(lineTotal(item))}</td>
       <td data-label="Retailer">${escapeHtml(item.retailer)}</td>
-      <td class="buy" data-label="Buy">${buyCell(item, associateTag)}</td>
+      <td class="buy" data-label="Buy">${buyCell(item, bom)}</td>
     </tr>`;
   }).join('');
 
@@ -90,7 +88,7 @@ export function renderBom(bom, root) {
 
   const cart = root.querySelector('[data-amazon-cart]');
   if (cart) {
-    cart.href = amazonCartUrl(bom);
+    cart.href = cartUrl;
     cart.target = '_blank';
     cart.rel = 'sponsored nofollow noopener';
   }

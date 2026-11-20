@@ -1,7 +1,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
-import { amazonCartUrl, amazonItems, itemUrl, lineTotal, money, subtotal } from '../clients/story-coffee/app.mjs';
+import { amazonCartUrl, amazonItems, buyUrl, lineTotal, money, subtotal } from '../clients/story-coffee/app.mjs';
 
 const bom = JSON.parse(fs.readFileSync('clients/story-coffee/bom.json', 'utf8'));
 const page = fs.readFileSync('clients/story-coffee/index.html', 'utf8');
@@ -54,9 +54,21 @@ test('Amazon cart URL and per-item links use the shared associate tag', () => {
     'https://www.amazon.com/gp/aws/cart/add.html?AssociateTag=weighhere-20&ASIN.1=B0CV2HW5LT&Quantity.1=1&ASIN.2=B0BJDY6D1W&Quantity.2=1&ASIN.3=B01BT3DNN2&Quantity.3=1&ASIN.4=B001POEZHO&Quantity.4=1&ASIN.5=B008BMMJYE&Quantity.5=1'
   );
   assert.equal(amazonItems(bom.items).length, 5);
-  assert.equal(itemUrl(bom.items[1], bom.amazonAssociateTag), 'https://www.amazon.com/dp/B0BJDY6D1W?tag=weighhere-20');
-  assert.equal(itemUrl(bom.items[5], bom.amazonAssociateTag), bom.items[5].url);
-  assert.equal(itemUrl(bom.items[7], bom.amazonAssociateTag), null);
+  for (const item of amazonItems(bom.items)) {
+    assert.equal(buyUrl(item, bom), cart);
+  }
+  assert.equal(buyUrl(bom.items[5], bom), bom.items[5].url);
+  assert.equal(buyUrl(bom.items[6], bom), bom.items[6].url);
+  assert.equal(buyUrl(bom.items[7], bom), null);
+});
+
+test('Amazon buy buttons are buy-all links, not single-ASIN product pages', () => {
+  const app = fs.readFileSync('clients/story-coffee/app.mjs', 'utf8');
+  assert.match(app, /Buy all on Amazon/);
+  assert.match(page, /Any Amazon button on this page adds all five Amazon items to a cart/);
+  assert.doesNotMatch(app, /amazon\.com\/dp\//);
+  assert.doesNotMatch(page, /weighhere-20|awhind-20/);
+  assert.equal((app.match(/amazonCartUrl\(/g) || []).length >= 2, true);
 });
 
 test('line totals and subtotal add up', () => {
@@ -72,6 +84,7 @@ test('buy page is noindex, fetches bom.json, and uses sponsored buy links', () =
   assert.match(app, /\.\/bom\.json/);
   assert.match(app, /sponsored nofollow noopener/);
   assert.match(page, /Prices checked Nov 19, 2026; may change\./);
+  assert.match(page, /amazon-all-note/);
   assert.match(page, /As an Amazon Associate, AWH Industries earns from qualifying purchases/);
   assert.match(page, /href="\/disclosure\/"/);
   assert.match(page, /data-amazon-cart/);

@@ -72,16 +72,16 @@ export function renderBom(bom, root) {
       ? `<div class="list-price">List ${money(item.listPrice)}</div>`
       : '';
     return `<tr>
-      <td>
+      <td data-label="Item">
         <div class="item-name">${escapeHtml(item.item)}</div>
         <div class="item-model">${escapeHtml(item.model)}</div>
         ${noteRow}
       </td>
-      <td class="num">${escapeHtml(item.qty)}</td>
-      <td class="num">${money(item.unitPrice)}${list}</td>
-      <td class="num">${money(lineTotal(item))}</td>
-      <td>${escapeHtml(item.retailer)}</td>
-      <td class="buy">${buyCell(item, associateTag)}</td>
+      <td class="num" data-label="Qty">${escapeHtml(item.qty)}</td>
+      <td class="num" data-label="Unit price">${money(item.unitPrice)}${list}</td>
+      <td class="num" data-label="Line total">${money(lineTotal(item))}</td>
+      <td data-label="Retailer">${escapeHtml(item.retailer)}</td>
+      <td class="buy" data-label="Buy">${buyCell(item, associateTag)}</td>
     </tr>`;
   }).join('');
 

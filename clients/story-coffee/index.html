@@ -73,9 +73,24 @@
   footer .copy{font-size:12px; color:var(--text-tertiary); font-family:var(--mono);}
   footer a{font-size:12px; color:var(--text-secondary); text-decoration:none; margin-right:16px;}
   footer a:hover{color:var(--accent);}
-  @media (max-width:640px){
+  @media (max-width:720px){
     .wrap{padding:0 18px;}
     header.page-hero h1{font-size:30px;}
+    .table-wrap{overflow:visible;}
+    table{min-width:0; width:100%;}
+    thead{display:none;}
+    tbody tr{display:block; padding:16px 16px 8px; border-bottom:1px solid var(--line);}
+    tbody td{display:flex; justify-content:space-between; align-items:flex-start; gap:12px; border:0; padding:6px 0; white-space:normal;}
+    tbody td::before{content:attr(data-label); font-family:var(--mono); font-size:11px; letter-spacing:.08em; text-transform:uppercase; color:var(--text-secondary); flex:0 0 7.5em;}
+    tbody td[data-label="Item"]{display:block; padding-bottom:10px;}
+    tbody td[data-label="Item"]::before{display:none;}
+    tbody td.buy{justify-content:flex-end;}
+    tbody td.buy::before{margin-right:auto;}
+    tfoot tr{display:flex; justify-content:space-between; align-items:center; padding:14px 16px;}
+    tfoot td{border:0; padding:0; background:transparent;}
+    tfoot td:not(.num):not([data-subtotal]) {font-family:var(--mono); font-size:11px; letter-spacing:.08em; text-transform:uppercase;}
+    tfoot td[colspan]{width:auto;}
+    tfoot td:empty{display:none;}
   }
 </style>
 </head>
@@ -111,7 +126,7 @@
       <tfoot>
         <tr>
           <td colspan="3">Subtotal</td>
-          <td class="num" data-subtotal></td>
+          <td class="num" data-label="Subtotal" data-subtotal></td>
           <td colspan="2"></td>
         </tr>
       </tfoot>

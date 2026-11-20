@@ -23,11 +23,14 @@ test('bom items have the required fields and expected catalog', () => {
   for (const item of bom.items) {
     for (const key of required) assert.ok(key in item, `${item.id || item.item} missing ${key}`);
     assert.equal(item.priceChecked, '2026-11-19');
-    assert.equal(item.qty, 1);
   }
   const byId = Object.fromEntries(bom.items.map((item) => [item.id, item]));
-  assert.equal(byId['jbl-control-65pt-bundle'].asin, 'B0CV2HW5LT');
-  assert.equal(byId['jbl-control-65pt-bundle'].unitPrice, 1199.85);
+  assert.equal(bom.items.some((item) => item.asin === 'B0CV2HW5LT'), false);
+  assert.equal(bom.items.some((item) => (item.url || '').includes('monoprice.com')), false);
+  assert.equal(byId['jbl-control-65pt-wh-pair'].asin, 'B00519RSDC');
+  assert.equal(byId['jbl-control-65pt-wh-pair'].qty, 3);
+  assert.equal(byId['jbl-control-65pt-wh-pair'].unitPrice, 440);
+  assert.equal(byId['jbl-control-65pt-wh-pair'].affiliate, true);
   assert.equal(byId['wiim-pro'].asin, 'B0BJDY6D1W');
   assert.equal(byId['wiim-pro'].unitPrice, 135.20);
   assert.equal(byId['jbl-control-25-1-wh'].asin, 'B01BT3DNN2');
@@ -39,9 +42,12 @@ test('bom items have the required fields and expected catalog', () => {
   assert.equal(byId['jbl-csa-280z'].affiliate, false);
   assert.match(byId['jbl-csa-280z'].url, /bhphotovideo\.com/);
   assert.equal(byId['jbl-csa-280z'].unitPrice, 498);
-  assert.equal(byId['monoprice-cmp-16awg-500'].affiliate, false);
-  assert.equal(byId['monoprice-cmp-16awg-500'].url, 'https://www.monoprice.com/product?p_id=13725');
-  assert.equal(byId['monoprice-cmp-16awg-500'].unitPrice, 216.72);
+  assert.equal(byId['west-penn-25225bwh0500'].affiliate, false);
+  assert.equal(byId['west-penn-25225bwh0500'].unitPrice, 137.60);
+  assert.equal(byId['west-penn-25225bwh0500'].url, 'https://www.aiconsol.com/25225bwh0500-west-penn-wire.html');
+  assert.equal(byId['west-penn-25225bwh0500'].alternate.retailer, 'Markertek');
+  assert.match(byId['west-penn-25225bwh0500'].alternate.url, /markertek\.com/);
+  assert.equal(byId['west-penn-25225bwh0500'].alternate.unitPrice, 145.79);
   assert.equal(byId['small-hardware'].estimate, true);
   assert.equal(byId['small-hardware'].unitPrice, 190);
   assert.equal(byId['small-hardware'].url, undefined);
@@ -51,7 +57,7 @@ test('Amazon cart URL and per-item links use the shared associate tag', () => {
   const cart = amazonCartUrl(bom);
   assert.equal(
     cart,
-    'https://www.amazon.com/gp/aws/cart/add.html?AssociateTag=weighhere-20&ASIN.1=B0CV2HW5LT&Quantity.1=1&ASIN.2=B0BJDY6D1W&Quantity.2=1&ASIN.3=B01BT3DNN2&Quantity.3=1&ASIN.4=B001POEZHO&Quantity.4=1&ASIN.5=B008BMMJYE&Quantity.5=1'
+    'https://www.amazon.com/gp/aws/cart/add.html?AssociateTag=weighhere-20&ASIN.1=B00519RSDC&Quantity.1=3&ASIN.2=B0BJDY6D1W&Quantity.2=1&ASIN.3=B01BT3DNN2&Quantity.3=1&ASIN.4=B001POEZHO&Quantity.4=1&ASIN.5=B008BMMJYE&Quantity.5=1'
   );
   assert.equal(amazonItems(bom.items).length, 5);
   for (const item of amazonItems(bom.items)) {
@@ -65,7 +71,7 @@ test('Amazon cart URL and per-item links use the shared associate tag', () => {
 test('Amazon buy buttons are buy-all links, not single-ASIN product pages', () => {
   const app = fs.readFileSync('clients/story-coffee/app.mjs', 'utf8');
   assert.match(app, /Buy all on Amazon/);
-  assert.match(page, /Any Amazon button on this page adds all five Amazon items to a cart/);
+  assert.match(page, /Any Amazon button on this page adds all Amazon items to a cart/);
   assert.doesNotMatch(app, /amazon\.com\/dp\//);
   assert.doesNotMatch(page, /weighhere-20|awhind-20/);
   assert.equal((app.match(/amazonCartUrl\(/g) || []).length >= 2, true);
@@ -73,8 +79,9 @@ test('Amazon buy buttons are buy-all links, not single-ASIN product pages', () =
 
 test('line totals and subtotal add up', () => {
   assert.equal(lineTotal({ qty: 1, unitPrice: 46.5 }), 46.5);
+  assert.equal(lineTotal({ qty: 3, unitPrice: 440 }), 1320);
   assert.equal(money(135.2), '$135.20');
-  assert.equal(subtotal(bom.items), 2728.26);
+  assert.equal(subtotal(bom.items), 2769.29);
 });
 
 test('buy page is noindex, fetches bom.json, and uses sponsored buy links', () => {

@@ -63,9 +63,15 @@ export function renderBom(bom, root) {
   if (note) note.textContent = bom.priceCheckedNote;
 
   const body = items.map((item) => {
-    const noteRow = item.note
-      ? `<div class="item-note">${escapeHtml(item.note)}</div>`
-      : '';
+    const noteBits = [];
+    if (item.note) noteBits.push(`<div class="item-note">${escapeHtml(item.note)}</div>`);
+    if (item.alternate && item.alternate.url) {
+      const alt = item.alternate;
+      const price = alt.unitPrice != null ? ` — ${money(alt.unitPrice)}` : '';
+      const availability = alt.availability ? ` — ${escapeHtml(alt.availability)}` : '';
+      noteBits.push(`<div class="item-note">Alternate (non-affiliate): <a href="${escapeHtml(alt.url)}" target="_blank" rel="nofollow noopener">${escapeHtml(alt.retailer)}</a>${price}${availability}.</div>`);
+    }
+    const noteRow = noteBits.join('');
     const list = item.listPrice
       ? `<div class="list-price">List ${money(item.listPrice)}</div>`
       : '';

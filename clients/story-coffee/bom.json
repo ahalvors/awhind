@@ -6,16 +6,17 @@
   "amazonAssociateTag": "weighhere-20",
   "items": [
     {
-      "id": "jbl-control-65pt-bundle",
-      "item": "JBL Control 65P/T pendant speakers, white, 3-pair bundle (6 speakers)",
-      "model": "Control 65P/T-WH 3-pair bundle",
-      "qty": 1,
-      "unitPrice": 1199.85,
+      "id": "jbl-control-65pt-wh-pair",
+      "item": "JBL Control 65P/T pendant speakers, white, sold as a pair (3 pairs = 6 speakers)",
+      "model": "Control 65P/T-WH (pair)",
+      "qty": 3,
+      "unitPrice": 440.0,
+      "listPrice": 550.0,
       "priceChecked": "2026-11-19",
       "retailer": "Amazon",
-      "asin": "B0CV2HW5LT",
+      "asin": "B00519RSDC",
       "affiliate": true,
-      "note": "Amazon listing matched this bundle and returned HTTP 200, but the buy box was listed as currently unavailable. The $1,199.85 figure is from the client brief (a fullPrice of 1199 also appeared in the page data). Live unit price could not be reconfirmed."
+      "note": "Replaces the unavailable Amazon 3-pair bundle (B0CV2HW5LT). This listing is the white pair; quantity 3 covers six speakers. Amazon buy-box price on Nov 19, 2026 was $440.00 (20% off the typical $550.00), with 14 left in stock and more on the way. B&H lists the same white pair at $550.00 but was temporarily out of stock (expected 2\u20134 weeks)."
     },
     {
       "id": "wiim-pro",
@@ -76,15 +77,21 @@
       "affiliate": false
     },
     {
-      "id": "monoprice-cmp-16awg-500",
-      "item": "Monoprice CMP plenum speaker wire, 16AWG, 2-conductor, 500 ft, black",
-      "model": "Monoprice 13725",
+      "id": "west-penn-25225bwh0500",
+      "item": "West Penn 25225BWH0500 white plenum speaker cable, 16/2 CMP, 500 ft",
+      "model": "25225BWH0500",
       "qty": 1,
-      "unitPrice": 216.72,
+      "unitPrice": 137.6,
       "priceChecked": "2026-11-19",
-      "retailer": "Monoprice",
-      "url": "https://www.monoprice.com/product?p_id=13725",
-      "affiliate": false
+      "retailer": "A-I Consolidated",
+      "url": "https://www.aiconsol.com/25225bwh0500-west-penn-wire.html",
+      "affiliate": false,
+      "alternate": {
+        "retailer": "Markertek",
+        "url": "https://www.markertek.com/product/wp-25225b-500we/west-penn-wire-25225b-500-16-ga-unshielded-plenum-speaker-cable-500-feet-white",
+        "unitPrice": 145.79,
+        "availability": "Currently out of stock; usually ships in 5\u201314 days"
+      }
     },
     {
       "id": "small-hardware",

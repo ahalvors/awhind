@@ -1,5 +1,38 @@
 [
   {
+    "date": "2026-11-21",
+    "tag": "Patch",
+    "read": "3 min",
+    "title": "Attackers have been breaking into VMware vCenter since September. If your servers run on VMware, patch vCenter this weekend",
+    "dek": "Broadcom has fixed a critical vCenter flaw that lets someone with network access skip the login, and Google's Mandiant says a state-backed group was already using it. Here's how to tell if you're affected and what to do first.",
+    "body": [
+      "Broadcom released an emergency fix on Nov. 19 for CVE-2026-123890, a critical authentication bypass in VMware vCenter Server rated 9.8 out of 10, per its advisory <a href=\"https://support.broadcom.com/web/ecx/support-content-notification/-/external/content/SecurityAdvisories/0/39495\" target=\"_blank\" rel=\"noopener\">VMSA-2026-0009</a>. Broadcom says an attacker with network access to vCenter can bypass authentication and gain unauthorized access, and that there is no workaround. CISA added the flaw to its <a href=\"https://www.cisa.gov/news-events/alerts/2026/11/20/cisa-adds-four-known-exploited-vulnerabilities-catalog\" target=\"_blank\" rel=\"noopener\">Known Exploited Vulnerabilities catalog</a> on Nov. 20.",
+      "<strong>Who's using it.</strong> Google's Mandiant and Threat Intelligence Group say a suspected Chinese state-sponsored group it tracks as Armory Castle exploited the flaw starting in early September, per <a href=\"https://www.bleepingcomputer.com/news/security/vmware-patches-vcenter-zero-day-exploited-in-attacks-since-september/\" target=\"_blank\" rel=\"noopener\">BleepingComputer</a>. In the attack Mandiant described, the group first broke into a BeyondTrust Remote Support appliance, moved through internal Linux systems, and then used the vCenter flaw to create an administrator account and steal the vCenter directory database.",
+      "<strong>Why it matters if you're a small business.</strong> vCenter is the console that runs your VMware servers. Whoever controls it controls every virtual machine under it. Mandiant says the attackers went on to reach ESXi hosts and pull files from virtual machines, including Windows Active Directory database files, per <a href=\"https://www.bleepingcomputer.com/news/security/vmware-patches-vcenter-zero-day-exploited-in-attacks-since-september/\" target=\"_blank\" rel=\"noopener\">BleepingComputer</a>. <a href=\"https://censys.com/advisory/cve-2026-123890/\" target=\"_blank\" rel=\"noopener\">Censys</a> notes the attack path also allows forged sign-in tokens that can get past MFA. If your file server, accounting system or domain controller lives on VMware, this is the patch to do first.",
+      "<strong>The fixed versions.</strong> From Broadcom's advisory:<br>- vCenter 8.0: update to <strong>8.0 U3m</strong><br>- vCenter 9.0.x: update to <strong>9.0.2.0200</strong><br>- vCenter 9.1.x: update to <strong>9.1.1.0200</strong><br>- VMware Cloud Foundation 5.x: update to <strong>5.2.5</strong><br>- vCenter 7.0: no public fix. Broadcom says to contact its support if you have an extended support contract.",
+      "<strong>Action items for this weekend.</strong><br>1. <strong>Find out if you run vCenter at all.</strong> If you have one or two standalone ESXi hosts with no vCenter, this flaw doesn't apply, but ask whoever manages your servers to confirm.<br>2. <strong>Check the version.</strong> Compare it to the list above. Anything older needs the update.<br>3. <strong>Take a snapshot or backup of vCenter, then patch.</strong> Broadcom calls this an emergency update.<br>4. <strong>Keep vCenter off the internet.</strong> The management console should only be reachable from your internal admin network or VPN. Broadcom says network restrictions and firewall rules can reduce exposure while you schedule the update.<br>5. <strong>Still on vCenter 7.0?</strong> Without an extended support contract there's no fix. Lock down network access to it now and start planning the upgrade.<br>6. <strong>Patch the doors in, too.</strong> This attack started at a remote-support appliance. Make sure remote-access tools, VPNs and firewalls are on current versions.<br>7. <strong>If your vCenter was reachable from outside before you patched,</strong> have someone review it for new admin accounts and unfamiliar logins. Censys says a vCenter attackers could reach while it was unpatched needs review.",
+      "Not sure who manages your VMware servers, or what version they're on? Call us at +1 (689) 225-0286 and we'll help you check."
+    ],
+    "sources": [
+      [
+        "Broadcom: VMSA-2026-0009, Nov. 19, 2026 (updated Nov. 20)",
+        "https://support.broadcom.com/web/ecx/support-content-notification/-/external/content/SecurityAdvisories/0/39495"
+      ],
+      [
+        "BleepingComputer: VMware patches vCenter zero-day exploited in attacks since September, Nov. 19, 2026",
+        "https://www.bleepingcomputer.com/news/security/vmware-patches-vcenter-zero-day-exploited-in-attacks-since-september/"
+      ],
+      [
+        "CISA: CISA Adds Four Known Exploited Vulnerabilities to Catalog, Nov. 20, 2026",
+        "https://www.cisa.gov/news-events/alerts/2026/11/20/cisa-adds-four-known-exploited-vulnerabilities-catalog"
+      ],
+      [
+        "Censys: Nov 19 Advisory: VMware vCenter Authentication Bypass (CVE-2026-123890)",
+        "https://censys.com/advisory/cve-2026-123890/"
+      ]
+    ]
+  },
+  {
     "date": "2026-11-20",
     "tag": "Phishing",
     "read": "3 min",

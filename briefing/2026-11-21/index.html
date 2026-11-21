@@ -1,0 +1,166 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Broadcom has fixed a critical vCenter flaw that lets someone with network access skip the login, and Google&#039;s Mandiant says a state-backed group was already using it. Here&#039;s how to tell if you&#039;re affected and what to do first.">
+<title>Attackers have been breaking into VMware vCenter since September. If your servers run on VMware, patch vCenter this weekend — AWHIND Daily Briefing</title>
+<link rel="canonical" href="https://awhind.com/briefing/2026-11-21/">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='16' fill='%230B0F17'/%3E%3Ccircle cx='50' cy='50' r='16' fill='%23DD4E1E'/%3E%3C/svg%3E">
+
+<!-- Open Graph -->
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://awhind.com/briefing/2026-11-21/">
+<meta property="og:title" content="Attackers have been breaking into VMware vCenter since September. If your servers run on VMware, patch vCenter this weekend">
+<meta property="og:description" content="Broadcom has fixed a critical vCenter flaw that lets someone with network access skip the login, and Google&#039;s Mandiant says a state-backed group was already using it. Here&#039;s how to tell if you&#039;re affected and what to do first.">
+<meta property="og:site_name" content="AWHIND">
+
+<!-- Twitter Card -->
+<meta name="twitter:title" content="Attackers have been breaking into VMware vCenter since September. If your servers run on VMware, patch vCenter this weekend">
+<meta name="twitter:description" content="Broadcom has fixed a critical vCenter flaw that lets someone with network access skip the login, and Google&#039;s Mandiant says a state-backed group was already using it. Here&#039;s how to tell if you&#039;re affected and what to do first.">
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "Attackers have been breaking into VMware vCenter since September. If your servers run on VMware, patch vCenter this weekend",
+  "description": "Broadcom has fixed a critical vCenter flaw that lets someone with network access skip the login, and Google's Mandiant says a state-backed group was already using it. Here's how to tell if you're affected and what to do first.",
+  "datePublished": "2026-11-21",
+  "url": "https://awhind.com/briefing/2026-11-21/",
+  "author": {
+    "@type": "Organization",
+    "name": "AWHIND",
+    "url": "https://awhind.com",
+    "telephone": "+1-689-225-0286"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "AWHIND",
+    "url": "https://awhind.com",
+    "telephone": "+1-689-225-0286"
+  }
+}
+</script>
+
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,500&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap');
+
+  :root{
+    --bg:#F1F2ED;
+    --bg-elevated:#FFFFFF;
+    --bg-sunken:#E7E8E1;
+    --text:#0B0F17;
+    --text-secondary:#566072;
+    --text-tertiary:#848d9b;
+    --line:#D9DAD2;
+    --line-strong:#c2c4ba;
+    --accent:#DD4E1E;
+    --accent-contrast:#FFFFFF;
+    --shadow: 0 1px 2px rgba(11,15,23,.04), 0 8px 24px rgba(11,15,23,.06);
+    --serif: 'Newsreader', Georgia, 'Times New Roman', serif;
+    --sans: 'IBM Plex Sans', -apple-system, 'Segoe UI', Roboto, sans-serif;
+    --mono: 'IBM Plex Mono', 'SF Mono', Consolas, monospace;
+  }
+  @media (prefers-color-scheme: dark){
+    :root:not([data-theme="light"]){
+      --bg:#0A0D14;
+      --bg-elevated:#12161F;
+      --bg-sunken:#080A10;
+      --text:#EEF0F4;
+      --text-secondary:#9AA3B4;
+      --text-tertiary:#6d7688;
+      --line:#232838;
+      --line-strong:#323951;
+      --accent:#FF7A47;
+      --accent-contrast:#0A0D14;
+      --shadow: 0 1px 2px rgba(0,0,0,.3), 0 8px 28px rgba(0,0,0,.4);
+    }
+  }
+  :root[data-theme="dark"]{
+    --bg:#0A0D14;
+    --bg-elevated:#12161F;
+    --bg-sunken:#080A10;
+    --text:#EEF0F4;
+    --text-secondary:#9AA3B4;
+    --text-tertiary:#6d7688;
+    --line:#232838;
+    --line-strong:#323951;
+    --accent:#FF7A47;
+    --accent-contrast:#0A0D14;
+    --shadow: 0 1px 2px rgba(0,0,0,.3), 0 8px 28px rgba(0,0,0,.4);
+  }
+
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0; background:var(--bg); color:var(--text);
+    font-family:var(--sans); font-size:16px; line-height:1.55;
+    -webkit-font-smoothing:antialiased;
+  }
+  a{color:inherit;}
+  h1,h2{font-family:var(--serif); font-weight:500; margin:0; text-wrap:balance; letter-spacing:-0.01em;}
+  .mono{font-family:var(--mono);}
+  .wrap{max-width:1120px; margin:0 auto; padding:0 28px;}
+  .btn{
+    display:inline-flex; align-items:center; gap:8px; font-family:var(--mono); font-size:13px;
+    letter-spacing:.04em; text-transform:uppercase; padding:12px 20px; border-radius:2px;
+    text-decoration:none; cursor:pointer; border:1px solid transparent;
+  }
+  .btn-ghost{border-color:var(--line-strong); color:var(--text);}
+  .btn-ghost:hover{border-color:var(--accent); color:var(--accent);}
+  .btn-sm{padding:8px 14px; font-size:11px;}
+
+  nav.wrap{display:flex; align-items:center; justify-content:space-between; padding-top:18px; padding-bottom:18px;}
+  .brand{font-family:var(--serif); font-weight:600; font-size:21px; letter-spacing:-.01em; text-decoration:none; color:var(--text); display:flex; align-items:center; gap:9px;}
+  .brand .mark{width:9px;height:9px;background:var(--accent);display:inline-block;}
+
+  article{max-width:720px; margin:44px auto; padding:0 28px;}
+  .meta{font-family:var(--mono); font-size:11.5px; color:var(--text-tertiary); letter-spacing:.03em; margin-bottom:16px;}
+  article h1{font-size:32px; line-height:1.15;}
+  .dek{font-size:16px; color:var(--text-secondary); margin-top:14px; font-family:var(--serif); font-style:italic;}
+  .article-body{margin-top:28px; font-size:15.5px; color:var(--text); max-width:60ch;}
+  .article-body p{margin:0 0 18px;}
+  .article-body strong{font-weight:600;}
+  .article-body .stat-inline{font-family:var(--mono); color:var(--accent); font-weight:600;}
+  .article-sources{margin-top:32px; padding-top:20px; border-top:1px solid var(--line); font-size:12px; color:var(--text-tertiary);}
+  .article-sources a{color:var(--text-secondary); text-decoration:underline; text-decoration-color:var(--line-strong);}
+  .back-link{margin-top:32px; display:inline-block;}
+</style>
+<meta property="og:image" content="https://awhind.com/images/og/briefing/2026-11-21.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Preview card: Attackers have been breaking into VMware vCenter since September. If your servers run on VMware, patch vCenter this weekend">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:site" content="@awhxtech">
+<meta name="twitter:image" content="https://awhind.com/images/og/briefing/2026-11-21.png">
+<meta name="twitter:image:alt" content="Preview card: Attackers have been breaking into VMware vCenter since September. If your servers run on VMware, patch vCenter this weekend">
+</head>
+<body>
+
+<nav class="wrap">
+  <a href="/" class="brand"><span class="mark"></span>AWHIND</a>
+  <div>
+    <a href="/#briefing" class="btn btn-ghost btn-sm">← All Briefings</a>
+  </div>
+</nav>
+
+<article>
+  <div class="meta">Nov 21, 2026 &middot; Patch &middot; 3 min read</div>
+  <h1>Attackers have been breaking into VMware vCenter since September. If your servers run on VMware, patch vCenter this weekend</h1>
+  <div class="dek">Broadcom has fixed a critical vCenter flaw that lets someone with network access skip the login, and Google's Mandiant says a state-backed group was already using it. Here's how to tell if you're affected and what to do first.</div>
+  <div class="article-body">
+    <p>Broadcom released an emergency fix on Nov. 19 for CVE-2026-123890, a critical authentication bypass in VMware vCenter Server rated 9.8 out of 10, per its advisory <a href="https://support.broadcom.com/web/ecx/support-content-notification/-/external/content/SecurityAdvisories/0/39495" target="_blank" rel="noopener">VMSA-2026-0009</a>. Broadcom says an attacker with network access to vCenter can bypass authentication and gain unauthorized access, and that there is no workaround. CISA added the flaw to its <a href="https://www.cisa.gov/news-events/alerts/2026/11/20/cisa-adds-four-known-exploited-vulnerabilities-catalog" target="_blank" rel="noopener">Known Exploited Vulnerabilities catalog</a> on Nov. 20.</p>
+    <p><strong>Who's using it.</strong> Google's Mandiant and Threat Intelligence Group say a suspected Chinese state-sponsored group it tracks as Armory Castle exploited the flaw starting in early September, per <a href="https://www.bleepingcomputer.com/news/security/vmware-patches-vcenter-zero-day-exploited-in-attacks-since-september/" target="_blank" rel="noopener">BleepingComputer</a>. In the attack Mandiant described, the group first broke into a BeyondTrust Remote Support appliance, moved through internal Linux systems, and then used the vCenter flaw to create an administrator account and steal the vCenter directory database.</p>
+    <p><strong>Why it matters if you're a small business.</strong> vCenter is the console that runs your VMware servers. Whoever controls it controls every virtual machine under it. Mandiant says the attackers went on to reach ESXi hosts and pull files from virtual machines, including Windows Active Directory database files, per <a href="https://www.bleepingcomputer.com/news/security/vmware-patches-vcenter-zero-day-exploited-in-attacks-since-september/" target="_blank" rel="noopener">BleepingComputer</a>. <a href="https://censys.com/advisory/cve-2026-123890/" target="_blank" rel="noopener">Censys</a> notes the attack path also allows forged sign-in tokens that can get past MFA. If your file server, accounting system or domain controller lives on VMware, this is the patch to do first.</p>
+    <p><strong>The fixed versions.</strong> From Broadcom's advisory:<br>- vCenter 8.0: update to <strong>8.0 U3m</strong><br>- vCenter 9.0.x: update to <strong>9.0.2.0200</strong><br>- vCenter 9.1.x: update to <strong>9.1.1.0200</strong><br>- VMware Cloud Foundation 5.x: update to <strong>5.2.5</strong><br>- vCenter 7.0: no public fix. Broadcom says to contact its support if you have an extended support contract.</p>
+    <p><strong>Action items for this weekend.</strong><br>1. <strong>Find out if you run vCenter at all.</strong> If you have one or two standalone ESXi hosts with no vCenter, this flaw doesn't apply, but ask whoever manages your servers to confirm.<br>2. <strong>Check the version.</strong> Compare it to the list above. Anything older needs the update.<br>3. <strong>Take a snapshot or backup of vCenter, then patch.</strong> Broadcom calls this an emergency update.<br>4. <strong>Keep vCenter off the internet.</strong> The management console should only be reachable from your internal admin network or VPN. Broadcom says network restrictions and firewall rules can reduce exposure while you schedule the update.<br>5. <strong>Still on vCenter 7.0?</strong> Without an extended support contract there's no fix. Lock down network access to it now and start planning the upgrade.<br>6. <strong>Patch the doors in, too.</strong> This attack started at a remote-support appliance. Make sure remote-access tools, VPNs and firewalls are on current versions.<br>7. <strong>If your vCenter was reachable from outside before you patched,</strong> have someone review it for new admin accounts and unfamiliar logins. Censys says a vCenter attackers could reach while it was unpatched needs review.</p>
+    <p>Not sure who manages your VMware servers, or what version they're on? Call us at +1 (689) 225-0286 and we'll help you check.</p>
+  </div>
+  <div class="article-sources">
+    Sources: <a href="https://support.broadcom.com/web/ecx/support-content-notification/-/external/content/SecurityAdvisories/0/39495" target="_blank" rel="noopener">Broadcom: VMSA-2026-0009, Nov. 19, 2026 (updated Nov. 20)</a> &middot; <a href="https://www.bleepingcomputer.com/news/security/vmware-patches-vcenter-zero-day-exploited-in-attacks-since-september/" target="_blank" rel="noopener">BleepingComputer: VMware patches vCenter zero-day exploited in attacks since September, Nov. 19, 2026</a> &middot; <a href="https://www.cisa.gov/news-events/alerts/2026/11/20/cisa-adds-four-known-exploited-vulnerabilities-catalog" target="_blank" rel="noopener">CISA: CISA Adds Four Known Exploited Vulnerabilities to Catalog, Nov. 20, 2026</a> &middot; <a href="https://censys.com/advisory/cve-2026-123890/" target="_blank" rel="noopener">Censys: Nov 19 Advisory: VMware vCenter Authentication Bypass (CVE-2026-123890)</a>
+  </div>
+  <a href="/#briefing" class="btn btn-ghost btn-sm back-link">← All Briefings</a>
+</article>
+
+</body>
+</html>

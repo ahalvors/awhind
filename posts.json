@@ -1,5 +1,34 @@
 [
   {
+    "date": "2026-11-23",
+    "tag": "Advisory",
+    "read": "3 min",
+    "title": "Hackers used GL.iNet's cloud service to plant malware on its routers and KVMs. If you have one, check it and update today",
+    "dek": "GL.iNet says an attacker exploited a flaw in its cloud remote management service to install malware on some of its routers and KVM devices. The cloud hole is closed, but infected devices stay infected until you install the new security firmware.",
+    "body": [
+      "GL.iNet says an unauthorized party exploited a vulnerability in its cloud remote management service and used it to access and install malicious software on some GL.iNet routers and KVM devices, per its <a href=\"https://www.gl-inet.com/en-us/blogs/blog/glinet-security-notice-2026-11-20\" target=\"_blank\" rel=\"noopener\">security notice</a> issued Nov. 20. The company says it fixed the cloud flaw and blocked the access used in the attack, so devices can no longer be newly infected that way. But the cloud fix does not remove malware from devices that were already infected. For that, you need the new security firmware.",
+      "<strong>Why it matters if you're a small business.</strong> GL.iNet makes small routers, travel routers and remote KVM devices. They're popular with remote workers and with IT folks who need to reach an office computer from home. A KVM gives remote control of the computer plugged into it, so an infected KVM is a door to that computer. GL.iNet says it is still investigating whether computers connected to affected KVM devices were impacted.",
+      "<strong>What researchers found.</strong> <a href=\"https://www.bleepingcomputer.com/news/security/hackers-exploit-glinet-cloud-flaw-to-infect-routers-kvm-devices/\" target=\"_blank\" rel=\"noopener\">BleepingComputer</a> reports that customers and researchers shared evidence of custom malware built for GL.iNet devices and root-level reverse shells giving remote access to infected devices. One researcher group said it found suspicious activity on 152 of 183 routers it owns or manages, though it noted its results may not match other customers' and that some older backdoor infections may not be linked to this attack. GL.iNet has not said how many customers were affected.",
+      "<strong>The fixed firmware.</strong> From GL.iNet's notice:<br>- Routers: GL-MG1300, GL-MT3000, GL-MT6000 need <strong>4.11.1</strong> or later; GL-E5800 <strong>4.10.3</strong>; GL-BE3600, GL-BE9300 <strong>4.10.2</strong>; GL-BE14000 <strong>4.9.3</strong>; GL-BE6500, GL-MT3600BE, GL-MT5000 <strong>4.9.1</strong>; GL-BE10000 <strong>4.8.7</strong>; GL-AX1800, GL-AXT1800, GL-SFT1200, GL-X3000, GL-XE3000 <strong>4.8.4</strong>; GL-MT2500/MT2500A, GL-X2000 <strong>4.7.14</strong>.<br>- KVMs: RM1, RM1V2, RM10, RM10RC, RM1PE, RM4PE need <strong>1.10.3</strong> or later; RMQ1 needs <strong>1.8.7</strong> or later.<br>- Model not listed? GL.iNet says check its Download Center or email support@gl-inet.com, and don't install firmware made for another model. An unlisted model is not necessarily unaffected.",
+      "<strong>Action items for today.</strong><br>1. <strong>Take inventory.</strong> Ask your team, especially remote staff, whether anyone uses a GL.iNet router, travel router or KVM for work.<br>2. <strong>Check for the infection marker.</strong> GL.iNet says to look for a running process showing `crond -i /tmp/.log`. On a router, open the Admin Panel, go to System → Advanced Settings, sign in to LuCI, open Status → Processes and search for `tmp/.log`, or over SSH run `ps | grep tmp`. On a KVM, open Toolbox → Terminal → Access and run `ps -aux | grep tmp` (on the RMQ1, `ps -a | grep tmp`). A line showing only the grep command is not a match.<br>3. <strong>Install the security firmware either way.</strong> GL.iNet recommends it even if the check finds nothing, and says the update removes the malware it identified without a factory reset.<br>4. <strong>Don't treat a clean check as proof.</strong> GL.iNet says the quick check may not detect every affected device and points to an optional, unofficial community tool for a deeper check.<br>5. <strong>If a KVM was infected, check the computer behind it.</strong> GL.iNet suggests looking for unfamiliar programs, browser extensions or user accounts, unexpected startup items or scheduled tasks, and running a full scan with up-to-date security software.<br>6. <strong>Change the passwords.</strong> If you suspect a device was compromised, BleepingComputer reports the guidance is to rotate credentials and access keys that may have been exposed.<br>7. <strong>Turn off cloud remote management you don't use.</strong> Our own advice: if nobody relies on GoodCloud remote access for that device, switch it off. Fewer ways in means fewer surprises.",
+      "Not sure whether anyone on your team has one of these, or how to check it? Call us at +1 (689) 225-0286 and we'll help."
+    ],
+    "sources": [
+      [
+        "GL.iNet: Security Notice 2026-11-20 (last updated Nov. 23, 2026)",
+        "https://www.gl-inet.com/en-us/blogs/blog/glinet-security-notice-2026-11-20"
+      ],
+      [
+        "BleepingComputer: Hackers exploit GL.iNet cloud flaw to infect routers, KVM devices, Nov. 22, 2026",
+        "https://www.bleepingcomputer.com/news/security/hackers-exploit-glinet-cloud-flaw-to-infect-routers-kvm-devices/"
+      ],
+      [
+        "heise online: GL.iNet: Schwachstelle entdeckt, Patch verfügbar, Nov. 22, 2026",
+        "https://www.heise.de/news/GL-iNet-Schwachstelle-entdeckt-Patch-verfuegbar-11533722.html"
+      ]
+    ]
+  },
+  {
     "date": "2026-11-22",
     "tag": "Advisory",
     "read": "3 min",

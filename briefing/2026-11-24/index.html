@@ -1,0 +1,167 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="N-able says an attacker got into one server behind its Mail Assure and SpamExperts hosted email filtering service, which many IT providers run for their clients. The flaw is fixed, email kept flowing, and customer API tokens were revoked. Here&#039;s what that means for your business.">
+<title>N-able&#039;s Mail Assure email filter was breached, and the hole is patched. If your IT provider uses it, here&#039;s what to ask — AWHIND Daily Briefing</title>
+<link rel="canonical" href="https://awhind.com/briefing/2026-11-24/">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='16' fill='%230B0F17'/%3E%3Ccircle cx='50' cy='50' r='16' fill='%23DD4E1E'/%3E%3C/svg%3E">
+
+<!-- Open Graph -->
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://awhind.com/briefing/2026-11-24/">
+<meta property="og:title" content="N-able&#039;s Mail Assure email filter was breached, and the hole is patched. If your IT provider uses it, here&#039;s what to ask">
+<meta property="og:description" content="N-able says an attacker got into one server behind its Mail Assure and SpamExperts hosted email filtering service, which many IT providers run for their clients. The flaw is fixed, email kept flowing, and customer API tokens were revoked. Here&#039;s what that means for your business.">
+<meta property="og:site_name" content="AWHIND">
+
+<!-- Twitter Card -->
+<meta name="twitter:title" content="N-able&#039;s Mail Assure email filter was breached, and the hole is patched. If your IT provider uses it, here&#039;s what to ask">
+<meta name="twitter:description" content="N-able says an attacker got into one server behind its Mail Assure and SpamExperts hosted email filtering service, which many IT providers run for their clients. The flaw is fixed, email kept flowing, and customer API tokens were revoked. Here&#039;s what that means for your business.">
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "N-able's Mail Assure email filter was breached, and the hole is patched. If your IT provider uses it, here's what to ask",
+  "description": "N-able says an attacker got into one server behind its Mail Assure and SpamExperts hosted email filtering service, which many IT providers run for their clients. The flaw is fixed, email kept flowing, and customer API tokens were revoked. Here's what that means for your business.",
+  "datePublished": "2026-11-24",
+  "url": "https://awhind.com/briefing/2026-11-24/",
+  "author": {
+    "@type": "Organization",
+    "name": "AWHIND",
+    "url": "https://awhind.com",
+    "telephone": "+1-689-225-0286"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "AWHIND",
+    "url": "https://awhind.com",
+    "telephone": "+1-689-225-0286"
+  }
+}
+</script>
+
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,500&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap');
+
+  :root{
+    --bg:#F1F2ED;
+    --bg-elevated:#FFFFFF;
+    --bg-sunken:#E7E8E1;
+    --text:#0B0F17;
+    --text-secondary:#566072;
+    --text-tertiary:#848d9b;
+    --line:#D9DAD2;
+    --line-strong:#c2c4ba;
+    --accent:#DD4E1E;
+    --accent-contrast:#FFFFFF;
+    --shadow: 0 1px 2px rgba(11,15,23,.04), 0 8px 24px rgba(11,15,23,.06);
+    --serif: 'Newsreader', Georgia, 'Times New Roman', serif;
+    --sans: 'IBM Plex Sans', -apple-system, 'Segoe UI', Roboto, sans-serif;
+    --mono: 'IBM Plex Mono', 'SF Mono', Consolas, monospace;
+  }
+  @media (prefers-color-scheme: dark){
+    :root:not([data-theme="light"]){
+      --bg:#0A0D14;
+      --bg-elevated:#12161F;
+      --bg-sunken:#080A10;
+      --text:#EEF0F4;
+      --text-secondary:#9AA3B4;
+      --text-tertiary:#6d7688;
+      --line:#232838;
+      --line-strong:#323951;
+      --accent:#FF7A47;
+      --accent-contrast:#0A0D14;
+      --shadow: 0 1px 2px rgba(0,0,0,.3), 0 8px 28px rgba(0,0,0,.4);
+    }
+  }
+  :root[data-theme="dark"]{
+    --bg:#0A0D14;
+    --bg-elevated:#12161F;
+    --bg-sunken:#080A10;
+    --text:#EEF0F4;
+    --text-secondary:#9AA3B4;
+    --text-tertiary:#6d7688;
+    --line:#232838;
+    --line-strong:#323951;
+    --accent:#FF7A47;
+    --accent-contrast:#0A0D14;
+    --shadow: 0 1px 2px rgba(0,0,0,.3), 0 8px 28px rgba(0,0,0,.4);
+  }
+
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0; background:var(--bg); color:var(--text);
+    font-family:var(--sans); font-size:16px; line-height:1.55;
+    -webkit-font-smoothing:antialiased;
+  }
+  a{color:inherit;}
+  h1,h2{font-family:var(--serif); font-weight:500; margin:0; text-wrap:balance; letter-spacing:-0.01em;}
+  .mono{font-family:var(--mono);}
+  .wrap{max-width:1120px; margin:0 auto; padding:0 28px;}
+  .btn{
+    display:inline-flex; align-items:center; gap:8px; font-family:var(--mono); font-size:13px;
+    letter-spacing:.04em; text-transform:uppercase; padding:12px 20px; border-radius:2px;
+    text-decoration:none; cursor:pointer; border:1px solid transparent;
+  }
+  .btn-ghost{border-color:var(--line-strong); color:var(--text);}
+  .btn-ghost:hover{border-color:var(--accent); color:var(--accent);}
+  .btn-sm{padding:8px 14px; font-size:11px;}
+
+  nav.wrap{display:flex; align-items:center; justify-content:space-between; padding-top:18px; padding-bottom:18px;}
+  .brand{font-family:var(--serif); font-weight:600; font-size:21px; letter-spacing:-.01em; text-decoration:none; color:var(--text); display:flex; align-items:center; gap:9px;}
+  .brand .mark{width:9px;height:9px;background:var(--accent);display:inline-block;}
+
+  article{max-width:720px; margin:44px auto; padding:0 28px;}
+  .meta{font-family:var(--mono); font-size:11.5px; color:var(--text-tertiary); letter-spacing:.03em; margin-bottom:16px;}
+  article h1{font-size:32px; line-height:1.15;}
+  .dek{font-size:16px; color:var(--text-secondary); margin-top:14px; font-family:var(--serif); font-style:italic;}
+  .article-body{margin-top:28px; font-size:15.5px; color:var(--text); max-width:60ch;}
+  .article-body p{margin:0 0 18px;}
+  .article-body strong{font-weight:600;}
+  .article-body .stat-inline{font-family:var(--mono); color:var(--accent); font-weight:600;}
+  .article-sources{margin-top:32px; padding-top:20px; border-top:1px solid var(--line); font-size:12px; color:var(--text-tertiary);}
+  .article-sources a{color:var(--text-secondary); text-decoration:underline; text-decoration-color:var(--line-strong);}
+  .back-link{margin-top:32px; display:inline-block;}
+</style>
+<meta property="og:image" content="https://awhind.com/images/og/briefing/2026-11-24.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Preview card: N-able&#039;s Mail Assure email filter was breached, and the hole is patched. If your IT provider uses it, here&#039;s what to ask">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:site" content="@awhxtech">
+<meta name="twitter:image" content="https://awhind.com/images/og/briefing/2026-11-24.png">
+<meta name="twitter:image:alt" content="Preview card: N-able&#039;s Mail Assure email filter was breached, and the hole is patched. If your IT provider uses it, here&#039;s what to ask">
+</head>
+<body>
+
+<nav class="wrap">
+  <a href="/" class="brand"><span class="mark"></span>AWHIND</a>
+  <div>
+    <a href="/#briefing" class="btn btn-ghost btn-sm">← All Briefings</a>
+  </div>
+</nav>
+
+<article>
+  <div class="meta">Nov 24, 2026 &middot; Advisory &middot; 3 min read</div>
+  <h1>N-able's Mail Assure email filter was breached, and the hole is patched. If your IT provider uses it, here's what to ask</h1>
+  <div class="dek">N-able says an attacker got into one server behind its Mail Assure and SpamExperts hosted email filtering service, which many IT providers run for their clients. The flaw is fixed, email kept flowing, and customer API tokens were revoked. Here's what that means for your business.</div>
+  <div class="article-body">
+    <p>N-able says an unauthorized party accessed one of the servers behind Mail Assure and SpamExperts Hosted Cloud, an email filtering service it runs for managed service providers. On Nov. 16 the company took the management portal and API offline and suspended logging, mailbox synchronization and quarantine, while email delivery kept working, <a href="https://www.securityweek.com/n-able-patches-critical-flaw-disclosed-after-mail-assure-cyberattack/" target="_blank" rel="noopener">SecurityWeek</a> reports. Two days later it confirmed a cyberattack: the attackers hit a web server and likely accessed certain credentials stored there.</p>
+    <p><strong>What N-able fixed.</strong> During its investigation, N-able found and patched a critical flaw, <a href="https://euvd.enisa.europa.eu/vulnerability/CVE-2026-134624" target="_blank" rel="noopener">CVE-2026-134624</a> (CVSS 4.0 score 9.3). A connection check used for LDAP synchronization did not restrict where it could connect, so an API user with enough privileges could make the server reach internal hosts and send crafted data to internal services. Build 20261121.1943 fixes it. N-able says it restored dashboard and API access on Nov. 21 at 23:45 UTC, and that inbound and outbound mail and spam filtering kept running throughout, per its <a href="https://www.n-able.com/blog/mail-assure-incident-update" target="_blank" rel="noopener">incident update</a>. <a href="https://www.cisa.gov/news-events/alerts/2026/11/23/cisa-adds-two-known-exploited-vulnerabilities-catalog" target="_blank" rel="noopener">CISA</a> added the flaw to its Known Exploited Vulnerabilities catalog on Nov. 23.</p>
+    <p><strong>What N-able says, and what it hasn't said yet.</strong> The company says it has found no evidence of exploitation beyond the single N-able-hosted server, has brought in an outside forensics team, and will publish a formal root cause analysis within two weeks of its Nov. 22 update. <a href="https://thehackernews.com/2026/11/n-able-discloses-critical-mail-assure.html" target="_blank" rel="noopener">The Hacker News</a> reports N-able has found no evidence that customer data, including tenants' mailboxes, was compromised. N-able has not said how the attackers first got in or whether this flaw was the way in. It also says this incident is unrelated to the N-central incident earlier this month.</p>
+    <p><strong>What N-able already did for customers.</strong> It took the affected server offline, rotated internal platform credentials, revoked customers' existing API tokens, invalidated OAuth tokens and reset local users' passwords, The Hacker News reports. Hosted customers have nothing to install. The hosted platform is already patched.</p>
+    <p><strong>Why it matters if you're a small business.</strong> You may never have heard the name Mail Assure, because your IT provider runs it for you. It sits in front of your mailboxes and decides what is spam. If your provider uses it, some of the service, like quarantine and logging, may still be coming back in phases. Any scripts or integrations your provider built on the old API tokens need new credentials before they work again.</p>
+    <p><strong>Action items for this week.</strong><br>1. <strong>Ask your IT provider whether your email filtering runs on N-able Mail Assure or SpamExperts.</strong> If the answer is no, you're done with this one.<br>2. <strong>If yes, ask whether they received N-able's setup-specific guidance.</strong> N-able says it emailed each partner instructions for its environment and asks anyone who didn't get them to contact support.<br>3. <strong>Ask whether quarantine and logging are fully back.</strong> If a real message you expected never showed up, check with your provider before assuming it was never sent.<br>4. <strong>Expect a password reset if your staff use a quarantine login.</strong> N-able reset local users' passwords. Our own advice: reset through the portal address your provider gives you, not a link in an email, because attackers love fake "messages held in quarantine" emails.<br>5. <strong>If you run SpamExperts Local Cloud on your own servers, confirm you're on build 20261121.1943 or later.</strong> The incident statements describe the Hosted Cloud, and Local Cloud servers are yours to check.<br>6. <strong>Ask your provider to share N-able's root cause analysis when it's out.</strong> It should say how the attackers got in and whether any credentials were taken.</p>
+    <p>Not sure who filters your email, or what to ask? Call us at +1 (689) 225-0286 and we'll help.</p>
+  </div>
+  <div class="article-sources">
+    Sources: <a href="https://www.n-able.com/blog/mail-assure-incident-update" target="_blank" rel="noopener">N-able: Mail Assure Incident Update, Nov. 22, 2026</a> &middot; <a href="https://www.securityweek.com/n-able-patches-critical-flaw-disclosed-after-mail-assure-cyberattack/" target="_blank" rel="noopener">SecurityWeek: N-able Patches Critical Flaw Discovered After Mail Assure Cyberattack, Nov. 23, 2026</a> &middot; <a href="https://thehackernews.com/2026/11/n-able-discloses-critical-mail-assure.html" target="_blank" rel="noopener">The Hacker News: N-able Discloses Critical Mail Assure Vulnerability Found During Breach Investigation, Nov. 23, 2026</a> &middot; <a href="https://www.cisa.gov/news-events/alerts/2026/11/23/cisa-adds-two-known-exploited-vulnerabilities-catalog" target="_blank" rel="noopener">CISA: CISA Adds Two Known Exploited Vulnerabilities to Catalog, Nov. 23, 2026</a> &middot; <a href="https://www.cyber.gc.ca/en/alerts-advisories/n-able-security-advisory-av26-1191" target="_blank" rel="noopener">Canadian Centre for Cyber Security: N-able security advisory (AV26-1191), Nov. 23, 2026</a> &middot; <a href="https://euvd.enisa.europa.eu/vulnerability/CVE-2026-134624" target="_blank" rel="noopener">ENISA EUVD: CVE-2026-134624</a>
+  </div>
+  <a href="/#briefing" class="btn btn-ghost btn-sm back-link">← All Briefings</a>
+</article>
+
+</body>
+</html>

@@ -131,3 +131,13 @@
   to = "/404"
   status = 404
   force = true
+
+# Site-wide security headers (CSP is report-only until verified against every page)
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Content-Type-Options = "nosniff"
+    X-Frame-Options = "SAMEORIGIN"
+    Referrer-Policy = "strict-origin-when-cross-origin"
+    Permissions-Policy = "camera=(), microphone=(), geolocation=()"
+    Content-Security-Policy-Report-Only = "object-src 'none'; base-uri 'self'; frame-ancestors 'self'"

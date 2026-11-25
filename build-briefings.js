@@ -224,6 +224,8 @@ ${JSON.stringify(jsonLd, null, 2)}
   .article-body p{margin:0 0 18px;}
   .article-body strong{font-weight:600;}
   .article-body .stat-inline{font-family:var(--mono); color:var(--accent); font-weight:600;}
+  .article-body pre{font-family:var(--mono); font-size:13px; line-height:1.45; background:var(--bg-sunken); border:1px solid var(--line); padding:14px 16px; overflow-x:auto; margin:0 0 18px; white-space:pre;}
+  .article-body pre code{font-family:inherit; font-size:inherit;}
   .article-sources{margin-top:32px; padding-top:20px; border-top:1px solid var(--line); font-size:12px; color:var(--text-tertiary);}
   .article-sources a{color:var(--text-secondary); text-decoration:underline; text-decoration-color:var(--line-strong);}
   .back-link{margin-top:32px; display:inline-block;}
@@ -243,7 +245,7 @@ ${JSON.stringify(jsonLd, null, 2)}
   <h1>${post.title}</h1>
   <div class="dek">${post.dek}</div>
   <div class="article-body">
-    ${post.body.map(p => `<p>${p}</p>`).join('\n    ')}
+    ${post.body.map(p => /^<pre[\s>]/.test(p.trim()) ? p : `<p>${p}</p>`).join('\n    ')}
   </div>
   <div class="article-sources">
     Sources: ${post.sources.map(s => `<a href="${s[1]}" target="_blank" rel="noopener">${s[0]}</a>`).join(' &middot; ')}

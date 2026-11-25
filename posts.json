@@ -1,5 +1,50 @@
 [
   {
+    "date": "2026-11-25",
+    "tag": "Advisory",
+    "read": "3 min",
+    "title": "Attackers are using Drupal's installer to take over websites. If your site runs Drupal, here's what to do today",
+    "dek": "A critical flaw in Drupal core lets an anonymous visitor abuse the leftover installer page to take over a site. Drupal says it has been exploited on live sites since Nov. 19, and CISA added it to its exploited list on Nov. 24. The fix is out, and there's a five-minute block you can add right now.",
+    "body": [
+      "Every Drupal site ships with an installer page, `/core/install.php`, and it stays on the server long after the site is built. On Nov. 18 the Drupal Security Team rated a flaw in it <a href=\"https://www.drupal.org/sa-core-2026-017\" target=\"_blank\" rel=\"noopener\">Highly critical</a>: \"Under specific conditions, an attacker can use the installer to attempt to reinstall Drupal. This can lead to a site takeover or remote code execution.\" It is tracked as CVE-2026-132165.",
+      "<strong>It's being exploited now.</strong> Drupal updated its advisory to say the flaw was \"exploited on live sites as early as 2026-11-19 19:00 UTC,\" <a href=\"https://www.bleepingcomputer.com/news/security/hackers-now-exploit-critical-drupal-rce-flaw-to-hijack-sites/\" target=\"_blank\" rel=\"noopener\">BleepingComputer</a> reports. <a href=\"https://www.cisa.gov/news-events/alerts/2026/11/24/cisa-adds-three-known-exploited-vulnerabilities-catalog\" target=\"_blank\" rel=\"noopener\">CISA</a> added it to its Known Exploited Vulnerabilities catalog on Nov. 24 and gave federal agencies until Friday, Nov. 27 to fix it.",
+      "<strong>Which versions are affected.</strong> Everything before 10.6.22, 11.0 through 11.3.21, and 11.4.0 through 11.4.12. The fixed releases are <strong>Drupal 10.6.22, 11.3.22 and 11.4.13</strong>. Drupal 11.2.x and older, 10.5.x and older, and all of Drupal 8 and 9 are end-of-life and get no fix at all, per the <a href=\"https://www.drupal.org/sa-core-2026-017\" target=\"_blank\" rel=\"noopener\">Drupal advisory</a>.",
+      "<strong>Why it matters if you're a small business.</strong> You may not know what your website runs on, because a web designer or agency built it years ago. If it's Drupal and nobody has updated it lately, the installer page is probably still reachable: the <a href=\"https://security.utoronto.ca/advisories/security-advisory-critical-remote-code-execution-in-the-drupal-core-installer/\" target=\"_blank\" rel=\"noopener\">University of Toronto's security team</a> notes that Drupal's default .htaccess rules do not block it. A taken-over site can be used to serve malware or phishing pages under your name.",
+      "<strong>Check whether your installer is exposed.</strong> Drupal's <a href=\"https://www.drupal.org/docs/administering-a-drupal-site/security-in-drupal/securing-the-installer-installphp\" target=\"_blank\" rel=\"noopener\">guide to securing the installer</a> gives these checks. Replace `example.com` with your site's address:",
+      "<pre><code>curl -I https://example.com/core/install.php\ncurl -IL https://example.com/install.php\ncurl -I https://example.com/core/install.php/foo</code></pre>",
+      "All three should end with a `403` or `404`. If you see `200`, the installer is open.",
+      "<strong>Block it today, even before you patch.</strong> On Apache, add this to your virtual host configuration (not .htaccess, which causes a 500 error), run `apachectl configtest`, then reload:",
+      "<pre><code>&lt;Location \"/core/install.php\"&gt;\n  Require all denied\n&lt;/Location&gt;</code></pre>",
+      "On Nginx, add this inside the HTTPS `server` block, run `nginx -t`, then reload:",
+      "<pre><code>location ^~ /core/install.php {\n  return 404;\n}</code></pre>",
+      "Drupal warns not to use an exact match (`location = /core/install.php`), because some setups still run the installer through URLs like `/core/install.php/foo`. On shared hosting where you can't edit server config, the same guide has an .htaccess option. Blocking the installer doesn't affect `update.php` or normal updates.",
+      "<strong>Action items for today.</strong><br>1. <strong>Find out what your website runs on.</strong> Ask your web designer, agency or host. If it isn't Drupal, you're done with this one.<br>2. <strong>If it's Drupal, run the three checks above</strong> or ask whoever manages the site to run them.<br>3. <strong>Block `/core/install.php`</strong> with the web server rule above. Drupal's guide says some managed hosts already block it, so test first.<br>4. <strong>Update to 10.6.22, 11.3.22 or 11.4.13.</strong> Drupal Steward customers are protected from known attack paths, but Drupal still says to upgrade.<br>5. <strong>If you're on an end-of-life version, plan the upgrade now.</strong> There is no patch for 11.2.x, 10.5.x, 9 or 8, so the block is your only cover until you move.<br>6. <strong>Make sure the web server can't write to `settings.php`.</strong> Drupal says that blocks some, but not all, of the attack paths.<br>7. <strong>If the installer was open, have someone look for signs of takeover.</strong> Our own advice: check for admin accounts you don't recognize and pages you didn't publish.",
+      "Not sure what your website runs on, or who can check it? Call us at +1 (689) 225-0286 and we'll help."
+    ],
+    "sources": [
+      [
+        "Drupal: SA-CORE-2026-017, Drupal core Highly critical Remote code execution, Nov. 18, 2026 (updated)",
+        "https://www.drupal.org/sa-core-2026-017"
+      ],
+      [
+        "Drupal.org: Securing the installer (install.php), Nov. 21, 2026",
+        "https://www.drupal.org/docs/administering-a-drupal-site/security-in-drupal/securing-the-installer-installphp"
+      ],
+      [
+        "BleepingComputer: Hackers now exploit critical Drupal RCE flaw to hijack sites, Nov. 25, 2026",
+        "https://www.bleepingcomputer.com/news/security/hackers-now-exploit-critical-drupal-rce-flaw-to-hijack-sites/"
+      ],
+      [
+        "CISA: CISA Adds Three Known Exploited Vulnerabilities to Catalog, Nov. 24, 2026",
+        "https://www.cisa.gov/news-events/alerts/2026/11/24/cisa-adds-three-known-exploited-vulnerabilities-catalog"
+      ],
+      [
+        "University of Toronto Information Security: Critical remote code execution in the Drupal core installer, Nov. 19, 2026",
+        "https://security.utoronto.ca/advisories/security-advisory-critical-remote-code-execution-in-the-drupal-core-installer/"
+      ]
+    ]
+  },
+  {
     "date": "2026-11-24",
     "tag": "Advisory",
     "read": "3 min",

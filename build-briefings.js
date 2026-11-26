@@ -114,8 +114,8 @@ posts.forEach(post => {
     "description": stripHtml(post.dek),
     "datePublished": post.date,
     "url": canonicalUrl,
-    "author": { "@type": "Organization", "name": "AWHIND", "url": "https://awhind.com", "telephone": "+1-689-225-0286" },
-    "publisher": { "@type": "Organization", "name": "AWHIND", "url": "https://awhind.com", "telephone": "+1-689-225-0286" }
+    "author": { "@type": "Organization", "name": "AWHIND", "url": "https://awhind.com", "telephone": "+19252483463" },
+    "publisher": { "@type": "Organization", "name": "AWHIND", "url": "https://awhind.com", "telephone": "+19252483463" }
   };
   
   const html = `<!doctype html>
@@ -302,8 +302,8 @@ dueArticles.forEach(post => {
     "description": post.meta_description,
     "datePublished": post.date,
     "url": canonicalUrl,
-    "author": { "@type": "Organization", "name": "AWHIND", "url": "https://awhind.com", "telephone": "+1-689-225-0286" },
-    "publisher": { "@type": "Organization", "name": "AWHIND", "url": "https://awhind.com", "telephone": "+1-689-225-0286" }
+    "author": { "@type": "Organization", "name": "AWHIND", "url": "https://awhind.com", "telephone": "+19252483463" },
+    "publisher": { "@type": "Organization", "name": "AWHIND", "url": "https://awhind.com", "telephone": "+19252483463" }
   };
   if (post.featured_image) {
     jsonLd.image = ogImageUrl;

@@ -1,0 +1,170 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="1Password disclosed on Nov. 25 that an attacker got into an employee&#039;s GitHub account and used it to copy account records for a subset of customers. Vaults, the keys that protect them, passwords and Secret Keys were not affected, and you don&#039;t need to change anything. The real risk now is phishing aimed at known 1Password users.">
+<title>1Password says an attacker copied customer names and emails, but not vaults. Expect fake 1Password emails, and here&#039;s how to handle them — AWHIND Daily Briefing</title>
+<link rel="canonical" href="https://awhind.com/briefing/2026-11-26/">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='16' fill='%230B0F17'/%3E%3Ccircle cx='50' cy='50' r='16' fill='%23DD4E1E'/%3E%3C/svg%3E">
+
+<!-- Open Graph -->
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://awhind.com/briefing/2026-11-26/">
+<meta property="og:title" content="1Password says an attacker copied customer names and emails, but not vaults. Expect fake 1Password emails, and here&#039;s how to handle them">
+<meta property="og:description" content="1Password disclosed on Nov. 25 that an attacker got into an employee&#039;s GitHub account and used it to copy account records for a subset of customers. Vaults, the keys that protect them, passwords and Secret Keys were not affected, and you don&#039;t need to change anything. The real risk now is phishing aimed at known 1Password users.">
+<meta property="og:site_name" content="AWHIND">
+
+<!-- Twitter Card -->
+<meta name="twitter:title" content="1Password says an attacker copied customer names and emails, but not vaults. Expect fake 1Password emails, and here&#039;s how to handle them">
+<meta name="twitter:description" content="1Password disclosed on Nov. 25 that an attacker got into an employee&#039;s GitHub account and used it to copy account records for a subset of customers. Vaults, the keys that protect them, passwords and Secret Keys were not affected, and you don&#039;t need to change anything. The real risk now is phishing aimed at known 1Password users.">
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "1Password says an attacker copied customer names and emails, but not vaults. Expect fake 1Password emails, and here's how to handle them",
+  "description": "1Password disclosed on Nov. 25 that an attacker got into an employee's GitHub account and used it to copy account records for a subset of customers. Vaults, the keys that protect them, passwords and Secret Keys were not affected, and you don't need to change anything. The real risk now is phishing aimed at known 1Password users.",
+  "datePublished": "2026-11-26",
+  "url": "https://awhind.com/briefing/2026-11-26/",
+  "author": {
+    "@type": "Organization",
+    "name": "AWHIND",
+    "url": "https://awhind.com",
+    "telephone": "+1-689-225-0286"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "AWHIND",
+    "url": "https://awhind.com",
+    "telephone": "+1-689-225-0286"
+  }
+}
+</script>
+
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,500&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap');
+
+  :root{
+    --bg:#F1F2ED;
+    --bg-elevated:#FFFFFF;
+    --bg-sunken:#E7E8E1;
+    --text:#0B0F17;
+    --text-secondary:#566072;
+    --text-tertiary:#848d9b;
+    --line:#D9DAD2;
+    --line-strong:#c2c4ba;
+    --accent:#DD4E1E;
+    --accent-contrast:#FFFFFF;
+    --shadow: 0 1px 2px rgba(11,15,23,.04), 0 8px 24px rgba(11,15,23,.06);
+    --serif: 'Newsreader', Georgia, 'Times New Roman', serif;
+    --sans: 'IBM Plex Sans', -apple-system, 'Segoe UI', Roboto, sans-serif;
+    --mono: 'IBM Plex Mono', 'SF Mono', Consolas, monospace;
+  }
+  @media (prefers-color-scheme: dark){
+    :root:not([data-theme="light"]){
+      --bg:#0A0D14;
+      --bg-elevated:#12161F;
+      --bg-sunken:#080A10;
+      --text:#EEF0F4;
+      --text-secondary:#9AA3B4;
+      --text-tertiary:#6d7688;
+      --line:#232838;
+      --line-strong:#323951;
+      --accent:#FF7A47;
+      --accent-contrast:#0A0D14;
+      --shadow: 0 1px 2px rgba(0,0,0,.3), 0 8px 28px rgba(0,0,0,.4);
+    }
+  }
+  :root[data-theme="dark"]{
+    --bg:#0A0D14;
+    --bg-elevated:#12161F;
+    --bg-sunken:#080A10;
+    --text:#EEF0F4;
+    --text-secondary:#9AA3B4;
+    --text-tertiary:#6d7688;
+    --line:#232838;
+    --line-strong:#323951;
+    --accent:#FF7A47;
+    --accent-contrast:#0A0D14;
+    --shadow: 0 1px 2px rgba(0,0,0,.3), 0 8px 28px rgba(0,0,0,.4);
+  }
+
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0; background:var(--bg); color:var(--text);
+    font-family:var(--sans); font-size:16px; line-height:1.55;
+    -webkit-font-smoothing:antialiased;
+  }
+  a{color:inherit;}
+  h1,h2{font-family:var(--serif); font-weight:500; margin:0; text-wrap:balance; letter-spacing:-0.01em;}
+  .mono{font-family:var(--mono);}
+  .wrap{max-width:1120px; margin:0 auto; padding:0 28px;}
+  .btn{
+    display:inline-flex; align-items:center; gap:8px; font-family:var(--mono); font-size:13px;
+    letter-spacing:.04em; text-transform:uppercase; padding:12px 20px; border-radius:2px;
+    text-decoration:none; cursor:pointer; border:1px solid transparent;
+  }
+  .btn-ghost{border-color:var(--line-strong); color:var(--text);}
+  .btn-ghost:hover{border-color:var(--accent); color:var(--accent);}
+  .btn-sm{padding:8px 14px; font-size:11px;}
+
+  nav.wrap{display:flex; align-items:center; justify-content:space-between; padding-top:18px; padding-bottom:18px;}
+  .brand{font-family:var(--serif); font-weight:600; font-size:21px; letter-spacing:-.01em; text-decoration:none; color:var(--text); display:flex; align-items:center; gap:9px;}
+  .brand .mark{width:9px;height:9px;background:var(--accent);display:inline-block;}
+
+  article{max-width:720px; margin:44px auto; padding:0 28px;}
+  .meta{font-family:var(--mono); font-size:11.5px; color:var(--text-tertiary); letter-spacing:.03em; margin-bottom:16px;}
+  article h1{font-size:32px; line-height:1.15;}
+  .dek{font-size:16px; color:var(--text-secondary); margin-top:14px; font-family:var(--serif); font-style:italic;}
+  .article-body{margin-top:28px; font-size:15.5px; color:var(--text); max-width:60ch;}
+  .article-body p{margin:0 0 18px;}
+  .article-body strong{font-weight:600;}
+  .article-body .stat-inline{font-family:var(--mono); color:var(--accent); font-weight:600;}
+  .article-body pre{font-family:var(--mono); font-size:13px; line-height:1.45; background:var(--bg-sunken); border:1px solid var(--line); padding:14px 16px; overflow-x:auto; margin:0 0 18px; white-space:pre;}
+  .article-body pre code{font-family:inherit; font-size:inherit;}
+  .article-sources{margin-top:32px; padding-top:20px; border-top:1px solid var(--line); font-size:12px; color:var(--text-tertiary);}
+  .article-sources a{color:var(--text-secondary); text-decoration:underline; text-decoration-color:var(--line-strong);}
+  .back-link{margin-top:32px; display:inline-block;}
+</style>
+<meta property="og:image" content="https://awhind.com/images/og/briefing/2026-11-26.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Preview card: 1Password says an attacker copied customer names and emails, but not vaults. Expect fake 1Password emails, and here&#039;s how to handle them">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:site" content="@awhxtech">
+<meta name="twitter:image" content="https://awhind.com/images/og/briefing/2026-11-26.png">
+<meta name="twitter:image:alt" content="Preview card: 1Password says an attacker copied customer names and emails, but not vaults. Expect fake 1Password emails, and here&#039;s how to handle them">
+</head>
+<body>
+
+<nav class="wrap">
+  <a href="/" class="brand"><span class="mark"></span>AWHIND</a>
+  <div>
+    <a href="/#briefing" class="btn btn-ghost btn-sm">← All Briefings</a>
+  </div>
+</nav>
+
+<article>
+  <div class="meta">Nov 26, 2026 &middot; Advisory &middot; 3 min read</div>
+  <h1>1Password says an attacker copied customer names and emails, but not vaults. Expect fake 1Password emails, and here's how to handle them</h1>
+  <div class="dek">1Password disclosed on Nov. 25 that an attacker got into an employee's GitHub account and used it to copy account records for a subset of customers. Vaults, the keys that protect them, passwords and Secret Keys were not affected, and you don't need to change anything. The real risk now is phishing aimed at known 1Password users.</div>
+  <div class="article-body">
+    <p>On Nov. 25, <a href="https://1password.com/blog/update-on-nov-2026-security-incident" target="_blank" rel="noopener">1Password disclosed</a> that it began investigating on Nov. 19 after signs that an attacker had taken over an employee's corporate GitHub account. The attacker used that account to reach source code and push malicious code to backend services, which then downloaded account records for a subset of customers. The attacker also got into 1Password's CI/CD system, and the company says it has rotated every internal credential that may have been exposed.</p>
+    <p><strong>What was taken.</strong> According to 1Password, the records include names and email addresses, account and user IDs, account creation and last sign-in times, public keys, Secure Remote Password parameters, tokens from certain emailed invitation, provisioning and account recovery links, and other non-secret account metadata.</p>
+    <p><strong>What was not taken.</strong> 1Password says your vaults, the items in them and the keys that protect them were not affected. It does not store your account password or Secret Key, and account recovery keys, apps and browser extensions were not affected. The company says <strong>you do not need to change anything in your account</strong>.</p>
+    <p><strong>About those emailed tokens.</strong> 1Password says a token from an invitation or recovery email can't open an account by itself. It only works together with an SSO sign-in or a code sent to the user's registered email. A small number of users had one of these pending and were notified directly. As a precaution, 1Password lengthened that code from six digits to ten letters and numbers, <a href="https://www.bleepingcomputer.com/news/security/1password-customer-data-stolen-after-employee-github-account-breach/" target="_blank" rel="noopener">BleepingComputer</a> reports.</p>
+    <p><strong>Why it matters if you're a small business.</strong> Your team's names and work emails may now be on a list of confirmed 1Password users. That is exactly what a phisher wants. As BleepingComputer points out, expect emails that use this breach as the lure: "secure your account," "reset your password," "verify your information," or an account recovery or team invitation you didn't ask for.</p>
+    <p><strong>Action items for this week.</strong><br>1. <strong>Don't change anything because an email told you to.</strong> 1Password says no action is needed in your account. Any message saying otherwise deserves suspicion.<br>2. <strong>Open 1Password yourself.</strong> If an email about 1Password worries you, ignore its links and open the app, or type the website address yourself. 1Password says to enter your account password and Secret Key only there.<br>3. <strong>Never give out your account password, Secret Key or a verification code.</strong> 1Password says it will never contact you to ask for your password or Secret Key, and that covers texts and phone calls too.<br>4. <strong>Ignore invitations and recovery requests you didn't start.</strong> If someone on your team gets one, have them tell you before they click anything.<br>5. <strong>If you're the 1Password admin, confirm recovery requests out loud.</strong> Our own advice: before you approve an account recovery for a team member, call them or ask them in person to confirm they actually requested it.<br>6. <strong>Give your team a two-line heads-up today.</strong> Tell them 1Password had a breach, their vaults are safe, and any email about it asking them to click, sign in or share a code should be forwarded to you, not answered.<br>7. <strong>Report anything suspicious</strong> to support@1password.com, as 1Password asks.</p>
+    <p>A password manager is still one of the best things a small office can use, and turning on multi-factor sign-in everywhere still matters. This breach is a reminder that the biggest risk is usually the email that comes after the news.</p>
+    <p>Want help warning your team or checking a suspicious email? Call us at +1 (925) 248-3463.</p>
+  </div>
+  <div class="article-sources">
+    Sources: <a href="https://1password.com/blog/update-on-nov-2026-security-incident" target="_blank" rel="noopener">1Password: Update on a security incident involving 1Password's backend systems, Nov. 25, 2026</a> &middot; <a href="https://www.bleepingcomputer.com/news/security/1password-customer-data-stolen-after-employee-github-account-breach/" target="_blank" rel="noopener">BleepingComputer: 1Password customer data stolen after employee GitHub account breach, Nov. 25, 2026</a>
+  </div>
+  <a href="/#briefing" class="btn btn-ghost btn-sm back-link">← All Briefings</a>
+</article>
+
+</body>
+</html>

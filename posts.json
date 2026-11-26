@@ -1,5 +1,32 @@
 [
   {
+    "date": "2026-11-26",
+    "tag": "Advisory",
+    "read": "3 min",
+    "title": "1Password says an attacker copied customer names and emails, but not vaults. Expect fake 1Password emails, and here's how to handle them",
+    "dek": "1Password disclosed on Nov. 25 that an attacker got into an employee's GitHub account and used it to copy account records for a subset of customers. Vaults, the keys that protect them, passwords and Secret Keys were not affected, and you don't need to change anything. The real risk now is phishing aimed at known 1Password users.",
+    "body": [
+      "On Nov. 25, <a href=\"https://1password.com/blog/update-on-nov-2026-security-incident\" target=\"_blank\" rel=\"noopener\">1Password disclosed</a> that it began investigating on Nov. 19 after signs that an attacker had taken over an employee's corporate GitHub account. The attacker used that account to reach source code and push malicious code to backend services, which then downloaded account records for a subset of customers. The attacker also got into 1Password's CI/CD system, and the company says it has rotated every internal credential that may have been exposed.",
+      "<strong>What was taken.</strong> According to 1Password, the records include names and email addresses, account and user IDs, account creation and last sign-in times, public keys, Secure Remote Password parameters, tokens from certain emailed invitation, provisioning and account recovery links, and other non-secret account metadata.",
+      "<strong>What was not taken.</strong> 1Password says your vaults, the items in them and the keys that protect them were not affected. It does not store your account password or Secret Key, and account recovery keys, apps and browser extensions were not affected. The company says <strong>you do not need to change anything in your account</strong>.",
+      "<strong>About those emailed tokens.</strong> 1Password says a token from an invitation or recovery email can't open an account by itself. It only works together with an SSO sign-in or a code sent to the user's registered email. A small number of users had one of these pending and were notified directly. As a precaution, 1Password lengthened that code from six digits to ten letters and numbers, <a href=\"https://www.bleepingcomputer.com/news/security/1password-customer-data-stolen-after-employee-github-account-breach/\" target=\"_blank\" rel=\"noopener\">BleepingComputer</a> reports.",
+      "<strong>Why it matters if you're a small business.</strong> Your team's names and work emails may now be on a list of confirmed 1Password users. That is exactly what a phisher wants. As BleepingComputer points out, expect emails that use this breach as the lure: \"secure your account,\" \"reset your password,\" \"verify your information,\" or an account recovery or team invitation you didn't ask for.",
+      "<strong>Action items for this week.</strong><br>1. <strong>Don't change anything because an email told you to.</strong> 1Password says no action is needed in your account. Any message saying otherwise deserves suspicion.<br>2. <strong>Open 1Password yourself.</strong> If an email about 1Password worries you, ignore its links and open the app, or type the website address yourself. 1Password says to enter your account password and Secret Key only there.<br>3. <strong>Never give out your account password, Secret Key or a verification code.</strong> 1Password says it will never contact you to ask for your password or Secret Key, and that covers texts and phone calls too.<br>4. <strong>Ignore invitations and recovery requests you didn't start.</strong> If someone on your team gets one, have them tell you before they click anything.<br>5. <strong>If you're the 1Password admin, confirm recovery requests out loud.</strong> Our own advice: before you approve an account recovery for a team member, call them or ask them in person to confirm they actually requested it.<br>6. <strong>Give your team a two-line heads-up today.</strong> Tell them 1Password had a breach, their vaults are safe, and any email about it asking them to click, sign in or share a code should be forwarded to you, not answered.<br>7. <strong>Report anything suspicious</strong> to support@1password.com, as 1Password asks.",
+      "A password manager is still one of the best things a small office can use, and turning on multi-factor sign-in everywhere still matters. This breach is a reminder that the biggest risk is usually the email that comes after the news.",
+      "Want help warning your team or checking a suspicious email? Call us at +1 (925) 248-3463."
+    ],
+    "sources": [
+      [
+        "1Password: Update on a security incident involving 1Password's backend systems, Nov. 25, 2026",
+        "https://1password.com/blog/update-on-nov-2026-security-incident"
+      ],
+      [
+        "BleepingComputer: 1Password customer data stolen after employee GitHub account breach, Nov. 25, 2026",
+        "https://www.bleepingcomputer.com/news/security/1password-customer-data-stolen-after-employee-github-account-breach/"
+      ]
+    ]
+  },
+  {
     "date": "2026-11-25",
     "tag": "Advisory",
     "read": "3 min",

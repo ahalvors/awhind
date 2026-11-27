@@ -70,7 +70,7 @@ test('full build preserves valid JSON-LD with unique object properties', () => {
     console.log(`Validated ${validatePages(tmp)} built JSON-LD blocks`);
     const home = fs.readFileSync(path.join(tmp, 'index.html'), 'utf8');
     const schema = parseUniqueJson(home.match(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/)[1]);
-    assert.equal(schema.telephone, '+1-689-225-0286');
+    assert.equal(schema.telephone, '+19252483463');
     assert.equal(schema['@type'], 'Organization');
   } finally {
     fs.rmSync(tmp, { recursive: true, force: true });

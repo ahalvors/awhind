@@ -1,5 +1,32 @@
 [
   {
+    "date": "2026-11-27",
+    "tag": "Advisory",
+    "read": "3 min",
+    "title": "Two new malware strains read Gmail and Outlook through a fake browser extension. Take five minutes to check your team's browsers",
+    "dek": "Researchers this week described two infostealers, Remus and SYS010, that plant a fake document extension in the browser and use it to read email. One of them can survive a password change, and the other can delete security alerts before you see them. Here's what to look for on your office computers.",
+    "body": [
+      "On Nov. 26, <a href=\"https://www.bleepingcomputer.com/news/security/remus-malware-steals-gmail-messages-via-fake-google-sheets-extension/\" target=\"_blank\" rel=\"noopener\">BleepingComputer</a> and <a href=\"https://www.bleepingcomputer.com/news/security/sys010-malware-abuses-browser-management-to-spy-on-gmail-outlook/\" target=\"_blank\" rel=\"noopener\">BleepingComputer again</a> reported on two pieces of malware that steal email the same way: they install a browser extension that looks like a Google document tool, then read the inbox from inside the browser.",
+      "<strong>Remus.</strong> GenDigital and Invoke RE researchers found that the Remus infostealer, which its seller advertised as a \"Gmail zero-day,\" actually installs a malicious Chrome extension named \"Google Sheets.\" According to BleepingComputer, the malware edits the Chrome profile to register the extension and turns on Developer Mode so it can run. Once active, it checks for unread Gmail messages every minute and sends the subject, body and sender to the attackers. Because it lives in the browser, it keeps working after a password change or a \"sign out everywhere.\" It picks up again as soon as the user signs back in.",
+      "<strong>SYS010.</strong> Bitdefender says a new version of the SYS01 infostealer is spreading through Meta ads for free animated wallpapers that impersonate Wallpaper Engine and Lively Wallpaper. The wallpaper works, but in the background the malware enrolls the browser in attacker-controlled management. In Chrome that means an attacker's Google admin console, in Edge an attacker's device management server, and in Firefox a forced-install policy. It then force-installs an add-on posing as \"Docs Helper\" (Chrome) or \"Document Hub\" (Firefox) that the user can't remove. To get admin rights, it repeats the Windows permission prompt every three seconds, up to 99 times, until someone clicks Yes. Bitdefender says the extension steals session cookies, which lets the attacker into signed-in accounts without a password or a two-factor code. It can also read recent Gmail and Outlook messages and permanently delete selected ones, so login codes and security alerts can vanish before you see them. It also goes after the Facebook Pages and ad accounts the victim can reach.",
+      "<strong>Why it matters if you're a small business.</strong> Changing a password won't fix either one. The email theft runs inside a browser on a computer you own, so the fix has to happen on that computer.",
+      "<strong>Five-minute check for each office computer.</strong> Have each person paste these into the address bar:<br>- <strong>Chrome:</strong> `chrome://extensions` and look for anything named \"Google Sheets\" or \"Docs Helper,\" anything you don't recognize, or Developer Mode switched on (top right) when nobody there writes extensions. Then open `chrome://management`. If it says the browser is managed and the computer isn't a company-managed device, that's a red flag.<br>- <strong>Edge:</strong> `edge://extensions` and `edge://management`, same checks.<br>- <strong>Firefox:</strong> `about:addons` and look for \"Document Hub\" or anything unfamiliar, then `about:policies` for policies you didn't set.",
+      "Bitdefender's own tip: an unexpected \"managed by your organization\" message in a browser should be a red flag.",
+      "<strong>Action items for this week.</strong><br>1. <strong>Run the check above on every computer</strong> that signs in to company email, especially the ones used for Facebook or Meta ads.<br>2. <strong>If you find a match, unplug that computer from the network and call your IT support.</strong> A forced-install extension can't simply be removed, and the malware that installed it is still on the machine. Our own advice: once the computer is clean, change the email and Meta passwords from a different, clean device, and sign out of all sessions.<br>3. <strong>Don't download software from social-media ads.</strong> Bitdefender recommends this directly. Wallpapers, PDF tools and \"free\" utilities are common bait.<br>4. <strong>Teach your team that a permission prompt that keeps coming back is a warning, not a nuisance.</strong> Say No and call you. Better yet, don't give everyday users administrator rights on their computers.<br>5. <strong>Check your Meta Business access.</strong> Bitdefender advises reviewing who has access to your Meta accounts, removing permissions you no longer need, and watching for unfamiliar ads, payment changes or spending.<br>6. <strong>If you use Google Workspace or Microsoft 365, let only approved extensions in.</strong> Both can limit which browser extensions your users install. Ask your IT provider to turn that on.",
+      "Want a hand checking your office computers or locking down browser extensions? Call us at +1 (925) 248-3463."
+    ],
+    "sources": [
+      [
+        "BleepingComputer: Remus malware steals Gmail messages via fake Google Sheets extension, Nov. 26, 2026",
+        "https://www.bleepingcomputer.com/news/security/remus-malware-steals-gmail-messages-via-fake-google-sheets-extension/"
+      ],
+      [
+        "BleepingComputer: SYS010 malware abuses browser management to spy on Gmail, Outlook, Nov. 26, 2026",
+        "https://www.bleepingcomputer.com/news/security/sys010-malware-abuses-browser-management-to-spy-on-gmail-outlook/"
+      ]
+    ]
+  },
+  {
     "date": "2026-11-26",
     "tag": "Advisory",
     "read": "3 min",

@@ -1,0 +1,170 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Researchers this week described two infostealers, Remus and SYS010, that plant a fake document extension in the browser and use it to read email. One of them can survive a password change, and the other can delete security alerts before you see them. Here&#039;s what to look for on your office computers.">
+<title>Two new malware strains read Gmail and Outlook through a fake browser extension. Take five minutes to check your team&#039;s browsers — AWHIND Daily Briefing</title>
+<link rel="canonical" href="https://awhind.com/briefing/2026-11-27/">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='16' fill='%230B0F17'/%3E%3Ccircle cx='50' cy='50' r='16' fill='%23DD4E1E'/%3E%3C/svg%3E">
+
+<!-- Open Graph -->
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://awhind.com/briefing/2026-11-27/">
+<meta property="og:title" content="Two new malware strains read Gmail and Outlook through a fake browser extension. Take five minutes to check your team&#039;s browsers">
+<meta property="og:description" content="Researchers this week described two infostealers, Remus and SYS010, that plant a fake document extension in the browser and use it to read email. One of them can survive a password change, and the other can delete security alerts before you see them. Here&#039;s what to look for on your office computers.">
+<meta property="og:site_name" content="AWHIND">
+
+<!-- Twitter Card -->
+<meta name="twitter:title" content="Two new malware strains read Gmail and Outlook through a fake browser extension. Take five minutes to check your team&#039;s browsers">
+<meta name="twitter:description" content="Researchers this week described two infostealers, Remus and SYS010, that plant a fake document extension in the browser and use it to read email. One of them can survive a password change, and the other can delete security alerts before you see them. Here&#039;s what to look for on your office computers.">
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "Two new malware strains read Gmail and Outlook through a fake browser extension. Take five minutes to check your team's browsers",
+  "description": "Researchers this week described two infostealers, Remus and SYS010, that plant a fake document extension in the browser and use it to read email. One of them can survive a password change, and the other can delete security alerts before you see them. Here's what to look for on your office computers.",
+  "datePublished": "2026-11-27",
+  "url": "https://awhind.com/briefing/2026-11-27/",
+  "author": {
+    "@type": "Organization",
+    "name": "AWHIND",
+    "url": "https://awhind.com",
+    "telephone": "+19252483463"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "AWHIND",
+    "url": "https://awhind.com",
+    "telephone": "+19252483463"
+  }
+}
+</script>
+
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,500&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap');
+
+  :root{
+    --bg:#F1F2ED;
+    --bg-elevated:#FFFFFF;
+    --bg-sunken:#E7E8E1;
+    --text:#0B0F17;
+    --text-secondary:#566072;
+    --text-tertiary:#848d9b;
+    --line:#D9DAD2;
+    --line-strong:#c2c4ba;
+    --accent:#DD4E1E;
+    --accent-contrast:#FFFFFF;
+    --shadow: 0 1px 2px rgba(11,15,23,.04), 0 8px 24px rgba(11,15,23,.06);
+    --serif: 'Newsreader', Georgia, 'Times New Roman', serif;
+    --sans: 'IBM Plex Sans', -apple-system, 'Segoe UI', Roboto, sans-serif;
+    --mono: 'IBM Plex Mono', 'SF Mono', Consolas, monospace;
+  }
+  @media (prefers-color-scheme: dark){
+    :root:not([data-theme="light"]){
+      --bg:#0A0D14;
+      --bg-elevated:#12161F;
+      --bg-sunken:#080A10;
+      --text:#EEF0F4;
+      --text-secondary:#9AA3B4;
+      --text-tertiary:#6d7688;
+      --line:#232838;
+      --line-strong:#323951;
+      --accent:#FF7A47;
+      --accent-contrast:#0A0D14;
+      --shadow: 0 1px 2px rgba(0,0,0,.3), 0 8px 28px rgba(0,0,0,.4);
+    }
+  }
+  :root[data-theme="dark"]{
+    --bg:#0A0D14;
+    --bg-elevated:#12161F;
+    --bg-sunken:#080A10;
+    --text:#EEF0F4;
+    --text-secondary:#9AA3B4;
+    --text-tertiary:#6d7688;
+    --line:#232838;
+    --line-strong:#323951;
+    --accent:#FF7A47;
+    --accent-contrast:#0A0D14;
+    --shadow: 0 1px 2px rgba(0,0,0,.3), 0 8px 28px rgba(0,0,0,.4);
+  }
+
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0; background:var(--bg); color:var(--text);
+    font-family:var(--sans); font-size:16px; line-height:1.55;
+    -webkit-font-smoothing:antialiased;
+  }
+  a{color:inherit;}
+  h1,h2{font-family:var(--serif); font-weight:500; margin:0; text-wrap:balance; letter-spacing:-0.01em;}
+  .mono{font-family:var(--mono);}
+  .wrap{max-width:1120px; margin:0 auto; padding:0 28px;}
+  .btn{
+    display:inline-flex; align-items:center; gap:8px; font-family:var(--mono); font-size:13px;
+    letter-spacing:.04em; text-transform:uppercase; padding:12px 20px; border-radius:2px;
+    text-decoration:none; cursor:pointer; border:1px solid transparent;
+  }
+  .btn-ghost{border-color:var(--line-strong); color:var(--text);}
+  .btn-ghost:hover{border-color:var(--accent); color:var(--accent);}
+  .btn-sm{padding:8px 14px; font-size:11px;}
+
+  nav.wrap{display:flex; align-items:center; justify-content:space-between; padding-top:18px; padding-bottom:18px;}
+  .brand{font-family:var(--serif); font-weight:600; font-size:21px; letter-spacing:-.01em; text-decoration:none; color:var(--text); display:flex; align-items:center; gap:9px;}
+  .brand .mark{width:9px;height:9px;background:var(--accent);display:inline-block;}
+
+  article{max-width:720px; margin:44px auto; padding:0 28px;}
+  .meta{font-family:var(--mono); font-size:11.5px; color:var(--text-tertiary); letter-spacing:.03em; margin-bottom:16px;}
+  article h1{font-size:32px; line-height:1.15;}
+  .dek{font-size:16px; color:var(--text-secondary); margin-top:14px; font-family:var(--serif); font-style:italic;}
+  .article-body{margin-top:28px; font-size:15.5px; color:var(--text); max-width:60ch;}
+  .article-body p{margin:0 0 18px;}
+  .article-body strong{font-weight:600;}
+  .article-body .stat-inline{font-family:var(--mono); color:var(--accent); font-weight:600;}
+  .article-body pre{font-family:var(--mono); font-size:13px; line-height:1.45; background:var(--bg-sunken); border:1px solid var(--line); padding:14px 16px; overflow-x:auto; margin:0 0 18px; white-space:pre;}
+  .article-body pre code{font-family:inherit; font-size:inherit;}
+  .article-sources{margin-top:32px; padding-top:20px; border-top:1px solid var(--line); font-size:12px; color:var(--text-tertiary);}
+  .article-sources a{color:var(--text-secondary); text-decoration:underline; text-decoration-color:var(--line-strong);}
+  .back-link{margin-top:32px; display:inline-block;}
+</style>
+<meta property="og:image" content="https://awhind.com/images/og/briefing/2026-11-27.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Preview card: Two new malware strains read Gmail and Outlook through a fake browser extension. Take five minutes to check your team&#039;s browsers">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:site" content="@awhxtech">
+<meta name="twitter:image" content="https://awhind.com/images/og/briefing/2026-11-27.png">
+<meta name="twitter:image:alt" content="Preview card: Two new malware strains read Gmail and Outlook through a fake browser extension. Take five minutes to check your team&#039;s browsers">
+</head>
+<body>
+
+<nav class="wrap">
+  <a href="/" class="brand"><span class="mark"></span>AWHIND</a>
+  <div>
+    <a href="/#briefing" class="btn btn-ghost btn-sm">← All Briefings</a>
+  </div>
+</nav>
+
+<article>
+  <div class="meta">Nov 27, 2026 &middot; Advisory &middot; 3 min read</div>
+  <h1>Two new malware strains read Gmail and Outlook through a fake browser extension. Take five minutes to check your team's browsers</h1>
+  <div class="dek">Researchers this week described two infostealers, Remus and SYS010, that plant a fake document extension in the browser and use it to read email. One of them can survive a password change, and the other can delete security alerts before you see them. Here's what to look for on your office computers.</div>
+  <div class="article-body">
+    <p>On Nov. 26, <a href="https://www.bleepingcomputer.com/news/security/remus-malware-steals-gmail-messages-via-fake-google-sheets-extension/" target="_blank" rel="noopener">BleepingComputer</a> and <a href="https://www.bleepingcomputer.com/news/security/sys010-malware-abuses-browser-management-to-spy-on-gmail-outlook/" target="_blank" rel="noopener">BleepingComputer again</a> reported on two pieces of malware that steal email the same way: they install a browser extension that looks like a Google document tool, then read the inbox from inside the browser.</p>
+    <p><strong>Remus.</strong> GenDigital and Invoke RE researchers found that the Remus infostealer, which its seller advertised as a "Gmail zero-day," actually installs a malicious Chrome extension named "Google Sheets." According to BleepingComputer, the malware edits the Chrome profile to register the extension and turns on Developer Mode so it can run. Once active, it checks for unread Gmail messages every minute and sends the subject, body and sender to the attackers. Because it lives in the browser, it keeps working after a password change or a "sign out everywhere." It picks up again as soon as the user signs back in.</p>
+    <p><strong>SYS010.</strong> Bitdefender says a new version of the SYS01 infostealer is spreading through Meta ads for free animated wallpapers that impersonate Wallpaper Engine and Lively Wallpaper. The wallpaper works, but in the background the malware enrolls the browser in attacker-controlled management. In Chrome that means an attacker's Google admin console, in Edge an attacker's device management server, and in Firefox a forced-install policy. It then force-installs an add-on posing as "Docs Helper" (Chrome) or "Document Hub" (Firefox) that the user can't remove. To get admin rights, it repeats the Windows permission prompt every three seconds, up to 99 times, until someone clicks Yes. Bitdefender says the extension steals session cookies, which lets the attacker into signed-in accounts without a password or a two-factor code. It can also read recent Gmail and Outlook messages and permanently delete selected ones, so login codes and security alerts can vanish before you see them. It also goes after the Facebook Pages and ad accounts the victim can reach.</p>
+    <p><strong>Why it matters if you're a small business.</strong> Changing a password won't fix either one. The email theft runs inside a browser on a computer you own, so the fix has to happen on that computer.</p>
+    <p><strong>Five-minute check for each office computer.</strong> Have each person paste these into the address bar:<br>- <strong>Chrome:</strong> `chrome://extensions` and look for anything named "Google Sheets" or "Docs Helper," anything you don't recognize, or Developer Mode switched on (top right) when nobody there writes extensions. Then open `chrome://management`. If it says the browser is managed and the computer isn't a company-managed device, that's a red flag.<br>- <strong>Edge:</strong> `edge://extensions` and `edge://management`, same checks.<br>- <strong>Firefox:</strong> `about:addons` and look for "Document Hub" or anything unfamiliar, then `about:policies` for policies you didn't set.</p>
+    <p>Bitdefender's own tip: an unexpected "managed by your organization" message in a browser should be a red flag.</p>
+    <p><strong>Action items for this week.</strong><br>1. <strong>Run the check above on every computer</strong> that signs in to company email, especially the ones used for Facebook or Meta ads.<br>2. <strong>If you find a match, unplug that computer from the network and call your IT support.</strong> A forced-install extension can't simply be removed, and the malware that installed it is still on the machine. Our own advice: once the computer is clean, change the email and Meta passwords from a different, clean device, and sign out of all sessions.<br>3. <strong>Don't download software from social-media ads.</strong> Bitdefender recommends this directly. Wallpapers, PDF tools and "free" utilities are common bait.<br>4. <strong>Teach your team that a permission prompt that keeps coming back is a warning, not a nuisance.</strong> Say No and call you. Better yet, don't give everyday users administrator rights on their computers.<br>5. <strong>Check your Meta Business access.</strong> Bitdefender advises reviewing who has access to your Meta accounts, removing permissions you no longer need, and watching for unfamiliar ads, payment changes or spending.<br>6. <strong>If you use Google Workspace or Microsoft 365, let only approved extensions in.</strong> Both can limit which browser extensions your users install. Ask your IT provider to turn that on.</p>
+    <p>Want a hand checking your office computers or locking down browser extensions? Call us at +1 (925) 248-3463.</p>
+  </div>
+  <div class="article-sources">
+    Sources: <a href="https://www.bleepingcomputer.com/news/security/remus-malware-steals-gmail-messages-via-fake-google-sheets-extension/" target="_blank" rel="noopener">BleepingComputer: Remus malware steals Gmail messages via fake Google Sheets extension, Nov. 26, 2026</a> &middot; <a href="https://www.bleepingcomputer.com/news/security/sys010-malware-abuses-browser-management-to-spy-on-gmail-outlook/" target="_blank" rel="noopener">BleepingComputer: SYS010 malware abuses browser management to spy on Gmail, Outlook, Nov. 26, 2026</a>
+  </div>
+  <a href="/#briefing" class="btn btn-ghost btn-sm back-link">← All Briefings</a>
+</article>
+
+</body>
+</html>

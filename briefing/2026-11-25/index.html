@@ -1,0 +1,182 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="A critical flaw in Drupal core lets an anonymous visitor abuse the leftover installer page to take over a site. Drupal says it has been exploited on live sites since Nov. 19, and CISA added it to its exploited list on Nov. 24. The fix is out, and there&#039;s a five-minute block you can add right now.">
+<title>Attackers are using Drupal&#039;s installer to take over websites. If your site runs Drupal, here&#039;s what to do today — AWHIND Daily Briefing</title>
+<link rel="canonical" href="https://awhind.com/briefing/2026-11-25/">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='16' fill='%230B0F17'/%3E%3Ccircle cx='50' cy='50' r='16' fill='%23DD4E1E'/%3E%3C/svg%3E">
+
+<!-- Open Graph -->
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://awhind.com/briefing/2026-11-25/">
+<meta property="og:title" content="Attackers are using Drupal&#039;s installer to take over websites. If your site runs Drupal, here&#039;s what to do today">
+<meta property="og:description" content="A critical flaw in Drupal core lets an anonymous visitor abuse the leftover installer page to take over a site. Drupal says it has been exploited on live sites since Nov. 19, and CISA added it to its exploited list on Nov. 24. The fix is out, and there&#039;s a five-minute block you can add right now.">
+<meta property="og:site_name" content="AWHIND">
+
+<!-- Twitter Card -->
+<meta name="twitter:title" content="Attackers are using Drupal&#039;s installer to take over websites. If your site runs Drupal, here&#039;s what to do today">
+<meta name="twitter:description" content="A critical flaw in Drupal core lets an anonymous visitor abuse the leftover installer page to take over a site. Drupal says it has been exploited on live sites since Nov. 19, and CISA added it to its exploited list on Nov. 24. The fix is out, and there&#039;s a five-minute block you can add right now.">
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "Attackers are using Drupal's installer to take over websites. If your site runs Drupal, here's what to do today",
+  "description": "A critical flaw in Drupal core lets an anonymous visitor abuse the leftover installer page to take over a site. Drupal says it has been exploited on live sites since Nov. 19, and CISA added it to its exploited list on Nov. 24. The fix is out, and there's a five-minute block you can add right now.",
+  "datePublished": "2026-11-25",
+  "url": "https://awhind.com/briefing/2026-11-25/",
+  "author": {
+    "@type": "Organization",
+    "name": "AWHIND",
+    "url": "https://awhind.com",
+    "telephone": "+19252483463"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "AWHIND",
+    "url": "https://awhind.com",
+    "telephone": "+19252483463"
+  }
+}
+</script>
+
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,500&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap');
+
+  :root{
+    --bg:#F1F2ED;
+    --bg-elevated:#FFFFFF;
+    --bg-sunken:#E7E8E1;
+    --text:#0B0F17;
+    --text-secondary:#566072;
+    --text-tertiary:#848d9b;
+    --line:#D9DAD2;
+    --line-strong:#c2c4ba;
+    --accent:#DD4E1E;
+    --accent-contrast:#FFFFFF;
+    --shadow: 0 1px 2px rgba(11,15,23,.04), 0 8px 24px rgba(11,15,23,.06);
+    --serif: 'Newsreader', Georgia, 'Times New Roman', serif;
+    --sans: 'IBM Plex Sans', -apple-system, 'Segoe UI', Roboto, sans-serif;
+    --mono: 'IBM Plex Mono', 'SF Mono', Consolas, monospace;
+  }
+  @media (prefers-color-scheme: dark){
+    :root:not([data-theme="light"]){
+      --bg:#0A0D14;
+      --bg-elevated:#12161F;
+      --bg-sunken:#080A10;
+      --text:#EEF0F4;
+      --text-secondary:#9AA3B4;
+      --text-tertiary:#6d7688;
+      --line:#232838;
+      --line-strong:#323951;
+      --accent:#FF7A47;
+      --accent-contrast:#0A0D14;
+      --shadow: 0 1px 2px rgba(0,0,0,.3), 0 8px 28px rgba(0,0,0,.4);
+    }
+  }
+  :root[data-theme="dark"]{
+    --bg:#0A0D14;
+    --bg-elevated:#12161F;
+    --bg-sunken:#080A10;
+    --text:#EEF0F4;
+    --text-secondary:#9AA3B4;
+    --text-tertiary:#6d7688;
+    --line:#232838;
+    --line-strong:#323951;
+    --accent:#FF7A47;
+    --accent-contrast:#0A0D14;
+    --shadow: 0 1px 2px rgba(0,0,0,.3), 0 8px 28px rgba(0,0,0,.4);
+  }
+
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0; background:var(--bg); color:var(--text);
+    font-family:var(--sans); font-size:16px; line-height:1.55;
+    -webkit-font-smoothing:antialiased;
+  }
+  a{color:inherit;}
+  h1,h2{font-family:var(--serif); font-weight:500; margin:0; text-wrap:balance; letter-spacing:-0.01em;}
+  .mono{font-family:var(--mono);}
+  .wrap{max-width:1120px; margin:0 auto; padding:0 28px;}
+  .btn{
+    display:inline-flex; align-items:center; gap:8px; font-family:var(--mono); font-size:13px;
+    letter-spacing:.04em; text-transform:uppercase; padding:12px 20px; border-radius:2px;
+    text-decoration:none; cursor:pointer; border:1px solid transparent;
+  }
+  .btn-ghost{border-color:var(--line-strong); color:var(--text);}
+  .btn-ghost:hover{border-color:var(--accent); color:var(--accent);}
+  .btn-sm{padding:8px 14px; font-size:11px;}
+
+  nav.wrap{display:flex; align-items:center; justify-content:space-between; padding-top:18px; padding-bottom:18px;}
+  .brand{font-family:var(--serif); font-weight:600; font-size:21px; letter-spacing:-.01em; text-decoration:none; color:var(--text); display:flex; align-items:center; gap:9px;}
+  .brand .mark{width:9px;height:9px;background:var(--accent);display:inline-block;}
+
+  article{max-width:720px; margin:44px auto; padding:0 28px;}
+  .meta{font-family:var(--mono); font-size:11.5px; color:var(--text-tertiary); letter-spacing:.03em; margin-bottom:16px;}
+  article h1{font-size:32px; line-height:1.15;}
+  .dek{font-size:16px; color:var(--text-secondary); margin-top:14px; font-family:var(--serif); font-style:italic;}
+  .article-body{margin-top:28px; font-size:15.5px; color:var(--text); max-width:60ch;}
+  .article-body p{margin:0 0 18px;}
+  .article-body strong{font-weight:600;}
+  .article-body .stat-inline{font-family:var(--mono); color:var(--accent); font-weight:600;}
+  .article-body pre{font-family:var(--mono); font-size:13px; line-height:1.45; background:var(--bg-sunken); border:1px solid var(--line); padding:14px 16px; overflow-x:auto; margin:0 0 18px; white-space:pre;}
+  .article-body pre code{font-family:inherit; font-size:inherit;}
+  .article-sources{margin-top:32px; padding-top:20px; border-top:1px solid var(--line); font-size:12px; color:var(--text-tertiary);}
+  .article-sources a{color:var(--text-secondary); text-decoration:underline; text-decoration-color:var(--line-strong);}
+  .back-link{margin-top:32px; display:inline-block;}
+</style>
+<meta property="og:image" content="https://awhind.com/images/og/briefing/2026-11-25.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Preview card: Attackers are using Drupal&#039;s installer to take over websites. If your site runs Drupal, here&#039;s what to do today">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:site" content="@awhxtech">
+<meta name="twitter:image" content="https://awhind.com/images/og/briefing/2026-11-25.png">
+<meta name="twitter:image:alt" content="Preview card: Attackers are using Drupal&#039;s installer to take over websites. If your site runs Drupal, here&#039;s what to do today">
+</head>
+<body>
+
+<nav class="wrap">
+  <a href="/" class="brand"><span class="mark"></span>AWHIND</a>
+  <div>
+    <a href="/#briefing" class="btn btn-ghost btn-sm">← All Briefings</a>
+  </div>
+</nav>
+
+<article>
+  <div class="meta">Nov 25, 2026 &middot; Advisory &middot; 3 min read</div>
+  <h1>Attackers are using Drupal's installer to take over websites. If your site runs Drupal, here's what to do today</h1>
+  <div class="dek">A critical flaw in Drupal core lets an anonymous visitor abuse the leftover installer page to take over a site. Drupal says it has been exploited on live sites since Nov. 19, and CISA added it to its exploited list on Nov. 24. The fix is out, and there's a five-minute block you can add right now.</div>
+  <div class="article-body">
+    <p>Every Drupal site ships with an installer page, `/core/install.php`, and it stays on the server long after the site is built. On Nov. 18 the Drupal Security Team rated a flaw in it <a href="https://www.drupal.org/sa-core-2026-017" target="_blank" rel="noopener">Highly critical</a>: "Under specific conditions, an attacker can use the installer to attempt to reinstall Drupal. This can lead to a site takeover or remote code execution." It is tracked as CVE-2026-132165.</p>
+    <p><strong>It's being exploited now.</strong> Drupal updated its advisory to say the flaw was "exploited on live sites as early as 2026-11-19 19:00 UTC," <a href="https://www.bleepingcomputer.com/news/security/hackers-now-exploit-critical-drupal-rce-flaw-to-hijack-sites/" target="_blank" rel="noopener">BleepingComputer</a> reports. <a href="https://www.cisa.gov/news-events/alerts/2026/11/24/cisa-adds-three-known-exploited-vulnerabilities-catalog" target="_blank" rel="noopener">CISA</a> added it to its Known Exploited Vulnerabilities catalog on Nov. 24 and gave federal agencies until Friday, Nov. 27 to fix it.</p>
+    <p><strong>Which versions are affected.</strong> Everything before 10.6.22, 11.0 through 11.3.21, and 11.4.0 through 11.4.12. The fixed releases are <strong>Drupal 10.6.22, 11.3.22 and 11.4.13</strong>. Drupal 11.2.x and older, 10.5.x and older, and all of Drupal 8 and 9 are end-of-life and get no fix at all, per the <a href="https://www.drupal.org/sa-core-2026-017" target="_blank" rel="noopener">Drupal advisory</a>.</p>
+    <p><strong>Why it matters if you're a small business.</strong> You may not know what your website runs on, because a web designer or agency built it years ago. If it's Drupal and nobody has updated it lately, the installer page is probably still reachable: the <a href="https://security.utoronto.ca/advisories/security-advisory-critical-remote-code-execution-in-the-drupal-core-installer/" target="_blank" rel="noopener">University of Toronto's security team</a> notes that Drupal's default .htaccess rules do not block it. A taken-over site can be used to serve malware or phishing pages under your name.</p>
+    <p><strong>Check whether your installer is exposed.</strong> Drupal's <a href="https://www.drupal.org/docs/administering-a-drupal-site/security-in-drupal/securing-the-installer-installphp" target="_blank" rel="noopener">guide to securing the installer</a> gives these checks. Replace `example.com` with your site's address:</p>
+    <pre><code>curl -I https://example.com/core/install.php
+curl -IL https://example.com/install.php
+curl -I https://example.com/core/install.php/foo</code></pre>
+    <p>All three should end with a `403` or `404`. If you see `200`, the installer is open.</p>
+    <p><strong>Block it today, even before you patch.</strong> On Apache, add this to your virtual host configuration (not .htaccess, which causes a 500 error), run `apachectl configtest`, then reload:</p>
+    <pre><code>&lt;Location "/core/install.php"&gt;
+  Require all denied
+&lt;/Location&gt;</code></pre>
+    <p>On Nginx, add this inside the HTTPS `server` block, run `nginx -t`, then reload:</p>
+    <pre><code>location ^~ /core/install.php {
+  return 404;
+}</code></pre>
+    <p>Drupal warns not to use an exact match (`location = /core/install.php`), because some setups still run the installer through URLs like `/core/install.php/foo`. On shared hosting where you can't edit server config, the same guide has an .htaccess option. Blocking the installer doesn't affect `update.php` or normal updates.</p>
+    <p><strong>Action items for today.</strong><br>1. <strong>Find out what your website runs on.</strong> Ask your web designer, agency or host. If it isn't Drupal, you're done with this one.<br>2. <strong>If it's Drupal, run the three checks above</strong> or ask whoever manages the site to run them.<br>3. <strong>Block `/core/install.php`</strong> with the web server rule above. Drupal's guide says some managed hosts already block it, so test first.<br>4. <strong>Update to 10.6.22, 11.3.22 or 11.4.13.</strong> Drupal Steward customers are protected from known attack paths, but Drupal still says to upgrade.<br>5. <strong>If you're on an end-of-life version, plan the upgrade now.</strong> There is no patch for 11.2.x, 10.5.x, 9 or 8, so the block is your only cover until you move.<br>6. <strong>Make sure the web server can't write to `settings.php`.</strong> Drupal says that blocks some, but not all, of the attack paths.<br>7. <strong>If the installer was open, have someone look for signs of takeover.</strong> Our own advice: check for admin accounts you don't recognize and pages you didn't publish.</p>
+    <p>Not sure what your website runs on, or who can check it? Call us at +1 (925) 248-3463 and we'll help.</p>
+  </div>
+  <div class="article-sources">
+    Sources: <a href="https://www.drupal.org/sa-core-2026-017" target="_blank" rel="noopener">Drupal: SA-CORE-2026-017, Drupal core Highly critical Remote code execution, Nov. 18, 2026 (updated)</a> &middot; <a href="https://www.drupal.org/docs/administering-a-drupal-site/security-in-drupal/securing-the-installer-installphp" target="_blank" rel="noopener">Drupal.org: Securing the installer (install.php), Nov. 21, 2026</a> &middot; <a href="https://www.bleepingcomputer.com/news/security/hackers-now-exploit-critical-drupal-rce-flaw-to-hijack-sites/" target="_blank" rel="noopener">BleepingComputer: Hackers now exploit critical Drupal RCE flaw to hijack sites, Nov. 25, 2026</a> &middot; <a href="https://www.cisa.gov/news-events/alerts/2026/11/24/cisa-adds-three-known-exploited-vulnerabilities-catalog" target="_blank" rel="noopener">CISA: CISA Adds Three Known Exploited Vulnerabilities to Catalog, Nov. 24, 2026</a> &middot; <a href="https://security.utoronto.ca/advisories/security-advisory-critical-remote-code-execution-in-the-drupal-core-installer/" target="_blank" rel="noopener">University of Toronto Information Security: Critical remote code execution in the Drupal core installer, Nov. 19, 2026</a>
+  </div>
+  <a href="/#briefing" class="btn btn-ghost btn-sm back-link">← All Briefings</a>
+</article>
+
+</body>
+</html>

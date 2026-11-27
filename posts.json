@@ -1,5 +1,759 @@
 [
   {
+    "date": "2026-11-27",
+    "tag": "Advisory",
+    "read": "3 min",
+    "title": "Two new malware strains read Gmail and Outlook through a fake browser extension. Take five minutes to check your team's browsers",
+    "dek": "Researchers this week described two infostealers, Remus and SYS010, that plant a fake document extension in the browser and use it to read email. One of them can survive a password change, and the other can delete security alerts before you see them. Here's what to look for on your office computers.",
+    "body": [
+      "On Nov. 26, <a href=\"https://www.bleepingcomputer.com/news/security/remus-malware-steals-gmail-messages-via-fake-google-sheets-extension/\" target=\"_blank\" rel=\"noopener\">BleepingComputer</a> and <a href=\"https://www.bleepingcomputer.com/news/security/sys010-malware-abuses-browser-management-to-spy-on-gmail-outlook/\" target=\"_blank\" rel=\"noopener\">BleepingComputer again</a> reported on two pieces of malware that steal email the same way: they install a browser extension that looks like a Google document tool, then read the inbox from inside the browser.",
+      "<strong>Remus.</strong> GenDigital and Invoke RE researchers found that the Remus infostealer, which its seller advertised as a \"Gmail zero-day,\" actually installs a malicious Chrome extension named \"Google Sheets.\" According to BleepingComputer, the malware edits the Chrome profile to register the extension and turns on Developer Mode so it can run. Once active, it checks for unread Gmail messages every minute and sends the subject, body and sender to the attackers. Because it lives in the browser, it keeps working after a password change or a \"sign out everywhere.\" It picks up again as soon as the user signs back in.",
+      "<strong>SYS010.</strong> Bitdefender says a new version of the SYS01 infostealer is spreading through Meta ads for free animated wallpapers that impersonate Wallpaper Engine and Lively Wallpaper. The wallpaper works, but in the background the malware enrolls the browser in attacker-controlled management. In Chrome that means an attacker's Google admin console, in Edge an attacker's device management server, and in Firefox a forced-install policy. It then force-installs an add-on posing as \"Docs Helper\" (Chrome) or \"Document Hub\" (Firefox) that the user can't remove. To get admin rights, it repeats the Windows permission prompt every three seconds, up to 99 times, until someone clicks Yes. Bitdefender says the extension steals session cookies, which lets the attacker into signed-in accounts without a password or a two-factor code. It can also read recent Gmail and Outlook messages and permanently delete selected ones, so login codes and security alerts can vanish before you see them. It also goes after the Facebook Pages and ad accounts the victim can reach.",
+      "<strong>Why it matters if you're a small business.</strong> Changing a password won't fix either one. The email theft runs inside a browser on a computer you own, so the fix has to happen on that computer.",
+      "<strong>Five-minute check for each office computer.</strong> Have each person paste these into the address bar:<br>- <strong>Chrome:</strong> `chrome://extensions` and look for anything named \"Google Sheets\" or \"Docs Helper,\" anything you don't recognize, or Developer Mode switched on (top right) when nobody there writes extensions. Then open `chrome://management`. If it says the browser is managed and the computer isn't a company-managed device, that's a red flag.<br>- <strong>Edge:</strong> `edge://extensions` and `edge://management`, same checks.<br>- <strong>Firefox:</strong> `about:addons` and look for \"Document Hub\" or anything unfamiliar, then `about:policies` for policies you didn't set.",
+      "Bitdefender's own tip: an unexpected \"managed by your organization\" message in a browser should be a red flag.",
+      "<strong>Action items for this week.</strong><br>1. <strong>Run the check above on every computer</strong> that signs in to company email, especially the ones used for Facebook or Meta ads.<br>2. <strong>If you find a match, unplug that computer from the network and call your IT support.</strong> A forced-install extension can't simply be removed, and the malware that installed it is still on the machine. Our own advice: once the computer is clean, change the email and Meta passwords from a different, clean device, and sign out of all sessions.<br>3. <strong>Don't download software from social-media ads.</strong> Bitdefender recommends this directly. Wallpapers, PDF tools and \"free\" utilities are common bait.<br>4. <strong>Teach your team that a permission prompt that keeps coming back is a warning, not a nuisance.</strong> Say No and call you. Better yet, don't give everyday users administrator rights on their computers.<br>5. <strong>Check your Meta Business access.</strong> Bitdefender advises reviewing who has access to your Meta accounts, removing permissions you no longer need, and watching for unfamiliar ads, payment changes or spending.<br>6. <strong>If you use Google Workspace or Microsoft 365, let only approved extensions in.</strong> Both can limit which browser extensions your users install. Ask your IT provider to turn that on.",
+      "Want a hand checking your office computers or locking down browser extensions? Call us at +1 (925) 248-3463."
+    ],
+    "sources": [
+      [
+        "BleepingComputer: Remus malware steals Gmail messages via fake Google Sheets extension, Nov. 26, 2026",
+        "https://www.bleepingcomputer.com/news/security/remus-malware-steals-gmail-messages-via-fake-google-sheets-extension/"
+      ],
+      [
+        "BleepingComputer: SYS010 malware abuses browser management to spy on Gmail, Outlook, Nov. 26, 2026",
+        "https://www.bleepingcomputer.com/news/security/sys010-malware-abuses-browser-management-to-spy-on-gmail-outlook/"
+      ]
+    ]
+  },
+  {
+    "date": "2026-11-26",
+    "tag": "Advisory",
+    "read": "3 min",
+    "title": "1Password says an attacker copied customer names and emails, but not vaults. Expect fake 1Password emails, and here's how to handle them",
+    "dek": "1Password disclosed on Nov. 25 that an attacker got into an employee's GitHub account and used it to copy account records for a subset of customers. Vaults, the keys that protect them, passwords and Secret Keys were not affected, and you don't need to change anything. The real risk now is phishing aimed at known 1Password users.",
+    "body": [
+      "On Nov. 25, <a href=\"https://1password.com/blog/update-on-nov-2026-security-incident\" target=\"_blank\" rel=\"noopener\">1Password disclosed</a> that it began investigating on Nov. 19 after signs that an attacker had taken over an employee's corporate GitHub account. The attacker used that account to reach source code and push malicious code to backend services, which then downloaded account records for a subset of customers. The attacker also got into 1Password's CI/CD system, and the company says it has rotated every internal credential that may have been exposed.",
+      "<strong>What was taken.</strong> According to 1Password, the records include names and email addresses, account and user IDs, account creation and last sign-in times, public keys, Secure Remote Password parameters, tokens from certain emailed invitation, provisioning and account recovery links, and other non-secret account metadata.",
+      "<strong>What was not taken.</strong> 1Password says your vaults, the items in them and the keys that protect them were not affected. It does not store your account password or Secret Key, and account recovery keys, apps and browser extensions were not affected. The company says <strong>you do not need to change anything in your account</strong>.",
+      "<strong>About those emailed tokens.</strong> 1Password says a token from an invitation or recovery email can't open an account by itself. It only works together with an SSO sign-in or a code sent to the user's registered email. A small number of users had one of these pending and were notified directly. As a precaution, 1Password lengthened that code from six digits to ten letters and numbers, <a href=\"https://www.bleepingcomputer.com/news/security/1password-customer-data-stolen-after-employee-github-account-breach/\" target=\"_blank\" rel=\"noopener\">BleepingComputer</a> reports.",
+      "<strong>Why it matters if you're a small business.</strong> Your team's names and work emails may now be on a list of confirmed 1Password users. That is exactly what a phisher wants. As BleepingComputer points out, expect emails that use this breach as the lure: \"secure your account,\" \"reset your password,\" \"verify your information,\" or an account recovery or team invitation you didn't ask for.",
+      "<strong>Action items for this week.</strong><br>1. <strong>Don't change anything because an email told you to.</strong> 1Password says no action is needed in your account. Any message saying otherwise deserves suspicion.<br>2. <strong>Open 1Password yourself.</strong> If an email about 1Password worries you, ignore its links and open the app, or type the website address yourself. 1Password says to enter your account password and Secret Key only there.<br>3. <strong>Never give out your account password, Secret Key or a verification code.</strong> 1Password says it will never contact you to ask for your password or Secret Key, and that covers texts and phone calls too.<br>4. <strong>Ignore invitations and recovery requests you didn't start.</strong> If someone on your team gets one, have them tell you before they click anything.<br>5. <strong>If you're the 1Password admin, confirm recovery requests out loud.</strong> Our own advice: before you approve an account recovery for a team member, call them or ask them in person to confirm they actually requested it.<br>6. <strong>Give your team a two-line heads-up today.</strong> Tell them 1Password had a breach, their vaults are safe, and any email about it asking them to click, sign in or share a code should be forwarded to you, not answered.<br>7. <strong>Report anything suspicious</strong> to support@1password.com, as 1Password asks.",
+      "A password manager is still one of the best things a small office can use, and turning on multi-factor sign-in everywhere still matters. This breach is a reminder that the biggest risk is usually the email that comes after the news.",
+      "Want help warning your team or checking a suspicious email? Call us at +1 (925) 248-3463."
+    ],
+    "sources": [
+      [
+        "1Password: Update on a security incident involving 1Password's backend systems, Nov. 25, 2026",
+        "https://1password.com/blog/update-on-nov-2026-security-incident"
+      ],
+      [
+        "BleepingComputer: 1Password customer data stolen after employee GitHub account breach, Nov. 25, 2026",
+        "https://www.bleepingcomputer.com/news/security/1password-customer-data-stolen-after-employee-github-account-breach/"
+      ]
+    ]
+  },
+  {
+    "date": "2026-11-25",
+    "tag": "Advisory",
+    "read": "3 min",
+    "title": "Attackers are using Drupal's installer to take over websites. If your site runs Drupal, here's what to do today",
+    "dek": "A critical flaw in Drupal core lets an anonymous visitor abuse the leftover installer page to take over a site. Drupal says it has been exploited on live sites since Nov. 19, and CISA added it to its exploited list on Nov. 24. The fix is out, and there's a five-minute block you can add right now.",
+    "body": [
+      "Every Drupal site ships with an installer page, `/core/install.php`, and it stays on the server long after the site is built. On Nov. 18 the Drupal Security Team rated a flaw in it <a href=\"https://www.drupal.org/sa-core-2026-017\" target=\"_blank\" rel=\"noopener\">Highly critical</a>: \"Under specific conditions, an attacker can use the installer to attempt to reinstall Drupal. This can lead to a site takeover or remote code execution.\" It is tracked as CVE-2026-132165.",
+      "<strong>It's being exploited now.</strong> Drupal updated its advisory to say the flaw was \"exploited on live sites as early as 2026-11-19 19:00 UTC,\" <a href=\"https://www.bleepingcomputer.com/news/security/hackers-now-exploit-critical-drupal-rce-flaw-to-hijack-sites/\" target=\"_blank\" rel=\"noopener\">BleepingComputer</a> reports. <a href=\"https://www.cisa.gov/news-events/alerts/2026/11/24/cisa-adds-three-known-exploited-vulnerabilities-catalog\" target=\"_blank\" rel=\"noopener\">CISA</a> added it to its Known Exploited Vulnerabilities catalog on Nov. 24 and gave federal agencies until Friday, Nov. 27 to fix it.",
+      "<strong>Which versions are affected.</strong> Everything before 10.6.22, 11.0 through 11.3.21, and 11.4.0 through 11.4.12. The fixed releases are <strong>Drupal 10.6.22, 11.3.22 and 11.4.13</strong>. Drupal 11.2.x and older, 10.5.x and older, and all of Drupal 8 and 9 are end-of-life and get no fix at all, per the <a href=\"https://www.drupal.org/sa-core-2026-017\" target=\"_blank\" rel=\"noopener\">Drupal advisory</a>.",
+      "<strong>Why it matters if you're a small business.</strong> You may not know what your website runs on, because a web designer or agency built it years ago. If it's Drupal and nobody has updated it lately, the installer page is probably still reachable: the <a href=\"https://security.utoronto.ca/advisories/security-advisory-critical-remote-code-execution-in-the-drupal-core-installer/\" target=\"_blank\" rel=\"noopener\">University of Toronto's security team</a> notes that Drupal's default .htaccess rules do not block it. A taken-over site can be used to serve malware or phishing pages under your name.",
+      "<strong>Check whether your installer is exposed.</strong> Drupal's <a href=\"https://www.drupal.org/docs/administering-a-drupal-site/security-in-drupal/securing-the-installer-installphp\" target=\"_blank\" rel=\"noopener\">guide to securing the installer</a> gives these checks. Replace `example.com` with your site's address:",
+      "<pre><code>curl -I https://example.com/core/install.php\ncurl -IL https://example.com/install.php\ncurl -I https://example.com/core/install.php/foo</code></pre>",
+      "All three should end with a `403` or `404`. If you see `200`, the installer is open.",
+      "<strong>Block it today, even before you patch.</strong> On Apache, add this to your virtual host configuration (not .htaccess, which causes a 500 error), run `apachectl configtest`, then reload:",
+      "<pre><code>&lt;Location \"/core/install.php\"&gt;\n  Require all denied\n&lt;/Location&gt;</code></pre>",
+      "On Nginx, add this inside the HTTPS `server` block, run `nginx -t`, then reload:",
+      "<pre><code>location ^~ /core/install.php {\n  return 404;\n}</code></pre>",
+      "Drupal warns not to use an exact match (`location = /core/install.php`), because some setups still run the installer through URLs like `/core/install.php/foo`. On shared hosting where you can't edit server config, the same guide has an .htaccess option. Blocking the installer doesn't affect `update.php` or normal updates.",
+      "<strong>Action items for today.</strong><br>1. <strong>Find out what your website runs on.</strong> Ask your web designer, agency or host. If it isn't Drupal, you're done with this one.<br>2. <strong>If it's Drupal, run the three checks above</strong> or ask whoever manages the site to run them.<br>3. <strong>Block `/core/install.php`</strong> with the web server rule above. Drupal's guide says some managed hosts already block it, so test first.<br>4. <strong>Update to 10.6.22, 11.3.22 or 11.4.13.</strong> Drupal Steward customers are protected from known attack paths, but Drupal still says to upgrade.<br>5. <strong>If you're on an end-of-life version, plan the upgrade now.</strong> There is no patch for 11.2.x, 10.5.x, 9 or 8, so the block is your only cover until you move.<br>6. <strong>Make sure the web server can't write to `settings.php`.</strong> Drupal says that blocks some, but not all, of the attack paths.<br>7. <strong>If the installer was open, have someone look for signs of takeover.</strong> Our own advice: check for admin accounts you don't recognize and pages you didn't publish.",
+      "Not sure what your website runs on, or who can check it? Call us at +1 (925) 248-3463 and we'll help."
+    ],
+    "sources": [
+      [
+        "Drupal: SA-CORE-2026-017, Drupal core Highly critical Remote code execution, Nov. 18, 2026 (updated)",
+        "https://www.drupal.org/sa-core-2026-017"
+      ],
+      [
+        "Drupal.org: Securing the installer (install.php), Nov. 21, 2026",
+        "https://www.drupal.org/docs/administering-a-drupal-site/security-in-drupal/securing-the-installer-installphp"
+      ],
+      [
+        "BleepingComputer: Hackers now exploit critical Drupal RCE flaw to hijack sites, Nov. 25, 2026",
+        "https://www.bleepingcomputer.com/news/security/hackers-now-exploit-critical-drupal-rce-flaw-to-hijack-sites/"
+      ],
+      [
+        "CISA: CISA Adds Three Known Exploited Vulnerabilities to Catalog, Nov. 24, 2026",
+        "https://www.cisa.gov/news-events/alerts/2026/11/24/cisa-adds-three-known-exploited-vulnerabilities-catalog"
+      ],
+      [
+        "University of Toronto Information Security: Critical remote code execution in the Drupal core installer, Nov. 19, 2026",
+        "https://security.utoronto.ca/advisories/security-advisory-critical-remote-code-execution-in-the-drupal-core-installer/"
+      ]
+    ]
+  },
+  {
+    "date": "2026-11-24",
+    "tag": "Advisory",
+    "read": "3 min",
+    "title": "N-able's Mail Assure email filter was breached, and the hole is patched. If your IT provider uses it, here's what to ask",
+    "dek": "N-able says an attacker got into one server behind its Mail Assure and SpamExperts hosted email filtering service, which many IT providers run for their clients. The flaw is fixed, email kept flowing, and customer API tokens were revoked. Here's what that means for your business.",
+    "body": [
+      "N-able says an unauthorized party accessed one of the servers behind Mail Assure and SpamExperts Hosted Cloud, an email filtering service it runs for managed service providers. On Nov. 16 the company took the management portal and API offline and suspended logging, mailbox synchronization and quarantine, while email delivery kept working, <a href=\"https://www.securityweek.com/n-able-patches-critical-flaw-disclosed-after-mail-assure-cyberattack/\" target=\"_blank\" rel=\"noopener\">SecurityWeek</a> reports. Two days later it confirmed a cyberattack: the attackers hit a web server and likely accessed certain credentials stored there.",
+      "<strong>What N-able fixed.</strong> During its investigation, N-able found and patched a critical flaw, <a href=\"https://euvd.enisa.europa.eu/vulnerability/CVE-2026-134624\" target=\"_blank\" rel=\"noopener\">CVE-2026-134624</a> (CVSS 4.0 score 9.3). A connection check used for LDAP synchronization did not restrict where it could connect, so an API user with enough privileges could make the server reach internal hosts and send crafted data to internal services. Build 20261121.1943 fixes it. N-able says it restored dashboard and API access on Nov. 21 at 23:45 UTC, and that inbound and outbound mail and spam filtering kept running throughout, per its <a href=\"https://www.n-able.com/blog/mail-assure-incident-update\" target=\"_blank\" rel=\"noopener\">incident update</a>. <a href=\"https://www.cisa.gov/news-events/alerts/2026/11/23/cisa-adds-two-known-exploited-vulnerabilities-catalog\" target=\"_blank\" rel=\"noopener\">CISA</a> added the flaw to its Known Exploited Vulnerabilities catalog on Nov. 23.",
+      "<strong>What N-able says, and what it hasn't said yet.</strong> The company says it has found no evidence of exploitation beyond the single N-able-hosted server, has brought in an outside forensics team, and will publish a formal root cause analysis within two weeks of its Nov. 22 update. <a href=\"https://thehackernews.com/2026/11/n-able-discloses-critical-mail-assure.html\" target=\"_blank\" rel=\"noopener\">The Hacker News</a> reports N-able has found no evidence that customer data, including tenants' mailboxes, was compromised. N-able has not said how the attackers first got in or whether this flaw was the way in. It also says this incident is unrelated to the N-central incident earlier this month.",
+      "<strong>What N-able already did for customers.</strong> It took the affected server offline, rotated internal platform credentials, revoked customers' existing API tokens, invalidated OAuth tokens and reset local users' passwords, The Hacker News reports. Hosted customers have nothing to install. The hosted platform is already patched.",
+      "<strong>Why it matters if you're a small business.</strong> You may never have heard the name Mail Assure, because your IT provider runs it for you. It sits in front of your mailboxes and decides what is spam. If your provider uses it, some of the service, like quarantine and logging, may still be coming back in phases. Any scripts or integrations your provider built on the old API tokens need new credentials before they work again.",
+      "<strong>Action items for this week.</strong><br>1. <strong>Ask your IT provider whether your email filtering runs on N-able Mail Assure or SpamExperts.</strong> If the answer is no, you're done with this one.<br>2. <strong>If yes, ask whether they received N-able's setup-specific guidance.</strong> N-able says it emailed each partner instructions for its environment and asks anyone who didn't get them to contact support.<br>3. <strong>Ask whether quarantine and logging are fully back.</strong> If a real message you expected never showed up, check with your provider before assuming it was never sent.<br>4. <strong>Expect a password reset if your staff use a quarantine login.</strong> N-able reset local users' passwords. Our own advice: reset through the portal address your provider gives you, not a link in an email, because attackers love fake \"messages held in quarantine\" emails.<br>5. <strong>If you run SpamExperts Local Cloud on your own servers, confirm you're on build 20261121.1943 or later.</strong> The incident statements describe the Hosted Cloud, and Local Cloud servers are yours to check.<br>6. <strong>Ask your provider to share N-able's root cause analysis when it's out.</strong> It should say how the attackers got in and whether any credentials were taken.",
+      "Not sure who filters your email, or what to ask? Call us at +1 (925) 248-3463 and we'll help."
+    ],
+    "sources": [
+      [
+        "N-able: Mail Assure Incident Update, Nov. 22, 2026",
+        "https://www.n-able.com/blog/mail-assure-incident-update"
+      ],
+      [
+        "SecurityWeek: N-able Patches Critical Flaw Discovered After Mail Assure Cyberattack, Nov. 23, 2026",
+        "https://www.securityweek.com/n-able-patches-critical-flaw-disclosed-after-mail-assure-cyberattack/"
+      ],
+      [
+        "The Hacker News: N-able Discloses Critical Mail Assure Vulnerability Found During Breach Investigation, Nov. 23, 2026",
+        "https://thehackernews.com/2026/11/n-able-discloses-critical-mail-assure.html"
+      ],
+      [
+        "CISA: CISA Adds Two Known Exploited Vulnerabilities to Catalog, Nov. 23, 2026",
+        "https://www.cisa.gov/news-events/alerts/2026/11/23/cisa-adds-two-known-exploited-vulnerabilities-catalog"
+      ],
+      [
+        "Canadian Centre for Cyber Security: N-able security advisory (AV26-1191), Nov. 23, 2026",
+        "https://www.cyber.gc.ca/en/alerts-advisories/n-able-security-advisory-av26-1191"
+      ],
+      [
+        "ENISA EUVD: CVE-2026-134624",
+        "https://euvd.enisa.europa.eu/vulnerability/CVE-2026-134624"
+      ]
+    ]
+  },
+  {
+    "date": "2026-11-23",
+    "tag": "Advisory",
+    "read": "3 min",
+    "title": "Hackers used GL.iNet's cloud service to plant malware on its routers and KVMs. If you have one, check it and update today",
+    "dek": "GL.iNet says an attacker exploited a flaw in its cloud remote management service to install malware on some of its routers and KVM devices. The cloud hole is closed, but infected devices stay infected until you install the new security firmware.",
+    "body": [
+      "GL.iNet says an unauthorized party exploited a vulnerability in its cloud remote management service and used it to access and install malicious software on some GL.iNet routers and KVM devices, per its <a href=\"https://www.gl-inet.com/en-us/blogs/blog/glinet-security-notice-2026-11-20\" target=\"_blank\" rel=\"noopener\">security notice</a> issued Nov. 20. The company says it fixed the cloud flaw and blocked the access used in the attack, so devices can no longer be newly infected that way. But the cloud fix does not remove malware from devices that were already infected. For that, you need the new security firmware.",
+      "<strong>Why it matters if you're a small business.</strong> GL.iNet makes small routers, travel routers and remote KVM devices. They're popular with remote workers and with IT folks who need to reach an office computer from home. A KVM gives remote control of the computer plugged into it, so an infected KVM is a door to that computer. GL.iNet says it is still investigating whether computers connected to affected KVM devices were impacted.",
+      "<strong>What researchers found.</strong> <a href=\"https://www.bleepingcomputer.com/news/security/hackers-exploit-glinet-cloud-flaw-to-infect-routers-kvm-devices/\" target=\"_blank\" rel=\"noopener\">BleepingComputer</a> reports that customers and researchers shared evidence of custom malware built for GL.iNet devices and root-level reverse shells giving remote access to infected devices. One researcher group said it found suspicious activity on 152 of 183 routers it owns or manages, though it noted its results may not match other customers' and that some older backdoor infections may not be linked to this attack. GL.iNet has not said how many customers were affected.",
+      "<strong>The fixed firmware.</strong> From GL.iNet's notice:<br>- Routers: GL-MG1300, GL-MT3000, GL-MT6000 need <strong>4.11.1</strong> or later; GL-E5800 <strong>4.10.3</strong>; GL-BE3600, GL-BE9300 <strong>4.10.2</strong>; GL-BE14000 <strong>4.9.3</strong>; GL-BE6500, GL-MT3600BE, GL-MT5000 <strong>4.9.1</strong>; GL-BE10000 <strong>4.8.7</strong>; GL-AX1800, GL-AXT1800, GL-SFT1200, GL-X3000, GL-XE3000 <strong>4.8.4</strong>; GL-MT2500/MT2500A, GL-X2000 <strong>4.7.14</strong>.<br>- KVMs: RM1, RM1V2, RM10, RM10RC, RM1PE, RM4PE need <strong>1.10.3</strong> or later; RMQ1 needs <strong>1.8.7</strong> or later.<br>- Model not listed? GL.iNet says check its Download Center or email support@gl-inet.com, and don't install firmware made for another model. An unlisted model is not necessarily unaffected.",
+      "<strong>Action items for today.</strong><br>1. <strong>Take inventory.</strong> Ask your team, especially remote staff, whether anyone uses a GL.iNet router, travel router or KVM for work.<br>2. <strong>Check for the infection marker.</strong> GL.iNet says to look for a running process showing `crond -i /tmp/.log`. On a router, open the Admin Panel, go to System → Advanced Settings, sign in to LuCI, open Status → Processes and search for `tmp/.log`, or over SSH run `ps | grep tmp`. On a KVM, open Toolbox → Terminal → Access and run `ps -aux | grep tmp` (on the RMQ1, `ps -a | grep tmp`). A line showing only the grep command is not a match.<br>3. <strong>Install the security firmware either way.</strong> GL.iNet recommends it even if the check finds nothing, and says the update removes the malware it identified without a factory reset.<br>4. <strong>Don't treat a clean check as proof.</strong> GL.iNet says the quick check may not detect every affected device and points to an optional, unofficial community tool for a deeper check.<br>5. <strong>If a KVM was infected, check the computer behind it.</strong> GL.iNet suggests looking for unfamiliar programs, browser extensions or user accounts, unexpected startup items or scheduled tasks, and running a full scan with up-to-date security software.<br>6. <strong>Change the passwords.</strong> If you suspect a device was compromised, BleepingComputer reports the guidance is to rotate credentials and access keys that may have been exposed.<br>7. <strong>Turn off cloud remote management you don't use.</strong> Our own advice: if nobody relies on GoodCloud remote access for that device, switch it off. Fewer ways in means fewer surprises.",
+      "Not sure whether anyone on your team has one of these, or how to check it? Call us at +1 (925) 248-3463 and we'll help."
+    ],
+    "sources": [
+      [
+        "GL.iNet: Security Notice 2026-11-20 (last updated Nov. 23, 2026)",
+        "https://www.gl-inet.com/en-us/blogs/blog/glinet-security-notice-2026-11-20"
+      ],
+      [
+        "BleepingComputer: Hackers exploit GL.iNet cloud flaw to infect routers, KVM devices, Nov. 22, 2026",
+        "https://www.bleepingcomputer.com/news/security/hackers-exploit-glinet-cloud-flaw-to-infect-routers-kvm-devices/"
+      ],
+      [
+        "heise online: GL.iNet: Schwachstelle entdeckt, Patch verfügbar, Nov. 22, 2026",
+        "https://www.heise.de/news/GL-iNet-Schwachstelle-entdeckt-Patch-verfuegbar-11533722.html"
+      ]
+    ]
+  },
+  {
+    "date": "2026-11-22",
+    "tag": "Advisory",
+    "read": "3 min",
+    "title": "Microsoft says attackers read admin contact details from its Entra Connect Health service. If you got the notice, here's what to do",
+    "dek": "Microsoft fixed a flaw in Entra Connect Health that exposed administrator email addresses and tenant details. No patch is needed on your end, but those admin inboxes are now likely phishing targets.",
+    "body": [
+      "Microsoft is notifying organizations that attackers exploited a flaw in the Entra Connect Health API and got read-only access to tenant-level metadata, per <a href=\"https://www.bleepingcomputer.com/news/security/microsoft-entra-connect-health-flaw-exploited-to-steal-tenant-data/\" target=\"_blank\" rel=\"noopener\">BleepingComputer</a>. Entra Connect Health is the cloud service admins use to monitor the on-premises identity setup that syncs into Microsoft 365. Microsoft says the flaw was introduced on July 23, found on Nov. 9 and fixed server-side on Nov. 19. It finished its investigation on Nov. 20 and began notifying affected customers through Azure Service Health.",
+      "<strong>What was exposed.</strong> According to Microsoft's notice, as reported by <a href=\"https://www.bleepingcomputer.com/news/security/microsoft-entra-connect-health-flaw-exploited-to-steal-tenant-data/\" target=\"_blank\" rel=\"noopener\">BleepingComputer</a>:<br>- Email addresses of tenant technical contacts and administrator accounts<br>- Tenant IDs, display names, initial domain names, country and region<br>- Entra license tiers and directory sync status, including the last sync time<br>- Connect Health onboarding status<br>- An expired certificate Microsoft says was no longer in use",
+      "Microsoft says no passwords, password hashes, authentication tokens, valid keys, on-premises Active Directory details or Azure subscription information were exposed, and it found no unauthorized configuration changes. It has not said how many organizations were affected or who was behind it, per <a href=\"https://www.isec.news/2026/11/22/microsoft-entra-connect-health-flaw-tenant-data/\" target=\"_blank\" rel=\"noopener\">iSec News</a> and BleepingComputer.",
+      "<strong>Why it matters if you're a small business.</strong> Microsoft says no customer update is required. The risk now is the follow-up: whoever pulled this data knows who your Microsoft 365 admins are and how your tenant is set up. Microsoft's own advice is to expect targeted phishing and social engineering aimed at those admin addresses. A convincing fake \"Microsoft security notice\" sent to your admin is exactly what this kind of data makes easier.",
+      "<strong>Action items.</strong><br>1. <strong>Check whether you got the notice.</strong> Microsoft sends tenant security notifications to Global Admins, Technical Contacts and Security Admins by email and Azure Service Health, per <a href=\"https://learn.microsoft.com/en-us/azure/service-health/stay-informed-security\" target=\"_blank\" rel=\"noopener\">Microsoft Learn</a>. If an IT provider manages your tenant, ask them. BleepingComputer reports some providers got notices for several customer tenants.<br>2. <strong>Make sure those contact addresses are current.</strong> Microsoft Learn says these addresses are where security notices go. A former employee's inbox or an unwatched mailbox means you miss the next one.<br>3. <strong>Warn your admins.</strong> Any email about this incident, or any \"urgent Microsoft security\" message, should be checked by signing in to the admin center directly, not by clicking a link in the email.<br>4. <strong>Use phishing-resistant MFA on admin accounts.</strong> Microsoft recommends it for privileged accounts. That means passkeys or security keys, not text-message codes.<br>5. <strong>Review your Entra audit and sign-in logs</strong> for admin sign-ins you don't recognize, as Microsoft advises.<br>6. <strong>Review your Connect Health settings.</strong> Microsoft published a PowerShell script at aka.ms/ConnectHealth/scripts that shows what kinds of tenant metadata could have been exposed. BleepingComputer notes it shows your current settings, not the data that was actually accessed.",
+      "Not sure who gets Microsoft's security notices for your company, or whether your admin accounts have strong MFA? Call us at +1 (925) 248-3463 and we'll help you check."
+    ],
+    "sources": [
+      [
+        "BleepingComputer: Microsoft Entra Connect Health flaw exploited to steal tenant data, Nov. 21, 2026",
+        "https://www.bleepingcomputer.com/news/security/microsoft-entra-connect-health-flaw-exploited-to-steal-tenant-data/"
+      ],
+      [
+        "iSec News: Microsoft Says Entra Connect Health Flaw Exposed Tenant Information, Nov. 22, 2026",
+        "https://www.isec.news/2026/11/22/microsoft-entra-connect-health-flaw-tenant-data/"
+      ],
+      [
+        "Microsoft Learn: Security notifications overview, Azure Service Health",
+        "https://learn.microsoft.com/en-us/azure/service-health/stay-informed-security"
+      ]
+    ]
+  },
+  {
+    "date": "2026-11-21",
+    "tag": "Patch",
+    "read": "3 min",
+    "title": "Attackers have been breaking into VMware vCenter since September. If your servers run on VMware, patch vCenter this weekend",
+    "dek": "Broadcom has fixed a critical vCenter flaw that lets someone with network access skip the login, and Google's Mandiant says a state-backed group was already using it. Here's how to tell if you're affected and what to do first.",
+    "body": [
+      "Broadcom released an emergency fix on Nov. 19 for CVE-2026-123890, a critical authentication bypass in VMware vCenter Server rated 9.8 out of 10, per its advisory <a href=\"https://support.broadcom.com/web/ecx/support-content-notification/-/external/content/SecurityAdvisories/0/39495\" target=\"_blank\" rel=\"noopener\">VMSA-2026-0009</a>. Broadcom says an attacker with network access to vCenter can bypass authentication and gain unauthorized access, and that there is no workaround. CISA added the flaw to its <a href=\"https://www.cisa.gov/news-events/alerts/2026/11/20/cisa-adds-four-known-exploited-vulnerabilities-catalog\" target=\"_blank\" rel=\"noopener\">Known Exploited Vulnerabilities catalog</a> on Nov. 20.",
+      "<strong>Who's using it.</strong> Google's Mandiant and Threat Intelligence Group say a suspected Chinese state-sponsored group it tracks as Armory Castle exploited the flaw starting in early September, per <a href=\"https://www.bleepingcomputer.com/news/security/vmware-patches-vcenter-zero-day-exploited-in-attacks-since-september/\" target=\"_blank\" rel=\"noopener\">BleepingComputer</a>. In the attack Mandiant described, the group first broke into a BeyondTrust Remote Support appliance, moved through internal Linux systems, and then used the vCenter flaw to create an administrator account and steal the vCenter directory database.",
+      "<strong>Why it matters if you're a small business.</strong> vCenter is the console that runs your VMware servers. Whoever controls it controls every virtual machine under it. Mandiant says the attackers went on to reach ESXi hosts and pull files from virtual machines, including Windows Active Directory database files, per <a href=\"https://www.bleepingcomputer.com/news/security/vmware-patches-vcenter-zero-day-exploited-in-attacks-since-september/\" target=\"_blank\" rel=\"noopener\">BleepingComputer</a>. <a href=\"https://censys.com/advisory/cve-2026-123890/\" target=\"_blank\" rel=\"noopener\">Censys</a> notes the attack path also allows forged sign-in tokens that can get past MFA. If your file server, accounting system or domain controller lives on VMware, this is the patch to do first.",
+      "<strong>The fixed versions.</strong> From Broadcom's advisory:<br>- vCenter 8.0: update to <strong>8.0 U3m</strong><br>- vCenter 9.0.x: update to <strong>9.0.2.0200</strong><br>- vCenter 9.1.x: update to <strong>9.1.1.0200</strong><br>- VMware Cloud Foundation 5.x: update to <strong>5.2.5</strong><br>- vCenter 7.0: no public fix. Broadcom says to contact its support if you have an extended support contract.",
+      "<strong>Action items for this weekend.</strong><br>1. <strong>Find out if you run vCenter at all.</strong> If you have one or two standalone ESXi hosts with no vCenter, this flaw doesn't apply, but ask whoever manages your servers to confirm.<br>2. <strong>Check the version.</strong> Compare it to the list above. Anything older needs the update.<br>3. <strong>Take a snapshot or backup of vCenter, then patch.</strong> Broadcom calls this an emergency update.<br>4. <strong>Keep vCenter off the internet.</strong> The management console should only be reachable from your internal admin network or VPN. Broadcom says network restrictions and firewall rules can reduce exposure while you schedule the update.<br>5. <strong>Still on vCenter 7.0?</strong> Without an extended support contract there's no fix. Lock down network access to it now and start planning the upgrade.<br>6. <strong>Patch the doors in, too.</strong> This attack started at a remote-support appliance. Make sure remote-access tools, VPNs and firewalls are on current versions.<br>7. <strong>If your vCenter was reachable from outside before you patched,</strong> have someone review it for new admin accounts and unfamiliar logins. Censys says a vCenter attackers could reach while it was unpatched needs review.",
+      "Not sure who manages your VMware servers, or what version they're on? Call us at +1 (925) 248-3463 and we'll help you check."
+    ],
+    "sources": [
+      [
+        "Broadcom: VMSA-2026-0009, Nov. 19, 2026 (updated Nov. 20)",
+        "https://support.broadcom.com/web/ecx/support-content-notification/-/external/content/SecurityAdvisories/0/39495"
+      ],
+      [
+        "BleepingComputer: VMware patches vCenter zero-day exploited in attacks since September, Nov. 19, 2026",
+        "https://www.bleepingcomputer.com/news/security/vmware-patches-vcenter-zero-day-exploited-in-attacks-since-september/"
+      ],
+      [
+        "CISA: CISA Adds Four Known Exploited Vulnerabilities to Catalog, Nov. 20, 2026",
+        "https://www.cisa.gov/news-events/alerts/2026/11/20/cisa-adds-four-known-exploited-vulnerabilities-catalog"
+      ],
+      [
+        "Censys: Nov 19 Advisory: VMware vCenter Authentication Bypass (CVE-2026-123890)",
+        "https://censys.com/advisory/cve-2026-123890/"
+      ]
+    ]
+  },
+  {
+    "date": "2026-11-20",
+    "tag": "Phishing",
+    "read": "3 min",
+    "title": "Chase, Visa and Mastercard vendors leaked customer emails. Expect bank emails that know your name, and teach your team where to check instead",
+    "dek": "The three companies say no card numbers or payment data were taken, but a leak of names, email addresses and some phone numbers is exactly what scammers need to send convincing fake bank messages. Here's what to tell anyone in your office who handles a company card.",
+    "body": [
+      "JPMorgan Chase, Visa and Mastercard have each confirmed incidents at outside service providers after an extortion group called N0n posted data it says came from them, per <a href=\"https://www.securityweek.com/jpmorgan-visa-mastercard-cite-third-party-incidents-amid-data-leak/\" target=\"_blank\" rel=\"noopener\">SecurityWeek</a>. Chase said on X that the attackers accessed \"certain marketing data held by those vendors, which may include some customer names and email addresses,\" and that its services were not disrupted, per <a href=\"https://www.theregister.com/security/2026/11/19/chase-visa-mastercard-confirm-third-party-cyberattacks-that-may-have-exposed-customers-info/5311175\" target=\"_blank\" rel=\"noopener\">The Register</a>.",
+      "<strong>What was taken, and what wasn't.</strong> Visa said the incident involved a third-party provider in Asia Pacific and that no payment data such as card numbers was affected. Mastercard said a limited number of email addresses from cardholders in one benefit program were exposed, and its payment network was not affected, per <a href=\"https://www.theregister.com/security/2026/11/19/chase-visa-mastercard-confirm-third-party-cyberattacks-that-may-have-exposed-customers-info/5311175\" target=\"_blank\" rel=\"noopener\">The Register</a>. Reuters' review of the Chase-related files found over 16,000 customer emails, some with phone numbers and postal codes, per <a href=\"https://www.securityweek.com/jpmorgan-visa-mastercard-cite-third-party-incidents-amid-data-leak/\" target=\"_blank\" rel=\"noopener\">SecurityWeek</a>. None of the three has named the vendors or said how many customers were affected.",
+      "<strong>Why it still matters to a small business.</strong> No card numbers doesn't mean no risk. A real name, a real email, a phone number and the fact that you bank with Chase or carry a certain card is what makes a fake \"fraud alert\" believable. If your office uses a Chase account or a Visa or Mastercard company card, assume the people who handle it may get those messages soon.",
+      "<strong>Watch for fake \"credit monitoring\" offers too.</strong> Chase said it plans to reach out to affected customers where appropriate and offer free credit monitoring, per <a href=\"https://www.securityweek.com/jpmorgan-visa-mastercard-cite-third-party-incidents-amid-data-leak/\" target=\"_blank\" rel=\"noopener\">SecurityWeek</a>. Scammers copy offers like that. Don't sign up through a link in an email or text. Log in to your account the usual way and look for the offer there.",
+      "<strong>Action items for today.</strong><br>1. <strong>Tell whoever handles the company card or bank account.</strong> One short message: emails, texts or calls about this breach may be fake, even if they use your name.<br>2. <strong>Check through the app or the number on the card.</strong> Never through a link, a reply or a phone number in the message. Type the bank's address yourself or use its app.<br>3. <strong>Never read a one-time code to anyone.</strong> A caller who says they're from the bank's fraud team and asks for the code you just got is the scam.<br>4. <strong>Slow down payment changes.</strong> Any request to move money, add a payee or change account details gets confirmed by phone, using a number you already had.<br>5. <strong>Know which vendors hold your customer list.</strong> This leak came from marketing vendors, not the banks themselves. Make a short list of the email, marketing and loyalty tools that hold your customers' names and emails, and make sure each one has MFA on and only the people who need it have access.",
+      "Got a suspicious \"bank\" email and not sure? Call us at +1 (925) 248-3463 before you click."
+    ],
+    "sources": [
+      [
+        "SecurityWeek: JPMorgan, Visa, Mastercard Cite Third-Party Incidents Amid Data Leak, Nov. 20, 2026",
+        "https://www.securityweek.com/jpmorgan-visa-mastercard-cite-third-party-incidents-amid-data-leak/"
+      ],
+      [
+        "The Register: Chase, Visa, Mastercard confirm third-party cyberattacks that may have exposed customers' info, Nov. 19, 2026",
+        "https://www.theregister.com/security/2026/11/19/chase-visa-mastercard-confirm-third-party-cyberattacks-that-may-have-exposed-customers-info/5311175"
+      ],
+      [
+        "AP: A cyberattack leaks thousands of Chase customer emails and some phone numbers",
+        "https://apnews.com/article/chase-data-leak-cyberattack-8470d475450721b66858bdace47091c0"
+      ],
+      [
+        "Euronews: Hackers leak stolen data on 16,000 Visa, Mastercard and JPMorgan customers, Nov. 20, 2026",
+        "https://www.euronews.com/2026/11/20/hackers-leak-stolen-data-on-16000-visa-mastercard-and-jpmorgan-customers"
+      ]
+    ]
+  },
+  {
+    "date": "2026-11-19",
+    "tag": "Storage",
+    "read": "3 min",
+    "title": "CISA says attackers are now using a Synology NAS flaw. If your office files live on a DiskStation or BeeStation, check the version today",
+    "dek": "Synology fixed this remote code execution bug in late 2024, but CISA added it to its exploited list on Nov 18, 2026, and gave federal agencies until Saturday, Nov 21, to deal with it. Any office NAS that never got those updates is a target. Here's how to check yours and what to do.",
+    "body": [
+      "Plenty of small offices keep their shared drive, scanned documents and backups on a Synology box in a closet. On Nov 18, CISA added a Synology flaw, CVE-2024-10441, to its Known Exploited Vulnerabilities list, which means it has evidence attackers are using it, per <a href=\"https://www.cisa.gov/news-events/alerts/2026/11/18/cisa-adds-four-known-exploited-vulnerabilities-catalog\" target=\"_blank\" rel=\"noopener\">CISA</a>. Federal agencies have until Nov 21 to act, per the <a href=\"https://nvd.nist.gov/vuln/detail/cve-2024-10441\" target=\"_blank\" rel=\"noopener\">NVD entry</a>. Hong Kong's HKCERT rated it \"Extremely High Risk\" on Nov 19, per its <a href=\"https://www.hkcert.org/security-bulletin/synology-diskstation-manager-remote-code-execution-vulnerability_20261119\" target=\"_blank\" rel=\"noopener\">bulletin</a>.",
+      "<strong>What the flaw does.</strong> It's a bug in the system plugin daemon of Synology DiskStation Manager (DSM) and BeeStation OS (BSM). It lets a remote attacker run code on the device, and Synology rates it Critical with a CVSS score of 9.8, per <a href=\"https://www.synology.com/en-us/security/advisory/Synology_SA_24_20\" target=\"_blank\" rel=\"noopener\">Synology's advisory Synology-SA-24:20</a>. Code running on your NAS means someone can read, change or encrypt the files on it.",
+      "<strong>This is an old fix, not a new one.</strong> Synology first published the advisory on Nov 5, 2024, after the bug was shown at Pwn2Own, and the updates have been out since late 2024, per the advisory. So the boxes at risk are the ones that never got updated. That's common with a NAS that \"just works\" and nobody logs into.",
+      "<strong>Fixed versions.</strong> Per Synology's advisory:<br>- DSM 7.2.2: 7.2.2-72806-1 or later<br>- DSM 7.2.1: 7.2.1-69057-6 or later<br>- DSM 7.2: 7.2-64570-4 or later<br>- DSM 7.1: 7.1.1-42962-7 or later<br>- BeeStation OS: 1.1-65374 or later (per the <a href=\"https://nvd.nist.gov/vuln/detail/cve-2024-10441\" target=\"_blank\" rel=\"noopener\">NVD entry</a>)",
+      "The same advisory lists DSM 6.2 as Moderate, fixed in 6.2.4-25556-8 or later, for two lesser bugs fixed in the same update. Synology lists no workaround: the fix is the update.",
+      "<strong>Action items for today.</strong><br>1. <strong>Find every Synology box.</strong> Check the office closet, the back room and anyone's home office that syncs to work. Note the model and the DSM or BSM version.<br>2. <strong>Check the version.</strong> In DSM, open Control Panel, then Update &amp; Restore. Compare the version to the list above.<br>3. <strong>Update it.</strong> If you're behind, install the update after hours. Make sure a backup copy of the important files exists somewhere else first.<br>4. <strong>Get it off the open internet.</strong> CISA tells agencies to check each device's internet exposure. If the NAS login page is reachable from outside your office through port forwarding, close that. Use a VPN for remote access instead.<br>5. <strong>Look for trouble.</strong> If the NAS was out of date and reachable from the internet, review its admin accounts and recent logins, and change the admin password after updating. Unknown accounts or changed files are a reason to call for help before you trust the box again.",
+      "Not sure what's in your closet or when it was last updated? Call us at +1 (925) 248-3463."
+    ],
+    "sources": [
+      [
+        "CISA: Adds Four Known Exploited Vulnerabilities to Catalog, Nov. 18, 2026",
+        "https://www.cisa.gov/news-events/alerts/2026/11/18/cisa-adds-four-known-exploited-vulnerabilities-catalog"
+      ],
+      [
+        "Synology-SA-24:20 DSM (PWN2OWN 2024)",
+        "https://www.synology.com/en-us/security/advisory/Synology_SA_24_20"
+      ],
+      [
+        "NVD: CVE-2024-10441",
+        "https://nvd.nist.gov/vuln/detail/cve-2024-10441"
+      ],
+      [
+        "HKCERT: Synology DiskStation Manager Multiple Vulnerabilities",
+        "https://www.hkcert.org/security-bulletin/synology-diskstation-manager-remote-code-execution-vulnerability_20261119"
+      ],
+      [
+        "NamiQ: Daily threat watch, 18 November 2026",
+        "https://namiq.io/insights/daily-threat-watch-2026-11-18"
+      ]
+    ]
+  },
+  {
+    "date": "2026-11-18",
+    "tag": "Network",
+    "read": "3 min",
+    "title": "Attackers are using a SonicWall VPN flaw that can skip your multi-factor sign-in. If your office VPN runs on a SonicWall, check the firmware this week",
+    "dek": "SonicWall says a flaw in its SSL-VPN can let someone with a working password get past SAML sign-in, including the multi-factor step it was supposed to enforce. CISA lists it as exploited and gave federal agencies until Friday, Nov 20, to fix it. Here's how to tell if your firewall is affected and what to do.",
+    "body": [
+      "A lot of small offices connect remote staff through a SonicWall firewall's SSL-VPN, and a lot of them added multi-factor sign-in through Microsoft Entra, Okta or another identity provider using SAML. A flaw SonicWall disclosed on Nov 6 can undo that second step. SonicWall says it investigated a report of the flaw being exploited, and CISA added it to its Known Exploited Vulnerabilities list the same day, with a Nov 20 deadline for federal agencies, per <a href=\"https://www.cisa.gov/news-events/alerts/2026/11/06/cisa-adds-one-known-exploited-vulnerability-catalog\" target=\"_blank\" rel=\"noopener\">CISA</a> and <a href=\"https://www.bleepingcomputer.com/news/security/sonicwall-warns-of-new-ssl-vpn-mfa-bypass-flaw-exploited-in-attacks/\" target=\"_blank\" rel=\"noopener\">BleepingComputer</a>.",
+      "<strong>What the flaw does.</strong> The bug, CVE-2026-19868, lets a user with valid credentials for another configured sign-in method bypass SAML authentication on the SSL-VPN, and possibly the multi-factor check SAML was enforcing, per <a href=\"https://psirt.global.sonicwall.com/vuln-detail/SNWLID-2026-0014\" target=\"_blank\" rel=\"noopener\">SonicWall's advisory SNWLID-2026-0014</a>. The attacker still needs a working password. The problem is that the step meant to stop a stolen password may not run.",
+      "<strong>Who is affected.</strong> Only SonicWall firewalls with SAML turned on for SSL-VPN logins are exposed to this one. Affected versions are Gen 7 SonicOS 7.3.3-7015 and older and Gen 8 SonicOS 8.2.2-8015 and older. SonicWall lists the fixes as 7.3.4-7013 or later for Gen 7 and 8.2.3-8015 or later for Gen 8, and says there is no workaround, per the advisory. The same advisory fixes six other SonicOS flaws, including two in the management page, so update even if you don't use SAML.",
+      "<strong>One detail worth knowing.</strong> On Gen 7, the exact build matters. ThreatListPro notes that a second SonicWall advisory, SNWLID-2026-0021, lists 7.3.4-7013 as affected by a separate certificate issue, and that 7.3.4-7015 is also the first 7.3.4 build for the virtual NSv models, per <a href=\"https://threatlistpro.com/learn/sonicwall-cve-2026-19868\" target=\"_blank\" rel=\"noopener\">ThreatListPro</a>. Read the release notes for your model in MySonicWall before you upgrade.",
+      "<strong>Older boxes.</strong> Gen 6 firewalls are not listed in this advisory, but SonicWall lists them as end of support, so they get no new fixes, per WaterISAC's <a href=\"https://www.waterisac.org/tlpclear-vulnerability-notification-sonicwall-firewalls-actively-exploited\" target=\"_blank\" rel=\"noopener\">notice on the flaw</a>. If your office still runs one, it's time to plan the replacement.",
+      "<strong>Action items for this week.</strong><br>1. <strong>Find out what's in the closet.</strong> Note the firewall model and the SonicOS version on its dashboard. If someone else manages it, ask them for both.<br>2. <strong>Update the firmware.</strong> Gen 7 to 7.3.4-7013 or later (check whether your model should go to 7.3.4-7015), Gen 8 to 8.2.3-8015 or later. Schedule a few minutes of downtime after hours.<br>3. <strong>Check recent VPN logins.</strong> WaterISAC advises comparing successful SSL-VPN logins against your identity provider's sign-in log. A VPN login with no matching sign-in and MFA check is a red flag. Reset that account's password and review what it reached.<br>4. <strong>Turn off sign-in methods you don't use.</strong> The flaw depends on a second working login method. If the VPN should only take SAML sign-ins, remove local or other accounts that can still log in.<br>5. <strong>Keep the management page off the internet.</strong> Two of the other fixed flaws sit in the SonicOS management interface, and New York State's IT office warns that internet-reachable management pages face more risk, per <a href=\"https://its.ny.gov/2026-126\" target=\"_blank\" rel=\"noopener\">NY ITS advisory 2026-126</a>.",
+      "Not sure which firewall your office runs or whether it's been updated? Call us at +1 (925) 248-3463."
+    ],
+    "sources": [
+      [
+        "SonicWall PSIRT: SNWLID-2026-0014",
+        "https://psirt.global.sonicwall.com/vuln-detail/SNWLID-2026-0014"
+      ],
+      [
+        "CISA: Adds One Known Exploited Vulnerability to Catalog, Nov. 6, 2026",
+        "https://www.cisa.gov/news-events/alerts/2026/11/06/cisa-adds-one-known-exploited-vulnerability-catalog"
+      ],
+      [
+        "BleepingComputer: SonicWall warns of new SSL-VPN MFA bypass flaw exploited in attacks",
+        "https://www.bleepingcomputer.com/news/security/sonicwall-warns-of-new-ssl-vpn-mfa-bypass-flaw-exploited-in-attacks/"
+      ],
+      [
+        "WaterISAC: SonicWall Firewalls Actively Exploited",
+        "https://www.waterisac.org/tlpclear-vulnerability-notification-sonicwall-firewalls-actively-exploited"
+      ],
+      [
+        "ThreatListPro: SonicWall CVE-2026-19868: Which SonicOS Build Fixes It?",
+        "https://threatlistpro.com/learn/sonicwall-cve-2026-19868"
+      ],
+      [
+        "Canadian Centre for Cyber Security: SonicWall security advisory AV26-1133",
+        "https://www.cyber.gc.ca/en/alerts-advisories/sonicwall-security-advisory-av26-1133"
+      ],
+      [
+        "NY ITS Advisory 2026-126: Multiple Vulnerabilities in SonicWall SonicOS",
+        "https://its.ny.gov/2026-126"
+      ]
+    ]
+  },
+  {
+    "date": "2026-11-17",
+    "tag": "Websites",
+    "read": "3 min",
+    "title": "Malware rode in on a trusted script and hit CNN, Zoom and the BBC. Your small-business site loads outside scripts too. Here's what to check",
+    "dek": "Attackers broke into Optimizely, a web testing service, and slipped card-skimming code onto the sites of 178 organizations on Monday. You probably don't use Optimizely. You almost certainly load someone else's code on your website. Here's a short list to review this week.",
+    "body": [
+      "On Monday, visitors to some of the biggest sites on the web got malware from a service those sites trusted. Optimizely, a platform companies use to test and personalize their web pages, says an unauthorized party exploited a vulnerability in its Experimentation product and used it to add malicious JavaScript to some customer projects, per <a href=\"https://status.optimizely.com/\" target=\"_blank\" rel=\"noopener\">Optimizely's status page</a>.",
+      "<strong>What happened.</strong> Security researcher Scott Helme of Report URI found 188 infected Optimizely scripts belonging to 178 organizations, per <a href=\"https://www.bleepingcomputer.com/news/security/optimizely-supply-chain-attack-infects-major-brands-sites-with-malware/\" target=\"_blank\" rel=\"noopener\">BleepingComputer</a>. BleepingComputer confirmed the malicious script loaded, or tried to load, on sites including Zoom, CNN, the BBC, GitLab and Salesforce. The code swapped cryptocurrency wallet addresses for the attacker's, looked for card numbers typed into pages, collected cookies and screenshots, and tried to load iOS exploit kits on iPhones and iPads.",
+      "<strong>What Optimizely says it did.</strong> The company told BleepingComputer it blocked the vulnerable path, deployed a fix, removed the injected code, ended active sessions, revoked tokens and reset access for affected user accounts. Report URI found one customer's script was cleaned and then re-infected, which suggests the attacker still had access at that point, per <a href=\"https://thehackernews.com/2026/11/hijacked-optimizely-scripts-served-card.html\" target=\"_blank\" rel=\"noopener\">The Hacker News</a>.",
+      "<strong>Why a small business should care.</strong> Your website almost certainly loads code from other companies: analytics, ad pixels, chat widgets, booking tools, review badges. Each of those runs with the same power as your own code. If one of those companies gets broken into, your visitors get whatever the attacker adds, and your site's name is on it. Optimizely's customers didn't do anything wrong on Monday. The weak point was a vendor.",
+      "<strong>One detail worth knowing.</strong> Report URI recommends a Content Security Policy, a browser rule that limits which outside code a page may run and where it may send data. It also notes that simply allowing cdn.optimizely.com would not have helped, because the bad code came from that same host, per The Hacker News. A policy helps most when it also limits where scripts can send data.",
+      "<strong>Action items for this week.</strong><br>1. <strong>If you visited a big-name site Monday and paid by card,</strong> watch your statements. If you sent crypto that day, compare the address you paid against the one you meant to pay, per BleepingComputer.<br>2. <strong>Update iPhones and iPads.</strong> Report URI advises iOS 18.7.3 or later, or iOS 26.3 or later, for anyone who visited an affected site, per The Hacker News. It's a good idea regardless.<br>3. <strong>List the outside scripts on your own site.</strong> Ask whoever built it, or check your site's settings and plugins. Remove anything nobody uses anymore. Old tracking pixels and abandoned widgets are pure risk.<br>4. <strong>Keep extra scripts off your payment page.</strong> Take card details through your payment provider's own hosted fields or checkout page, so outside scripts on your site never touch card numbers, per The Hacker News.<br>5. <strong>Lock down the vendor accounts.</strong> Every service that can change code on your site (web host, site builder, tag manager, plugins) needs multi-factor sign-in and only the people who still need access.<br>6. <strong>If you use Optimizely,</strong> follow Report URI's checklist: review your project JavaScript and experiment code for anything you didn't write, rotate API tokens and check who can write to the account, per The Hacker News.",
+      "Not sure what your website is loading behind the scenes? Call us at +1 (925) 248-3463."
+    ],
+    "sources": [
+      [
+        "Optimizely Service Status: Web Experimentation Security Incident, Nov. 17, 2026",
+        "https://status.optimizely.com/"
+      ],
+      [
+        "BleepingComputer: Optimizely hack infected CNN, Fox News, BBC, Salesforce sites with malware",
+        "https://www.bleepingcomputer.com/news/security/optimizely-supply-chain-attack-infects-major-brands-sites-with-malware/"
+      ],
+      [
+        "The Hacker News: Hijacked Optimizely Scripts Served Card Skimmer and iOS Exploit Kits to CNN, BBC and Zoom Visitors",
+        "https://thehackernews.com/2026/11/hijacked-optimizely-scripts-served-card.html"
+      ],
+      [
+        "Help Net Security: Malware spread through Optimizely hits 178 organizations, including BBC, CNN and Zoom",
+        "https://www.helpnetsecurity.com/2026/11/17/optimizely-vulnerability-malicious-javascript/"
+      ],
+      [
+        "Report URI Blog: World's Largest Brands Infected With Malware Via Optimizely",
+        "https://blog.report-uri.com/"
+      ]
+    ]
+  },
+  {
+    "date": "2026-11-16",
+    "tag": "Phishing",
+    "read": "3 min",
+    "title": "Got an email saying mail held during the Microsoft outage will be deleted in 24 hours? It's phishing. Here's what to check this week",
+    "dek": "Microsoft says scammers are sending fake outage notices that cite the real incident number. The outage is over. The lures, fake support calls and payment-change requests are not. Here's what a small office should do.",
+    "body": [
+      "Last week's Microsoft 365 outage is fixed. Microsoft says it was \"a technical issue not related to cyber,\" and it marked the Exchange Online incident, EX1550543, resolved on Nov. 13, per <a href=\"https://www.securityweek.com/microsoft-rules-out-cyberattack-in-outage-warns-of-phishing-campaign/\" target=\"_blank\" rel=\"noopener\">SecurityWeek</a>. Scammers are now using that outage as cover.",
+      "<strong>What Microsoft is seeing.</strong> Microsoft Threat Intelligence says it found an active phishing campaign posing as Microsoft 365 service health notices and citing the real incident number, per <a href=\"https://x.com/MsftSecIntel/status/2121491564161581148\" target=\"_blank\" rel=\"noopener\">Microsoft Threat Intelligence on X</a>. Some of the emails, detected Nov. 13, claimed messages held during the outage would be deleted within 24 hours unless you clicked to restore them. Subject lines follow the pattern \"Outage -\" plus a six-character code. Sender names start with your organization's name and end in \"Outage Notification\" or \"Service Health,\" per <a href=\"https://www.itnews.com.au/news/phishers-quick-to-exploit-extended-m365-outage-630347\" target=\"_blank\" rel=\"noopener\">iTnews</a>.",
+      "<strong>The details to block.</strong> Microsoft named three sending domains: moments-notice[.]com, planetmaison[.]com and newbooker[.]com. Links in the emails redirect to reallifeaccounting[.]com, per iTnews. Microsoft calls the activity consistent with credential phishing but says it has not confirmed that passwords were collected or malware delivered, and it says its security products are now blocking the campaign, per SecurityWeek. Don't visit those domains to check.",
+      "<strong>It's not just email.</strong> Security firm Field Effect found a version that copies Microsoft's quarantine digest, with a \"RESTORE MESSAGES\" button leading to a fake sign-in page. It also reports outage-themed texts, fake IT support calls, and a manager or supplier saying their email is down and asking by text for a payment to a new account, per <a href=\"https://fieldeffect.com/blog/microsoft-365-outage-theme\" target=\"_blank\" rel=\"noopener\">Field Effect</a>.",
+      "<strong>Why the right number doesn't help.</strong> A real incident ID makes the fake look real. It proves nothing about the link. Microsoft posts outage updates on the Service health page in the Microsoft 365 admin center, not in emails asking you to click, per <a href=\"https://cybersecuritynews.com/active-password-stealing-attack-microsoft-365/\" target=\"_blank\" rel=\"noopener\">Cybersecurity News</a>.",
+      "<strong>Action items for this week.</strong><br>1. <strong>Tell your team today.</strong> Any email about the outage that asks you to restore mail, verify an account, reset a password or re-enroll MFA gets deleted or reported, not clicked.<br>2. <strong>Know what the real one looks like.</strong> Genuine quarantine digests come from quarantine@messaging.microsoft.com with the subject \"Microsoft 365 security: You have messages in quarantine,\" per Field Effect.<br>3. <strong>Block the senders.</strong> Have whoever runs your Microsoft 365 add the three sending domains to your block list and search for messages with \"Outage -\" subjects.<br>4. <strong>Check anyone who clicked.</strong> A click alone doesn't mean a stolen password. If someone entered a password, look for new sign-in locations, inbox rules or forwarding, app consents and new MFA methods since Nov. 12. Remove anything unknown, then reset the password and sign out all sessions. A password reset alone leaves those rules and methods in place, per Field Effect.<br>5. <strong>Call back before you pay.</strong> Confirm any payment, bank-detail, password or MFA change requested since the outage by calling the person back on a number you already have.<br>6. <strong>Shut the fake-support door.</strong> Only your IT staff should run remote support tools like Quick Assist. If anyone let a \"Microsoft support\" caller into their PC, unplug it from the network and call your IT provider.",
+      "Not sure whether anyone in your office clicked? Call us at +1 (925) 248-3463."
+    ],
+    "sources": [
+      [
+        "Microsoft Threat Intelligence (@MsftSecIntel) on X, Nov. 14, 2026",
+        "https://x.com/MsftSecIntel/status/2121491564161581148"
+      ],
+      [
+        "SecurityWeek: Microsoft Rules Out Cyberattack in Outage, Warns of Phishing Campaign",
+        "https://www.securityweek.com/microsoft-rules-out-cyberattack-in-outage-warns-of-phishing-campaign/"
+      ],
+      [
+        "iTnews: Phishers quick to exploit extended M365 outage",
+        "https://www.itnews.com.au/news/phishers-quick-to-exploit-extended-m365-outage-630347"
+      ],
+      [
+        "Field Effect: Microsoft 365 outage theme drives credential phishing and support scams",
+        "https://fieldeffect.com/blog/microsoft-365-outage-theme"
+      ],
+      [
+        "Cybersecurity News: Microsoft Warns of Active Password Stealing Attack Exploiting the Microsoft 365 Service Disruption",
+        "https://cybersecuritynews.com/active-password-stealing-attack-microsoft-365/"
+      ]
+    ]
+  },
+  {
+    "date": "2026-11-15",
+    "tag": "Patch",
+    "read": "3 min",
+    "title": "Still running Exchange 2016 or 2019 in the back closet? Microsoft now calls it permanently vulnerable. Plan the move this month",
+    "dek": "November's Exchange fixes went to the Subscription Edition only. Older Exchange servers got nothing and won't again, and this month's worst email-server flaw needs no click at all. Here's what a small office should check.",
+    "body": [
+      "Most small offices moved their email to Microsoft 365 years ago. Some didn't, and some moved but kept an old Exchange server around for management. If either sounds like your office, this month's update cycle changes things.",
+      "<strong>What happened.</strong> On Nov. 10, Microsoft released its November security update for Exchange Server, and only for the Subscription Edition (SE). In the same post it said Exchange 2016 and 2019 \"are no longer tested for vulnerabilities and there are no updates released,\" and that anyone still using them \"should consider them permanently vulnerable and should upgrade your organization immediately,\" per <a href=\"https://techcommunity.microsoft.com/blog/exchange/released-november-2026-exchange-server-security-updates/4570368\" target=\"_blank\" rel=\"noopener\">Microsoft's Exchange Team</a>. Support ended in October 2025. Microsoft then sold extended security updates, and the final ones for 2016 and 2019 shipped on Oct. 13, per <a href=\"https://www.theregister.com/saas/2026/11/12/microsoft-exchange-server-2016-and-2019-enter-their-permanently-vulnerable-era/5309401\" target=\"_blank\" rel=\"noopener\">The Register</a>.",
+      "<strong>What November fixed.</strong> The SE update covers nine Exchange flaws, including a critical one, CVE-2026-118207, per The Register. Microsoft says an attacker with any low-level login could send a specially crafted request and run code on the server, with no user interaction. It was not exploited or public at release, but Microsoft rates exploitation \"more likely,\" per <a href=\"https://msrc.microsoft.com/update-guide/vulnerability/CVE-2026-118207\" target=\"_blank\" rel=\"noopener\">Microsoft's Security Update Guide</a>.",
+      "<strong>The one that needs no click.</strong> A separate Windows Search flaw, CVE-2026-116928, is rated 9.8 out of 10. Microsoft says an attacker with no login could send an email with a booby-trapped attachment, and because Exchange automatically indexes attachments, nobody has to open anything, per <a href=\"https://msrc.microsoft.com/update-guide/vulnerability/CVE-2026-116928\" target=\"_blank\" rel=\"noopener\">Microsoft</a>. That fix comes in November's Windows Server updates, not the Exchange update.",
+      "<strong>Already on Microsoft 365?</strong> Exchange Online customers are already protected and don't need to do anything, per Microsoft. The exception is a hybrid setup: any Exchange server you kept, even one used only for management, still needs the update.",
+      "<strong>Action items for this week.</strong><br>1. <strong>Find out if you have an Exchange server.</strong> Ask whoever runs your IT. Include leftover servers from a past move to Microsoft 365 and any PC running the Exchange Management Tools.<br>2. <strong>Check the version.</strong> Microsoft's Exchange Server Health Checker script reports whether a server is behind on updates. The current SE build is 15.2.2562.57, released Nov. 10, per <a href=\"https://learn.microsoft.com/en-us/exchange/new-features/build-numbers-and-release-dates\" target=\"_blank\" rel=\"noopener\">Microsoft Learn</a>.<br>3. <strong>If it's SE, install both updates.</strong> Install November's Exchange update and November's Windows Server update. Order doesn't matter. Reboot, then confirm all Exchange services have started. If some are disabled, the install was interrupted, per Microsoft.<br>4. <strong>If it's 2016 or 2019, start the move now.</strong> Upgrade to Exchange SE or move the mailboxes to Exchange Online. Microsoft's build list shows the last 2019 update was Oct. 13. Every flaw found after that stays open.<br>5. <strong>Don't skip the Windows update in the meantime.</strong> The no-click Windows Search fix is in November's Windows Server updates, so install them on the Exchange server today.",
+      "Not sure what's still running in your server closet? Call us at +1 (925) 248-3463."
+    ],
+    "sources": [
+      [
+        "Microsoft Exchange Team: Released: November 2026 Exchange Server Security Updates",
+        "https://techcommunity.microsoft.com/blog/exchange/released-november-2026-exchange-server-security-updates/4570368"
+      ],
+      [
+        "The Register: Microsoft Exchange Server 2016 and 2019 enter their 'permanently vulnerable' era",
+        "https://www.theregister.com/saas/2026/11/12/microsoft-exchange-server-2016-and-2019-enter-their-permanently-vulnerable-era/5309401"
+      ],
+      [
+        "Microsoft Security Update Guide: CVE-2026-118207",
+        "https://msrc.microsoft.com/update-guide/vulnerability/CVE-2026-118207"
+      ],
+      [
+        "Microsoft Security Update Guide: CVE-2026-116928",
+        "https://msrc.microsoft.com/update-guide/vulnerability/CVE-2026-116928"
+      ],
+      [
+        "Microsoft Learn: Exchange Server build numbers and release dates",
+        "https://learn.microsoft.com/en-us/exchange/new-features/build-numbers-and-release-dates"
+      ]
+    ]
+  },
+  {
+    "date": "2026-11-14",
+    "tag": "Advisory",
+    "read": "3 min",
+    "title": "Attackers are hitting Barracuda email gateways through their admin page. If yours is reachable from the internet, fix that today",
+    "dek": "Barracuda says two patched flaws in its Email Security Gateway are now being exploited, and one needs no password, only access to the admin page. Check Point also shipped emergency fixes this week. Here's what a small office should check.",
+    "body": [
+      "A lot of small offices have a Barracuda box sitting in front of their email, filtering spam before it reaches the mailboxes. If yours is one of them, this is the week to make sure it's patched, and to check who can reach its admin page.",
+      "<strong>What happened.</strong> On Nov. 2, Barracuda released patches for two flaws, CVE-2026-116606 and CVE-2026-111560. On Nov. 5 it clarified that the first one needs no login at all, only access to the appliance's admin interface. Used together, the two give an attacker root control of the device, per <a href=\"https://trust.barracuda.com/security/pre-authentication-authorization-bypass-command-injection\" target=\"_blank\" rel=\"noopener\">Barracuda's advisory</a>. On Nov. 9 Barracuda added that it has seen exploitation affecting a small number of organizations, per <a href=\"https://www.bleepingcomputer.com/news/security/hackers-exploit-barracuda-email-security-gateway-flaws-to-get-root-access/\" target=\"_blank\" rel=\"noopener\">BleepingComputer</a>. CISA added both flaws to its Known Exploited Vulnerabilities list on Nov. 10, per the <a href=\"https://www.cyber.gc.ca/en/alerts-advisories/barracuda-networks-security-advisory-av26-1112\" target=\"_blank\" rel=\"noopener\">Canadian Centre for Cyber Security</a>.",
+      "<strong>Which products.</strong> The Email Security Gateway (ESG) has both flaws. The second flaw also affects Barracuda's Load Balancer ADC, Message Archiver, Web Application Firewall, WAF Control Center and Web Security Gateway, per Barracuda.",
+      "<strong>Why it matters more than a normal patch.</strong> An email gateway sees every message coming into the company. Root on that box means access to your mail and a foothold to move into the rest of your network, per <a href=\"https://cypheron.cz/en/blog/vulnerability-roundup-2026-11-13\" target=\"_blank\" rel=\"noopener\">CypherOn's weekly roundup</a>.",
+      "<strong>Not a Barracuda shop?</strong> The same week, Check Point released emergency hotfixes for CVE-2026-123039, a Gaia OS flaw that lets an attacker who already has a foothold get root. Check Point says it saw it exploited against a couple of dozen customers, and attacks go back to late October, per <a href=\"https://www.bleepingcomputer.com/news/security/check-point-patches-zero-day-that-lets-hackers-get-root-access/\" target=\"_blank\" rel=\"noopener\">BleepingComputer</a>. CISA added it to the exploited list on Nov. 13, per <a href=\"https://www.cisa.gov/news-events/alerts/2026/11/13/cisa-adds-two-known-exploited-vulnerabilities-catalog\" target=\"_blank\" rel=\"noopener\">CISA</a>.",
+      "<strong>Action items for this weekend.</strong><br>1. <strong>Check the firmware.</strong> Log in to the appliance and confirm it shows the latest firmware with patches applied. For the ESG, the patches are BNSF-40425 (firmware 9.4.017 and later) or BNSF-40430 (earlier builds), per Barracuda. If the box is several versions behind, it may need more than one update.<br>2. <strong>Turn automatic patching back on.</strong> If someone switched it off, Barracuda recommends turning it back on so the next fix lands without waiting on anyone.<br>3. <strong>Take the admin page off the internet.</strong> Barracuda says devices whose admin interfaces aren't reachable from the internet are less exposed. Limit it to your office network or a VPN.<br>4. <strong>If it was exposed, look for changes.</strong> Review recent configuration changes and admin accounts on the device, and change the passwords and keys stored on it, per CypherOn.<br>5. <strong>Ask your IT provider one question.</strong> \"Which of our devices have an admin page reachable from the internet?\" That covers the email filter, the firewall, the Wi-Fi controller and the NAS. The answer should be none.",
+      "Not sure what's sitting at the edge of your network? Call us at +1 (925) 248-3463."
+    ],
+    "sources": [
+      [
+        "Barracuda: Pre-Authentication Authorization Bypass and Command Injection Vulnerabilities",
+        "https://trust.barracuda.com/security/pre-authentication-authorization-bypass-command-injection"
+      ],
+      [
+        "BleepingComputer: Hackers now exploit critical Barracuda ESG flaws to gain root access",
+        "https://www.bleepingcomputer.com/news/security/hackers-exploit-barracuda-email-security-gateway-flaws-to-get-root-access/"
+      ],
+      [
+        "Canadian Centre for Cyber Security: Barracuda Networks security advisory (AV26-1112)",
+        "https://www.cyber.gc.ca/en/alerts-advisories/barracuda-networks-security-advisory-av26-1112"
+      ],
+      [
+        "CypherOn: Vulnerability Roundup 13 November 2026",
+        "https://cypheron.cz/en/blog/vulnerability-roundup-2026-11-13"
+      ],
+      [
+        "BleepingComputer: Check Point warns of zero-day flaw exploited for root access",
+        "https://www.bleepingcomputer.com/news/security/check-point-patches-zero-day-that-lets-hackers-get-root-access/"
+      ],
+      [
+        "CISA: CISA Adds Two Known Exploited Vulnerabilities to Catalog",
+        "https://www.cisa.gov/news-events/alerts/2026/11/13/cisa-adds-two-known-exploited-vulnerabilities-catalog"
+      ]
+    ]
+  },
+  {
+    "date": "2026-11-13",
+    "tag": "Advisory",
+    "read": "3 min",
+    "title": "Outlook and Teams have been down for most of a day. Microsoft says it's not an attack. Here's what to do while it recovers, and what to fix before the next one",
+    "dek": "A Microsoft 365 outage that began Thursday morning knocked out Exchange Online, Teams, SharePoint and more, and was still degraded Friday morning. Don't reset passwords or keep resending mail. Here's what actually helps.",
+    "body": [
+      "If your office runs on Microsoft 365, you probably noticed Thursday. Outlook wouldn't connect, Teams calls dropped, and shared files wouldn't open. You weren't hacked, and it wasn't your internet.",
+      "<strong>What happened.</strong> Microsoft's incident record for Exchange Online starts at 11:17 a.m. ET Thursday (8:17 a.m. Pacific), per <a href=\"https://www.webpronews.com/microsoft-365-outlook-outage-servers-health-checks-no-root-cause/\" target=\"_blank\" rel=\"noopener\">WebProNews</a>. Microsoft says a number of servers failed automated health checks and dropped out of service, which overloaded the rest, per <a href=\"https://www.cnbc.com/2026/11/12/microsoft-outage-outlook-aws-google.html\" target=\"_blank\" rel=\"noopener\">CNBC</a>. Microsoft later said a process on those servers that sets up secure connections was getting overwhelmed. Nearly 130,000 people reported Outlook problems on Downdetector just after 1 p.m. ET. Exchange Online, Teams, SharePoint, Copilot, Intune and Defender for Office 365 were all listed as potentially affected. Even the admin tools IT people would use to troubleshoot went down, per <a href=\"https://www.theregister.com/saas/2026/11/12/microsoft-struggling-to-fix-massive-cloud-outage-thats-taken-down-email-and-intune/5309531\" target=\"_blank\" rel=\"noopener\">The Register</a>.",
+      "<strong>Is it an attack?</strong> Microsoft says no. It says there is no indication of malicious activity and that it will publish a full root-cause report once the problem is fixed, per WebProNews.",
+      "<strong>Where it stands.</strong> As of 7:00 a.m. ET Friday (4:00 a.m. Pacific), Microsoft said recovery was improving in Europe and North America, but some users may still see intermittent problems, and it had not said when full service will return, per CNBC and WebProNews. Microsoft extended the window for delayed email to keep retrying delivery to 48 hours, so messages stuck in the queue shouldn't simply be lost.",
+      "<strong>Action items for today.</strong><br>1. <strong>Don't reset passwords or reinstall Office.</strong> Your account is fine. Resets during an outage just add lockouts and help-desk tickets.<br>2. <strong>Don't keep resending the same email.</strong> Microsoft is holding delayed mail for up to 48 hours. Resending creates duplicates when the queue clears. If something is truly urgent, pick up the phone.<br>3. <strong>Check status in one place.</strong> Your IT admin can see the incident in the Microsoft 365 admin center under Health > Service health (Microsoft's incident IDs are EX1550543 and MO1550821, per WebProNews). Everyone else can follow @MSFT365Status on X.<br>4. <strong>Be suspicious of \"fix your mailbox\" messages.</strong> Outages are a natural cover story for phishing. If a text or email shows up today with a link to \"restore\" your account, don't sign in from it. Open Outlook or office.com the way you normally do.<br>5. <strong>Tell customers another way.</strong> If clients email you for orders or appointments, a short note on your website or a phone greeting saying email is delayed beats silence.",
+      "<strong>Before the next one.</strong> The last big Microsoft 365 outage was only in September, per WebProNews. Take 30 minutes next week to write down:<br>&bull; <strong>A phone list</strong> for staff and your top customers that doesn't live in Outlook.<br>&bull; <strong>One backup way to talk</strong>, like a group text, so the team isn't stuck when Teams is down.<br>&bull; <strong>Which files you can't work without</strong>, and make sure they're synced to each PC through OneDrive so they open offline.<br>&bull; <strong>Who calls whom.</strong> One person checks status and updates everyone.",
+      "Want help putting that one-page plan together? Call us at +1 (925) 248-3463."
+    ],
+    "sources": [
+      [
+        "CNBC: Outlook outage continues as Microsoft flags 'encouraging recovery progress'",
+        "https://www.cnbc.com/2026/11/12/microsoft-outage-outlook-aws-google.html"
+      ],
+      [
+        "WebProNews: Microsoft 365 outage cuts off Outlook for hours",
+        "https://www.webpronews.com/microsoft-365-outlook-outage-servers-health-checks-no-root-cause/"
+      ],
+      [
+        "The Register: Microsoft struggling to fix massive cloud outage",
+        "https://www.theregister.com/saas/2026/11/12/microsoft-struggling-to-fix-massive-cloud-outage-thats-taken-down-email-and-intune/5309531"
+      ]
+    ]
+  },
+  {
+    "date": "2026-11-12",
+    "tag": "Advisory",
+    "read": "3 min",
+    "title": "The remote-management tool many IT providers use to run your computers just had 33 flaws dumped online. Ask your provider one question this week",
+    "dek": "Exploit code for N-able N-central, a tool managed service providers use to monitor and control client PCs, went public on Nov 9. A fix is out, but on-premises servers and the agents on your machines have to be updated. Here's what to ask.",
+    "body": [
+      "If an outside IT company looks after your office computers, there's a good chance it uses a remote monitoring and management (RMM) tool: software that lets it see, patch and control every PC from one console. N-able N-central is one of the widely used ones. N-able says its tools are used at more than 500,000 organizations in over 140 countries, per <a href=\"https://www.bleepingcomputer.com/news/security/n-able-releases-security-hotfixes-for-zero-day-vulnerabilities/\" target=\"_blank\" rel=\"noopener\">BleepingComputer</a>.",
+      "<strong>What happened.</strong> On Nov 9, a researcher published a write-up called Able2Shell describing 33 alleged N-central vulnerabilities, with proof-of-concept attack code, per <a href=\"https://www.tenable.com/blog/able2shell-frequently-asked-questions-for-reported-n-able-n-central-zero-day-vulnerabilities\" target=\"_blank\" rel=\"noopener\">Tenable</a>. The researcher says one attack chain needs no password at all and ends with the attacker running commands on the server. BleepingComputer reports the code can also create a rogue administrator account in the N-central console. N-able took its hosted N-central service offline across the Americas, Europe and Asia-Pacific that same day and told customers running their own N-central servers to take them offline too.",
+      "<strong>The fix.</strong> On Nov 10, N-able released N-central 2026.4 Hotfix 2 (build 2026.4.1.26), which fixes seven CVEs rated 8.3 to 9.3, per Tenable. N-able says it has upgraded all hosted servers and they're back online, and that every flaw an attacker could use without logging in has been addressed, per <a href=\"https://www.n-able.com/blog/update-on-n-central-2026-4-hf2-and-ongoing-security-response\" target=\"_blank\" rel=\"noopener\">N-able</a>. More fixes are coming in a follow-up hotfix.",
+      "<strong>Is anyone being hit?</strong> Attackers are scanning for it. N-able says it sees scanning tied to the published code but no signs of compromise on its hosted servers. Security firms have logged exploitation attempts against decoy N-central servers, but as of Nov 10 no confirmed compromise of a customer server had been reported, per Tenable. Shadowserver counted 1,338 N-central servers exposed online on Monday and just over 148 by the time BleepingComputer reported it, so most have been pulled offline or locked down.",
+      "<strong>Why this matters to you.</strong> You don't run N-central yourself. Your IT provider does. If its console were taken over, an attacker could reach every computer it manages, including yours. Hosted customers still have to update the agents and probes on client networks themselves, per N-able.",
+      "<strong>Action item: Ask your IT provider this week.</strong><br>1. <strong>\"Do you use N-able N-central, and is it on Hotfix 2 (build 2026.4.1.26)?\"</strong> If they run their own N-central server, it should stay off the internet until that upgrade is done, per N-able.<br>2. <strong>\"Have the agents and probes on our machines been updated?\"</strong> Tenable notes agents go first, because an updated probe can't talk to agents that haven't been updated.<br>3. <strong>\"Did you check for new admin accounts or odd remote sessions since Nov 8?\"</strong> That is the review Huntress recommends, per Tenable.<br>4. <strong>Don't accept \"we're cloud, so we're fine.\"</strong> Hosted servers were patched by N-able, but the agents on your PCs still need the update.",
+      "Not sure what tools your IT provider uses, or want a second set of eyes? Call us at +1 (925) 248-3463."
+    ],
+    "sources": [
+      [
+        "N-able: Update on N-central 2026.4 HF2",
+        "https://www.n-able.com/blog/update-on-n-central-2026-4-hf2-and-ongoing-security-response"
+      ],
+      [
+        "Tenable: Able2Shell FAQ",
+        "https://www.tenable.com/blog/able2shell-frequently-asked-questions-for-reported-n-able-n-central-zero-day-vulnerabilities"
+      ],
+      [
+        "BleepingComputer: N-able releases security hotfixes for zero-day vulnerabilities",
+        "https://www.bleepingcomputer.com/news/security/n-able-releases-security-hotfixes-for-zero-day-vulnerabilities/"
+      ],
+      [
+        "Cybersecurity Dive",
+        "https://www.cybersecuritydive.com/news/n-able-hotfix-researcher-pocs-zero-days/874388/"
+      ]
+    ]
+  },
+  {
+    "date": "2026-11-11",
+    "tag": "Patch",
+    "read": "3 min",
+    "title": "Attackers are using an Outlook flaw to steal Windows logins from one opened file. Install this week's Office update, and relaunch Chrome too",
+    "dek": "Microsoft's November Patch Tuesday fixed one flaw that attackers are already using: a booby-trapped message file that makes Outlook quietly hand over your login hash. Google also patched an exploited Chrome bug on Monday. Both fixes are out now.",
+    "body": [
+      "Microsoft's November Patch Tuesday on Nov 10 fixed 1,093 vulnerabilities, and one of them is already being used in attacks: an Outlook flaw tracked as CVE-2026-124194, per <a href=\"https://www.ivanti.com/blog/november-2026-patch-tuesday\" target=\"_blank\" rel=\"noopener\">Ivanti</a> and <a href=\"https://therecord.media/patch-tuesday-microsoft-1000-bugs-again\" target=\"_blank\" rel=\"noopener\">The Record</a>. CISA added it to its Known Exploited Vulnerabilities catalog the same day and gave federal agencies until Nov 24 to patch, per <a href=\"https://securityonline.info/outlook-zero-day-cve-2026-124194/\" target=\"_blank\" rel=\"noopener\">SecurityOnline</a>.",
+      "<strong>What the flaw does.</strong> An attacker sends a specially crafted message file and gets someone to open it in Outlook. Opening it makes Outlook connect to a server the attacker controls without showing the usual external-content warning, and that connection hands over the user's NTLMv2 password hash, per <a href=\"https://www.bleepingcomputer.com/news/microsoft/microsoft-november-2026-patch-tuesday-fixes-1-235-flaws-outlook-zero-day/\" target=\"_blank\" rel=\"noopener\">BleepingComputer</a>. The attacker can relay that hash to sign in to other systems as the user or try to crack it to recover the password, per <a href=\"https://www.csoonline.com/article/4247015/november-2026-patch-tuesday-63-critical-microsoft-fixes-plus-an-outlook-zero-day-that-allows-theft-of-hashed-credentials.html\" target=\"_blank\" rel=\"noopener\">CSO Online</a>. Microsoft says the Preview Pane is not a way in, so the file has to be opened.",
+      "<strong>Don't let the score fool you.</strong> Microsoft rates it only Moderate, with a CVSS score of 6.5, but working attack code exists and it is being used now. Ivanti recommends treating it as Critical. Microsoft hasn't said who is behind the attacks or how many people were hit.",
+      "<strong>Who's affected.</strong> Microsoft 365 Apps for Enterprise and Office LTSC 2021 and 2024. The fixed LTSC builds are 16.0.14334.21048 and 16.0.17932.21140.",
+      "<strong>Chrome too.</strong> On Nov 9, Google released Chrome 157.0.8103.50/.51 for Windows and Mac and 157.0.8103.50 for Linux to fix CVE-2026-125350, a bug in how Chrome handles XML that attackers are already exploiting, per <a href=\"https://chromereleases.googleblog.com/2026/11/stable-channel-update-for-desktop_018223192.html\" target=\"_blank\" rel=\"noopener\">Google's release notes</a>. It's Chrome's eighth exploited zero-day this year, per <a href=\"https://thehackernews.com/2026/11/google-issues-chrome-security-update.html\" target=\"_blank\" rel=\"noopener\">The Hacker News</a>. Edge and other Chromium-based browsers need the same fix as their updates arrive.",
+      "<strong>Action item: Patch Office and browsers this week.</strong><br>1. <strong>Update Office on every PC that runs Outlook.</strong> In Outlook, go to File > Office Account > Update Options > Update Now. If you manage updates centrally, confirm the November Office updates actually reached each machine.<br>2. <strong>Relaunch Chrome and Edge.</strong> The fix doesn't apply until the browser restarts. Check Help > About Google Chrome and confirm you're on 157.0.8103.50 or later.<br>3. <strong>Tell staff not to open unexpected message files</strong>, even from people they know, until Office is patched.<br>4. <strong>Block outbound SMB to the internet.</strong> SecurityOnline suggests blocking outbound SMB and NTLM traffic at the firewall, which stops this kind of hash leak from reaching an outside server.",
+      "Not sure every PC got the update? Call us at +1 (925) 248-3463."
+    ],
+    "sources": [
+      [
+        "Ivanti: November 2026 Patch Tuesday",
+        "https://www.ivanti.com/blog/november-2026-patch-tuesday"
+      ],
+      [
+        "The Record",
+        "https://therecord.media/patch-tuesday-microsoft-1000-bugs-again"
+      ],
+      [
+        "BleepingComputer: November 2026 Patch Tuesday",
+        "https://www.bleepingcomputer.com/news/microsoft/microsoft-november-2026-patch-tuesday-fixes-1-235-flaws-outlook-zero-day/"
+      ],
+      [
+        "CSO Online",
+        "https://www.csoonline.com/article/4247015/november-2026-patch-tuesday-63-critical-microsoft-fixes-plus-an-outlook-zero-day-that-allows-theft-of-hashed-credentials.html"
+      ],
+      [
+        "SecurityOnline: Outlook zero-day CVE-2026-124194",
+        "https://securityonline.info/outlook-zero-day-cve-2026-124194/"
+      ],
+      [
+        "Google Chrome release notes (Nov 9)",
+        "https://chromereleases.googleblog.com/2026/11/stable-channel-update-for-desktop_018223192.html"
+      ],
+      [
+        "The Hacker News: Chrome zero-day",
+        "https://thehackernews.com/2026/11/google-issues-chrome-security-update.html"
+      ]
+    ]
+  },
+  {
+    "date": "2026-11-10",
+    "tag": "Patch",
+    "read": "3 min",
+    "title": "Attackers are already using SSHole to log in to Alpine Linux servers without a password. Update OpenSSH to 10.6p2 or turn off SSH passwords",
+    "dek": "A new OpenSSH flaw lets attackers into certain accounts that were never supposed to accept a password, just by sending a very long one. It only hits Linux systems built on musl, such as Alpine, OpenWrt, Buildroot and Yocto, and the fix shipped Nov 5. Exploitation started within days.",
+    "body": [
+      "On Nov 5, OpenSSH released version 10.6p2 to fix a password authentication bypass nicknamed \"SSHole\" (CVE-2026-123158, CVSS 8.1), per the <a href=\"https://www.openssh.org/releasenotes.html\" target=\"_blank\" rel=\"noopener\">OpenSSH release notes</a> and the <a href=\"https://www.openwall.com/lists/oss-security/2026/11/05/3\" target=\"_blank\" rel=\"noopener\">oss-security disclosure</a>. Exploit code showed up a few hours later, and by the weekend GreyNoise, watchTowr and Previdian were all reporting attacks in the wild, per <a href=\"https://www.bleepingcomputer.com/news/security/hackers-exploit-sshole-openssh-flaw-to-breach-linux-systems/\" target=\"_blank\" rel=\"noopener\">BleepingComputer</a> and <a href=\"https://www.securityweek.com/hackers-exploiting-sshole-authentication-bypass-in-openssh/\" target=\"_blank\" rel=\"noopener\">SecurityWeek</a>.",
+      "<strong>What the flaw does.</strong> Some accounts, like root on Alpine, are set up so they can never log in with a password; their stored password is just an asterisk. On Linux systems that use the musl C library with PAM turned off, sending a password longer than 256 characters makes musl's hashing function fail and return an asterisk. OpenSSH then sees that it matches and lets the attacker in. Accounts with real passwords are not affected, and neither are glibc-based distributions, systems using PAM, or the Dropbear SSH server, per <a href=\"https://www.getastra.com/blog/security-advisory/sshole-cve-2026-123158/\" target=\"_blank\" rel=\"noopener\">Astra Security</a>.",
+      "<strong>What attackers are doing with it.</strong> GreyNoise logged its first successful break-in on Nov 7. Attackers looked around the system and containers, queried cloud metadata services, tried to read password hashes and root SSH keys, and added their own SSH keys to keep access. In one case they got root and installed a remote-control program called TAC Agent. watchTowr says only botnets and crypto miners have picked it up so far.",
+      "<strong>Why small businesses should care.</strong> You may not think you run Alpine Linux, but it is common inside cloud servers, Docker containers and appliances, and OpenWrt and Yocto show up in routers and embedded devices. If a contractor or vendor set up a small server, VPN box or device for you, it could be one of them. Anything with SSH open to the internet is getting scanned right now.",
+      "<strong>Action item: Check anything that runs SSH this week.</strong><br>1. <strong>Find your SSH systems.</strong> List servers, cloud instances, containers and network devices that accept SSH, especially anything reachable from the internet. Ask your vendor if you're not sure what an appliance runs.<br>2. <strong>Update OpenSSH.</strong> Install OpenSSH 10.6p2 or your distribution's patched package. On Alpine, run <code>apk upgrade openssh</code>. Upgrading doesn't restart the running SSH service, so restart it afterward.<br>3. <strong>Can't patch yet? Turn off SSH passwords.</strong> Set <code>PasswordAuthentication no</code> in <code>/etc/ssh/sshd_config</code> and restart SSH. Confirm key-based login works first so you don't lock yourself out.<br>4. <strong>Look for signs of a break-in.</strong> Check SSH logs for successful password logins to accounts that shouldn't have one, look for SSH keys you didn't add in <code>authorized_keys</code> files, and check for unfamiliar startup services.",
+      "Not sure what's running SSH on your network? Call us at +1 (925) 248-3463."
+    ],
+    "sources": [
+      [
+        "OpenSSH 10.6p2 release notes (Nov 5)",
+        "https://www.openssh.org/releasenotes.html"
+      ],
+      [
+        "oss-security disclosure (Nov 5)",
+        "https://www.openwall.com/lists/oss-security/2026/11/05/3"
+      ],
+      [
+        "BleepingComputer: OpenSSH flaw lets attackers log into password-disabled Linux accounts",
+        "https://www.bleepingcomputer.com/news/security/openssh-flaw-lets-attackers-log-into-password-disabled-linux-accounts/"
+      ],
+      [
+        "BleepingComputer: Hackers exploit SSHole OpenSSH flaw",
+        "https://www.bleepingcomputer.com/news/security/hackers-exploit-sshole-openssh-flaw-to-breach-linux-systems/"
+      ],
+      [
+        "SecurityWeek",
+        "https://www.securityweek.com/hackers-exploiting-sshole-authentication-bypass-in-openssh/"
+      ],
+      [
+        "Astra Security advisory",
+        "https://www.getastra.com/blog/security-advisory/sshole-cve-2026-123158/"
+      ]
+    ]
+  },
+  {
+    "date": "2026-11-06",
+    "tag": "Patch",
+    "read": "3 min",
+    "title": "There's no patch yet for D-Link's DGS-3130 Discovery Protocol flaws. Disable DDP, drop default SNMP, and keep management off the internet",
+    "dek": "D-Link published an interim advisory for unpatched flaws in the DGS-3130-30TS managed switch's Discovery Protocol. Until firmware ships, disable DDP, remove default SNMP community strings, and keep SSH, the web page and SNMP on a management network only. Separately, DigiCert says an exposed archive let outsiders read business contacts, and for some customers, ID documents used in validation.",
+    "body": [
+      "On Nov 6, D-Link published an interim security advisory for multiple unpatched flaws in its DGS-3130-30TS managed switch, found in the D-Link Discovery Protocol (DDP) and parts of the firmware, per <a href=\"https://www.bleepingcomputer.com/news/security/d-link-warns-of-multiple-zero-days-in-dgs-3130-series-switches/\" target=\"_blank\" rel=\"noopener\">BleepingComputer</a> and D-Link's <a href=\"https://supportannouncement.us.dlink.com/security/publication.aspx?name=SAP10523\" target=\"_blank\" rel=\"noopener\">SAP10523</a>. The company has not released fixed firmware yet, and CVE identifiers are not public. Other DGS-3130 models and other D-Link switch lines are still under investigation.",
+      "<strong>What the flaws can do.</strong> An attacker who can reach the switch on the network may be able to read device and network settings, change admin credentials, expose SNMP community strings, reset the switch, or disrupt service. Separate findings cover SSH configuration, how the device protects operating-system credentials, and firmware encryption. Disabling DDP cuts the main known DDP attack path, but D-Link says it does not fix those other firmware issues.",
+      "<strong>Why small businesses should care.</strong> The DGS-3130 is aimed at small and mid-size offices and metro Ethernet setups. Like the Zyxel GS1900 story earlier this week, a managed switch that sits forgotten in a closet is still in the middle of every office conversation. There is no patch to install today, so the interim steps matter.",
+      "<strong>Action item: Mitigate until firmware ships.</strong><br>1. <strong>Check the label.</strong> Look for \"DGS-3130,\" especially a DGS-3130-30TS. Note the hardware revision and firmware version before you change anything.<br>2. <strong>Disable DDP.</strong> On the switch CLI, use <code>no ddp</code> in global and interface configuration, confirm with <code>show ddp</code>, then save so the setting survives a reboot. D-Link says this is the primary interim step for the DDP findings.<br>3. <strong>Remove default SNMP communities.</strong> Delete <code>public</code> and <code>private</code> (and any other unused communities). If you still need SNMP, prefer SNMPv3 with authentication, limited to known admin hosts.<br>4. <strong>Keep management off the internet.</strong> Restrict SSH, the web UI and SNMP to a small management network or named admin machines. Save an offline config backup, and watch logs for unexpected reboots, config changes or factory resets.<br>5. <strong>Watch for the real fix.</strong> Follow D-Link's <a href=\"https://supportannouncement.us.dlink.com/security/publication.aspx?name=SAP10523\" target=\"_blank\" rel=\"noopener\">SAP10523</a> advisory. When firmware ships, match model and hardware revision before you install it.",
+      "Not sure what's in your network closet? Call us at +1 (925) 248-3463, or start with the free <a href=\"https://awhind.com/security-checklist/\" target=\"_blank\" rel=\"noopener\">security checklist</a>.",
+      "<strong>Second item: DigiCert customers, expect fake \"re-upload your ID\" emails.</strong> DigiCert says an archive system that held business customer records was left reachable from the internet after a network move, and an attacker used a self-registration feature (no MFA) to create a read-only account, per <a href=\"https://www.securityweek.com/digicert-data-breach-impacts-business-customer-information/\" target=\"_blank\" rel=\"noopener\">SecurityWeek</a>. That account could read names, emails, phones and business addresses between June 27 and July 2. For some customers, driver's licenses, passports or utility bills used in validation were also exposed. DigiCert says certificate systems were not affected and certificates still work.",
+      "&bull; <strong>Open CertCentral by typing the address</strong>, not from a scary message asking you to re-upload an ID or \"fix validation.\"<br>&bull; <strong>Treat unexpected DigiCert mail as phishing</strong> until you check it inside the real portal."
+    ],
+    "sources": [
+      [
+        "BleepingComputer: D-Link DGS-3130 (Nov 6)",
+        "https://www.bleepingcomputer.com/news/security/d-link-warns-of-multiple-zero-days-in-dgs-3130-series-switches/"
+      ],
+      [
+        "D-Link SAP10523",
+        "https://supportannouncement.us.dlink.com/security/publication.aspx?name=SAP10523"
+      ],
+      [
+        "SecurityWeek: DigiCert (Nov 6)",
+        "https://www.securityweek.com/digicert-data-breach-impacts-business-customer-information/"
+      ]
+    ]
+  },
+  {
+    "date": "2026-11-05",
+    "tag": "Patch",
+    "read": "2 min",
+    "title": "The Zyxel switch fix everyone installed didn't stop the hack. Update GS1900 switches again and lock down their web page",
+    "dek": "About 1,000 Zyxel GS1900 switches were hacked in August through a flaw nobody knew about, not the older bug that got the blame and the patch. Zyxel shipped the real fix on Oct 23.",
+    "body": [
+      "In September, GreyNoise reported that attackers had hacked roughly 1,000 Zyxel GS1900 network switches in August, and blamed CVE-2026-7273, a bug Zyxel patched in June. CISA added that bug to its exploited list. Now Binarly says the attackers were actually using a different, unknown flaw, so the June patch did nothing to stop them, per <a href=\"https://www.securityweek.com/zyxel-switch-hacks-blamed-on-patched-flaw-actually-exploited-a-zero-day/\" target=\"_blank\" rel=\"noopener\">SecurityWeek</a>.",
+      "<strong>What the flaw does.</strong> The new bug, CVE-2026-107441 (CVSS 8.8), lets an attacker who hasn't logged in run commands on the switch by sending crafted web requests. It affects 10 GS1900 models. Zyxel released fixes on Oct 23 and published its advisory on Nov 3. The attacks have been linked to a Chinese group GreyNoise calls Red Heron.",
+      "<strong>Why small businesses should care.</strong> The GS1900 is an affordable managed switch, the kind that ends up in a small office closet and gets forgotten. If you patched in June and thought you were done, you weren't. A hacked switch sits in the middle of all your office traffic.",
+      "<strong>Action item: Check your switch this week.</strong><br>1. <strong>Find out if you have one.</strong> Look at the label on the switches in your network closet, or ask whoever set up your network. You're looking for \"GS1900.\"<br>2. <strong>Install firmware released on or after Oct 23.</strong> Check Zyxel's Nov 3 advisory for your exact model and fixed version.<br>3. <strong>Keep the switch's web page off the internet.</strong> Its management page should be reachable only from inside your office, never from outside.<br>4. <strong>If it was ever exposed online,</strong> assume it may have been touched. Update it, change its admin password, and consider a factory reset.",
+      "Not sure what's in your network closet? Call us at +1 (925) 248-3463."
+    ],
+    "sources": [
+      [
+        "SecurityWeek (Nov 5)",
+        "https://www.securityweek.com/zyxel-switch-hacks-blamed-on-patched-flaw-actually-exploited-a-zero-day/"
+      ]
+    ]
+  },
+  {
+    "date": "2026-11-04",
+    "tag": "Threat",
+    "read": "3 min",
+    "title": "A Google Calendar invite from someone you know got past MFA. Move key accounts to passkeys, and mSecure users should reset now",
+    "dek": "A phishing operation sent calendar invites from real, hacked accounts that led to a live copy of Google's sign-in page, relaying text codes, app codes and push approvals to steal whole sessions. Separately, mSecure told current and former customers to change passwords after an encrypted vault database was reportedly stolen.",
+    "body": [
+      "Since mid-August, a phishing operation has been stealing live Google sessions from corporate users, per <a href=\"https://www.bleepingcomputer.com/news/security/google-calendar-phishing-campaign-hijacks-sessions-bypasses-mfa/\" target=\"_blank\" rel=\"noopener\">BleepingComputer</a>, reporting on research by Material Security. The lures arrived as Google Calendar invites, often from an organization the victim had already emailed with. The pretexts were boring on purpose: voicemail notices, RFP requests, court summonses, missed payments.",
+      "<strong>How it beat MFA.</strong> The links mostly pointed at Google's own redirector, Google Drive or share.google, so every reputation check came back clean. Behind them sat a live relay in front of the real Google sign-in page. Victims typed their password, got a real prompt, approved it, and the attacker passed every code to Google in real time: text codes, authenticator codes, number matching, even phone-based recovery. The attacker walked away with the signed-in session, which reaches mail, Drive, and the power to grant app access in the victim's name. Material counted 8,570 hacked sender addresses across 6,354 domains in one month, and says the operator has an unused Microsoft 365 version ready to go.",
+      "<strong>Why small businesses should care.</strong> Your team trusts invites from customers and vendors. In this campaign, those were exactly the accounts sending the bait. And MFA codes and push prompts, the protection most small offices rely on, didn't stop it.",
+      "<strong>Action item: Close the gap MFA left open.</strong><br>1. <strong>Move key accounts to passkeys or security keys.</strong> Start with owners, whoever pays bills, and whoever runs IT. A passkey won't sign in to a lookalike page, so it can't be relayed.<br>2. <strong>Tell staff the rule:</strong> a sign-in prompt you didn't expect gets a \"no,\" and a sign-in page reached from an invite link gets closed. Go to the site directly instead.<br>3. <strong>Limit who can drop events on your calendar.</strong> In Google Calendar on a computer: Settings, Event settings, \"Add invitations to my calendar,\" then \"Only if the sender is known.\"<br>4. <strong>Know how to kill a session.</strong> If someone thinks they signed in through a strange link, sign them out everywhere, reset the password, and check which apps have access. Practice doing it in under an hour.",
+      "Want help switching your office to passkeys? Call us at +1 (925) 248-3463, or start with the free <a href=\"https://awhind.com/security-checklist/\" target=\"_blank\" rel=\"noopener\">security checklist</a>.",
+      "<strong>Second item: mSecure users, reset your passwords.</strong> mSeven Software told current and former mSecure customers on Nov 3 to change passwords, reset two-factor, and remove passkeys stored in the app, per <a href=\"https://www.bleepingcomputer.com/news/security/msecure-password-manager-hack-prompts-password-reset-warnings/\" target=\"_blank\" rel=\"noopener\">BleepingComputer</a>. Support replies shared by customers say a hacker stole an encrypted database from mSecure Cloud, affecting users who synced through it. The company says it has no evidence the encrypted contents were accessed. But a stolen vault can be attacked offline for as long as the attacker likes, and a new master password doesn't change the copy they already have.",
+      "&bull; <strong>If you synced mSecure to its cloud,</strong> change your most important passwords first: email, bank, payroll, and your domain registrar.<br>&bull; <strong>Then reset two-factor</strong> on those accounts, and replace any passkeys stored in mSecure."
+    ],
+    "sources": [
+      [
+        "BleepingComputer: Calendar phishing (Nov 4)",
+        "https://www.bleepingcomputer.com/news/security/google-calendar-phishing-campaign-hijacks-sessions-bypasses-mfa/"
+      ],
+      [
+        "BleepingComputer: mSecure (Nov 4)",
+        "https://www.bleepingcomputer.com/news/security/msecure-password-manager-hack-prompts-password-reset-warnings/"
+      ]
+    ]
+  },
+  {
+    "date": "2026-11-03",
+    "tag": "AI Safety",
+    "read": "3 min",
+    "title": "Stolen AI keys are running up bills of $100,000 a day. Find yours, cap them, and turn on billing alerts",
+    "dek": "Google says attackers are stealing AI API keys and cloud tokens and burning through victims' AI budgets, with charges topping $100,000 in a single day and reaching $1 million at some organizations. If anyone on your team built something with an AI key, this week is the week to find out where it lives.",
+    "body": [
+      "On Nov 3, Google Threat Intelligence Group and Mandiant warned about \"LLMjacking,\" per <a href=\"https://thehackernews.com/2026/11/google-warns-llmjacking-attacks-are.html\" target=\"_blank\" rel=\"noopener\">The Hacker News</a>. An attacker gets hold of an organization's AI API key or cloud login, then uses its AI services while the real owner pays the bill. Google says it saw fraudulent charges above $100,000 in a single day, and cumulative charges at some organizations reached $1 million before access was revoked.",
+      "<strong>How the keys get out.</strong> Google says the most common way in was exposed or stolen cloud credentials: service account keys, GitHub personal access tokens, and live session tokens. It also found AI keys picked up from public GitHub repositories, and keys exposed through phishing, misconfigured setups, and code that runs in the browser. Unlike cryptomining, which drains resources slowly, Google says this can spike a bill \"in a matter of hours.\" The stolen access is then resold on underground services, one of which offers \"unlimited\" access to a top AI model for about $60 a month.",
+      "<strong>Why small businesses should care.</strong> You don't need a data science team to be exposed. A contractor who built your chatbot, a staffer who connected an AI tool to a spreadsheet, or a developer who pasted a key into a website's code can all leave a key that bills your card. I wire AI services into a lot of builds, and the key is always the part I check first.",
+      "<strong>Action item: Find and fence your AI keys.</strong><br>1. <strong>Make a list.</strong> Ask everyone, including outside developers, which AI services (OpenAI, Anthropic, Google, and so on) they've set up with a company card, and where each key is stored.<br>2. <strong>Set a spending cap and a billing alert</strong> on every AI and cloud account. A $50 alert you get today beats a $50,000 invoice next month.<br>3. <strong>Get keys out of code.</strong> Keys should never sit in a website's front-end code or a public GitHub repo. If one ever did, delete it and create a new one.<br>4. <strong>Delete what you don't use.</strong> Old keys and unused service accounts are free doors for an attacker.",
+      "Want a one-page list of the rest? Our free <a href=\"https://awhind.com/security-checklist/\" target=\"_blank\" rel=\"noopener\">security checklist</a> covers it.",
+      "<strong>Also today</strong>",
+      "&bull; <strong>Only install AI coding tools from the vendor.</strong> Symantec and Carbon Black described a gray-market service that installs the real Codex and Claude Code tools, then rewrites their settings to switch off safety sandboxing and route every request through its own servers, per the same <a href=\"https://thehackernews.com/2026/11/google-warns-llmjacking-attacks-are.html\" target=\"_blank\" rel=\"noopener\">Hacker News report</a>. It mainly targets regions where those vendors don't operate, but the lesson travels: don't run a one-line setup command from an unofficial site."
+    ],
+    "sources": [
+      [
+        "The Hacker News (Nov 3)",
+        "https://thehackernews.com/2026/11/google-warns-llmjacking-attacks-are.html"
+      ]
+    ]
+  },
+  {
     "date": "2026-11-02",
     "tag": "Threat",
     "read": "3 min",

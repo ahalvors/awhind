@@ -1,0 +1,166 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="GL.iNet says an attacker exploited a flaw in its cloud remote management service to install malware on some of its routers and KVM devices. The cloud hole is closed, but infected devices stay infected until you install the new security firmware.">
+<title>Hackers used GL.iNet&#039;s cloud service to plant malware on its routers and KVMs. If you have one, check it and update today — AWHIND Daily Briefing</title>
+<link rel="canonical" href="https://awhind.com/briefing/2026-11-23/">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='16' fill='%230B0F17'/%3E%3Ccircle cx='50' cy='50' r='16' fill='%23DD4E1E'/%3E%3C/svg%3E">
+
+<!-- Open Graph -->
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://awhind.com/briefing/2026-11-23/">
+<meta property="og:title" content="Hackers used GL.iNet&#039;s cloud service to plant malware on its routers and KVMs. If you have one, check it and update today">
+<meta property="og:description" content="GL.iNet says an attacker exploited a flaw in its cloud remote management service to install malware on some of its routers and KVM devices. The cloud hole is closed, but infected devices stay infected until you install the new security firmware.">
+<meta property="og:site_name" content="AWHIND">
+
+<!-- Twitter Card -->
+<meta name="twitter:title" content="Hackers used GL.iNet&#039;s cloud service to plant malware on its routers and KVMs. If you have one, check it and update today">
+<meta name="twitter:description" content="GL.iNet says an attacker exploited a flaw in its cloud remote management service to install malware on some of its routers and KVM devices. The cloud hole is closed, but infected devices stay infected until you install the new security firmware.">
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "Hackers used GL.iNet's cloud service to plant malware on its routers and KVMs. If you have one, check it and update today",
+  "description": "GL.iNet says an attacker exploited a flaw in its cloud remote management service to install malware on some of its routers and KVM devices. The cloud hole is closed, but infected devices stay infected until you install the new security firmware.",
+  "datePublished": "2026-11-23",
+  "url": "https://awhind.com/briefing/2026-11-23/",
+  "author": {
+    "@type": "Organization",
+    "name": "AWHIND",
+    "url": "https://awhind.com",
+    "telephone": "+19252483463"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "AWHIND",
+    "url": "https://awhind.com",
+    "telephone": "+19252483463"
+  }
+}
+</script>
+
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,500&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap');
+
+  :root{
+    --bg:#F1F2ED;
+    --bg-elevated:#FFFFFF;
+    --bg-sunken:#E7E8E1;
+    --text:#0B0F17;
+    --text-secondary:#566072;
+    --text-tertiary:#848d9b;
+    --line:#D9DAD2;
+    --line-strong:#c2c4ba;
+    --accent:#DD4E1E;
+    --accent-contrast:#FFFFFF;
+    --shadow: 0 1px 2px rgba(11,15,23,.04), 0 8px 24px rgba(11,15,23,.06);
+    --serif: 'Newsreader', Georgia, 'Times New Roman', serif;
+    --sans: 'IBM Plex Sans', -apple-system, 'Segoe UI', Roboto, sans-serif;
+    --mono: 'IBM Plex Mono', 'SF Mono', Consolas, monospace;
+  }
+  @media (prefers-color-scheme: dark){
+    :root:not([data-theme="light"]){
+      --bg:#0A0D14;
+      --bg-elevated:#12161F;
+      --bg-sunken:#080A10;
+      --text:#EEF0F4;
+      --text-secondary:#9AA3B4;
+      --text-tertiary:#6d7688;
+      --line:#232838;
+      --line-strong:#323951;
+      --accent:#FF7A47;
+      --accent-contrast:#0A0D14;
+      --shadow: 0 1px 2px rgba(0,0,0,.3), 0 8px 28px rgba(0,0,0,.4);
+    }
+  }
+  :root[data-theme="dark"]{
+    --bg:#0A0D14;
+    --bg-elevated:#12161F;
+    --bg-sunken:#080A10;
+    --text:#EEF0F4;
+    --text-secondary:#9AA3B4;
+    --text-tertiary:#6d7688;
+    --line:#232838;
+    --line-strong:#323951;
+    --accent:#FF7A47;
+    --accent-contrast:#0A0D14;
+    --shadow: 0 1px 2px rgba(0,0,0,.3), 0 8px 28px rgba(0,0,0,.4);
+  }
+
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0; background:var(--bg); color:var(--text);
+    font-family:var(--sans); font-size:16px; line-height:1.55;
+    -webkit-font-smoothing:antialiased;
+  }
+  a{color:inherit;}
+  h1,h2{font-family:var(--serif); font-weight:500; margin:0; text-wrap:balance; letter-spacing:-0.01em;}
+  .mono{font-family:var(--mono);}
+  .wrap{max-width:1120px; margin:0 auto; padding:0 28px;}
+  .btn{
+    display:inline-flex; align-items:center; gap:8px; font-family:var(--mono); font-size:13px;
+    letter-spacing:.04em; text-transform:uppercase; padding:12px 20px; border-radius:2px;
+    text-decoration:none; cursor:pointer; border:1px solid transparent;
+  }
+  .btn-ghost{border-color:var(--line-strong); color:var(--text);}
+  .btn-ghost:hover{border-color:var(--accent); color:var(--accent);}
+  .btn-sm{padding:8px 14px; font-size:11px;}
+
+  nav.wrap{display:flex; align-items:center; justify-content:space-between; padding-top:18px; padding-bottom:18px;}
+  .brand{font-family:var(--serif); font-weight:600; font-size:21px; letter-spacing:-.01em; text-decoration:none; color:var(--text); display:flex; align-items:center; gap:9px;}
+  .brand .mark{width:9px;height:9px;background:var(--accent);display:inline-block;}
+
+  article{max-width:720px; margin:44px auto; padding:0 28px;}
+  .meta{font-family:var(--mono); font-size:11.5px; color:var(--text-tertiary); letter-spacing:.03em; margin-bottom:16px;}
+  article h1{font-size:32px; line-height:1.15;}
+  .dek{font-size:16px; color:var(--text-secondary); margin-top:14px; font-family:var(--serif); font-style:italic;}
+  .article-body{margin-top:28px; font-size:15.5px; color:var(--text); max-width:60ch;}
+  .article-body p{margin:0 0 18px;}
+  .article-body strong{font-weight:600;}
+  .article-body .stat-inline{font-family:var(--mono); color:var(--accent); font-weight:600;}
+  .article-sources{margin-top:32px; padding-top:20px; border-top:1px solid var(--line); font-size:12px; color:var(--text-tertiary);}
+  .article-sources a{color:var(--text-secondary); text-decoration:underline; text-decoration-color:var(--line-strong);}
+  .back-link{margin-top:32px; display:inline-block;}
+</style>
+<meta property="og:image" content="https://awhind.com/images/og/briefing/2026-11-23.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Preview card: Hackers used GL.iNet&#039;s cloud service to plant malware on its routers and KVMs. If you have one, check it and update today">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:site" content="@awhxtech">
+<meta name="twitter:image" content="https://awhind.com/images/og/briefing/2026-11-23.png">
+<meta name="twitter:image:alt" content="Preview card: Hackers used GL.iNet&#039;s cloud service to plant malware on its routers and KVMs. If you have one, check it and update today">
+</head>
+<body>
+
+<nav class="wrap">
+  <a href="/" class="brand"><span class="mark"></span>AWHIND</a>
+  <div>
+    <a href="/#briefing" class="btn btn-ghost btn-sm">← All Briefings</a>
+  </div>
+</nav>
+
+<article>
+  <div class="meta">Nov 23, 2026 &middot; Advisory &middot; 3 min read</div>
+  <h1>Hackers used GL.iNet's cloud service to plant malware on its routers and KVMs. If you have one, check it and update today</h1>
+  <div class="dek">GL.iNet says an attacker exploited a flaw in its cloud remote management service to install malware on some of its routers and KVM devices. The cloud hole is closed, but infected devices stay infected until you install the new security firmware.</div>
+  <div class="article-body">
+    <p>GL.iNet says an unauthorized party exploited a vulnerability in its cloud remote management service and used it to access and install malicious software on some GL.iNet routers and KVM devices, per its <a href="https://www.gl-inet.com/en-us/blogs/blog/glinet-security-notice-2026-11-20" target="_blank" rel="noopener">security notice</a> issued Nov. 20. The company says it fixed the cloud flaw and blocked the access used in the attack, so devices can no longer be newly infected that way. But the cloud fix does not remove malware from devices that were already infected. For that, you need the new security firmware.</p>
+    <p><strong>Why it matters if you're a small business.</strong> GL.iNet makes small routers, travel routers and remote KVM devices. They're popular with remote workers and with IT folks who need to reach an office computer from home. A KVM gives remote control of the computer plugged into it, so an infected KVM is a door to that computer. GL.iNet says it is still investigating whether computers connected to affected KVM devices were impacted.</p>
+    <p><strong>What researchers found.</strong> <a href="https://www.bleepingcomputer.com/news/security/hackers-exploit-glinet-cloud-flaw-to-infect-routers-kvm-devices/" target="_blank" rel="noopener">BleepingComputer</a> reports that customers and researchers shared evidence of custom malware built for GL.iNet devices and root-level reverse shells giving remote access to infected devices. One researcher group said it found suspicious activity on 152 of 183 routers it owns or manages, though it noted its results may not match other customers' and that some older backdoor infections may not be linked to this attack. GL.iNet has not said how many customers were affected.</p>
+    <p><strong>The fixed firmware.</strong> From GL.iNet's notice:<br>- Routers: GL-MG1300, GL-MT3000, GL-MT6000 need <strong>4.11.1</strong> or later; GL-E5800 <strong>4.10.3</strong>; GL-BE3600, GL-BE9300 <strong>4.10.2</strong>; GL-BE14000 <strong>4.9.3</strong>; GL-BE6500, GL-MT3600BE, GL-MT5000 <strong>4.9.1</strong>; GL-BE10000 <strong>4.8.7</strong>; GL-AX1800, GL-AXT1800, GL-SFT1200, GL-X3000, GL-XE3000 <strong>4.8.4</strong>; GL-MT2500/MT2500A, GL-X2000 <strong>4.7.14</strong>.<br>- KVMs: RM1, RM1V2, RM10, RM10RC, RM1PE, RM4PE need <strong>1.10.3</strong> or later; RMQ1 needs <strong>1.8.7</strong> or later.<br>- Model not listed? GL.iNet says check its Download Center or email support@gl-inet.com, and don't install firmware made for another model. An unlisted model is not necessarily unaffected.</p>
+    <p><strong>Action items for today.</strong><br>1. <strong>Take inventory.</strong> Ask your team, especially remote staff, whether anyone uses a GL.iNet router, travel router or KVM for work.<br>2. <strong>Check for the infection marker.</strong> GL.iNet says to look for a running process showing `crond -i /tmp/.log`. On a router, open the Admin Panel, go to System → Advanced Settings, sign in to LuCI, open Status → Processes and search for `tmp/.log`, or over SSH run `ps | grep tmp`. On a KVM, open Toolbox → Terminal → Access and run `ps -aux | grep tmp` (on the RMQ1, `ps -a | grep tmp`). A line showing only the grep command is not a match.<br>3. <strong>Install the security firmware either way.</strong> GL.iNet recommends it even if the check finds nothing, and says the update removes the malware it identified without a factory reset.<br>4. <strong>Don't treat a clean check as proof.</strong> GL.iNet says the quick check may not detect every affected device and points to an optional, unofficial community tool for a deeper check.<br>5. <strong>If a KVM was infected, check the computer behind it.</strong> GL.iNet suggests looking for unfamiliar programs, browser extensions or user accounts, unexpected startup items or scheduled tasks, and running a full scan with up-to-date security software.<br>6. <strong>Change the passwords.</strong> If you suspect a device was compromised, BleepingComputer reports the guidance is to rotate credentials and access keys that may have been exposed.<br>7. <strong>Turn off cloud remote management you don't use.</strong> Our own advice: if nobody relies on GoodCloud remote access for that device, switch it off. Fewer ways in means fewer surprises.</p>
+    <p>Not sure whether anyone on your team has one of these, or how to check it? Call us at +1 (925) 248-3463 and we'll help.</p>
+  </div>
+  <div class="article-sources">
+    Sources: <a href="https://www.gl-inet.com/en-us/blogs/blog/glinet-security-notice-2026-11-20" target="_blank" rel="noopener">GL.iNet: Security Notice 2026-11-20 (last updated Nov. 23, 2026)</a> &middot; <a href="https://www.bleepingcomputer.com/news/security/hackers-exploit-glinet-cloud-flaw-to-infect-routers-kvm-devices/" target="_blank" rel="noopener">BleepingComputer: Hackers exploit GL.iNet cloud flaw to infect routers, KVM devices, Nov. 22, 2026</a> &middot; <a href="https://www.heise.de/news/GL-iNet-Schwachstelle-entdeckt-Patch-verfuegbar-11533722.html" target="_blank" rel="noopener">heise online: GL.iNet: Schwachstelle entdeckt, Patch verfügbar, Nov. 22, 2026</a>
+  </div>
+  <a href="/#briefing" class="btn btn-ghost btn-sm back-link">← All Briefings</a>
+</article>
+
+</body>
+</html>

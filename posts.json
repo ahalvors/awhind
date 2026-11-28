@@ -1,5 +1,40 @@
 [
   {
+    "date": "2026-11-28",
+    "tag": "Advisory",
+    "read": "3 min",
+    "title": "Patched Drupal last week? You're not covered yet. Attackers are using a second installer flaw, so update again and check your site",
+    "dek": "Drupal fixed a second critical flaw in its installer on Nov. 25 and says it is being exploited, including on production sites. Last week's update did not protect against it. Here's what to update, what to block, and what to check if your site was exposed.",
+    "body": [
+      "On Tuesday we wrote about attackers using Drupal's installer page, `/core/install.php`, to take over websites. That flaw was fixed in Drupal 10.6.22, 11.3.22 and 11.4.13. On Nov. 25 the Drupal Security Team released a second fix, <a href=\"https://www.drupal.org/sa-core-2026-019\" target=\"_blank\" rel=\"noopener\">SA-CORE-2026-019</a>, rated Highly critical and tracked as CVE-2026-136716.",
+      "<strong>What changed.</strong> Drupal says \"certain sites in unusual or incomplete install states remain vulnerable to site takeover following that advisory, including production sites. It is not apparent in the user interface if a site is in the affected vulnerable state.\" And: \"This is being exploited in the wild.\" <a href=\"https://www.bleepingcomputer.com/news/security/drupal-warns-of-new-access-bypass-flaw-exploited-in-attacks/\" target=\"_blank\" rel=\"noopener\">BleepingComputer</a> reported on the new attacks on Nov. 27.",
+      "Drupal's <a href=\"https://www.drupal.org/docs/administering-a-drupal-site/security-in-drupal/checking-whether-your-site-was-compromised-through-the-installer\" target=\"_blank\" rel=\"noopener\">compromise-check guide</a> puts it plainly: \"Updating to 10.6.22, 11.3.22 or 11.4.13 last week did not protect against this issue.\" Your site was protected only if requests to `install.php` were blocked or the file was removed, or your host ran Drupal Steward's mitigations. Even then, Drupal says you still need to update.",
+      "<strong>The fixed versions.</strong> <strong>Drupal 10.6.23, 11.3.23 and 11.4.14.</strong> After updating, run `update.php`. Drupal says \"an update hook must run to fix existing production sites in this state.\" Drupal 11.2.x and older, 10.5.x and older, and Drupal 8 and 9 are end-of-life and get no fix.",
+      "<strong>Why it matters if you're a small business.</strong> If someone on your team or your web agency patched last week and checked the box, the site may still be open. And because the vulnerable state doesn't show up in the admin screens, a site that has run normally for years can still be affected.",
+      "<strong>Action items for this weekend.</strong><br>1. <strong>Block the installer first.</strong> Drupal says this \"takes minutes and stops the attack.\" If you used the Apache or Nginx rule from our <a href=\"https://awhind.com/briefing/2026-11-25/\" target=\"_blank\" rel=\"noopener\">Nov. 25 briefing</a>, it's still the right one, and Drupal says sites that already blocked the installer are not vulnerable to this flaw.<br>2. <strong>Update to 10.6.23, 11.3.23 or 11.4.14, then run database updates.</strong> Drupal says the code update closes the hole and the database update repairs the recorded install state. Do both.<br>3. <strong>Check the user 1 account.</strong> Drupal advises making sure the user 1 email address is one you control and considering a password reset. Whoever manages the site can run:",
+      "<pre><code>drush user:information --uid=1</code></pre>",
+      "4. <strong>Look for admin accounts you don't recognize,</strong> and check the recorded install date. Drupal's guide suggests:",
+      "<pre><code>date -d \"@$(drush state:get install_time)\"</code></pre>",
+      "That date is set when the installer finishes, so it should match when your site was actually built.",
+      "5. <strong>Save your web server logs now.</strong> Drupal notes some hosts keep logs for only a few days. Its guide includes a command to summarize installer requests since Nov. 18. Constant automated requests for `install.php` are normal. What to look into, per Drupal: POST requests that return 302 or 303, much larger responses, or requests to PHP files in the `files` directory.<br>6. <strong>If anything looks wrong, treat the site as compromised.</strong> Drupal warns that updating \"does not remove accounts, files or settings that an attacker added.\" Our own advice: restore from a backup made before the first suspicious request, then update and block the installer before bringing it back online.",
+      "Not sure whether your website runs Drupal, or whether last week's patch was enough? Call us at +1 (925) 248-3463."
+    ],
+    "sources": [
+      [
+        "Drupal: SA-CORE-2026-019, Drupal core Highly critical Access bypass, Nov. 25, 2026",
+        "https://www.drupal.org/sa-core-2026-019"
+      ],
+      [
+        "Drupal.org: Checking whether your site was compromised through the installer, Nov. 26, 2026",
+        "https://www.drupal.org/docs/administering-a-drupal-site/security-in-drupal/checking-whether-your-site-was-compromised-through-the-installer"
+      ],
+      [
+        "BleepingComputer: Drupal warns of new site takeover flaw exploited in attacks, Nov. 27, 2026",
+        "https://www.bleepingcomputer.com/news/security/drupal-warns-of-new-access-bypass-flaw-exploited-in-attacks/"
+      ]
+    ]
+  },
+  {
     "date": "2026-11-27",
     "tag": "Advisory",
     "read": "3 min",
